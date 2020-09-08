@@ -1,0 +1,25 @@
+/* Reconcile with components library code / pre / & tag class */
+.code--block,
+.code--slim {
+  display: block;
+  font-family: Consolas,Monaco,"Andale Mono","Ubuntu Mono",monospace;
+  color: #0b0c0c;
+  border: 1px solid #DFE0E7;
+  background-color: #F7F7F7;
+  word-break: break-word;
+  font-size: 14px;
+  white-space: pre-wrap;
+}
+
+// Code styling
+.code--block {
+  line-height: 1.5em;
+  padding: 10px;
+  margin: 20px 0;
+}
+
+.code--slim {
+  padding: 2px 4px;
+  display: inline-block;
+  line-height: 1.1em;
+}
