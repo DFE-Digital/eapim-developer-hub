@@ -4,8 +4,6 @@ import Link from 'next/link'
 import AccessChecker from 'components/common/AccessChecker'
 import Router from 'next/router'
 import ReturnTo from 'components/common/ReturnTo'
-import Header from 'components/common/Header'
-import PhaseBanner from 'components/common/PhaseBanner'
 import { deleteApplication, getApplications } from 'actions/application'
 import { PrivateRoute } from 'components/common/PrivateRoute'
 
@@ -20,7 +18,7 @@ class DeleteConfirm extends Component {
 
     const body = {
       userName: `${data.User.idToken.given_name} ${data.User.idToken.family_name}`,
-      userEmail: data.User.idToken['signInNames.emailAddress'],
+      userEmail: data.User.idToken['email'],
       userID: data.User.accountIdentifier,
       applicationId: selectedApplication.applicationId
     }
@@ -40,20 +38,14 @@ class DeleteConfirm extends Component {
 
   render () {
     const {
-      application: { selectedApplication, deleting },
-      user: { data }
+      application: { selectedApplication, deleting }
     } = this.props
-
-    let isLoggedIn = false
-    if (data && data.isAuthed) isLoggedIn = true
 
     return (
       <Fragment>
         <AccessChecker msalConfig={this.props.msalConfig} />
         <PrivateRoute redirect={'/applications'} />
         <ReturnTo parentPath={this.props.router.asPath} />
-        <Header msalConfig={this.props.msalConfig} isLoggedIn={isLoggedIn} />
-        <PhaseBanner />
         <div className='govuk-width-container'>
           <a href='#' className='govuk-back-link' onClick={() => Router.back()}>Back</a>
           <main className='govuk-main-wrapper ' id='main-content' role='main'>

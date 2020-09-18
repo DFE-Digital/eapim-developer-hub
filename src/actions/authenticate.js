@@ -15,10 +15,19 @@ export const signIn = (msalConfig) => async dispatch => {
   myMSALObj.loginRedirect(loginRequest)
 }
 
-export const editProfile = (msalEditProfileConfig) => async dispatch => {
-  dispatch({ type: REQUEST_EDIT_PROFILE })
+export const register = async (msalRegisterConfig) => {
+  const myMSALObj = new Msal.UserAgentApplication(msalRegisterConfig)
+  myMSALObj.loginRedirect(loginRequest)
+}
+
+export const editProfile = async (msalEditProfileConfig) => {
   const myMSALObj = new Msal.UserAgentApplication(msalEditProfileConfig)
   myMSALObj.loginRedirect(loginRequest)
+}
+
+export const forgotPassword = async (msalForgotPasswordConfig) => {
+  const myMSALObj = new Msal.UserAgentApplication(msalForgotPasswordConfig)
+  myMSALObj.loginRedirect({ authority: msalForgotPasswordConfig.auth.authority })
 }
 
 export const signInToken = (user) => async dispatch => {

@@ -4,8 +4,6 @@ import Content from '../../../content.json'
 import AccessChecker from 'components/common/AccessChecker'
 import ReturnTo from 'components/common/ReturnTo'
 import { Loading } from 'components/common/Loading'
-import Header from 'components/common/Header'
-import PhaseBanner from 'components/common/PhaseBanner'
 import ContentBuilder from 'components/common/ContentBuilder'
 import { PrivateRoute } from 'components/common/PrivateRoute'
 import ApplicationSideBar from 'components/common/ApplicationSideBar'
@@ -13,7 +11,7 @@ import APISubscriptions from 'components/common/APISubscriptions'
 
 import getInitialPropsErrorHandler from '../../../lib/getInitialPropsErrorHandler'
 
-import { getApis, getApiTags, mapSubscriptionsToAPI, buildTagsModel } from '../../../lib/apiServices'
+import { getApis, getApiTags, mapSubscriptionsToAPI } from '../../../lib/apiServices'
 import { getApplication } from '../../../lib/applicationService'
 import { getSubscriptions, getSubscriptionKeys, postSubscription, deleteSubscription } from '../../../lib/subscriptionService'
 
@@ -76,8 +74,6 @@ const ApplicationApiSubscriptions = ({ apis, application, subscriptions, user, r
     }
   }
 
-  const isLoggedIn = !!((user.data && user.data.isAuthed))
-
   if (!apis || apis.length === 0) return <Loading />
   if (!application) return <Loading />
 
@@ -86,8 +82,6 @@ const ApplicationApiSubscriptions = ({ apis, application, subscriptions, user, r
       <AccessChecker msalConfig={msalConfig} />
       <PrivateRoute redirect={'/applications'} />
       <ReturnTo parentPath={router.asPath} />
-      <Header msalConfig={msalConfig} isLoggedIn={isLoggedIn} />
-      <PhaseBanner />
       <div className='govuk-width-container'>
         <div className='govuk-breadcrumbs'>
           <ol className='govuk-breadcrumbs__list'>
@@ -159,8 +153,7 @@ ApplicationApiSubscriptions.getInitialProps = async ({ req, res, query }) => {
     if (!application) return getInitialPropsErrorHandler(res, 404)
 
     await Promise.all(apis.map(async (api) => {
-      const tags = await getApiTags(api.name)
-      api.tags = buildTagsModel(tags)
+      api.tags = await getApiTags(api.name)
       return api
     }))
 

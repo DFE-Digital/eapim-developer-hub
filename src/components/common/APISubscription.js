@@ -27,7 +27,7 @@ const APISubscription = ({ api, subscription, renderSubscribeButton, renderCance
       <tbody className='govuk-table__body'>
         <tr className='govuk-table__row'>
           <th scope='row' className='govuk-table__header govuk-!-font-weight-regular middle'>Status</th>
-          <td className='govuk-table__cell middle'>
+          <td className='govuk-table__cell govuk-table__cell--numeric middle'>
             <strong className={`govuk-tag govuk-tag-round govuk-!-margin-right-0 govuk-tag--${state.tag}`}>{subscription.state}</strong>
           </td>
         </tr>

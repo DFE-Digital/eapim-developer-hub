@@ -17,10 +17,10 @@ export const getApplications = (user) => async dispatch => {
   const url = `${PLATFORM_API_URL}/GetApplications`
   const body = {
     userName: `${user.idToken.given_name} ${user.idToken.family_name}`,
-    userEmail: user.idToken['signInNames.emailAddress'],
+    userEmail: user.idToken['email'],
     userID: user.accountIdentifier,
     organization: user.idToken.extension_OrganizationName,
-    role: user.idToken.extension_Role
+    role: 'role'
   }
 
   try {

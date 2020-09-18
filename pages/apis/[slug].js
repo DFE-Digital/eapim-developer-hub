@@ -4,13 +4,13 @@ import Content from '../../content.json'
 import AccessChecker from 'components/common/AccessChecker'
 import SideBar from 'components/common/SideBar'
 import ReturnTo from 'components/common/ReturnTo'
-import Header from 'components/common/Header'
-import PhaseBanner from 'components/common/PhaseBanner'
+
 import ErrorPage from 'components/ErrorPage'
 import DfEAPIInformation from 'components/DfEAPIInformation'
 import SchoolAPIInformation from 'components/SchoolAPIInformation'
+import AttendanceAPIInformation from 'components/AttendanceAPIInformation'
 
-import { getApis, getApiTags, buildTagsModel } from '../../lib/apiServices'
+import { getApis, getApiTags } from '../../lib/apiServices'
 import getInitialPropsErrorHandler from '../../lib/getInitialPropsErrorHandler'
 
 const ApiDetails = ({ api, router, msalConfig, user }) => {
@@ -22,13 +22,15 @@ const ApiDetails = ({ api, router, msalConfig, user }) => {
   if (!api) return <ErrorPage statusCode={404} router={router} msalConfig={msalConfig} />
 
   switch (api.name) {
-    case 'dfe-information-api':
-      informationComonent = <DfEAPIInformation selectedApi={api} isLoggedIn={isLoggedIn} />
-      break
+    case 'SchoolsInformationApi_V1':
     case 'schools-information-api':
       informationComonent = <SchoolAPIInformation msalConfig={msalConfig} selectedApi={api} isLoggedIn={isLoggedIn} />
       break
+    case 'AttendanceApi_V1':
+      informationComonent = <AttendanceAPIInformation msalConfig={msalConfig} selectedApi={api} isLoggedIn={isLoggedIn} />
+      break
     default:
+      informationComonent = <DfEAPIInformation selectedApi={api} isLoggedIn={isLoggedIn} />
   }
 
   console.log(api)
@@ -37,8 +39,6 @@ const ApiDetails = ({ api, router, msalConfig, user }) => {
     <Fragment>
       <AccessChecker msalConfig={msalConfig} />
       <ReturnTo parentPath={router.asPath} />
-      <Header msalConfig={msalConfig} isLoggedIn={isLoggedIn} />
-      <PhaseBanner />
       <div className='govuk-width-container'>
         <div className='govuk-breadcrumbs'>
           <ol className='govuk-breadcrumbs__list'>
@@ -77,9 +77,7 @@ ApiDetails.getInitialProps = async ({ res, query }) => {
   try {
     const apis = await getApis()
     const api = apis.find(api => api.name === query.slug)
-    const tags = await getApiTags(api.name)
-
-    api.tags = buildTagsModel(tags)
+    api.tags = await getApiTags(api.name)
 
     if (!api) return getInitialPropsErrorHandler(res, 404)
 

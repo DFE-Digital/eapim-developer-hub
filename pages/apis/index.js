@@ -5,8 +5,6 @@ import Content from '../../content.json'
 import { storeApi } from 'actions/apis'
 import SideBar from 'components/common/SideBar'
 import ReturnTo from 'components/common/ReturnTo'
-import Header from 'components/common/Header'
-import PhaseBanner from 'components/common/PhaseBanner'
 import ErrorPage from 'components/ErrorPage'
 
 import { getApis } from '../../lib/apiServices'
@@ -45,8 +43,7 @@ const Apis = ({ storeApi, user, apis, router, msalConfig }) => {
     <Fragment>
       <AccessChecker msalConfig={msalConfig} />
       <ReturnTo parentPath={router.asPath} />
-      <Header msalConfig={msalConfig} isLoggedIn={isLoggedIn} />
-      <PhaseBanner />
+
       <div className='govuk-width-container'>
         <div className='govuk-breadcrumbs'>
           <ol className='govuk-breadcrumbs__list'>

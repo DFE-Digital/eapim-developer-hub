@@ -18,23 +18,13 @@ class Header extends Component {
     this.setState({ jsEnabled: true })
   }
 
-  async doSignIn (e) {
-    e.preventDefault()
-    await this.props.signIn(this.props.msalConfig)
-  }
-
-  async doSignOut (e) {
-    e.preventDefault()
-    await this.props.signOut(this.props.msalConfig)
-  }
-
   toggleNav = (e) => {
     e.preventDefault()
     this.setState({ navToggled: !this.state.navToggled })
   }
 
   render () {
-    const { isLoggedIn } = this.props
+    const isLoggedIn = !!(this.props.user.data && this.props.user.data.isAuthed)
 
     return (
       <header className='govuk-header' role='banner' data-module='govuk-header'>
@@ -75,20 +65,6 @@ class Header extends Component {
                 aria-hidden={!this.state.navToggled}
               >
                 {Content.Navigation.map((nav, i) => {
-                  if (isLoggedIn && nav.isSignOut) {
-                    return (
-                      <li className='govuk-header__navigation-item' key={i}>
-                        <a href={nav.Url} className='govuk-header__link' onClick={e => this.doSignOut(e)}>{nav.Page}</a>
-                      </li>
-                    )
-                  }
-                  if (!isLoggedIn && nav.isSignIn) {
-                    return (
-                      <li className='govuk-header__navigation-item' key={i}>
-                        <a href={nav.Url} className='govuk-header__link' onClick={e => this.doSignIn(e)}>{nav.Page}</a>
-                      </li>
-                    )
-                  }
                   if (!isLoggedIn && nav.NoAuth) {
                     return (
                       <li className='govuk-header__navigation-item' key={i}>
@@ -96,10 +72,7 @@ class Header extends Component {
                       </li>
                     )
                   }
-                  if (
-                    (!isLoggedIn && nav.Auth) ||
-                    (isLoggedIn && nav.NoAuth)
-                  ) {
+                  if ((!isLoggedIn && nav.Auth) || (isLoggedIn && nav.NoAuth)) {
                     return null
                   }
                   return (

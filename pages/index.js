@@ -6,8 +6,6 @@ import AccessChecker from 'components/common/AccessChecker'
 import { signIn, signOut } from 'actions/authenticate'
 import Content from '../content.json'
 import ReturnTo from 'components/common/ReturnTo'
-import Header from 'components/common/Header'
-import PhaseBanner from 'components/common/PhaseBanner'
 
 const page = 'Home'
 
@@ -36,8 +34,6 @@ class Home extends Component {
        <Fragment>
          <AccessChecker msalConfig={this.props.msalConfig} />
          <ReturnTo parentPath={this.props.router.asPath} />
-         <Header msalConfig={this.props.msalConfig} isLoggedIn={isLoggedIn} />
-         <PhaseBanner />
          <main id='main-content' role='main'>
            <div className='govuk-panel govuk-panel--confirmation govuk-panel--welcome'>
              <div className='govuk-width-container'>
@@ -45,8 +41,8 @@ class Home extends Component {
                <div className='govuk-panel__body'>{Content[page].Content.Hero.Intro}</div>
                {!isLoggedIn && (
                  <div className='registerLinks govuk-!-margin-top-9'>
-                   <button type='button' onClick={() => this.props.signIn(this.props.msalConfig)} className='btn white'>{Content[page].Content.Hero.Register}</button>
-                   <p className='govuk-body'>or <a href='#' onClick={() => this.props.signIn(this.props.msalConfig)} className='govuk-link govuk-!-margin-left-1'><strong>{ ReactHtmlParser(Content[page].Content.Hero.Signin) }</strong></a> to the {Content.PortalName}.</p>
+                   <a href='/auth/register' className='btn white'>{Content[page].Content.Hero.Register}</a>
+                   <p className='govuk-body'>or <a href='/auth/login' className='govuk-link govuk-!-margin-left-1'><strong>{ ReactHtmlParser(Content[page].Content.Hero.Signin) }</strong></a> to the {Content.PortalName}.</p>
                  </div>
                )}
              </div>

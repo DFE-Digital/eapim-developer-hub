@@ -1,0 +1,1713 @@
+{
+  "PortalName": "DfE Developer Hub",
+  "Navigation": [
+    {
+      "Page": "Overview",
+      "Url": "/documentation"
+    },
+    {
+      "Page": "Apis",
+      "Url": "/apis"
+    },
+    {
+      "Page": "Applications",
+      "Url": "/applications"
+    },
+    {
+      "Page": "Support",
+      "Url": "/support"
+    },
+    {
+      "Page": "Profile",
+      "Url": "/profile",
+      "Auth": true
+    },
+    {
+      "Page": "Sign out",
+      "Url": "/auth/logout",
+      "Auth": true
+    },
+    {
+      "Page": "Create an account",
+      "Url": "/auth/register",
+      "NoAuth": true
+    },
+    {
+      "Page": "Sign in",
+      "Url": "/auth/login",
+      "NoAuth": true
+    }
+  ],
+  "PhaseBanner": {
+    "Phase": "Alpha",
+    "Content": "This is a new service – your <a class='govuk-link' href='https://forms.office.com/Pages/ResponsePage.aspx?id=yXfS-grGoU2187O4s0qC-YA4Qd_fewBHv2fn-gXg0b9UQU8yT1JaWU1GVFo1M0RXNlZDREJUWjZXRS4u' rel='noreferrer noopener' target='_blank'>feedback</a> will help us to improve it."
+  },
+  "Home": {
+    "Page": "Home",
+    "Url": "/",
+    "Content": {
+      "Hero": {
+        "Heading": "DfE Developer Hub",
+        "Intro": "Enterprise APIs are a specific group of APIs designed to support your needs by optimising governance and controls to suit specific interactions.",
+        "Register": "Create an account",
+        "Signin": "sign in"
+      },
+      "Columns": [
+        {
+          "Heading": "Getting started",
+          "Links": [
+            {
+              "Page": "Using the Developer Hub",
+              "Url": "/documentation"
+            },
+            {
+              "Page": "Authorisation",
+              "Url": "/documentation/authorisation"
+            },
+            {
+              "Page": "Tutorials",
+              "Url": "/documentation/tutorials"
+            },
+            {
+              "Page": "Terms of use",
+              "Url": "/documentation/terms-of-use"
+            },
+            {
+              "Page": "Fraud prevention",
+              "Url": "/documentation/fraud-prevention"
+            }
+          ]
+        },
+        {
+          "Heading": "Explore our APIs",
+          "Links": [
+            {
+              "Page": "API documentation",
+              "Url": "/apis"
+            }
+          ]
+        },
+        {
+          "Heading": "Applications",
+          "Links": [
+            {
+              "Page": "Registering your application",
+              "Url": "/applications"
+            },
+            {
+              "Page": "Application list",
+              "Url": "/applications"
+            },
+            {
+              "Page": "How to develop your application",
+              "Url": "/applications/how-to-develop-your-application"
+            },
+            {
+              "Page": "Terms of service",
+              "Url": "/applications/terms-of-service"
+            },
+            {
+              "Page": "Create a test user",
+              "Url": "/applications/create-a-test-user"
+            }
+          ]
+        },
+        {
+          "Heading": "Integration",
+          "Links": [
+            {
+              "Page": "Manage applications",
+              "Url": "/applications"
+            },
+            {
+              "Page": "Testing in the sandbox",
+              "Url": "/documentation/testing-in-the-sandbox"
+            },
+            {
+              "Page": "Create a test user",
+              "Url": "/applications/create-a-test-user"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "Documentation": {
+    "Using the Developer Hub": {
+      "Page": "Using the Developer Hub",
+      "Url": "/documentation",
+      "Content": [
+        {
+          "Type": "H2",
+          "Body": "1. Before you start"
+        },
+        {
+          "Type": "P",
+          "Body": "Read about the RESTful and XML APIs offered by EAPIM."
+        },
+        {
+          "Type": "P",
+          "Body": "Read our terms of use."
+        },
+        {
+          "Type": "P",
+          "Body": "Read up on authorisation"
+        },
+        {
+          "Type": "H2",
+          "Body": "2. Register for a developer account"
+        },
+        {
+          "Type": "P",
+          "Body": "Register for an account, activate it by email and sign in."
+        },
+        {
+          "Type": "P",
+          "Body": "You have 30 days to verify your account. If you do not verify your account within 30 days, your account will be deleted."
+        },
+        {
+          "Type": "H2",
+          "Body": "3. Test your application in the Test environment"
+        },
+        {
+          "Type": "P",
+          "Body": "Use the Developer Hub to:"
+        },
+        {
+          "Type": "BL",
+          "Body": [
+            "Add your application for <a class='govuk-link' href='/applications/registering-your-application'>testing</a>.",
+            "Subscribe it to the APIs you want to integrate with.",
+            "Get access to its test API credentials.",
+            "Use its sandbox credentials for integration testing."
+          ]
+        },
+        {
+          "Type": "H2",
+          "Body": "4. Apply to go live on the Developer Hub"
+        },
+        {
+          "Type": "P",
+          "Body": "Use the Developer Hub to:"
+        },
+        {
+          "Type": "BL",
+          "Body": [
+            "Add your production application.",
+            "Subscribe it to the APIs you want to integrate with.",
+            "Apply for production credentials and agree to our <a class='govuk-link' href='/documentation/terms-of-use'>terms of use</a>.",
+            "Use API in your production environment."
+          ]
+        }
+      ]
+    },
+    "Authorisation": {
+      "Page": "Authorisation",
+      "Url": "/documentation/authorisation",
+      "Content": [
+        {
+          "Type": "H2",
+          "Body": "Introduction"
+        },
+        {
+          "Type": "P",
+          "Body": "Our APIs have 3 types of endpoint. Each endpoint has its own:"
+        },
+        {
+          "Type": "BL",
+          "Body": [
+            "Access level.",
+            "Authorisation token.",
+            "Authorisation procedure."
+          ]
+        },
+        {
+          "Type": "TABLE",
+          "Body": {
+            "Caption": "Endpoint types and their required tokens",
+            "Headers": [
+              "Endpoint access level",
+              "Required authorisation token"
+            ],
+            "Rows": [
+              {
+                "Data": [
+                  "Open access",
+                  "No token"
+                ]
+              },
+              {
+                "Data": [
+                  "Application-restricted",
+                  "Azure AD B2C OAuth 2.0 access token"
+                ]
+              },
+              {
+                "Data": [
+                  "User-restricted",
+                  "Azure AD B2C IDConnect access token"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "Type": "H2",
+          "Body": "Credentials"
+        },
+        {
+          "Type": "P",
+          "Body": "Your credentials are your client ID and your client secret."
+        },
+        {
+          "Type": "P",
+          "Body": "Credentials are used:"
+        },
+        {
+          "Type": "BL",
+          "Body": [
+            "To identify and authorise your application during each step of the journey.",
+            "When you test your application with sandbox APIs."
+          ]
+        },
+        {
+          "Type": "H3",
+          "Body": "Client ID"
+        },
+        {
+          "Type": "P",
+          "Body": "Your client ID is a unique identifier we create when you add your application to the Developer Hub."
+        },
+        {
+          "Type": "H3",
+          "Body": "Client secrets"
+        },
+        {
+          "Type": "P",
+          "Body": "Client secrets are unique passphrases that you generate to authorise your application. They are known only to your application and the authorising server."
+        },
+        {
+          "Type": "P",
+          "Body": "The client secret is the equivalent of a password and should not be stored in plain text. Only store an encrypted version of the client secret to reduce the chance of it being compromised."
+        },
+        {
+          "Type": "P",
+          "Body": "Rotate your client secret regularly"
+        },
+        {
+          "Type": "P",
+          "Body": "Rotate your application's client secret to shorten the period an access key is active, reducing the impact to your business if it is compromised."
+        },
+        {
+          "Type": "P",
+          "Body": "To rotate your client secret:"
+        },
+        {
+          "Type": "OL",
+          "Body": [
+            "Generate a new client secret, in addition to the one used by your application.",
+            "Update your application to use the new client secret.",
+            "Check that your application is working with the new client secret.",
+            "Delete the inactive client secret."
+          ]
+        },
+        {
+          "Type": "P",
+          "Body": "You can have up to 5 client secrets at any time."
+        },
+        {
+          "Type": "H2",
+          "Body": "Open access endpoints"
+        },
+        {
+          "Type": "P",
+          "Body": "These endpoints are unrestricted and service general data held by us."
+        },
+        {
+          "Type": "P",
+          "Body": "In this example, you'll access the Department for Education API 'Information' endpoint."
+        },
+        {
+          "Type": "P",
+          "Body": "This endpoint is unrestricted so you can access it without an OAuth2.0 access token."
+        },
+        {
+          "Type": "H2",
+          "Body": "Application-restricted endpoints"
+        },
+        {
+          "Type": "P",
+          "Body": "Application-restricted endpoints do not require authorisation from the end user. They do not give access to sensitive personal data."
+        },
+        {
+          "Type": "P",
+          "Body": "We use the open standard OAuth 2.0  to generate an access token. If the endpoint requires a scope, your application must include this scope when creating the access token."
+        },
+        {
+          "Type": "H3",
+          "Body": "Getting an OAuth 2.0 access token"
+        },
+        {
+          "Type": "P",
+          "Body": "The authorisation user journey is an important part of our security, and may be changed without notice."
+        },
+        {
+          "Type": "H4",
+          "Body": "TO CONFIRM"
+        },
+        {
+          "Type": "OL",
+          "Body": [
+            "Register with the Development Portal and complete the form.",
+            "A verification code will be sent to your email address.",
+            "Once the code has been verified you will be re-directed."
+          ]
+        },
+        {
+          "Type": "P",
+          "Body": "In this example, you will request an OAuth 2.0 application token and then use it to access the Department for Education API 'Information Application' endpoint."
+        }
+      ]
+    },
+    "Tutorials": {
+      "Page": "Tutorials",
+      "Url": "/documentation/tutorials",
+      "Content": [
+        {
+          "Type": "H2",
+          "Body": "Before you start"
+        },
+        {
+          "Type": "P",
+          "Body": "All base URLs in these tutorials use the test environment."
+        },
+        {
+          "Type": "P",
+          "Body": "All code snippets in these tutorials are in CSharp (C#). They use:"
+        },
+        {
+          "Type": "BL",
+          "Body": [
+            "The <a class='govuk-link' href='https://restsharp.dev/' rel='noreferrer noopener' target='_blank'>RestSharp (opens in new tab)</a> library for accessing HTTP resources."
+          ]
+        },
+        {
+          "Type": "P",
+          "Body": "You can find more code samples in our public GitHub repositories. They're available in:"
+        },
+        {
+          "Type": "BL",
+          "Body": [
+            "<a class='govuk-link' href='https://github.com/DFE-Digital/api-example-csharp-client' rel='noreferrer noopener' target='_blank'>CSharp (opens in new tab)</a>",
+            "<a class='govuk-link' href='https://github.com/DFE-Digital/api-example-java-client' rel='noreferrer noopener' target='_blank'>Java (opens in new tab)</a>"
+          ]
+        },
+        {
+          "Type": "P",
+          "Body": "Most of our APIs use HTTP verbs and a RESTful interface. You can find out more information on these online."
+        },
+        {
+          "Type": "P",
+          "Body": "These tutorials use a simple DFE Information API that exposes 2 endpoints:"
+        },
+        {
+          "Type": "TABLE",
+          "Body": {
+            "Caption": "Endpoints exposed by DFE Information API",
+            "Headers": [
+              "Method",
+              "Path",
+              "Authorisation",
+              "Message"
+            ],
+            "Rows": [
+              {
+                "Data": [
+                  "GET",
+                  "/dfe/information",
+                  "None",
+                  "DFE Information"
+                ]
+              },
+              {
+                "Data": [
+                  "GET",
+                  "/dfe/application",
+                  "Application (OAuth 2.0 Access Token)",
+                  "DFE Information"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "Type": "H2",
+          "Body": "Accessing an open endpoint"
+        },
+        {
+          "Type": "P",
+          "Body": "In this example, you'll access the DFE Information API 'Information' endpoint."
+        },
+        {
+          "Type": "P",
+          "Body": "This endpoint is unrestricted so you can access it without an access token."
+        },
+        {
+          "Type": "H3",
+          "Body": "Issue a GET request"
+        },
+        {
+          "Type": "CODE",
+          "Body": "Issue a GET request to: https://dev-api-customerengagement.platform.education.gov.uk/dfe/information"
+        },
+        {
+          "Type": "CODE",
+          "Body": [
+            "// construct the GET request for our DFE Information endpoint\n",
+            "var client = newRestClient(\"https://dev-api-customerengagement.platform.education.gov.uk\");\n",
+            "var request = newRestRequest(\"dfe/information/\",Method.GET);\n\n",
+            "// execute the request & extract result\n",
+            "var queryResult = client.Execute<List<Items>>(request).Data;\n\n",
+            "// extract the HTTP status\n",
+            "HttpStatusCode statusCode = response.StatusCode;int numericStatusCode =(int)statusCode;\n"
+          ]
+        },
+        {
+          "Type": "H2",
+          "Body": "Accessing an application-restricted endpoint"
+        },
+        {
+          "Type": "P",
+          "Body": "In this example, you will request an access token and then use it to access the DFE Information API 'application' endpoint."
+        },
+        {
+          "Type": "P",
+          "Body": "<a class='govuk-link' href='https://dfeb2cdev.b2clogin.com/dfeb2cdev.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1A_eapim_signup_signin&client_id=7490ded6-b5b7-4e12-9713-1394c11a4cb9&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fc106d01-eapim-external-portal-app.azurewebsites.net%2Fsignin-success&scope=openid&response_type=id_token&prompt=login'>Register with the Developer Hub</a> and create an application. You will need your application's client_id and client_secret."
+        },
+        {
+          "Type": "P",
+          "Body": "You will need to test your application in the test environment before you request production credentials."
+        },
+        {
+          "Type": "P",
+          "Body": "See the <a class='govuk-link' href='/documentation/authorisation'>authorisation</a> section for information about requesting an Access token."
+        },
+        {
+          "Type": "H3",
+          "Body": "1. Request an OAuth 2.0 access token"
+        },
+        {
+          "Type": "CODE",
+          "Body": [
+            "var client = newRestClient(\"https://service.endpoint.com/api/oauth2/token\");\n",
+            "var request = newRestRequest(Method.POST);\n\n",
+            "request.AddHeader(\"cache-control","no-cache\");\n",
+            "request.AddHeader(\"content-type","application/x-www-form-urlencoded\");\n",
+            "request.AddParameter(\"application/x-www-form-urlencoded\",\"grant_type=client_credentials&client_id=abc&client_secret=123\",ParameterType.RequestBody);",
+            "\n\nIRestResponse response = client.Execute(request);"
+          ]
+        },
+        {
+          "Type": "H3",
+          "Body": "2. Issue a GET request"
+        },
+        {
+          "Type": "CODE",
+          "Body": "Issue a GET request to: https://dev-api-customerengagement.platform.education.gov.uk/dfe/application passing your newly issued access_token as an Authorization header with the type Bearer."
+        },
+        {
+          "Type": "CODE",
+          "Body": [
+            "// construct the GET request for our DFE Information endpoint\n",
+            "var client = newRestClient(\"https://dev-api-customerengagement.platform.education.gov.uk\");\n",
+            "var request =newRestRequest(\"dfe/application/\",Method.GET);\n\n",
+            "// execute the request & extract result\n",
+            "var queryResult = client.Execute<List<Items>>(request).Data;\n\n",
+            "// extract the HTTP status\n",
+            "HttpStatusCode statusCode = response.StatusCode;\n",
+            "int numericStatusCode =(int)statusCode;"
+          ]
+        },
+        {
+          "Type": "P",
+          "Body": "This should give you a \"DFE department high level information\" response."
+        }
+      ]
+    },
+    "Reference guide": {
+      "Page": "Reference guide",
+      "Url": "/documentation/reference-guide",
+      "Content": {
+        "Body": [
+          {
+            "Type": "P",
+            "Body": "on this page"
+          },
+          {
+            "Type": "UL",
+            "Body": [
+              "<a href='#browser-support-for-oauth-2.0' class='govuk-link'>Browser support for OAuth 2.0</a>",
+              "<a href='#coding-in-the-open' class='govuk-link'>Coding in the open</a>",
+              "<a href='#cross-origin-resource-sharing-(cors)' class='govuk-link'>Cross-origin resource sharing (CORS)</a>",
+              "<a href='#redirect-uris' class='govuk-link'>Redirect URIs</a>",
+              "<a href='#tls-standards' class='govuk-link'>TLS standards</a>"
+            ]
+          },
+          {
+            "Type": "P",
+            "Body": "Read the reference guide for actions you need to take to make sure your application integrates with DfE."
+          },
+          {
+            "Type": "P",
+            "Body": "See the <a href='/documentation/development-practices' class='govuk-link'>development practices</a> for how to avoid your application failing without warning when DfE make changes."
+          },
+          {
+            "Type": "H2",
+            "Body": "Browser support for OAuth 2.0"
+          },
+          {
+            "Type": "P",
+            "Body": "The OAuth 2.0 <a href='/documentation/authorisation' class='govuk-link'>authorisation</a> journey is designed to work with most modern browsers as per the list specified on <a href='https://www.gov.uk/service-manual/technology/designing-for-different-browsers-and-devices#browsers-to-test-in' class='govuk-link'>Designing for different browsers and devices</a>, including mobile devices and tablets."
+          },
+          {
+            "Type": "H2",
+            "Body": "Coding in the open"
+          },
+          {
+            "Type": "P",
+            "Body": "The DfE Developer Hub, the underlying API Platform and some of the APIs are coded in the open, as per the <a href='' class='govuk-link' target='_blank'>GOV.UK Digital Service Standard (opens in a new tab)</a>."
+          },
+          {
+            "Type": "P",
+            "Body": "The source code is available at <a href='https://github.com/hmrc' class='govuk-link' target='_blank'>https://github.com/hmrc (opens in a new tab)</a>. For more details, <a href='/support' class='govuk-link'>please contact us</a>."
+          },
+          {
+            "Type": "H2",
+            "Body": "Cross-origin resource sharing (CORS)"
+          },
+          {
+            "Type": "P",
+            "Body": "The API Platform does not support <a href='https://fetch.spec.whatwg.org/#http-cors-protocol' class='govuk-link' target='_blank'>cross-origin resource sharing (CORS) (opens in a new tab)</a>. It is therefore not possible to call our APIs from client-side code within a web browser, for example using Ajax."
+          },
+          {
+            "Type": "H2",
+            "Body": "Redirect URIs"
+          },
+          {
+            "Type": "P",
+            "Body": "We use redirect URIs to send the user back to your application after successful (or unsuccessful) authorisation, prior to your application accessing <a href='/documentation/authorisation' class='govuk-link'>user-restricted endpoints</a>."
+          },
+          {
+            "Type": "P",
+            "Body": "You must specify one or more redirect URIs when you create your application, and also specify one redirect URI when you send your user to our authorisation endpoint."
+          },
+          {
+            "Type": "P",
+            "Body": "To protect your application from phishing attacks, the redirect URI you use for authorisation (in your call to <code class='code--slim'>/oauth/authorize</code>) must match one of those you specified when you created your application."
+          },
+          {
+            "Type": "P",
+            "Body": "Also, you must use the same redirect URI when exchanging your authorisation code for an access token (in your call to <code class='code--slim'>/oauth/token</code>) that you used for authorisation (in your call to /oauth/authorize)."
+          },
+          {
+            "Type": "H3",
+            "Body": "Examples"
+          },
+          {
+            "Type": "P",
+            "Body": "Examples of valid (and invalid) redirect URIs are:"
+          },
+          {
+            "Type": "TABLE",
+            "Body": {
+              "Headers": [
+                "Redirect URI",
+                "Comments"
+              ],
+              "Rows": [
+                {
+                  "Data": [
+                    "<code class='code--slim'>https://www.example.com/auth-redirect</code>",
+                    "<strong>Valid</strong> - when creating your application, you can use the full redirect URI or a partial URI, for example: <p><code class='code--slim'>https://www.example.com/auth-redirect</code></p> <p><code class='code--slim'>https://www.example.com</code></p><p>When calling our authorisation endpoint, your redirect URI must be percent-encoded, for example:</p><p><code class='code--slim'>https%3A%2F%2Fwww.example.com%2Fauth-redirect</code></p>"
+                  ]
+                },
+                {
+                  "Data": [
+                    "<code class='code--slim'>https://www.example.com:8080/auth-redirect</code>",
+                    "<strong>Valid</strong> - includes a port number"
+                  ]
+                },
+                {
+                  "Data": [
+                    "<code class='code--slim'>http://www.example.com:8080/auth-redirect</code>",
+                    "<strong>Invalid</strong> - uses HTTP, not HTTPS (HTTP is OK for installed applications - see example below)"
+                  ]
+                },
+                {
+                  "Data": [
+                    "<code class='code--slim'>/auth-redirect</code>",
+                    "<strong>Invalid</strong> - is a relative URI, not an absolute URI"
+                  ]
+                },
+                {
+                  "Data": [
+                    "<code class='code--slim'>https://203.0.113.11/auth-redirect</code>",
+                    "<strong>Invalid</strong> - uses an IP address, not a DNS name"
+                  ]
+                },
+                {
+                  "Data": [
+                    "<code class='code--slim'>https://www.example.com:8080/auth-redirect?some_parameter=some_value</code>",
+                    "<strong>Valid</strong> - includes a query component"
+                  ]
+                },
+                {
+                  "Data": [
+                    "<code class='code--slim'>https://www.example.com:8080/auth-redirect#some_fragment</code>",
+                    "<strong>Invalid</strong> - includes a fragment component"
+                  ]
+                },
+                {
+                  "Data": [
+                    "<code class='code--slim'>http://localhost:8080</code>",
+                    "<strong>Invalid</strong> - <a href='/documentation/authorisation' class='govuk-link'>as explained in OAuth 2.0 for installed applications</a>"
+                  ]
+                },
+                {
+                  "Data": [
+                    "<code class='code--slim'>urn:ietf:wg:oauth:2.0:oob</code>",
+                    "<strong>Valid</strong> - <a href='/documentation/authorisation' class='govuk-link'>as explained in OAuth 2.0 for installed applications</a>"
+                  ]
+                },
+                {
+                  "Data": [
+                    "<code class='code--slim'>urn:ietf:wg:oauth:2.0:oob:auto</code>",
+                    "<strong>Valid</strong> - <a href='/documentation/authorisation' class='govuk-link'>as explained in OAuth 2.0 for installed applications</a>"
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "Type": "H2",
+            "Body": "TLS standards"
+          },
+          {
+            "Type": "P",
+            "Body": "DfE APIs are only accessible over Transport Layer Security (TLS). For example, URLs that begin with https://"
+          },
+          {
+            "Type": "INSET",
+            "Body": "Applications must support TLS 1.2 or higher to avoid known weaknesses in previous versions."
+          }
+        ]
+      }
+    },
+    "Development practices": {
+      "Page": "Development practices",
+      "Url": "/documentation/development-practices",
+      "Content": {
+        "Body": [
+          {
+            "Type": "P",
+            "Body": "The DfE Developer Hub uses DevOps practices, iterative development, continuous integration, continuous testing and continuous delivery to make hundreds of small changes to the production environment each year."
+          },
+          {
+            "Type": "P",
+            "Body": "Follow the development practices to make sure your application is not affected by the changes we make."
+          },
+          {
+            "Type": "H2",
+            "Body": "How to avoid your application failing without warning"
+          },
+          {
+            "Type": "P",
+            "Body": "You should avoid unintentionally tightly coupling your application to DfE."
+          },
+          {
+            "Type": "P",
+            "Body": "Tight coupling means a set of systems are dependent on one another. Making a change in a tightly coupled setup requires changes to both systems."
+          },
+          {
+            "Type": "P",
+            "Body": "Loose coupling reduces dependencies and ensures non-breaking changes have no impact on your application."
+          },
+          {
+            "Type": "H3",
+            "Body": "HTTPS certificates can change"
+          },
+          {
+            "Type": "P",
+            "Body": "The DfE Developer Hub’s HTTPS certificates can change. This includes the leaf certificate, intermediary certificates and the root certificate."
+          },
+          {
+            "Type": "P",
+            "Body": "<strong>Warning - If you import any DfE specific certificates into your keystone or load balancer, then your application may fail to connect when certificate changes occur.</strong>"
+          },
+          {
+            "Type": "P",
+            "Body": "Use a global root CA keystore and do not pin DfE  specific certificates"
+          },
+          {
+            "Type": "H3",
+            "Body": "IP addresses can change"
+          },
+          {
+            "Type": "P",
+            "Body": "You might need to configure your network so your software can access our API Platform and token generation. If your software is installed on end user devices, they might also need to configure their own network"
+          },
+          {
+            "Type": "P",
+            "Body": "We have fixed domain names, but cannot provide static IP addresses, so you need to configure your network access in your proxy, not your firewall."
+          },
+          {
+            "Type": "P",
+            "Body": "Configure your proxy to allow full access to the following domains, including HTTP <code class='code--slim'>GET</code>, <code class='code--slim'>POST</code>, <code class='code--slim'>PUT</code> and <code class='code--slim'>DELETE</code>"
+          },
+          {
+            "Type": "P",
+            "Body": "For testing in sandbox:"
+          },
+          {
+            "Type": "UL",
+            "Body": [
+              "<code class='code--slim'>URL TO BE FINALISED</code>"
+            ]
+          },
+          {
+            "Type": "P",
+            "Body": "For production use:"
+          },
+          {
+            "Type": "UL",
+            "Body": [
+              "<code class='code--slim'>URL TO BE FINALISED</code>"
+            ]
+          },
+          {
+            "Type": "H3",
+            "Body": "Cross-origin resource sharing (CORS)"
+          },
+          {
+            "Type": "P",
+            "Body": "The DfE Developer Hub does not support <a href='https://fetch.spec.whatwg.org/#http-cors-protocol' class='govuk-link' target='_blank'>cross-origin resource sharing (CORS) (opens in a new tab)</a>. It is not possible to call our APIs from client-side code within a web browser, for example using Ajax"
+          }
+        ]
+      }
+    },
+    "Terms of use": {
+      "Page": "Terms of use",
+      "Url": "/documentation/terms-of-use",
+      "Content": {
+        "Body": [
+          {
+            "Type": "P",
+            "Body": "Version 1 issued 18 August 2020"
+          },
+          {
+            "Type": "P",
+            "Body": "These terms of use explain what you can expect from us and what weexpect from you when creating and operating software services that consume DfE Application Programming Interfaces (APIs) hosted on the DfE Developer Hub. They do not create a legal relationship between HMRC and any software developer."
+          },
+          {
+            "Type": "P",
+            "Body": "We reserve the right to remove your access to the Developer Hub and its APIs temporarily or permanently."
+          },
+          {
+            "Type": "P",
+            "Body": "These terms may change from time to time and we will let you know when this happens. For major changes you may need to re-accept these terms of use, but for minor changes we will assume you agree to the changes unless we hear from you."
+          },
+          {
+            "Type": "P",
+            "Body": "If you have any questions <a class='govuk-link' href='/support'>ask for support.</a>"
+          },
+          {
+            "Type": "H2",
+            "Body": "Background checks"
+          },
+          {
+            "Type": "P",
+            "Body": "We may carry out basic background checks on your organisation. They include checking:"
+          },
+          {
+            "Type": "UL",
+            "Body": [
+              "information held by Companies House",
+              "your website"
+            ]
+          },
+          {
+            "Type": "H2",
+            "Body": "What you can expect from us"
+          },
+          {
+            "Type": "P",
+            "Body": "We will:"
+          },
+          {
+            "Type": "UL",
+            "Body": [
+              "give you at least 6 months' notice of changes affecting any stable APIs",
+              "make sure any minor changes made to stable APIs are backwards compatible",
+              "provide reasonable notice of changes affecting beta APIs, which can change fairly frequently",
+              "warn you before we retire an API"
+            ]
+          },
+          {
+            "Type": "H3",
+            "Body": "What we expect from you"
+          },
+          {
+            "Type": "P",
+            "Body": "We take the protection of customer data seriously. We expect you to do the same by following data protection law and protecting users in line withthe:"
+          },
+          {
+            "Type": "UL",
+            "Body": [
+              "<a href='https://www.ncsc.gov.uk/collection/digital-service-security' class='govuk-link' target='_blank'>National Cyber Security Centre's Digital Service Security (opensin a new tab)</a>",
+              "<a href='https://www.ncsc.gov.uk/blog-post/secure-development-and-deployment' class='govuk-link' target='_blank'>National Cyber Security Centre's Guidance for secure development and deployment (opens in a new tab)</a>",
+              "<a href='https://www.ncsc.gov.uk/guidance/tls-external-facing-services' class='govuk-link' target='_blank'>Transport Layer Security principles for protecting data (opens in a new tab)</a>",
+              "<a href='https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr' class='govuk-link' target='_blank'>General Data Protection Regulation – GDPR (opens in a new tab)</a>",
+              "<a href='https://ico.org.uk/about-the-ico/what-we-do/legislation-we-cover/privacy-and-electronic-communications-regulations/' class='govuk-link' target='_blank'>Privacy and Electronic Communications (EC Directive) Regulations 2003 – as amended (opens in a new tab)</a>",
+              "<a href='www.legislation.gov.uk/ukpga/2010/15/contents' class='govuk-link' target='_blank'>Equality Act 2010 (opens in a new tab)</a>",
+              "<a href='https://ico.org.uk/for-organisations/' class='govuk-link' target='_blank'>Information Commissioner's Office (opens in a new tab)</a>",
+              "<a href='https://ico.org.uk/for-organisations/data-protection-act-2018/' class='govuk-link' target='_blank'>Data Protection Act 2018 (opens in a new tab)</a>"
+            ]
+          },
+          {
+            "Type": "P",
+            "Body": "You must also follow these acts and regulations if they're changed or replaced."
+          },
+          {
+            "Type": "H3",
+            "Body": "Accessing data"
+          },
+          {
+            "Type": "P",
+            "Body": "You must give your users access to their data. We may also ask to access their data if we open an investigation."
+          },
+          {
+            "Type": "P",
+            "Body": "If you withdraw a piece of software or a user stops using it, you must let them retrieve and export all their data so they can meet their obligations to us."
+          },
+          {
+            "Type": "P",
+            "Body": "We recommend using multi-factor authentication to protect personal data."
+          },
+          {
+            "Type": "H3",
+            "Body": "Processing data"
+          },
+          {
+            "Type": "P",
+            "Body": "You may need to pay a data protection fee (opens in a new tab) if your software processes personal data"
+          },
+          {
+            "Type": "P",
+            "Body": "You must help us protect our users' confidential data by sending us particular types of user audit data which we will record. Our APIs provide HTTP headers that you can use to pass this audit data to us. See how to do this under <a href='/documentation/fraud-prevention' class='govuk-link'>fraud prevention</a>."
+          },
+          {
+            "Type": "P",
+            "Body": "To find out if header information is mandatory for an API that you use, read its <a href='/apis' class='govuk-link'>API documentation</a>."
+          },
+          {
+            "Type": "H3",
+            "Body": "Storing data"
+          },
+          {
+            "Type": "P",
+            "Body": "If you store and process their personal data, you must tell users:"
+          },
+          {
+            "Type": "UL",
+            "Body": [
+              "what personal data you'll be processing and what you'll use it for",
+              "that you're responsible for protecting their data",
+              "if you intend to store their data outside the European Economic Area",
+              "your <a href='https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/lawful-basis-for-processing/' class='govuk-link' target='_blank'>lawful basis (opens in a new tab)</a> for processing their personal data"
+            ]
+          },
+          {
+            "Type": "P",
+            "Body": "If you need users' consent to store and process their personal data you'll need to follow <a href='https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/lawful-basis-for-processing/consent/' class='govuk-link' target='_blank'>GDPR rules on obtaining consent (opens in a new tab)</a>."
+          },
+          {
+            "Type": "P",
+            "Body": "If you store or process data outside the European Economic Area, you must follow GDPR guidance on <a href='https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/international-transfers/' class='govuk-link' target='_blank'>international transfers (opens in a new tab)</a>."
+          },
+          {
+            "Type": "H3",
+            "Body": "Service standard"
+          },
+          {
+            "Type": "P",
+            "Body": "Your software must take into account the <a href='https://www.gov.uk/service-manual/service-standard' class='govuk-link'>Digital Service Standard</a>."
+          },
+          {
+            "Type": "H3",
+            "Body": "Accessibility"
+          },
+          {
+            "Type": "P",
+            "Body": "You must:"
+          },
+          {
+            "Type": "UL",
+            "Body": [
+              "meet <a href='www.w3.org/TR/WCAG21/' class='govuk-link' target='_blank'>W3C's Web Content Accessibility Guidelines (opens in a new tab)</a> at a minimum level of AA if your software's web-based, or <a href='https://www.w3.org/TR/mobile-accessibility-mapping/' class='govuk-link' target='_blank'>W3C's guidelines for mobile software (opens in a new tab)</a>",
+              "give us evidence that your software meets the guidelines, if we ask for it",
+              "<a href='/support' class='govuk-link' target='_blank'>ask for support</a> if you have any concerns meeting these guidelines"
+            ]
+          },
+          {
+            "Type": "H3",
+            "Body": "Advertising and marketing"
+          },
+          {
+            "Type": "P",
+            "Body": "Any advertising that appears in your software must follow both:"
+          },
+          {
+            "Type": "UL",
+            "Body": [
+              "<a href='https://www.asa.org.uk/codes-and-rulings/advertising-codes.html' class='govuk-link' target='_blank'>Advertising Standards Authority Codes (opens in a new tab)</a>",
+              "<a href='https://www.gov.uk/marketing-advertising-law/regulations-that-affect-advertising' class='govuk-link' target='_blank'>UK marketing and advertising laws (opens in a new tab)</a>"
+            ]
+          },
+          {
+            "Type": "P",
+            "Body": "You must not use advertising that promotes:"
+          },
+          {
+            "Type": "UL",
+            "Body": [
+              "adult themes",
+              "dating",
+              "gaming"
+            ]
+          },
+          {
+            "Type": "P",
+            "Body": "You cannot share personal data for marketing without users' consent, as defined in the Direct Marketing Guidance PDF from the <a href='https://ico.org.uk/for-organisations/marketing/' class='govuk-link' target='_blank'>Information Commissioner's Office (opens in a new tab)</a>"
+          },
+          {
+            "Type": "H3",
+            "Body": "Licence agreements"
+          },
+          {
+            "Type": "P",
+            "Body": "You must make the terms of the licence agreement between you and your users clear to them."
+          },
+          {
+            "Type": "H3",
+            "Body": "Security"
+          },
+          {
+            "Type": "P",
+            "Body": "You must:"
+          },
+          {
+            "Type": "UL",
+            "Body": [
+              "check software for vulnerabilities through secure development and pre-release testing",
+              "check open source or reused proprietary code using resources like the <a href='https://cve.mitre.org/' class='govuk-link' target='_blank'>Common Vulnerabilities and Exposures (opens in a new tab)</a> database",
+              "react quickly if you find vulnerabilities in your code",
+              "have a patching policy in place"
+            ]
+          },
+          {
+            "Type": "P",
+            "Body": "Your re-releases and upgrades should also follow secure development practices and pre-release testing."
+          },
+          {
+            "Type": "P",
+            "Body": "We recommend following the security principles of:"
+          },
+          {
+            "Type": "UL",
+            "Body": [
+              "the <a href='https://www.ncsc.gov.uk/' class='govuk-link' target='_blank'>National Cyber Security Centre (opens in a new tab)</a>",
+              "<a href='https://www.ncsc.gov.uk/blog-post/secure-development-and-deployment' class='govuk-link' target='_blank'>National Cyber Security Centre's Guidance for secure development and deployment (opens in a new tab)</a>",
+              "the <a href='https://www.owasp.org/index.php/Main_Page' class='govuk-link' target='_blank'>Open Web Application Security Project (opens in a new tab)</a>",
+              "<a href='https://www.cyberessentials.ncsc.gov.uk/' class='govuk-link' target='_blank'>Cyber Essentials or Cyber Essentials Plus certification (opens in a new tab)</a>"
+            ]
+          },
+          {
+            "Type": "H3",
+            "Body": "Suspicious activity"
+          },
+          {
+            "Type": "P",
+            "Body": "We expect you to look out for and block suspicious attempts to access or manipulate user accounts."
+          },
+          {
+            "Type": "H3",
+            "Body": "Support"
+          },
+          {
+            "Type": "P",
+            "Body": "You must give software support to your users. If you need help <a href='/support' class='govuk-link'>ask for support</a>."
+          }
+        ]
+      }
+    },
+    "Fraud prevention": {
+      "Page": "Fraud prevention",
+      "Url": "/documentation/fraud-prevention",
+      "Content": {
+        "Body": [
+          {
+            "Type": "P",
+            "Body": "Content to be finalized before Beta"
+          }
+        ]
+      }
+    }
+  },
+  "Apis": {
+    "APIs": {
+      "Page": "APIs",
+      "Url": "/apis",
+      "Content": {
+        "Auth": {
+          "Warning": "You need an account to view this API."
+        }
+      }
+    }
+  },
+  "Applications": {
+    "Applications": {
+      "Page": "Applications",
+      "Url": "/applications",
+      "Content": {
+        "Auth": {
+          "Warning": "You need an account to view applications."
+        },
+        "tableHeadings": [
+          {
+            "Heading": "Applications"
+          }
+        ],
+        "NoApplications": {
+          "Copy": "You don't have any applications",
+          "Button": "Register your first application"
+        },
+        "Production": {
+          "Copy": "After testing in the sandbox, you can apply for production credentials.",
+          "Button": "Get production credentials"
+        }
+      }
+    },
+    "Registering your application": {
+      "Page": "Registering your application",
+      "Url": "/applications/registering-your-application",
+      "Content": {
+        "Auth": {
+          "Warning": "You need an account to register applications."
+        },
+        "Body": [
+          {
+            "Type": "P",
+            "Body": "To start using our RESTful APIs with your application, you'll need to:"
+          },
+          {
+            "Type": "OL",
+            "Body": [
+              "Add it to our test environment (sandbox).",
+              "Choose which sandbox APIs you want to use.",
+              "Get credentials your application needs to interact with our APIs.",
+              "Get credentials your application needs to interact with our APIs."
+            ]
+          },
+          {
+            "Type": "INSET",
+            "Body": "Make sure your application complies with our <a class='govuk-link' href='/documentation/terms-of-use'>terms of use</a>"
+          },
+          {
+            "Type": "P",
+            "Body": "If you have not already done so:"
+          },
+          {
+            "Type": "BL",
+            "Body": [
+              "Find out which <a class='govuk-link' href='/apis'>RESTful and XML APIs</a> you can use.",
+              "Read up on <a class='govuk-link' href='/documentation/authorisation'>authorisation</a>.",
+              "Familiarise yourself with the <a class='govuk-link' href='https://oauth.net/2/' rel='noreferrer noopener' target='_blank'>OAuth 2.0 specification (opens in new tab)."
+            ]
+          }
+        ],
+        "Button": "Register application"
+      }
+    },
+    "How to develop your application": {
+      "Page": "How to develop your application",
+      "Url": "/applications/how-to-develop-your-application",
+      "Content": {
+        "Body": [
+          {
+            "Type": "H2",
+            "Body": "Using DfE in the name"
+          },
+          {
+            "Type": "P",
+            "Body": "Using DfE or making any reference to DfE as part of the name is not allowed and will result in your application being rejected."
+          },
+          {
+            "Type": "H2",
+            "Body": "Existing names"
+          },
+          {
+            "Type": "P",
+            "Body": "The name of your application can't be the same or similar to the nameof an application which has already requested production credentials on the Developer Hub."
+          },
+          {
+            "Type": "P",
+            "Body": "'The same' means a name that's either identical, or where the only difference is punctuation or a special character."
+          },
+          {
+            "Type": "H3",
+            "Body": "Exceptions"
+          },
+          {
+            "Type": "P",
+            "Body": "This doesn't apply if it meets both these conditions:"
+          },
+          {
+            "Type": "UL",
+            "Body": [
+              "The name will be part of a group with an existing application withthe same or similar name.",
+              "The admins of the existing application give you permission to use the name."
+            ]
+          },
+          {
+            "Type": "H2",
+            "Body": "Trademarked and registered names"
+          },
+          {
+            "Type": "P",
+            "Body": "Your application's name must not be the same or similar to a trademarked name that's registered by another business outside the DfE Developer Hub."
+          },
+          {
+            "Type": "H2",
+            "Body": "Offensive names"
+          },
+          {
+            "Type": "P",
+            "Body": "Your name can't contain offensive words or phrases."
+          },
+          {
+            "Type": "H2",
+            "Body": "Misleading names"
+          },
+          {
+            "Type": "P",
+            "Body": "Your application's name cannot mislead users into believing your application has special status or power. Such names might associate your application with government, local authorities, or institutions. For example, the Royal Tax App could be misleading."
+          },
+          {
+            "Type": "H2",
+            "Body": "Removal from the Developer Hub"
+          },
+          {
+            "Type": "P",
+            "Body": "We have the right to delete your application at any point, for any reason."
+          }
+        ]
+      }
+    },
+    "Terms of service": {
+      "Page": "Terms of service",
+      "Url": "/applications/terms-of-service",
+      "Content": {
+        "Body": [
+          {
+            "Type": "P",
+            "Body": "Content to be finalized before Beta"
+          }
+        ]
+      }
+    },
+    "Create a test user": {
+      "Page": "Create a test user",
+      "Url": "/applications/create-a-test-user",
+      "Content": {
+        "Body": [
+          {
+            "Type": "P",
+            "Body": "Content to be finalized before Beta"
+          }
+        ]
+      }
+    }
+  },
+  "ApplicationManagement": {
+    "Application details": {
+      "Page": "Application details",
+      "Url": "/details",
+      "Content": []
+    },
+    "API subscriptions": {
+      "Page": "API subscriptions",
+      "Url": "/api-subscriptions",
+      "forceRefresh": "true",
+      "Content": [
+        {
+          "Type": "P",
+          "Body": "You must subscribe to an API so your application can access it. You'll receive notifications about its lifecycle events, such as new version introductions and old version retirements."
+        },
+        {
+          "Type": "P",
+          "Body": "Learn more about our APIs in <a href='/apis' class='govuk-link'>API documentation</a>."
+        }
+      ]
+    },
+    "Client secrets": {
+      "Page": "Client secrets",
+      "Url": "/client-secrets",
+      "forceRefresh": "true",
+      "Content": [
+        {
+          "Type": "P",
+          "Body": "We only show you a new client secret once to help keep your data secure."
+        },
+        {
+          "Type": "H4",
+          "Body": "Rotate your client secret regularly"
+        },
+        {
+          "Type": "P",
+          "Body": "Rotate your application's client secret to shorten the period an access key is active, reducing the impact to your business if it is compromised."
+        },
+        {
+          "Type": "P",
+          "Body": "To rotate your client secret:"
+        },
+        {
+          "Type": "OL",
+          "Body": [
+            "Regenerate one of your client secrets",
+            "Update your application to use the updated client secret.",
+            "Check that your application is working with the updated client secret."
+          ]
+        }
+      ]
+    },
+    "Redirect URLs": {
+      "Page": "Redirect URLs",
+      "Url": "/redirect-urls",
+      "Content": [
+        {
+          "Type": "INSET",
+          "Body": "You need admin rights to change redirect URIs."
+        },
+        {
+          "Type": "DETAILS",
+          "Title": "What is a redirect URL?",
+          "Description": "Your application needs your users permission to interact with DfE on their behalf when accessing <a class='govuk-link' href='/documentation/authorisation#application-restricted-endpoints'>application-restricted endpoints</a>. Users must sign in to their DfE Developer Hub account to grant this authority.<br><br> Afterwards, redirect URLs tell us where to return your users in your application.  Learn more about <a class='govuk-link' href='/documentation/reference-guide'>redirect URLs</a>."
+        }
+      ]
+    },
+    "Team members": {
+      "Page": "Team members",
+      "Url": "/team-members",
+      "Content": []
+    },
+    "Delete application": {
+      "Page": "Delete application",
+      "Url": "/delete-application",
+      "Content": []
+    }
+  },
+  "Support": {
+    "Page": "Support",
+    "Url": "/support",
+    "Content": {
+      "Body": [
+        {
+          "Type": "P",
+          "Body": "Enterprise API Management is built and supported by the Government Department for Education."
+        },
+        {
+          "Type": "H2",
+          "Body": "Guidelines"
+        },
+        {
+          "Type": "P",
+          "Body": "For best practice and government guidelines to building APIs please refer to the GOV.uk API Technical and Data Standards - <a href=\"https://www.gov.uk/guidance/gds-api-technical-and-data-standards.\" target=\"_blank\">https://www.gov.uk/guidance/gds-api-technical-and-data-standards</a>."
+        },
+        {
+          "Type": "H2",
+          "Body": "Support Requests"
+        },
+        {
+          "Type": "P",
+          "Body": "To raise a support request please contact us at <a href=\"mailto:eapim.support@education.gov.uk\">eapim.support@education.gov.uk</a>."
+        }
+      ]
+    }
+  },
+  "Profile": {
+    "Page": "Profile",
+    "Url": "/profile",
+    "Content": {
+      "AccountDetails": {
+        "Heading": "Account details",
+        "Button": "Edit profile"
+      },
+      "DeleteAccount": {
+        "Heading": "Delete account",
+        "Copy": "You can ask us to delete your account and we will respond within 2 working days.",
+        "Button": "Request account deletion"
+      }
+    }
+  },
+  "Cookies": {
+    "Page": "Details about cookies on DfE Developer Hub",
+    "Url": "/cookies",
+    "Content": {
+      "Body": [
+        {
+          "Type": "P",
+          "Body": "The DfE Developer Hub puts small files (known as 'cookies') onto your computer to collect information about how you browse the site. Find out more about the cookies we use, what they're for and when they expire."
+        },
+        {
+          "Type": "H2",
+          "Body": "Cookies that measure website use"
+        },
+        {
+          "Type": "P",
+          "Body": "We use Google Analytics software (Universal Analytics) to collect anonymised information about how you use the Developer Hub. We do this to help make sure the site is meeting the needs of its users and to help us make improvements to the site and to government digital services."
+        },
+        {
+          "Type": "P",
+          "Body": "We do not allow Google to use or share the data about how you use this site."
+        },
+        {
+          "Type": "P",
+          "Body": "Google Analytics software collects information about how you use GOV.UK. This includes IP addresses. The data is anonymised before being used for analytics processing"
+        },
+        {
+          "Type": "P",
+          "Body": "Google Analytics stores information about:"
+        },
+        {
+          "Type": "UL",
+          "Body": [
+            "how you got to the site",
+            "the pages you visit on the Developer Hub and how long you spend on them",
+            "what you click on while you're visiting the site Google Analytics sets the following cookies."
+          ]
+        },
+        {
+          "Type": "TABLE",
+          "Body": {
+            "Headers": [
+              "Name",
+              "Purpose",
+              "Expires"
+            ],
+            "Rows": [
+              {
+                "Data": [
+                  "_ga",
+                  "These help us count how many people visit by tracking if you've visited before",
+                  "2 years"
+                ]
+              },
+              {
+                "Data": [
+                  "_gid",
+                  "These help us count how many people visit by tracking if you've visited before",
+                  "24 hours"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "Type": "P",
+          "Body": "We also set our own cookie to understand how people move through the site:"
+        },
+        {
+          "Type": "TABLE",
+          "Body": {
+            "Headers": [
+              "Name",
+              "Purpose",
+              "Expires"
+            ],
+            "Rows": [
+              {
+                "Data": [
+                  "analytics_next_page_call",
+                  "This lets us know the next page you visit, so we can make journeys better",
+                  "When you close your browser"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "Type": "H3",
+          "Body": "JavaScript detection"
+        },
+        {
+          "Type": "P",
+          "Body": "We measure how many people visiting the Developer Hub are using JavaScript, so that the site works for as many users as possible."
+        },
+        {
+          "Type": "TABLE",
+          "Body": {
+            "Headers": [
+              "Name",
+              "Purpose",
+              "Expires"
+            ],
+            "Rows": [
+              {
+                "Data": [
+                  "JS-Detection",
+                  "This tells us if you are browsing while running JavaScript",
+                  "1 year"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "Type": "H2",
+          "Body": "Strictly necessary cookies"
+        },
+        {
+          "Type": "P",
+          "Body": "These cookies are necessary for the website to function and cannot be switched off in our systems. They are usually only set in response to actions made by you which amount to a request for services, such as setting your privacy preferences, logging in or filling in forms.    Youcan set your browser to block or alert you about these cookies, but some parts of the site will not then work. These cookies do not store any personally identifiable information."
+        },
+        {
+          "Type": "TABLE",
+          "Body": {
+            "Headers": [
+              "Name",
+              "Purpose",
+              "Expires"
+            ],
+            "Rows": [
+              {
+                "Data": [
+                  "ARRAffinity",
+                  "Set by websites run on the Windows Azure cloud platform. It is used for load balancing to make sure the visitor page requests are routed to the same server in any browsing session.",
+                  "When you close your browser"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "Type": "H3",
+          "Body": "Cookies message"
+        },
+        {
+          "Type": "P",
+          "Body": "You may see a banner when you visit the Developer Hub inviting you to accept cookies or review your settings. We'll set cookies so that your computer knows you've seen it and not to show it again, and also to store your settings."
+        },
+        {
+          "Type": "TABLE",
+          "Body": {
+            "Headers": [
+              "Name",
+              "Purpose",
+              "Expires"
+            ],
+            "Rows": [
+              {
+                "Data": [
+                  "cookies_policy",
+                  "Saves your cookie consent settings",
+                  "1 year"
+                ]
+              },
+              {
+                "Data": [
+                  "cookies_preferences_set",
+                  "Lets us know that you've saved your cookie consent settings",
+                  "1 year"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "Privacy": {
+    "Page": "Privacy policy",
+    "Url": "/privacy-policy",
+    "Content": {
+      "Body": [
+        {
+          "Type": "H2",
+          "Body": "Your personal information"
+        },
+        {
+          "Type": "P",
+          "Body": "This privacy policy relates to the information we store about you as a Developer Hub user. It does not relate to the privacy of the end users of any application you develop; under our <a href='/documentation/terms-of-use' class='govuk-link'>terms of use</a> you are responsible for the information stored by your application."
+        },
+        {
+          "Type": "P",
+          "Body": "We collect certain information about you when you use the Developer Hub and APIs. This page explains what kind of personal information we collect, how it's protected and how you can find out about it."
+        },
+        {
+          "Type": "P",
+          "Body": "If we change this privacy policy, we’ll notify all Developer Hub users by email."
+        },
+        {
+          "Type": "H2",
+          "Body": "GDPR lawful basis"
+        },
+        {
+          "Type": "P",
+          "Body": "We hold information about you as a software developer on the lawful basis of “public task” so that we can run the Developer Hub as a service to you."
+        },
+        {
+          "Type": "H2",
+          "Body": "What personal information do we hold about you?"
+        },
+        {
+          "Type": "P",
+          "Body": "When you use the Developer Hub, we collect:"
+        },
+        {
+          "Type": "UL",
+          "Body": [
+            "your personal details including name, email address and optionally the name of your organisation",
+            "information about your applications and the email addresses of those of your colleagues with access to them",
+            "your IP address, and details of which version of <a href='https://www.gov.uk/help/browsers' class='govuk-link'>web browser</a> you use",
+            "information on how you use our site, based on <a href='/cookies' class='govuk-link'>cookies</a> and page tagging techniques",
+            "any questions, queries or feedback you leave, including your email address, if you contact our support team"
+          ]
+        },
+        {
+          "Type": "H2",
+          "Body": "How we use and share your data"
+        },
+        {
+          "Type": "P",
+          "Body": "We use this information to create and administer user accounts on the Developer Hub. The information you give us will be used in a customer relationship management tool to help us manage our customer service obligations. We do not share this information with anyone else."
+        },
+        {
+          "Type": "P",
+          "Body": "We store your information so that your user account on the Developer Hub can function correctly, and so we can administer that access via our approval process for issuing production credentials. This includes sending you service updates and notices."
+        },
+        {
+          "Type": "P",
+          "Body": "We undertake the following checks for application approvals:"
+        },
+        {
+          "Type": "UL",
+          "Body": [
+            "<strong>Companies House</strong> – to check the status of the business is “Active”.",
+            "<strong>LinkedIn</strong> – to check the business digital footprint",
+            "<strong>Twitter</strong> – to check the business digital footprint.",
+            "<strong>Company website</strong> – to check the business digital footprint but also for reassurance we are dealing with a valid developer.",
+            "<strong>Sandbox testing</strong> – to check/validate the developer has conducted sufficient testing of the API before being provided access to the live environment."
+          ]
+        },
+        {
+          "Type": "P",
+          "Body": "We delete your personal information when your user account is deleted, and keep audit records of your user account activity for up to 6 years."
+        },
+        {
+          "Type": "H2",
+          "Body": "How we protect your personal information"
+        },
+        {
+          "Type": "P",
+          "Body": "We comply with the EU General Data Protection Regulation (GDPR)"
+        },
+        {
+          "Type": "P",
+          "Body": "We will:"
+        },
+        {
+          "Type": "UL",
+          "Body": [
+            "tell you why the information is needed",
+            "only ask for what's needed",
+            "make sure no one has access to it who shouldn't",
+            "only keep the information for as long as it's needed",
+            "not make it available for commercial use"
+          ]
+        },
+        {
+          "Type": "H2",
+          "Body": "Third party integration"
+        },
+        {
+          "Type": "P",
+          "Body": "We use third party software to help us improve your experience on this website including Google Analytics."
+        },
+        {
+          "Type": "P",
+          "Body": "The following information may be collected about your device and browser and held so it cannot be used to identify who you are:"
+        },
+        {
+          "Type": "UL",
+          "Body": [
+            "device's IP address",
+            "device screen resolution",
+            "device type (unique device identifiers), operating system, and browser type",
+            "geographic location (city and country only)",
+            "preferred page display language",
+            "referring domain",
+            "pages visited",
+            "preferred language used to display the webpage",
+            "date and time when website pages were accessed",
+            "mouse events (movements, location and clicks)",
+            "keypresses"
+          ]
+        },
+        {
+          "Type": "P",
+          "Body": "You can opt out of Google Analytics by <a href='' class='govuk-link' target='_blank'>installing their Opt out Browser Add-on (opens in a new tab)</a>."
+        },
+        {
+          "Type": "H2",
+          "Body": "Handling your information"
+        },
+        {
+          "Type": "P",
+          "Body": "Our staff are trained in handling information and understand how important it is to protect personal and other sensitive information."
+        },
+        {
+          "Type": "H2",
+          "Body": "Asking to see your information"
+        },
+        {
+          "Type": "P",
+          "Body": "You can ask to see the personal information we hold about you. To help locate the information you want and deal with your request more quickly, you should make your GDPR request to the DfE office advised by our <a href='/support' class='govuk-link'>support team</a>. You should address your request to the Data Protection Officer."
+        },
+        {
+          "Type": "P",
+          "Body": "There is no charge."
+        },
+        {
+          "Type": "P",
+          "Body": "Sometimes we can withhold information, for example, to protect national security."
+        },
+        {
+          "Type": "H2",
+          "Body": "Your GDPR right to be forgotten"
+        },
+        {
+          "Type": "P",
+          "Body": "You can ask us to delete all the information we hold about you, if you no longer wish to be a user of the Developer Hub. To do this contact our <a href='/support' class='govuk-link'>support team</a>."
+        },
+        {
+          "Type": "H2",
+          "Body": "Children"
+        },
+        {
+          "Type": "P",
+          "Body": "The Developer Hub is not for use by children under the age of 16. We do not knowingly hold personal information on children under the age of 16."
+        }
+      ]
+    }
+  }
+}

@@ -4,8 +4,6 @@ import Content from '../../../content.json'
 import AccessChecker from 'components/common/AccessChecker'
 import ReturnTo from 'components/common/ReturnTo'
 import { Loading } from 'components/common/Loading'
-import Header from 'components/common/Header'
-import PhaseBanner from 'components/common/PhaseBanner'
 import ContentBuilder from 'components/common/ContentBuilder'
 import { getApplications, updateApplication } from 'actions/application'
 import { PrivateRoute } from 'components/common/PrivateRoute'
@@ -64,7 +62,7 @@ class ApplicationRedirectUrls extends Component {
     selectedApplication.web.redirectUris = modifiedArr
     const body = {
       userName: `${data.User.idToken.given_name} ${data.User.idToken.family_name}`,
-      userEmail: data.User.idToken['signInNames.emailAddress'],
+      userEmail: data.User.idToken['email'],
       userID: data.User.accountIdentifier,
       applicationId: selectedApplication.applicationId,
       description: selectedApplication.description,
@@ -101,7 +99,7 @@ class ApplicationRedirectUrls extends Component {
     selectedApplication.web.redirectUris = selectedApplication.web.redirectUris.filter(e => e !== redirectUri)
     const body = {
       userName: `${data.User.idToken.given_name} ${data.User.idToken.family_name}`,
-      userEmail: data.User.idToken['signInNames.emailAddress'],
+      userEmail: data.User.idToken['email'],
       userID: data.User.accountIdentifier,
       applicationId: selectedApplication.applicationId,
       description: selectedApplication.description,
@@ -137,7 +135,7 @@ class ApplicationRedirectUrls extends Component {
     this.setState({ addingNewRedirectUrl: false, newRedirectUrl: '' })
     const body = {
       userName: `${data.User.idToken.given_name} ${data.User.idToken.family_name}`,
-      userEmail: data.User.idToken['signInNames.emailAddress'],
+      userEmail: data.User.idToken['email'],
       userID: data.User.accountIdentifier,
       applicationId: selectedApplication.applicationId,
       description: selectedApplication.description,
@@ -171,12 +169,9 @@ class ApplicationRedirectUrls extends Component {
 
   render () {
     const {
-      application: { selectedApplication },
-      user: { data }
+      application: { selectedApplication }
     } = this.props
 
-    let isLoggedIn = false
-    if (data && data.isAuthed) isLoggedIn = true
     if (!selectedApplication) return <Loading />
 
     return (
@@ -184,8 +179,6 @@ class ApplicationRedirectUrls extends Component {
         <AccessChecker msalConfig={this.props.msalConfig} />
         <PrivateRoute redirect={'/applications'} />
         <ReturnTo parentPath={this.props.router.asPath} />
-        <Header msalConfig={this.props.msalConfig} isLoggedIn={isLoggedIn} />
-        <PhaseBanner />
         <div className='govuk-width-container'>
           <div className='govuk-breadcrumbs'>
             <ol className='govuk-breadcrumbs__list'>
@@ -257,6 +250,7 @@ class ApplicationRedirectUrls extends Component {
                                     inputErrorId={'error-msg-for__change-app-redirect-url'}
                                     placeholder={`https://www.`}
                                     isRequired
+                                    customValidationMessage='URL must contain https://. If you are using localhost, prefix it with http://'
                                     pattern={urlPattern}
                                     onChange={(e) => this.updateRedirectUrl(e)}
                                     onFocus={() => this.showError()}

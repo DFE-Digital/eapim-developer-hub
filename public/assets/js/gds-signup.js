@@ -156,6 +156,25 @@ ready(() => {
       newCopy.classList.add('govuk-!-margin-bottom-0')
       error.appendChild(newCopy)
     })
+
+    const passwordInput = document.querySelector('#newPassword')
+    const passwordHelperText = document.createElement('span')
+    passwordHelperText.classList.add('govuk-hint')
+    passwordHelperText.innerText = passwordInput.getAttribute('title')
+
+    const passwordInputParent = passwordInput.closest('.attrEntry')
+    passwordInputParent.insertBefore(passwordHelperText, passwordInput)
+
+    const termsEl = document.createElement('p')
+    termsEl.classList.add('govuk-body')
+    termsEl.innerHTML = '<p>By creating an account you agree to our ' +
+        '<a href="#{ROOT_URL}#/documentation/terms-of-use">terms and conditions,</a> ' +
+        '<a href="#{ROOT_URL}#/privacy-policy">privacy policy</a> and ' +
+        '<a href="#{ROOT_URL}#/cookies">cookie policy</a>.' +
+      '</p>'
+
+    const form = document.querySelector('#attributeList')
+    form.parentNode.insertBefore(termsEl, form.nextSibling)
   }
 
   setTimeout(() => {

@@ -7,8 +7,6 @@ import Content from '../../../content.json'
 
 import ReturnTo from 'components/common/ReturnTo'
 import AccessChecker from 'components/common/AccessChecker'
-import Header from 'components/common/Header'
-import PhaseBanner from 'components/common/PhaseBanner'
 import { Loading } from 'components/common/Loading'
 import ContentBuilder from 'components/common/ContentBuilder'
 import { PrivateRoute } from 'components/common/PrivateRoute'
@@ -55,8 +53,7 @@ const ApplicationClientSecrets = ({ id, user, newClientKey, newClientKeyDisplayN
       <PrivateRoute redirect={'/applications'} />
       <ReturnTo parentPath={router.asPath} />
       <AccessChecker msalConfig={msalConfig} />
-      <Header msalConfig={msalConfig} isLoggedIn={isLoggedIn} />
-      <PhaseBanner />
+
       <div className='govuk-width-container'>
         <div className='govuk-breadcrumbs'>
           <ol className='govuk-breadcrumbs__list'>
@@ -94,22 +91,21 @@ const ApplicationClientSecrets = ({ id, user, newClientKey, newClientKeyDisplayN
                         {(application ? application.applicationName : '')}
                       </dd>
                     </div>
-                    <div className='govuk-summary-list__row'>
-                      <dt className='govuk-summary-list__key'>
-                        Environment:
-                      </dt>
-                      <dd className='govuk-summary-list__value'>
-                        Sandbox
-                      </dd>
-                    </div>
                   </dl>
+
+                  <p className='govuk-body'>
+                    The client secret is a secret known only to the application and the authorization server. You must add the client secret to the request header whenever you make a request to an API.
+                  </p>
+                  <p className='govuk-body'>
+                    Primary and secondary secrets are provided in case you need to switch between keys.
+                  </p>
 
                   <table className='govuk-table'>
                     <thead className='govuk-table__head'>
                       <tr className='govuk-table__row'>
-                        <th scope='col' className='govuk-table__header'>Primary key</th>
-                        <th scope='col' className='govuk-table__header' />
+                        <th scope='col' className='govuk-table__header'>Primary Secret</th>
                         <th scope='col' className='govuk-table__header'>Created</th>
+                        <th scope='col' className='govuk-table__header'>Expires</th>
                         <th scope='col' className='govuk-table__header govuk-table__header--numeric'>Action</th>
                       </tr>
                     </thead>
@@ -132,16 +128,15 @@ const ApplicationClientSecrets = ({ id, user, newClientKey, newClientKeyDisplayN
                             <td className='govuk-table__cell middle'>
                               {primary.hint}••••••••••••••••••••••••••••••••
                             </td>
-                            <td className='govuk-table__cell middle' />
                             <td className='govuk-table__cell middle'>{moment(primary.startDateTime).format('DD MMM YYYY')}</td>
+                            <td className='govuk-table__cell middle'>{moment(primary.endDateTime).format('DD MMM YYYY')}</td>
                             <td className='govuk-table__cell middle govuk-table__cell--numeric'>
                               {isLoggedIn &&
                               <form method='POST' action={`/applications/${id}/client-secrets`}>
                                 <input type='hidden' name='userName' value={`${user.data.User.idToken.given_name} ${user.data.User.idToken.family_name}`} />
-                                <input type='hidden' name='userEmail' value={user.data.User.idToken['signInNames.emailAddress']} />
+                                <input type='hidden' name='userEmail' value={user.data.User.idToken['email']} />
                                 <input type='hidden' name='userID' value={user.data.User.accountIdentifier} />
                                 <input type='hidden' name='organization' value={user.data.User.idToken.extension_OrganizationName} />
-                                <input type='hidden' name='role' value={user.data.User.idToken.extension_Role} />
                                 <input type='hidden' name='applicationId' value={id} />
                                 <input type='hidden' name='KeyDisplayName' value={primary.displayName} />
                                 <input type='hidden' name='KeyId' value={primary.keyId} />
@@ -159,9 +154,9 @@ const ApplicationClientSecrets = ({ id, user, newClientKey, newClientKeyDisplayN
                   <table className='govuk-table'>
                     <thead className='govuk-table__head'>
                       <tr className='govuk-table__row'>
-                        <th scope='col' className='govuk-table__header'>Secondary key</th>
-                        <th scope='col' className='govuk-table__header' />
+                        <th scope='col' className='govuk-table__header'>Secondary Secret</th>
                         <th scope='col' className='govuk-table__header'>Created</th>
+                        <th scope='col' className='govuk-table__header'>Expires</th>
                         <th scope='col' className='govuk-table__header govuk-table__header--numeric'>Action</th>
                       </tr>
                     </thead>
@@ -184,16 +179,15 @@ const ApplicationClientSecrets = ({ id, user, newClientKey, newClientKeyDisplayN
                             <td className='govuk-table__cell middle'>
                               {secondary.hint}••••••••••••••••••••••••••••••••
                             </td>
-                            <td className='govuk-table__cell middle' />
                             <td className='govuk-table__cell middle'>{moment(secondary.startDateTime).format('DD MMM YYYY')}</td>
+                            <td className='govuk-table__cell middle'>{moment(secondary.endDateTime).format('DD MMM YYYY')}</td>
                             <td className='govuk-table__cell middle govuk-table__cell--numeric'>
                               {isLoggedIn &&
                               <form method='POST' action={`/applications/${id}/client-secrets`}>
                                 <input type='hidden' name='userName' value={`${user.data.User.idToken.given_name} ${user.data.User.idToken.family_name}`} />
-                                <input type='hidden' name='userEmail' value={user.data.User.idToken['signInNames.emailAddress']} />
+                                <input type='hidden' name='userEmail' value={user.data.User.idToken['email']} />
                                 <input type='hidden' name='userID' value={user.data.User.accountIdentifier} />
                                 <input type='hidden' name='organization' value={user.data.User.idToken.extension_OrganizationName} />
-                                <input type='hidden' name='role' value={user.data.User.idToken.extension_Role} />
                                 <input type='hidden' name='applicationId' value={id} />
                                 <input type='hidden' name='KeyDisplayName' value={secondary.displayName} />
                                 <input type='hidden' name='KeyId' value={secondary.keyId} />

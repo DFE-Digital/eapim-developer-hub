@@ -33,6 +33,26 @@ const APP_ROUTES = [
   {
     page: 'profile',
     pattern: '/profile'
+  },
+  {
+    page: '/auth/register',
+    pattern: '/register'
+  },
+  {
+    page: '/auth/login',
+    pattern: '/login'
+  },
+  {
+    page: '/auth/logout',
+    pattern: '/logout'
+  },
+  {
+    page: '/auth/forgot-password',
+    pattern: '/forgot-password'
+  },
+  {
+    page: '/auth/edit-profile',
+    pattern: '/edit-profile'
   }
 ]
 

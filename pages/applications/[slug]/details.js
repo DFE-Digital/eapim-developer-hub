@@ -6,8 +6,6 @@ import AccessChecker from 'components/common/AccessChecker'
 import Content from '../../../content.json'
 import ReturnTo from 'components/common/ReturnTo'
 import { Loading } from 'components/common/Loading'
-import Header from 'components/common/Header'
-import PhaseBanner from 'components/common/PhaseBanner'
 import { clearApplication } from 'actions/application'
 import { PrivateRoute } from 'components/common/PrivateRoute'
 import ApplicationSideBar from 'components/common/ApplicationSideBar'
@@ -20,16 +18,13 @@ class ApplicationDetails extends Component {
       user: { data }
     } = this.props
 
-    let isLoggedIn = false
-    if (data && data.isAuthed) isLoggedIn = true
     if (!selectedApplication) return <Loading />
+
     return (
       <Fragment>
         <AccessChecker msalConfig={this.props.msalConfig} />
         <PrivateRoute redirect={'/applications'} />
         <ReturnTo parentPath={this.props.router.asPath} />
-        <Header msalConfig={this.props.msalConfig} isLoggedIn={isLoggedIn} />
-        <PhaseBanner />
         <div className='govuk-width-container'>
           <div className='govuk-breadcrumbs'>
             <ol className='govuk-breadcrumbs__list'>
@@ -112,13 +107,13 @@ class ApplicationDetails extends Component {
                           Contact email:
                         </dt>
                         <dd className='govuk-summary-list__value'>
-                          {(data && data.User) ? data.User.idToken['signInNames.emailAddress'] : null}
+                          {(data && data.User) ? data.User.idToken['email'] : null}
                         </dd>
                       </div>
                     </dl>
 
-                    <Link href='/applications/[slug]/delete-application' as={`/applications/${selectedApplication.applicationId}/delete-application`}>
-                      <a className={'govuk-button govuk-button--warning govuk-!-margin-top-6'}>Delete application</a>
+                    <Link href='/applications/[slug]/api-subscriptions' as={`/applications/${selectedApplication.applicationId}/api-subscriptions`}>
+                      <a className={'govuk-button govuk-button--default govuk-!-margin-top-6'}>Subscribe to APIs</a>
                     </Link>
                   </div>
                 </div>

@@ -6,8 +6,6 @@ import Content from '../../content.json'
 import AuthWarning from 'components/common/AuthWarning'
 import SideBar from 'components/common/SideBar'
 import ReturnTo from 'components/common/ReturnTo'
-import Header from 'components/common/Header'
-import PhaseBanner from 'components/common/PhaseBanner'
 import ContentBuilder from 'components/common/ContentBuilder'
 
 const page = 'Registering your application'
@@ -25,8 +23,6 @@ class RegisteringApplications extends Component {
       <Fragment>
         <AccessChecker msalConfig={this.props.msalConfig} />
         <ReturnTo parentPath={this.props.router.asPath} />
-        <Header msalConfig={this.props.msalConfig} isLoggedIn={isLoggedIn} />
-        <PhaseBanner />
         <div className='govuk-width-container'>
           <div className='govuk-breadcrumbs'>
             <ol className='govuk-breadcrumbs__list'>

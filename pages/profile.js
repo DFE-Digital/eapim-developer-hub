@@ -5,9 +5,7 @@ import Router from 'next/router'
 import AccessChecker from 'components/common/AccessChecker'
 import Content from '../content.json'
 import ReturnTo from 'components/common/ReturnTo'
-import Header from 'components/common/Header'
-import PhaseBanner from 'components/common/PhaseBanner'
-import { editProfile, signInToken } from '../src/actions/authenticate'
+import { signInToken } from '../src/actions/authenticate'
 import { b2cPolicies } from '../src/auth/config'
 import { PrivateRoute } from 'components/common/PrivateRoute'
 
@@ -15,11 +13,13 @@ const page = 'Profile'
 
 class Profile extends Component {
   componentWillReceiveProps = () => {
-    const myMSALObj = new Msal.UserAgentApplication(this.props.msalConfig)
+    const myMSALObj = new Msal.UserAgentApplication(this.props.msalEditProfileConfig)
+
     myMSALObj.handleRedirectCallback((error, response) => {
       // Error handling
       if (error) {
-        console.log(error)
+        console.log('props', this.props.msalEditProfileConfig)
+        console.log('error.errorMessage', error.errorMessage)
 
         if (error.errorMessage.indexOf('AADB2C90091') > -1) {
           Router.push(this.props.router.route || '/')
@@ -28,18 +28,16 @@ class Profile extends Component {
         // Check for forgot password error
         // Learn more about AAD error codes at https://docs.microsoft.com/en-us/azure/active-directory/develop/reference-aadsts-error-codes
         if (error.errorMessage.indexOf('AADB2C90118') > -1) {
-          console.log('error.errorMessage', error.errorMessage)
-          try {
-            // Password reset policy/authority
-            myMSALObj.loginRedirect(this.props.msalForgotPasswordConfig.auth.authority)
-          } catch (err) {
-            console.log(err)
-          }
+          return Router.replace('/auth/forgot-password')
         }
       } else {
         if (response.tokenType === 'id_token' && response.idToken.claims['acr'] === b2cPolicies.names.editProfile) {
           console.log('id_token acquired at: ' + new Date().toString())
-          myMSALObj.loginRedirect(this.props.msalConfig)
+          const account = myMSALObj.getAccount()
+          console.log(account)
+
+          this.props.signInToken(account)
+          // myMSALObj.loginRedirect(this.props.msalConfig)
         } else {
           console.log('Token type is: ' + response.tokenType)
         }
@@ -51,8 +49,7 @@ class Profile extends Component {
     const {
       user: { data }
     } = this.props
-    let isLoggedIn = false
-    if (data && data.isAuthed) isLoggedIn = true
+
     if (data && !data.User) return null
 
     return (
@@ -60,8 +57,6 @@ class Profile extends Component {
         <AccessChecker msalConfig={this.props.msalConfig} />
         <PrivateRoute redirect={'/'} />
         <ReturnTo parentPath={this.props.router.asPath} />
-        <Header msalConfig={this.props.msalConfig} isLoggedIn={isLoggedIn} router={this.props.router} />
-        <PhaseBanner />
         <div className='govuk-width-container'>
           <div className='govuk-breadcrumbs'>
             <ol className='govuk-breadcrumbs__list'>
@@ -81,28 +76,20 @@ class Profile extends Component {
                       <caption className='govuk-table__caption govuk-heading-m'>{Content[page].Content.AccountDetails.Heading}</caption>
                       <tbody className='govuk-table__body'>
                         <tr className='govuk-table__row'>
-                          <th scope='row' className='govuk-table__header'>Display name</th>
-                          <td className='govuk-table__cell'>{data.User.name}</td>
-                        </tr>
-                        <tr className='govuk-table__row'>
                           <th scope='row' className='govuk-table__header'>Name</th>
                           <td className='govuk-table__cell'>{data.User.idToken.given_name} {data.User.idToken.family_name}</td>
                         </tr>
                         <tr className='govuk-table__row'>
                           <th scope='row' className='govuk-table__header'>Email address</th>
-                          <td className='govuk-table__cell'>{data.User.idToken['signInNames.emailAddress']}</td>
+                          <td className='govuk-table__cell'>{data.User.idToken['email']}</td>
                         </tr>
                         <tr className='govuk-table__row'>
                           <th scope='row' className='govuk-table__header'>Organisation</th>
                           <td className='govuk-table__cell'>{data.User.idToken.extension_OrganizationName}</td>
                         </tr>
-                        <tr className='govuk-table__row'>
-                          <th scope='row' className='govuk-table__header'>Role</th>
-                          <td className='govuk-table__cell'>{data.User.idToken.extension_Role}</td>
-                        </tr>
                       </tbody>
                     </table>
-                    <button type='button' onClick={() => this.props.editProfile(this.props.msalEditProfileConfig)} className='govuk-button'>{Content[page].Content.AccountDetails.Button}</button>
+                    <a href='/auth/edit-profile' className='govuk-button'>{Content[page].Content.AccountDetails.Button}</a>
                   </Fragment>
                 )}
                 <h2 className='govuk-heading-l govuk-!-margin-top-9'>{Content[page].Content.DeleteAccount.Heading}</h2>
@@ -124,4 +111,4 @@ const mapStateToProps = (state) => {
 }
 
 export { Profile }
-export default connect(mapStateToProps, { editProfile, signInToken })(Profile)
+export default connect(mapStateToProps, { signInToken })(Profile)

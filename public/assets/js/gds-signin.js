@@ -11,6 +11,53 @@ const wrapForgotPassword = (toWrap) => {
   return wrapper.appendChild(toWrap)
 }
 
+const createErrorLink = (id, html) => {
+  const a = document.createElement('a')
+  a.classList.add('govuk-link')
+  a.setAttribute('href', id)
+  a.append(html)
+  return a
+}
+
+const showFormGroupError = (inputId) => {
+  document.querySelector(inputId).closest('.govuk-form-group').classList.add('govuk-form-group--error')
+}
+
+const showFieldError = (inputId, type) => {
+  const itemLevel = document.querySelector(inputId).closest('.entry-item').querySelector('.itemLevel')
+
+  const p = itemLevel.querySelector('p')
+  p.classList.add('govuk-error-message')
+  p.innerHTML = 'Please enter your ' + type
+
+  itemLevel.style.display = 'block'
+
+  document.querySelector(inputId).classList.add('highlightError')
+}
+
+const showPageLevel = () => {
+  document.querySelector('.pageLevel').style.display = 'block'
+}
+
+const hidePageLevel = () => {
+  document.querySelector('.pageLevel').style.display = 'none'
+}
+
+const summaryErrorMessageCallback = (mutations) => {
+  mutations.forEach(mutation => {
+    const entry = mutation.target
+
+    if (entry.style.display === 'block') {
+      if (document.querySelector('.error-summary-email').innerHTML === '' && document.querySelector('.error-summary-password').innerHTML === '') {
+        showFormGroupError('#signInName')
+        showFieldError('#signInName', 'email')
+        showFormGroupError('#password')
+        showFieldError('#password', 'password')
+      }
+    }
+  })
+}
+
 const emailErrorMessageCallback = (mutations) => {
   mutations.forEach(mutation => {
     const entry = mutation.target
@@ -22,14 +69,12 @@ const emailErrorMessageCallback = (mutations) => {
       }
 
       if (mutated.innerText !== '') {
-        const a = document.createElement('a')
-        a.classList.add('govuk-link')
-        a.setAttribute('href', '#signInName')
-        a.append(mutated.cloneNode(true))
-        entry.closest('.govuk-form-group').classList.add('govuk-form-group--error')
+        const a = createErrorLink('#signInName', mutated.cloneNode(true))
+
+        showFormGroupError('#signInName')
         document.querySelector('.error-summary-email').innerHTML = ''
         document.querySelector('.error-summary-email').append(a)
-        document.querySelector('.pageLevel').style.display = 'block'
+        showPageLevel()
       }
     }
 
@@ -40,7 +85,7 @@ const emailErrorMessageCallback = (mutations) => {
     }
 
     if (document.querySelector('.error-summary-email').innerHTML === '' && document.querySelector('.error-summary-password').innerHTML === '') {
-      document.querySelector('.pageLevel').style.display = 'none'
+      hidePageLevel()
     }
   })
 }
@@ -56,14 +101,11 @@ const passwordErrorMessageCallback = (mutations) => {
       }
 
       if (mutated.innerText !== '') {
-        const a = document.createElement('a')
-        a.classList.add('govuk-link')
-        a.setAttribute('href', '#password')
-        a.append(mutated.cloneNode(true))
-        entry.closest('.govuk-form-group').classList.add('govuk-form-group--error')
+        const a = createErrorLink('#password', mutated.cloneNode(true))
+        showFormGroupError('#password')
         document.querySelector('.error-summary-password').innerHTML = ''
         document.querySelector('.error-summary-password').append(a)
-        document.querySelector('.pageLevel').style.display = 'block'
+        showPageLevel()
       }
     }
 
@@ -73,7 +115,7 @@ const passwordErrorMessageCallback = (mutations) => {
     }
 
     if (document.querySelector('.error-summary-email').innerHTML === '' && document.querySelector('.error-summary-password').innerHTML === '') {
-      document.querySelector('.pageLevel').style.display = 'none'
+      hidePageLevel()
     }
   })
 }
@@ -88,10 +130,12 @@ ready(() => {
     characterDataOldValue: false
   }
 
+  const summaryObserver = new window.MutationObserver(summaryErrorMessageCallback)
   const emailObserver = new window.MutationObserver(emailErrorMessageCallback)
   const passwordObserver = new window.MutationObserver(passwordErrorMessageCallback)
 
   if (container) {
+    summaryObserver.observe(container.querySelector('.pageLevel'), { attributes: true })
     emailObserver.observe(container.querySelector('#signInName').closest('.entry-item').querySelector('.itemLevel'), options)
     passwordObserver.observe(container.querySelector('#password').closest('.entry-item').querySelector('.itemLevel'), options)
 
@@ -149,11 +193,11 @@ ready(() => {
   }
 
   setTimeout(() => {
-    const create = container.querySelector('.create')
+    // const create = container.querySelector('.create')
     const forgotPassword = document.getElementById('forgotPassword')
     const moveTo = document.querySelectorAll('.entry-item')[1]
 
-    create.remove()
+    // create.remove()
     moveTo.appendChild(forgotPassword)
     wrapForgotPassword(forgotPassword)
   }, 100)

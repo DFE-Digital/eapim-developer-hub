@@ -1,6 +1,7 @@
 export const b2cPolicies = {
   names: {
-    signUpSignIn: 'b2c_1a_eapim_signup_signin',
+    signIn: 'b2c_1a_eapim_signin',
+    signUp: 'b2c_1a_eapim_signup',
     forgotPassword: 'b2c_1a_eapim_passwordreset',
     editProfile: 'b2c_1a_eapim_profileedit'
   }
@@ -11,12 +12,13 @@ export const apiConfig = {
   webApi: 'https://fabrikamb2chello.azurewebsites.net/hello'
 }
 
-export const msalConfig = ({ authority, clientId, redirectUri }) => {
+export const msalConfig = ({ authority, clientId, redirectUri, postLogoutRedirectUri }) => {
   return {
     auth: {
       clientId,
       authority,
       redirectUri,
+      postLogoutRedirectUri,
       validateAuthority: false,
       navigateToLoginRequestUrl: false
     },

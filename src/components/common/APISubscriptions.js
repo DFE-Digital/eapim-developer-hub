@@ -47,8 +47,8 @@ const APISubscriptions = ({ applicationId, apis, loadedRef, onSubscribe, onCance
       {apis.map(api => {
         const apiName = api.name
 
-        const productionSubscription = api.subscriptions[0]
-        const sandboxSubscription = api.subscriptions[1]
+        const sandboxSubscription = api.subscriptions[0]
+        const productionSubscription = api.subscriptions[1]
 
         return (
           <div className='govuk-accordion__section' key={api.id}>
@@ -61,29 +61,6 @@ const APISubscriptions = ({ applicationId, apis, loadedRef, onSubscribe, onCance
             </div>
 
             <div id='accordion-subscriptions' className='govuk-accordion__section-content' aria-labelledby='accordion-subscriptions-heading'>
-              {!api.subscriptions.find(api => api.environment === 'Production') && (
-                <table className='govuk-table'>
-                  <thead className='govuk-table__head'>
-                    <tr className='govuk-table__row'>
-                      <th scope='row' className='govuk-table__header govuk-!-width-one-half'>Production</th>
-                      <td scope='row' className='govuk-table__cell govuk-!-width-one-half govuk-table__header--numeric'>
-                        {renderSubscribeButton(apiName, 'Production')}
-                      </td>
-                    </tr>
-                  </thead>
-                </table>
-              )}
-              {productionSubscription && (
-                <APISubscription
-                  api={api}
-                  subscription={productionSubscription}
-                  renderSubscribeButton={renderSubscribeButton}
-                  renderCancelButton={renderCancelButton}
-                  handleFetching={handleFetching}
-                  fetching={fetching}
-                />
-              )}
-
               {!api.subscriptions.find(api => api.environment === 'Sandbox') && (
                 <table className='govuk-table'>
                   <thead className='govuk-table__head'>
@@ -107,6 +84,28 @@ const APISubscriptions = ({ applicationId, apis, loadedRef, onSubscribe, onCance
                 />
               )}
 
+              {!api.subscriptions.find(api => api.environment === 'Production') && (
+                <table className='govuk-table'>
+                  <thead className='govuk-table__head'>
+                    <tr className='govuk-table__row'>
+                      <th scope='row' className='govuk-table__header govuk-!-width-one-half'>Production</th>
+                      <td scope='row' className='govuk-table__cell govuk-!-width-one-half govuk-table__header--numeric'>
+                        {renderSubscribeButton(apiName, 'Production')}
+                      </td>
+                    </tr>
+                  </thead>
+                </table>
+              )}
+              {productionSubscription && (
+                <APISubscription
+                  api={api}
+                  subscription={productionSubscription}
+                  renderSubscribeButton={renderSubscribeButton}
+                  renderCancelButton={renderCancelButton}
+                  handleFetching={handleFetching}
+                  fetching={fetching}
+                />
+              )}
             </div>
           </div>
         )

@@ -14,6 +14,7 @@
   <meta property="og:title" content="DfE Developer Hub" />
   
   <link rel="stylesheet" href="#{ROOT_URL}#/assets/css/gds-main.css?v=0.0.3" type="text/css" media="all">
+  <link rel="stylesheet" href="#{ROOT_URL}#/assets/css/b2c-overrides.css" type="text/css" media="all">
 </head>
 <body>
   <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
@@ -29,7 +30,8 @@
             <li class="govuk-header__navigation-item"><a href="#{ROOT_URL}#/apis" class="govuk-header__link">Apis</a></li>
             <li class="govuk-header__navigation-item"><a href="#{ROOT_URL}#/applications" class="govuk-header__link">Applications</a></li>
             <li class="govuk-header__navigation-item"><a href="#{ROOT_URL}#/support" class="govuk-header__link">Support</a></li>
-            <li class="govuk-header__navigation-item govuk-header__navigation-item--active"><a href="#{B2C_SIGNUP_SIGNIN_TEMPLATE_URL}#" class="govuk-header__link">Sign in</a></li>
+            <li class="govuk-header__navigation-item govuk-header__navigation-item"><a href="#{ROOT_URL}#/auth/register" class="govuk-header__link">Create an account</a></li>
+            <li class="govuk-header__navigation-item govuk-header__navigation-item--active"><a href="#{ROOT_URL}#/auth/login" class="govuk-header__link">Sign in</a></li>
           </ul>
         </nav>
       </div>
@@ -51,7 +53,7 @@
       </div>
       <div class="govuk-grid-row govuk-!-margin-top-6">
         <div class="govuk-grid-column-one-half">
-          <p class="govuk-body govuk-!-margin-bottom-6">To access some specific Department for Education API services you will need to <a id="createAccount" tabindex="1" href="#{B2C_SIGNUP_SIGNIN_TEMPLATE_URL}#">create an account</a>.</p>
+          <p class="govuk-body govuk-!-margin-bottom-6">To access some specific Department for Education API services you will need to <a id="createAccount" tabindex="1" href="#{ROOT_URL}#/auth/register">Create an account</a>.</p>
           <div id="api"></div>
         </div>
       </div>

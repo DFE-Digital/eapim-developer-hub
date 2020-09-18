@@ -1,14 +1,18 @@
-import React, { PureComponent, Fragment } from 'react'
+import React, { Fragment } from 'react'
+import Header from 'components/common/Header'
+import PhaseBanner from 'components/common/PhaseBanner'
 import Footer from 'components/common/Footer'
 
-export default class Layout extends PureComponent {
-  render () {
-    return (
-      <Fragment>
-        <a href='#main-content' className='govuk-skip-link'>Skip to main content</a>
-        { this.props.children }
-        <Footer />
-      </Fragment>
-    )
-  }
+const Layout = ({ children, msalConfig }) => {
+  return (
+    <Fragment>
+      <Header msalConfig={msalConfig} />
+      <PhaseBanner />
+      <a href='#main-content' className='govuk-skip-link'>Skip to main content</a>
+      {children}
+      <Footer />
+    </Fragment>
+  )
 }
+
+export default Layout

@@ -5,8 +5,6 @@ import Router from 'next/router'
 import AccessChecker from 'components/common/AccessChecker'
 import ReturnTo from 'components/common/ReturnTo'
 import { Loading } from 'components/common/Loading'
-import Header from 'components/common/Header'
-import PhaseBanner from 'components/common/PhaseBanner'
 import { clearApplication } from 'actions/application'
 import { PrivateRoute } from 'components/common/PrivateRoute'
 
@@ -14,13 +12,7 @@ const page = 'Delete application'
 
 class DeleteApplication extends Component {
   render () {
-    const {
-      selectedApplication,
-      user: { data }
-    } = this.props
-
-    let isLoggedIn = false
-    if (data && data.isAuthed) isLoggedIn = true
+    const { selectedApplication } = this.props
 
     if (!selectedApplication) return <Loading />
 
@@ -29,8 +21,6 @@ class DeleteApplication extends Component {
         <AccessChecker msalConfig={this.props.msalConfig} />
         <PrivateRoute redirect={'/applications'} />
         <ReturnTo parentPath={this.props.router.asPath} />
-        <Header msalConfig={this.props.msalConfig} isLoggedIn={isLoggedIn} />
-        <PhaseBanner />
         <div className='govuk-width-container'>
           <a href='#' className='govuk-back-link' onClick={() => Router.back()}>Back</a>
           <main className='govuk-main-wrapper ' id='main-content' role='main'>
@@ -65,7 +55,6 @@ class DeleteApplication extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user,
     selectedApplication: state.application.selectedApplication
   }
 }

@@ -4,8 +4,6 @@ import Content from '../../../content.json'
 import AccessChecker from 'components/common/AccessChecker'
 import ReturnTo from 'components/common/ReturnTo'
 import { Loading } from 'components/common/Loading'
-import Header from 'components/common/Header'
-import PhaseBanner from 'components/common/PhaseBanner'
 import { PrivateRoute } from 'components/common/PrivateRoute'
 import ApplicationSideBar from 'components/common/ApplicationSideBar'
 
@@ -69,8 +67,6 @@ class TeamMembers extends Component {
       user: { data }
     } = this.props
 
-    let isLoggedIn = false
-    if (data && data.isAuthed) isLoggedIn = true
     if (!selectedApplication) return <Loading />
 
     return (
@@ -78,8 +74,6 @@ class TeamMembers extends Component {
         <AccessChecker msalConfig={this.props.msalConfig} />
         <PrivateRoute redirect={'/applications'} />
         <ReturnTo parentPath={this.props.router.asPath} />
-        <Header msalConfig={this.props.msalConfig} isLoggedIn={isLoggedIn} />
-        <PhaseBanner />
         <div className='govuk-width-container'>
           <div className='govuk-breadcrumbs'>
             <ol className='govuk-breadcrumbs__list'>
@@ -138,7 +132,7 @@ class TeamMembers extends Component {
                       </thead>
                       <tbody className='govuk-table__body'>
                         <tr className='govuk-table__row'>
-                          <th scope='row' className='govuk-table__header'>{(data && data.User) ? data.User.idToken['signInNames.emailAddress'] : null}</th>
+                          <th scope='row' className='govuk-table__header'>{(data && data.User) ? data.User.idToken['email'] : null}</th>
                           <td className='govuk-table__cell'>Admin</td>
                           <td className='govuk-table__cell' />
                         </tr>

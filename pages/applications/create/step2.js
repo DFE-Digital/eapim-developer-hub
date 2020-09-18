@@ -3,8 +3,6 @@ import { connect } from 'react-redux'
 import Router from 'next/router'
 import AccessChecker from 'components/common/AccessChecker'
 import ReturnTo from 'components/common/ReturnTo'
-import Header from 'components/common/Header'
-import PhaseBanner from 'components/common/PhaseBanner'
 import InputWithValidation from 'components/common/forms/input-with-validation'
 import ValidationMessages from 'components/common/forms/validation-messages'
 import { saveAppData, cancelApplication } from '../../../src/actions/application'
@@ -61,20 +59,14 @@ class CreateStep2 extends Component {
 
   render () {
     const {
-      user: { data },
       application: { details }
     } = this.props
-
-    let isLoggedIn = false
-    if (data && data.isAuthed) isLoggedIn = true
 
     return (
       <Fragment>
         <AccessChecker msalConfig={this.props.msalConfig} />
         <PrivateRoute redirect={'/applications'} />
         <ReturnTo parentPath={this.props.router.asPath} />
-        <Header msalConfig={this.props.msalConfig} isLoggedIn={isLoggedIn} />
-        <PhaseBanner />
         <div className='govuk-width-container'>
           <a href='#' className='govuk-back-link' onClick={() => Router.back()}>Back</a>
           <main className='govuk-main-wrapper ' id='main-content' role='main'>
@@ -135,7 +127,6 @@ class CreateStep2 extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user,
     application: state.application
   }
 }

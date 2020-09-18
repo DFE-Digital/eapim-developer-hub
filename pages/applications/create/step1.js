@@ -1,51 +1,63 @@
-import React, { Component, Fragment } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import { connect } from 'react-redux'
 import Router from 'next/router'
 import AccessChecker from 'components/common/AccessChecker'
 import ReturnTo from 'components/common/ReturnTo'
-import Header from 'components/common/Header'
-import PhaseBanner from 'components/common/PhaseBanner'
+import { Loading } from 'components/common/Loading'
 import InputWithValidation from 'components/common/forms/input-with-validation'
 import ValidationMessages from 'components/common/forms/validation-messages'
 import { saveAppData, cancelApplication } from '../../../src/actions/application'
+import { getApplications } from '../../../lib/applicationService'
 import { PrivateRoute } from 'components/common/PrivateRoute'
 import { appNamePattern } from '../../../src/utils/patterns'
 
-class CreateStep1 extends Component {
-  constructor (props) {
-    super(props)
+const CreateStep1 = ({ user, application, saveAppData, cancelApplication, router, msalConfig }) => {
+  const [fields, setFields] = useState({})
+  const [errors, setErrors] = useState([])
+  const [fetching, setFetching] = useState(false)
+  const [applications, setApplications] = useState([])
 
-    this.state = {
-      fields: {},
-      errors: []
+  const appName = React.createRef()
+
+  useEffect(() => {
+    const fetchApplications = async () => {
+      setFetching(true)
+      const apps = await getApplications(user.data.User)
+      setApplications(apps)
+      setFetching(false)
     }
 
-    this.appName = React.createRef()
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleInputChange = this.handleInputChange.bind(this)
-  }
+    if (user.data && user.data.User) fetchApplications()
+  }, [user])
 
-  handleSubmit (e) {
+  const handleSubmit = (e) => {
     e.preventDefault()
-    if (!this.appName.current.validateInput(e)) {
-      this.appName.current.validateInput(e)
+
+    if (!appName.current.validateInput(e)) {
+      appName.current.validateInput(e)
       return false
     }
-    this.props.saveAppData(this.state.fields)
+
+    if (applications.find(app => app.applicationName === appName.current.state.inputValue)) {
+      appName.current.setErrors('You have already have an application with this name', false)
+      return false
+    }
+
+    saveAppData(fields)
     Router.push('/applications/create/step2')
     return true
   }
 
-  handleInputChange (event) {
+  const handleInputChange = (event) => {
     const target = event.target
     const value = target.value.trim()
     const name = target.name
-    const fields = { ...this.state.fields }
-    fields[name] = value
-    this.setState({ fields })
+    const _fields = { ...fields }
+    _fields[name] = value
+    setFields(_fields)
   }
 
-  showError = () => {
+  const showError = () => {
     const validationErrors = []
     setTimeout(() => {
       Array.from(document.querySelectorAll(`[id^="error-msg-for__"]`)).forEach(element => {
@@ -56,83 +68,75 @@ class CreateStep1 extends Component {
           })
         }
       })
-      this.setState({ errors: validationErrors })
+      setErrors(validationErrors)
     }, 0)
   }
 
-  render () {
-    const {
-      user: { data },
-      application: { details }
-    } = this.props
+  const { details } = application
 
-    let isLoggedIn = false
-    if (data && data.isAuthed) isLoggedIn = true
+  if (fetching) return <Loading />
 
-    return (
-      <Fragment>
-        <AccessChecker msalConfig={this.props.msalConfig} />
-        <PrivateRoute redirect={'/applications'} />
-        <ReturnTo parentPath={this.props.router.asPath} />
-        <Header msalConfig={this.props.msalConfig} isLoggedIn={isLoggedIn} />
-        <PhaseBanner />
-        <div className='govuk-width-container'>
-          <a href='#' className='govuk-back-link' onClick={() => Router.back()}>Back</a>
-          <main className='govuk-main-wrapper ' id='main-content' role='main'>
-            <div className='govuk-grid-row'>
-              <div className='govuk-grid-column-full'>
-                <ValidationMessages errors={this.state.errors} />
-              </div>
+  return (
+    <Fragment>
+      <AccessChecker msalConfig={msalConfig} />
+      <PrivateRoute redirect={'/applications'} />
+      <ReturnTo parentPath={router.asPath} />
+      <div className='govuk-width-container'>
+        <a href='#' className='govuk-back-link' onClick={() => Router.back()}>Back</a>
+        <main className='govuk-main-wrapper ' id='main-content' role='main'>
+          <div className='govuk-grid-row'>
+            <div className='govuk-grid-column-full'>
+              <ValidationMessages errors={errors} />
             </div>
-            <div className='govuk-grid-row'>
-              <div className='govuk-grid-column-two-thirds'>
-                <form noValidate onSubmit={this.handleSubmit}>
-                  <div className='govuk-form-group'>
-                    <fieldset className='govuk-fieldset'>
-                      <legend className='govuk-fieldset__legend govuk-fieldset__legend--xl'>
-                        <h1 className='govuk-fieldset__heading govuk-!-margin-bottom-6'>
-                          What's the name of your application?
-                        </h1>
-                      </legend>
-                      <InputWithValidation
-                        ref={this.appName}
-                        friendlyName={'application name'}
-                        name={'app-name'}
-                        inputId={'app-name'}
-                        inputErrorId={'error-msg-for__app-name'}
-                        label={`Application name`}
-                        hint='Your application name can contain alphanumeric characters and spaces'
-                        customErrorMessage='Enter the name of your application'
-                        customValidationMessage='Application name must be between 2 and 50 characters'
-                        isRequired
-                        pattern={appNamePattern}
-                        onChange={this.handleInputChange}
-                        onFocus={() => this.showError()}
-                        inputValue={details ? details['app-name'] : this.state.fields['app-name']}
-                        setErrors={() => this.showError()}
-                      />
-                    </fieldset>
-                  </div>
+          </div>
+          <div className='govuk-grid-row'>
+            <div className='govuk-grid-column-two-thirds'>
+              <form noValidate onSubmit={handleSubmit}>
+                <div className='govuk-form-group'>
+                  <fieldset className='govuk-fieldset'>
+                    <legend className='govuk-fieldset__legend govuk-fieldset__legend--xl'>
+                      <h1 className='govuk-fieldset__heading govuk-!-margin-bottom-6'>
+                        What's the name of your application?
+                      </h1>
+                    </legend>
+                    <InputWithValidation
+                      ref={appName}
+                      friendlyName={'application name'}
+                      name={'app-name'}
+                      inputId={'app-name'}
+                      inputErrorId={'error-msg-for__app-name'}
+                      label={`Application name`}
+                      hint='Your application name must be between 2 and 50 characters. It can contain alphanumeric characters and spaces. Special characters are not allowed'
+                      customErrorMessage='Enter the name of your application'
+                      customValidationMessage='Application name must be between 2 and 50 characters and must not contain any special characters'
+                      isRequired
+                      pattern={appNamePattern}
+                      onChange={handleInputChange}
+                      onFocus={() => showError()}
+                      inputValue={details ? details['app-name'] : fields['app-name']}
+                      setErrors={() => showError()}
+                    />
+                  </fieldset>
+                </div>
 
-                  <button type='submit' className='govuk-button govuk-!-margin-right-1'>Continue</button>
-                  <button
-                    type='button'
-                    className='govuk-button govuk-button--secondary'
-                    onClick={() => {
-                      this.props.cancelApplication()
-                      Router.push('/applications')
-                    }}
-                  >
-                    Cancel
-                  </button>
-                </form>
-              </div>
+                <button type='submit' className='govuk-button govuk-!-margin-right-1'>Continue</button>
+                <button
+                  type='button'
+                  className='govuk-button govuk-button--secondary'
+                  onClick={() => {
+                    cancelApplication()
+                    Router.push('/applications')
+                  }}
+                >
+                  Cancel
+                </button>
+              </form>
             </div>
-          </main>
-        </div>
-      </Fragment>
-    )
-  }
+          </div>
+        </main>
+      </div>
+    </Fragment>
+  )
 }
 
 const mapStateToProps = (state) => {

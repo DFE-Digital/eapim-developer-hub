@@ -2,8 +2,6 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import * as Msal from 'msal'
 import Router from 'next/router'
-import Header from 'components/common/Header'
-import PhaseBanner from 'components/common/PhaseBanner'
 import { Loading } from 'components/common/Loading'
 import { signIn, signInToken } from 'actions/authenticate'
 import { b2cPolicies } from '../src/auth/config'
@@ -18,40 +16,42 @@ class SignInSuccess extends Component {
     }
   }
 
-  async signIn (e) {
-    e.preventDefault()
-    await this.props.signIn(this.props.msalConfig)
-  }
-
   componentWillReceiveProps = () => {
     const myMSALObj = new Msal.UserAgentApplication(this.props.msalConfig)
 
     myMSALObj.handleRedirectCallback((error, response) => {
-      console.log(response)
+      console.log('props', this.props.msalConfig)
+
+      console.log('MSAL Error Message: ', error && error.errorMessage)
+      console.log('MSAL Response: ', response)
+
       // Error handling
       if (error) {
-        console.log(error)
-
         // user has no account
         if (error.errorMessage.indexOf('AADB2C99002') > -1) {
-          return myMSALObj.loginRedirect({ authority: this.props.msalConfig.authority })
+          return Router.push('/')
         }
 
+        // user cancelled creating an account
+        // user cancelled forgot password
+        // user cancelled updating profile
         if (error.errorMessage.indexOf('AADB2C90091') > -1) {
-          const { returnTo: { returnUrl } } = this.props
-          return Router.push(returnUrl || '/')
+          // const { returnTo: { returnUrl } } = this.props
+          // return Router.push(returnUrl || '/')
+          // this.setState({ redirectPage: 'back to the homepage' })
+          return Router.push('/')
+        }
+
+        // user went from signin to create account
+        if (error.errorMessage.indexOf('AADB2C90037') > -1) {
+          return Router.replace('/auth/register')
         }
 
         // Check for forgot password error
         // Learn more about AAD error codes at https://docs.microsoft.com/en-us/azure/active-directory/develop/reference-aadsts-error-codes
         if (error.errorMessage.indexOf('AADB2C90118') > -1) {
-          console.log('error.errorMessage', error.errorMessage)
-          try {
-            // Password reset policy/authority
-            myMSALObj.loginRedirect({ authority: this.props.msalForgotPasswordConfig.auth.authority })
-          } catch (err) {
-            console.log(err)
-          }
+          return Router.replace('/auth/forgot-password')
+          // myMSALObj.loginRedirect('/forgot-password')
         }
       } else {
         // We need to reject id tokens that were not issued with the default sign-in policy.
@@ -61,7 +61,7 @@ class SignInSuccess extends Component {
         if (response.tokenType === 'id_token' && response.idToken.claims['acr'] === b2cPolicies.names.forgotPassword) {
           console.log(response.idToken.claims['acr'])
           this.setState({ passwordChanged: true })
-        } else if (response.tokenType === 'id_token' && response.idToken.claims['acr'] === b2cPolicies.names.signUpSignIn) {
+        } else if (response.tokenType === 'id_token' && (response.idToken.claims['acr'] === b2cPolicies.names.signIn || response.idToken.claims['acr'] === b2cPolicies.names.signUp)) {
           console.log('id_token acquired at: ' + new Date().toString())
 
           if (!myMSALObj.getAccount()) {
@@ -97,8 +97,6 @@ class SignInSuccess extends Component {
     ) Router.push(returnUrl || '/')
     return (
       <Fragment>
-        <Header msalConfig={this.props.msalConfig} isLoggedIn={false} />
-        <PhaseBanner />
         {!this.state.passwordChanged && (<Loading />)}
         {this.state.passwordChanged && (
           <div className='govuk-width-container'>
@@ -110,7 +108,7 @@ class SignInSuccess extends Component {
                     <p className='govuk-body govuk-!-margin-bottom-0'>Please sign-in with your new password.</p>
                   </div>
 
-                  <p className='govuk-body'><a href='#' onClick={e => this.signIn(e)} className='govuk-link'><strong>Sign in</strong></a> to the Developer Hub.</p>
+                  <p className='govuk-body'><a href='/auth/login' className='govuk-link'><strong>Sign in</strong></a> to the Developer Hub.</p>
                 </div>
               </div>
             </main>

@@ -4,8 +4,6 @@ import AccessChecker from 'components/common/AccessChecker'
 import Content from '../../content.json'
 import SideBar from 'components/common/SideBar'
 import ReturnTo from 'components/common/ReturnTo'
-import Header from 'components/common/Header'
-import PhaseBanner from 'components/common/PhaseBanner'
 
 const page = 'Reference guide'
 
@@ -22,8 +20,6 @@ class ReferenceGuide extends Component {
       <Fragment>
         <AccessChecker msalConfig={this.props.msalConfig} />
         <ReturnTo parentPath={this.props.router.asPath} />
-        <Header msalConfig={this.props.msalConfig} isLoggedIn={isLoggedIn} />
-        <PhaseBanner />
         <div className='govuk-width-container'>
           <div className='govuk-breadcrumbs'>
             <ol className='govuk-breadcrumbs__list'>

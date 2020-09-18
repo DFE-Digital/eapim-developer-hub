@@ -1,24 +1,16 @@
 import React, { Fragment } from 'react'
-import { connect } from 'react-redux'
 import Content from '../content.json'
 import AccessChecker from 'components/common/AccessChecker'
 import ReturnTo from 'components/common/ReturnTo'
-import Header from 'components/common/Header'
-import PhaseBanner from 'components/common/PhaseBanner'
 import ContentBuilder from 'components/common/ContentBuilder'
 
 const page = 'Cookies'
 
-const Cookies = ({ user, msalConfig, router }) => {
-  let isLoggedIn = false
-  if (user.data && user.data.isAuthed) isLoggedIn = true
-
+const Cookies = ({ msalConfig, router }) => {
   return (
     <Fragment>
       <AccessChecker msalConfig={msalConfig} />
       <ReturnTo parentPath={router.asPath} />
-      <Header msalConfig={msalConfig} isLoggedIn={isLoggedIn} />
-      <PhaseBanner />
       <div className='govuk-width-container'>
         <div className='govuk-breadcrumbs'>
           <ol className='govuk-breadcrumbs__list'>
@@ -41,11 +33,4 @@ const Cookies = ({ user, msalConfig, router }) => {
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user
-  }
-}
-
-export { Cookies }
-export default connect(mapStateToProps)(Cookies)
+export default Cookies

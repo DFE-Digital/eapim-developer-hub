@@ -3,8 +3,6 @@ import { connect } from 'react-redux'
 import Router from 'next/router'
 import AccessChecker from 'components/common/AccessChecker'
 import ReturnTo from 'components/common/ReturnTo'
-import Header from 'components/common/Header'
-import PhaseBanner from 'components/common/PhaseBanner'
 import { PrivateRoute } from 'components/common/PrivateRoute'
 
 class CreateCredentials extends Component {
@@ -12,6 +10,7 @@ class CreateCredentials extends Component {
     super(props)
     this.state = {
       confirm: false,
+      clientIdCopied: false,
       primaryCopied: false,
       secondaryCopied: false
     }
@@ -43,12 +42,8 @@ class CreateCredentials extends Component {
 
   render () {
     const {
-      user: { data },
       selectedApplication
     } = this.props
-
-    let isLoggedIn = false
-    if (data && data.isAuthed) isLoggedIn = true
 
     console.log(selectedApplication)
 
@@ -57,8 +52,7 @@ class CreateCredentials extends Component {
         <AccessChecker msalConfig={this.props.msalConfig} />
         <PrivateRoute redirect={'/applications'} />
         <ReturnTo parentPath={this.props.router.asPath} />
-        <Header msalConfig={this.props.msalConfig} isLoggedIn={isLoggedIn} />
-        <PhaseBanner />
+
         <div className='govuk-width-container'>
           <a href='#' className='govuk-back-link' onClick={() => Router.back()}>Back</a>
           <main className='govuk-main-wrapper ' id='main-content' role='main'>
@@ -67,8 +61,8 @@ class CreateCredentials extends Component {
                 <h1 className='govuk-heading-xl'>Credentials</h1>
 
                 <div className='govuk-inset-text'>
-                  We only show your client secret once to help keep your data secure.<br />
-                  Copy the client secret immediately.
+                  We only show your client secrets once to help keep your data secure.<br />
+                  Copy the client secrets immediately.
                 </div>
 
                 <table className='govuk-table'>
@@ -86,10 +80,14 @@ class CreateCredentials extends Component {
                     <tr className='govuk-table__row'>
                       <th scope='row' className='govuk-table__header'>Client Id:</th>
                       <td className='govuk-table__cell'>{selectedApplication ? selectedApplication.clientId : null}</td>
-                      <td className='govuk-table__cell govuk-table__cell--numeric' />
+                      <td className='govuk-table__cell govuk-table__cell--numeric'>
+                        <a href='#' className='govuk-link' onClick={(e) => this.copyToClipboard(e, selectedApplication.clientId, 'clientId')}>
+                          {this.state.clientIdCopied ? 'Copied' : 'Copy'}
+                        </a>
+                      </td>
                     </tr>
                     <tr className='govuk-table__row'>
-                      <th scope='row' className='govuk-table__header'>Primary key:</th>
+                      <th scope='row' className='govuk-table__header'>Primary secret:</th>
                       <td className='govuk-table__cell'>{selectedApplication ? selectedApplication.PrimarySecret : null}</td>
                       <td className='govuk-table__cell govuk-table__cell--numeric'>
                         <a href='#' className='govuk-link' onClick={(e) => this.copyToClipboard(e, selectedApplication.PrimarySecret, 'primary')}>
@@ -98,7 +96,7 @@ class CreateCredentials extends Component {
                       </td>
                     </tr>
                     <tr className='govuk-table__row'>
-                      <th scope='row' className='govuk-table__header'>Secondary key:</th>
+                      <th scope='row' className='govuk-table__header'>Secondary secret:</th>
                       <td className='govuk-table__cell'>{selectedApplication ? selectedApplication.SecondarySecret : null}</td>
                       <td className='govuk-table__cell govuk-table__cell--numeric'>
                         <a href='#' className='govuk-link' onClick={(e) => this.copyToClipboard(e, selectedApplication.SecondarySecret, 'secondary')}>
@@ -141,7 +139,6 @@ class CreateCredentials extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user,
     selectedApplication: state.application.selectedApplication
   }
 }

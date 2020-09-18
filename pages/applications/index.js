@@ -7,8 +7,6 @@ import SideBar from 'components/common/SideBar'
 import ReturnTo from 'components/common/ReturnTo'
 import { Loading } from 'components/common/Loading'
 import AuthWarning from 'components/common/AuthWarning'
-import Header from 'components/common/Header'
-import PhaseBanner from 'components/common/PhaseBanner'
 import { selectApplication } from '../../src/actions/application'
 
 import { getApplications } from '../../lib/applicationService'
@@ -43,8 +41,6 @@ const Applications = ({ user, selectApplication, router, msalConfig }) => {
     <Fragment>
       <AccessChecker msalConfig={msalConfig} />
       <ReturnTo parentPath={router.asPath} />
-      <Header msalConfig={msalConfig} isLoggedIn={isLoggedIn} />
-      <PhaseBanner />
       <div className='govuk-width-container'>
         <div className='govuk-breadcrumbs'>
           <ol className='govuk-breadcrumbs__list'>
@@ -98,7 +94,6 @@ const Applications = ({ user, selectApplication, router, msalConfig }) => {
                                 <th scope='row' className={`govuk-table__header`}>
                                   <a href='#' onClick={(e) => selectApp(e, app)}>{app.applicationName}</a>
                                 </th>
-                                <td className='govuk-table__cell'>{(user.data && user.data.User) ? user.data.User.idToken.extension_Role : null}</td>
                               </tr>
                             )
                           })}

@@ -3,8 +3,6 @@ import { connect } from 'react-redux'
 import Router from 'next/router'
 import AccessChecker from 'components/common/AccessChecker'
 import ReturnTo from 'components/common/ReturnTo'
-import Header from 'components/common/Header'
-import PhaseBanner from 'components/common/PhaseBanner'
 import { registerApplication, cancelApplication } from '../../../src/actions/application'
 import { PrivateRoute } from 'components/common/PrivateRoute'
 
@@ -12,10 +10,10 @@ class CreateSummary extends Component {
   async createApplication (user, details) {
     const appData = {
       userName: `${user.idToken.given_name} ${user.idToken.family_name}`,
-      userEmail: user.idToken['signInNames.emailAddress'],
+      userEmail: user.idToken['email'],
       userID: user.accountIdentifier,
       organization: user.idToken.extension_OrganizationName,
-      role: user.idToken.extension_Role,
+      role: 'role', // user.idToken.extension_Role,
       applicationName: details['app-name'],
       description: details['app-description'],
       redirectUri: details['app-redirect-url']
@@ -31,16 +29,11 @@ class CreateSummary extends Component {
       application: { details, registering }
     } = this.props
 
-    let isLoggedIn = false
-    if (data && data.isAuthed) isLoggedIn = true
-
     return (
       <Fragment>
         <AccessChecker msalConfig={this.props.msalConfig} />
         <PrivateRoute redirect={'/applications'} />
         <ReturnTo parentPath={this.props.router.asPath} />
-        <Header msalConfig={this.props.msalConfig} isLoggedIn={isLoggedIn} />
-        <PhaseBanner />
         <div className='govuk-width-container'>
           <a href='#' className='govuk-back-link' onClick={() => Router.back()}>Back</a>
           <main className='govuk-main-wrapper ' id='main-content' role='main'>
@@ -68,7 +61,7 @@ class CreateSummary extends Component {
                     </tr>
                     <tr className='govuk-table__row'>
                       <th scope='row' className='govuk-table__header'>Contact email:</th>
-                      <td className='govuk-table__cell'>{(data && data.User) ? data.User.idToken['signInNames.emailAddress'] : null}</td>
+                      <td className='govuk-table__cell'>{(data && data.User) ? data.User.idToken['email'] : null}</td>
                     </tr>
                   </tbody>
                 </table>

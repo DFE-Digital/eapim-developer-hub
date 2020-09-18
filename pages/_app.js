@@ -31,7 +31,14 @@ class MyApp extends App {
     const title = Content.PortalName
 
     const msalAuthConfig = {
-      authority: publicRuntimeConfig.B2C_SIGNUP_SIGNIN_URL,
+      authority: publicRuntimeConfig.B2C_SIGNIN_URL,
+      redirectUri: publicRuntimeConfig.REDIRECT_URL,
+      postLogoutRedirectUri: publicRuntimeConfig.ROOT_URL,
+      clientId: publicRuntimeConfig.CLIENT_ID
+    }
+
+    const msalRegisterConfig = {
+      authority: publicRuntimeConfig.B2C_SIGNUP_URL,
       redirectUri: publicRuntimeConfig.REDIRECT_URL,
       clientId: publicRuntimeConfig.CLIENT_ID
     }
@@ -74,6 +81,7 @@ class MyApp extends App {
                 msalConfig={msalConfig(msalAuthConfig)}
                 msalEditProfileConfig={msalConfig(msalEditProfileConfig)}
                 msalForgotPasswordConfig={msalConfig(msalForgotPasswordConfig)}
+                msalRegisterConfig={msalConfig(msalRegisterConfig)}
               />
             </Layout>
           </Provider>
