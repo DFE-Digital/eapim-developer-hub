@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import ReactHtmlParser from 'react-html-parser'
 import Link from 'next/link'
 import AccessChecker from 'components/common/AccessChecker'
-import { signIn, signOut } from 'actions/authenticate'
+import { signInLink, registerLink, signOut } from 'actions/authenticate'
 import Content from '../content.json'
 import ReturnTo from 'components/common/ReturnTo'
 
@@ -41,8 +41,8 @@ class Home extends Component {
                <div className='govuk-panel__body'>{Content[page].Content.Hero.Intro}</div>
                {!isLoggedIn && (
                  <div className='registerLinks govuk-!-margin-top-9'>
-                   <a href='/auth/register' className='btn white'>{Content[page].Content.Hero.Register}</a>
-                   <p className='govuk-body'>or <a href='/auth/login' className='govuk-link govuk-!-margin-left-1'><strong>{ ReactHtmlParser(Content[page].Content.Hero.Signin) }</strong></a> to the {Content.PortalName}.</p>
+                   <a href='/auth/register' onClick={(e) => registerLink(e, this.props.msalConfig)} className='btn white'>{Content[page].Content.Hero.Register}</a>
+                   <p className='govuk-body'>or <a href='/auth/login' onClick={(e) => signInLink(e, this.props.msalConfig)} className='govuk-link govuk-!-margin-left-1'><strong>{ ReactHtmlParser(Content[page].Content.Hero.Signin) }</strong></a> to the {Content.PortalName}.</p>
                  </div>
                )}
              </div>
@@ -96,4 +96,4 @@ const mapStateToProps = (state) => {
 }
 
 export { Home }
-export default connect(mapStateToProps, { signIn, signOut })(Home)
+export default connect(mapStateToProps, { signOut })(Home)

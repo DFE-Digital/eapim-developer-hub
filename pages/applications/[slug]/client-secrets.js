@@ -94,7 +94,7 @@ const ApplicationClientSecrets = ({ id, user, newClientKey, newClientKeyDisplayN
                   </dl>
 
                   <p className='govuk-body'>
-                    The client secret is a secret known only to the application and the authorization server. You must add the client secret to the request header whenever you make a request to an API.
+                    The client secret is a secret known only to the application and the authorisation server. You must add the client secret to the request header whenever you make a request to an API.
                   </p>
                   <p className='govuk-body'>
                     Primary and secondary secrets are provided in case you need to switch between keys.

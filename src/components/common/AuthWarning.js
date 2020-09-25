@@ -1,9 +1,11 @@
 import React, { Component, Fragment } from 'react'
 import Content from '../../../content.json'
 
+import { signInLink, registerLink } from 'actions/authenticate'
+
 class AuthWarning extends Component {
   render () {
-    const { warning } = this.props
+    const { warning, msalConfig } = this.props
 
     return (
       <Fragment>
@@ -15,8 +17,8 @@ class AuthWarning extends Component {
         </div>
 
         <div className='flex'>
-          <a href='/auth/register' className='govuk-button'>Create an account</a>
-          <p className='govuk-body'>or <a href='/auth/login' className='govuk-link govuk-!-margin-left-1'><strong>sign in</strong></a> to the {Content.PortalName}.</p>
+          <a href='/auth/register' onClick={(e) => registerLink(e, msalConfig)} className='govuk-button'>Create an account</a>
+          <p className='govuk-body'>or <a href='/auth/login' onClick={(e) => signInLink(e, msalConfig)} className='govuk-link govuk-!-margin-left-1'><strong>sign in</strong></a> to the {Content.PortalName}.</p>
         </div>
       </Fragment>
     )

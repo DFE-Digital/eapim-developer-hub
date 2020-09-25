@@ -53,6 +53,10 @@ const APP_ROUTES = [
   {
     page: '/auth/edit-profile',
     pattern: '/edit-profile'
+  },
+  {
+    page: '/support-submitted',
+    pattern: '/support/submitted'
   }
 ]
 

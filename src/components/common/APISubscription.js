@@ -4,7 +4,7 @@ const statusType = {
   default: { tag: 'green', button: 'subscribe' },
   active: { tag: 'turquoise', button: 'cancel' },
   pending: { tag: 'blue', button: 'cancel' },
-  submitted: { tag: 'purple', button: 'cancel' },
+  submitted: { tag: 'purple', button: 'cancel', text: 'pending' },
   cancelled: { tag: 'orange', button: 'subscribe' },
   rejected: { tag: 'red', button: 'cancel' },
   suspended: { tag: 'yellow', button: 'cancel' }
@@ -28,7 +28,7 @@ const APISubscription = ({ api, subscription, renderSubscribeButton, renderCance
         <tr className='govuk-table__row'>
           <th scope='row' className='govuk-table__header govuk-!-font-weight-regular middle'>Status</th>
           <td className='govuk-table__cell govuk-table__cell--numeric middle'>
-            <strong className={`govuk-tag govuk-tag-round govuk-!-margin-right-0 govuk-tag--${state.tag}`}>{subscription.state}</strong>
+            <strong className={`govuk-tag govuk-tag-round govuk-!-margin-right-0 govuk-tag--${state.tag}`}>{state.text || subscription.state}</strong>
           </td>
         </tr>
 

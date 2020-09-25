@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import * as Msal from 'msal'
 import Router from 'next/router'
 import { Loading } from 'components/common/Loading'
-import { signIn, signInToken } from 'actions/authenticate'
+import { signInLink, signInToken } from 'actions/authenticate'
 import { b2cPolicies } from '../src/auth/config'
 
 class SignInSuccess extends Component {
@@ -27,6 +27,9 @@ class SignInSuccess extends Component {
 
       // Error handling
       if (error) {
+        if (error.errorMessage.indexOf('Invalid state') > -1) {
+          return Router.push('/')
+        }
         // user has no account
         if (error.errorMessage.indexOf('AADB2C99002') > -1) {
           return Router.push('/')
@@ -108,7 +111,7 @@ class SignInSuccess extends Component {
                     <p className='govuk-body govuk-!-margin-bottom-0'>Please sign-in with your new password.</p>
                   </div>
 
-                  <p className='govuk-body'><a href='/auth/login' className='govuk-link'><strong>Sign in</strong></a> to the Developer Hub.</p>
+                  <p className='govuk-body'><a href='/auth/login' onClick={(e) => signInLink(e, this.props.msalConfig)} className='govuk-link'><strong>Sign in</strong></a> to the Developer Hub.</p>
                 </div>
               </div>
             </main>
@@ -127,4 +130,4 @@ const mapStateToProps = (state) => {
 }
 
 export { SignInSuccess }
-export default connect(mapStateToProps, { signIn, signInToken })(SignInSuccess)
+export default connect(mapStateToProps, { signInToken })(SignInSuccess)

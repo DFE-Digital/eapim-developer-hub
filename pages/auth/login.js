@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
 import { signIn } from '../../src/actions/authenticate'
 
-const Login = ({ signIn, msalConfig }) => {
+const Login = ({ msalConfig }) => {
   useEffect(() => {
     async function handler () {
       await signIn(msalConfig)
@@ -24,4 +23,4 @@ const Login = ({ signIn, msalConfig }) => {
   )
 }
 
-export default connect(null, { signIn })(Login)
+export default Login

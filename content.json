@@ -6,7 +6,7 @@
       "Url": "/documentation"
     },
     {
-      "Page": "Apis",
+      "Page": "APIs",
       "Url": "/apis"
     },
     {
@@ -48,7 +48,7 @@
     "Content": {
       "Hero": {
         "Heading": "DfE Developer Hub",
-        "Intro": "Enterprise APIs are a specific group of APIs designed to support your needs by optimising governance and controls to suit specific interactions.",
+        "Intro": "Build Education software using Department for Education APIs",
         "Register": "Create an account",
         "Signin": "sign in"
       },
@@ -105,10 +105,6 @@
             {
               "Page": "Terms of service",
               "Url": "/applications/terms-of-service"
-            },
-            {
-              "Page": "Create a test user",
-              "Url": "/applications/create-a-test-user"
             }
           ]
         },
@@ -118,14 +114,6 @@
             {
               "Page": "Manage applications",
               "Url": "/applications"
-            },
-            {
-              "Page": "Testing in the sandbox",
-              "Url": "/documentation/testing-in-the-sandbox"
-            },
-            {
-              "Page": "Create a test user",
-              "Url": "/applications/create-a-test-user"
             }
           ]
         }
@@ -143,7 +131,7 @@
         },
         {
           "Type": "P",
-          "Body": "Create an account with the DfE Developer Hub to gain access to API & their relevant subscription keys."
+          "Body": "Create an account with the DfE Developer Hub to gain access to APIs and their relevant subscription keys."
         },
         {
           "Type": "P",
@@ -151,15 +139,15 @@
         },
         {
           "Type": "H2",
-          "Body": "2. Register an Application"
+          "Body": "2. Register an application"
         },
         {
           "Type": "P",
-          "Body": "Registering an application allows DfE to understand who is accessing our data and for what reasons. Once you have signed in go to <a href='/applications/registering-your-application' class='govuk-link'>Registering your Application</a> and follow the process"
+          "Body": "Registering an application allows DfE to understand who is accessing our data and for what reasons. Once you have signed in go to <a href='/applications/registering-your-application' class='govuk-link'>Registering your application</a> and follow the process"
         },
         {
           "Type": "P",
-          "Body": "Registering an application is quick and easy and gives you access to a unique client identifier & secret(s) for use when calling DfE APIs. Using this client Id & secret helps keep your applications and our data secure."
+          "Body": "Registering an application is quick and easy and gives you access to a unique client identifier and secret(s) for use when calling DfE APIs. Using this client id and secret helps keep your applications and our data secure."
         },
         {
           "Type": "H2",
@@ -167,7 +155,7 @@
         },
         {
           "Type": "P",
-          "Body": "In order to integrate with a DfE API you must first subscribe to the required API, so that you can get access to a subscription key. The subscription key is unique to each client for the DfE API. If you need to connect to multiple DfE APIs you must first subscribe to each API."
+          "Body": "In order to integrate with a DfE API you must first subscribe to the required API, so that you can get access to a subscription key. The subscription key is unique to each client for the DfE API. If you need to connect to multiple DfE APIs you must subscribe to each one."
         },
         {
           "Type": "P",
@@ -175,15 +163,15 @@
         },
         {
           "Type": "P",
-          "Body": "Once you have registered your application you will be able to view your credential details and save them. Viewing your application details will allow you to click on the link subscribe to APIs. Select the API you wish to integrate with and choose sandbox or production."
+          "Body": "Once you have registered your application you will be able to view your credential details and save them. Viewing your application details will allow you to click on the link Subscribe to APIs. Select the API you wish to integrate with and choose sandbox or production."
         },
         {
           "Type": "H2",
-          "Body": "4. Getting Subscription Keys"
+          "Body": "4. Getting subscription keys"
         },
         {
           "Type": "P",
-          "Body": "Before any subscription keys are produced an internal process is carried out to grant access. Depending on the setup of the API this process can take up to a maximum of 3 days."
+          "Body": "Before any subscription keys are produced an internal process is carried out to grant access. Depending on the setup of the API this process can take up to a maximum of 3 working days."
         },
         {
           "Type": "P",
@@ -191,11 +179,11 @@
         },
         {
           "Type": "P",
-          "Body": "To see the status of your request, go to API Subscriptions select the API and a status will be shown."
+          "Body": "To see the status of your request, go to API subscriptions select the API and the status will be shown."
         },
         {
           "Type": "P",
-          "Body": "The status are as follows:"
+          "Body": "The statuses are as follows:"
         },
         {
           "Type": "TABLE",
@@ -232,7 +220,7 @@
               {
                 "Data": [
                   "Suspended",
-                  "The subscription has been suspended. Contact support to have the request unsuspended"
+                  "The subscription has been suspended. Contact support via the Support tab and complete the form to have the request unsuspended"
                 ]
               }
             ]
@@ -244,7 +232,7 @@
         },
         {
           "Type": "P",
-          "Body": "When you first add an application, you are required to register a redirect URL. You can add & edit up to five redirect URLs by going to Redirect URLs"
+          "Body": "When you first register an application, you are required to provide a redirect URL. You can add and edit up to five redirect URLs by going to Redirect URLs"
         },
         {
           "Type": "P",
@@ -252,25 +240,25 @@
         },
         {
           "Type": "P",
-          "Body": "You must specify one or more redirect URLs when you create your application, and also specify one redirect URL when you send your user to our authorisation endpoint."
+          "Body": "You must specify one redirect URL when you register your application, and also specify one redirect URL when you send your user to our authorisation endpoint. Multiple redirect URLs can be added at a later stage if required."
         },
         {
           "Type": "P",
-          "Body": "To protect your application from phishing attacks, the redirect URL you use for authorisation (in your call to DfE authorisation endpoint ) must match one of those you specified when you registered your application."
+          "Body": "To protect your application from phishing attacks, the redirect URL you use for authorisation (in your call to DfE authorisation endpoint) must match one of those you specified when you registered your application."
         },
         {
           "Type": "H2",
-          "Body": "6. Calling and API"
+          "Body": "6. Calling an API"
         },
         {
           "Type": "P",
-          "Body": "Once all the previous 5 steps have been completed you will now have access to the required elements to make an API call"
+          "Body": "Once all of the previous 5 steps have been completed you will have access to the required elements to make an API call"
         },
         {
           "Type": "OL",
           "Body": [
             "The DfE API URL and endpoint",
-            "A unique client Id & secret",
+            "A unique client id and secret",
             "A unique API subscription key",
             "A registered redirect URL"
           ]
@@ -325,7 +313,7 @@
               {
                 "Data": [
                   "User-restricted",
-                  "OAuth 2.0 access token (subscription key needed)\nGenerated using <a href='https://oauth.net/2/grant-types/authorization-code' class='govuk-link' target='_blank'>OAuth 2.0 Client Credentials Grant</a>"
+                  "OAuth 2.0 access token (subscription key needed)\nGenerated using <a href='https://oauth.net/2/grant-types/authorization-code' class='govuk-link' target='_blank'>OAuth 2.0 Authorisation Code Grant</a>"
                 ]
               }
             ]
@@ -333,7 +321,7 @@
         },
         {
           "Type": "P",
-          "Body": "As per the latest <a href='https://tools.ietf.org/html/draft-ietf-oauth-security-topics-13#section-3.4' class='govuk-link' target='_blank'>OAuth 2.0 Security Best Current Practice</a> DfE API's do not support implicit & password OAuth grant types."
+          "Body": "As per the latest <a href='https://tools.ietf.org/html/draft-ietf-oauth-security-topics-13#section-3.4' class='govuk-link' target='_blank'>OAuth 2.0 Security Best Current Practice</a> DfE API's do not support implicit and password OAuth grant types."
         },
         {
           "Type": "H2",
@@ -341,7 +329,7 @@
         },
         {
           "Type": "P",
-          "Body": "Your credentials are your client id and your client secret. Developer Hub supplies 2 active client secrets (primary & secondary) at any one time."
+          "Body": "Your credentials are your client id and your client secret. Developer Hub supplies 2 active client secrets (primary and secondary) at any one time."
         },
         {
           "Type": "P",
@@ -356,11 +344,11 @@
         },
         {
           "Type": "H3",
-          "Body": "Client ID"
+          "Body": "Client id"
         },
         {
           "Type": "P",
-          "Body": "Your client ID is a unique identifier we create when you add your application to the Developer Hub."
+          "Body": "Your client id is a unique identifier we create when you register your application on the Developer Hub."
         },
         {
           "Type": "H3",
@@ -389,9 +377,9 @@
         {
           "Type": "OL",
           "Body": [
-            "Once you register your application, your application is assigned two secrets (primary & secondary).",
+            "Once you register your application, your application is assigned two secrets (primary and secondary).",
             "These secrets are usually valid for 2 years.",
-            "Use the primary secret along with client id to integrate with DfE APIs.",
+            "Use the primary secret along with the client id to integrate with DfE APIs.",
             "If you need to rotate your primary secret, login to the Developer Hub and check that your secondary secret for the application has a reasonable amount of time remaining until expiry (e.g. 6 months at least).",
             "Update your application to use the secondary secret.",
             "Check that your application is working with the secondary secret.",
@@ -428,27 +416,27 @@
         },
         {
           "Type": "P",
-          "Body": "Read the API documentation/guide for authorisation rules for specific API endpoints."
+          "Body": "Read the API documentation authorisation rules for specific API endpoints."
         },
         {
           "Type": "P",
           "Body": "The access token lasts for 1 hour. When it expires you must generate a new token."
         },
         {
-          "Type": "H3",
+          "Type": "H2",
           "Body": "User-restricted endpoints"
         },
         {
           "Type": "P",
-          "Body": "These endpoints require specific authorisation from the end user. They generally give access to sensitive personal data."
+          "Body": "These endpoints require specific authorisation from the end user and they generally give access to sensitive personal data."
         },
         {
           "Type": "P",
-          "Body": "We use the open standard <a href='https://oauth.net/2/' class='govuk-link' target='_blank'>OAuth 2.0</a> with the <a href='https://oauth.net/2/grant-types/client-credentials' class='govuk-link' target='_blank'>Client Credentials Grant</a>. This lets the end users (e.g. Academy trusts or school authorities) grant authority to your application to interact with DfE on their behalf, without sharing their access credentials."
+          "Body": "We use the open standard <a href='https://oauth.net/2/' class='govuk-link' target='_blank'>OAuth 2.0</a> with the <a href='https://oauth.net/2/grant-types/client-credentials' class='govuk-link' target='_blank'>Client Credentials Grant</a>. This allows the end users to grant authority to your application to interact with DfE on their behalf, without sharing their access credentials."
         },
         {
           "Type": "P",
-          "Body": "The end user authenticates directly with us using their IDAMS & DfE sign-in accounts, and grants authority for specific scopes. We then issue an OAuth 2.0 access token that’s specific to the end user. Your application passes the access token in subsequent API requests to user-restricted endpoints. Along with the access token, a valid API subscription key is also required when accessing the API."
+          "Body": "The end user authenticates directly with us using their IDAMS and DfE sign-in accounts, and grants authority for specific scopes. We then issue an OAuth 2.0 access token that’s specific to the end user. Your application passes the access token in subsequent API requests to user-restricted endpoints. Along with the access token, a valid API subscription key is also required when accessing the API."
         },
         {
           "Type": "P",
@@ -470,13 +458,7 @@
         },
         {
           "Type": "P",
-          "Body": "All code snippets in these tutorials are in CSharp (C#). They use:"
-        },
-        {
-          "Type": "BL",
-          "Body": [
-            "The <a class='govuk-link' href='https://restsharp.dev/' rel='noreferrer noopener' target='_blank'>RestSharp (opens in new tab)</a> library for accessing HTTP resources."
-          ]
+          "Body": "All code snippets in these tutorials are in CSharp (C#). They use the <a class='govuk-link' href='https://restsharp.dev/' rel='noreferrer noopener' target='_blank'>RestSharp (opens in new tab)</a> library for accessing HTTP resources."
         },
         {
           "Type": "P",
@@ -537,6 +519,10 @@
           }
         },
         {
+          "Type": "H2",
+          "Body": "Getting your subscription keys"
+        },
+        {
           "Type": "P",
           "Body": "All the above endpoints require an API subscription key header. Before running <b>any</b> of these examples follow the steps below"
         },
@@ -545,9 +531,9 @@
           "Body": [
             "Create an account in the DfE Developer Hub.",
             "Register your application which will integrate with the DfE APIs.",
-            "Copy your client Id & secret details.",
+            "Copy your client id and secret details.",
             "Subscribe to the ‘DfE Information’ API and choose sandbox environment.",
-            "This should provide you with a primary & secondary subscription key",
+            "This should provide you with a primary and secondary subscription key",
             "Copy the primary key for below tests."
           ]
         },
@@ -564,19 +550,21 @@
           "Body": "This endpoint does not require an authorisation header so you can access it without an access token. You are still required to send a subscription key (copied from above step)."
         },
         {
-          "Type": "H3",
-          "Body": "Issue a GET request"
+          "Type": "H4",
+          "Body": "Issue a GET request to:"
         },
         {
-          "Type": "CODE",
-          "Body": "Issue a GET request to: https://oat-api-customerengagement.platform.education.gov.uk/dfe/open-info"
+          "Type": "INSET",
+          "Body": "https://oat-api-customerengagement.platform.education.gov.uk/DfE/open-info"
         },
         {
           "Type": "CODE",
           "Body": [
-            "// construct the GET request for our DFE Information endpoint\n",
+            "// construct the GET request for our DfE Information endpoint\n",
             "var client = new RestSharp.RestClient('https://dev-api-customerengagement.platform.education.gov.uk');\n",
             "var request = new RestSharp.RestRequest('DfE/open-info', RestSharp.Method.GET);\nrequest.AddHeader('Ocp-Apim-Subscription-Key', '992519688c7c43ef916add082ac49e33');\n\n",
+            "// Add Subscription Key Header\n",
+            "request.AddHeader(\"Ocp-Apim-Subscription-Key\", \"992519688c7c43ef916add082ac49e33\");\n\n",
             "// Execute the query and retreive results\n",
             "var queryResult = client.Execute(request);\n\n",
             "// extract the HTTP status\n",
@@ -589,111 +577,179 @@
         },
         {
           "Type": "P",
-          "Body": "In this example, you will request an access token in your code (utilising your client Id & client secret details) and then use it to access the DfE Information API 'application-info' endpoint."
+          "Body": "In this example, you will request an access token in your code (utilising your client id and client secret details) and then use it to access the DfE Information API 'application-info' endpoint."
         },
         {
           "Type": "P",
           "Body": "See the <a href='/documentation/authorisation' class='govuk-link'>authorisation</a> section for information about requesting an Access token."
         },
         {
-          "Type": "P",
-          "Body": "1. Go to the 'DfE Information' API documentation page & copy the OAuth token endpoint URL."
+          "Type": "H4",
+          "Body": "1. Go to the 'DfE Information' API documentation page and copy the OAuth token endpoint URL."
         },
         {
-          "Type": "P",
+          "Type": "H4",
           "Body": "2. Request an OAuth 2.0 access token in your application code"
         },
         {
           "Type": "CODE",
           "Body": [
-            "var client = new RestClient('Paste OAuth Token URL Here');\n",
+            "// construct the GET request for access token\n",
+            "var client = new RestClient('<Paste OAuth Token URL Here>');\n",
             "var request = new RestRequest(Method.POST);\n",
-            "request.AddHeader(\"cache-control\", \"no-cache\");\n",
             "request.AddHeader(\"content-type\", \"application/x-www-form-urlencoded\");\n",
-            "request.AddParameter(\"application/x-www-form-urlencoded","grant_type=client_credentials&client_id=abc&client_secret=123\", ParameterType.RequestBody);\n",
-            "IRestResponse response = client.Execute(request);"
+            "request.AddParameter(\"application/x-www-form-urlencoded","grant_type=client_credentials&client_id=<Paste client id here>&client_secret=<Paste client secret here>\", ParameterType.RequestBody);\n\n",
+            "// make call to get token\n",
+            "IRestResponse response = client.Execute(request);\n\n",
+            "// extract token\n",
+            "dynamic resp = JObject.Parse(response.Content);\n",
+            "string token = resp.access_token;\n\n"
           ]
         },
         {
-          "Type": "P",
-          "Body": "3. Make a GET request to the ‘DfE Information’ API application-info endpoint."
+          "Type": "H4",
+          "Body": "3. Make a GET request to the ‘DfE Information’ API application-info endpoint:"
         },
         {
-          "Type": "P",
-          "Body": "Issue a GET request to: https://dev-api-customerengagement.platform.education.gov.uk/DfE/application passing your newly issued access_token as an Authorization header with the type Bearer."
+          "Type": "INSET",
+          "Body": "https://oat-api-customerengagement.platform.education.gov.uk/DfE/application-info"
         },
         {
           "Type": "CODE",
           "Body": [
-            "// construct the GET request for our DFE Information endpoint\n",
-            "var client = new RestClient(\"https://dev-api-customerengagement.platform.education.gov.uk\");\n",
-            "var request = new RestRequest(\"DfE/application-info\", Method.GET);\n\n",
-            "// execute the request & extract result",
-            "var queryResult = client.Execute<List<Items>>(request).Data;\n\n",
-            "// extract the HTTP status",
-            "HttpStatusCode statusCode = response.StatusCode;\n",
-            "int numericStatusCode =(int)statusCode;"
+            "// prepare and make an api call to application authenticated endpoint\n",
+            "var client = new RestClient(\"https://oat-api-customerengagement.platform.education.gov.uk\");\n",
+            "var request = new RestRequest(\"DfE/application-info\", Method.GET);\n",
+            "request.AddHeader(\"authorisation\", \"Bearer \" + token);\n",
+            "request.AddHeader(\"ocp-apim-subscription-key\", \"992519688c7c43ef916add082ac49e33\");\n",
+            "request.AddHeader(\"accept\", \"application/json; charset=utf-8\");\n",
+            "response = client.Execute(request);"
           ]
         },
         {
           "Type": "P",
-          "Body": "This should give you a 'DFE department high level information' response."
+          "Body": "This should give you a 'DfE department high level information' response."
         },
         {
-          "Type": "H3",
+          "Type": "H2",
           "Body": "Accessing a user-restricted endpoint"
         },
         {
           "Type": "P",
-          "Body": "In this example, you will request an access token in your code (utilising your client Id & client secret details) and then use it to access the DfE Information API 'application-info' endpoint."
+          "Body": "In this example, you will request an OAuth 2.0 access token in your code (utilising your client id and client secret details) and use it to access the DfE Information API 'user-info' endpoint."
         },
         {
           "Type": "P",
-          "Body": "See the <a href='/documentation/authorisation' class='govuk-link'>authorisation</a> section for information about requesting an Access token."
+          "Body": "The user restricted endpoints provide details on the API page about their authorisation endpoint. Follow steps below to obtain access token and then make a call to the endpoint."
+        },
+        {
+          "Type": "H3",
+          "Body": "Authorise user"
         },
         {
           "Type": "P",
-          "Body": "1. Go to the 'DfE Information' API documentation page & copy the OAuth token endpoint URL."
+          "Body": "To begin the flow, you'll need to get the user's authorisation. This step may include one or more of the following processes:"
+        },
+        {
+          "Type": "UL",
+          "Body": [
+            "Authenticating the user",
+            "Obtaining user consent for the requested permission level, unless consent has been previously given"
+          ]
         },
         {
           "Type": "P",
-          "Body": "2. Request an OAuth 2.0 access token in your application code"
+          "Body": "To authorise the user, your app must send the user to the authorisation URL provided on the user-restricted API page. The scope details would also be provided on the specific API page."
+        },
+        {
+          "Type": "H4",
+          "Body": "1. Request an OAuth 2.0 authorisation code with the required scope"
+        },
+        {
+          "Type": "CODE",
+          "Body": "https://user-restricted-end-point -login/authorise?response_type=code&client_id=YOUR_CLIENT_ID&redirect_uri=https://YOUR_APP/callback&scope=SCOPE&audience=API_AUDIENCE&state=STATE"
+        },
+        {
+          "Type": "P",
+          "Body": "As an example, your HTML snippet for your authorisation URL when adding login to your app might look like:"
+        },
+        {
+          "Type": "CODE",
+          "Body": "<a href=\"https://user-restricted-end-point-login/authorise?response_type=code&client_id=YOUR_CLIENT_ID&redirect_uri=https://YOUR_APP/callback&scope=SCOPE&audience=API_AUDIENCE&state=xyzABC123\">Sign In</a>"
+        },
+        {
+          "Type": "P",
+          "Body": "The user will be redirected to the DfE Identity login screen. When they've submitted their credentials, they'll be asked to authorise your application to access the requested scope."
+        },
+        {
+          "Type": "P",
+          "Body": "Once the user has granted the requested authority, we will return to your application via the redirect URL. We'll provide  an authorisation code as a query string parameter."
+        },
+        {
+          "Type": "P",
+          "Body": "This authorisation code can then be exchanged for an OAuth 2.0 access_token and a refresh_token."
+        },
+        {
+          "Type": "P",
+          "Body": ""
+        },
+        {
+          "Type": "H4",
+          "Body": "2. Exchange the OAuth 2.0 authorisation code for an access token"
         },
         {
           "Type": "CODE",
           "Body": [
-            "var client = new RestClient('Paste OAuth Token URL Here');\n",
+            "// make a call to token endpoint to get access token\n",
+            "var client = new RestClient('<Paste OAuth Token URL Here>');\n",
             "var request = new RestRequest(Method.POST);\n",
-            "request.AddHeader(\"cache-control\", \"no-cache\");\n",
             "request.AddHeader(\"content-type\", \"application/x-www-form-urlencoded\");\n",
-            "request.AddParameter(\"application/x-www-form-urlencoded","grant_type=client_credentials&client_id=abc&client_secret=123\", ParameterType.RequestBody);\n",
+            "request.AddParameter(\"application/x-www-form-urlencoded","grant_type=client_credentials&client_id=<Paste your client id here>&client_secret=<Paste your client secret here>&code=<Paste your authorisation code here>&redirect_URL=<Paste your redirect url here>\", ParameterType.RequestBody);\n",
+            "IRestResponse response = client.Execute(request);\n\n",
+            "// Extract token\n",
+            "dynamic resp = JObject.Parse(response.Content);\n",
+            "string token = resp.access_token;"
+          ]
+        },
+        {
+          "Type": "H4",
+          "Body": "3. Make a GET request to the ‘DfE Information’ API user-info endpoint:"
+        },
+        {
+          "Type": "INSET",
+          "Body": "https://oat-api-customerengagement.platform.education.gov.uk/DfE/user-info"
+        },
+        {
+          "Type": "CODE",
+          "Body": [
+            "// prepare and make an API call to application authenticated endpoint\n",
+            "var client = new RestClient(\"https://oat-api-customerengagement.platform.education.gov.uk\");\n",
+            "var request = new RestRequest(\"DfE/user-info\", Method.GET);\n",
+            "request.AddHeader(\"authorisation\", \"Bearer \" + token);\n",
+            "request.AddHeader(\"ocp-apim-subscription-key\", \"992519688c7c43ef916add082ac49e33\");\n",
+            "request.AddHeader(\"accept\", \"application/json; charset=utf-8\");\n",
+            "response = client.Execute(request);"
+          ]
+        },
+        {
+          "Type": "H4",
+          "Body": "4. Refresh an expired OAuth 2.0 access_token"
+        },
+        {
+          "Type": "P",
+          "Body": "This exchanges a refresh_token for a new access_token (and a new refresh_token)."
+        },
+        {
+          "Type": "CODE",
+          "Body": [
+            "// construct the GET request for refresh token\n",
+            "var client = new RestClient(\"<Paste token endpoint here>\");\n",
+            "var request = new RestRequest(Method.POST);\n",
+            "request.AddHeader(\"content-type\", \"application/x-www-form-urlencoded\");\n",
+            "request.AddParameter(\"application/x-www-form-urlencoded","grant_type=client_credentials&client_id=<Paste your client id here>&client_secret=<Paste your client secret here>&code=<Paste your authorisation code here>\", ParameterType.RequestBody);\n\n",
+            "// make a call to get refresh token\n",
             "IRestResponse response = client.Execute(request);"
           ]
-        },
-        {
-          "Type": "P",
-          "Body": "3. Make a GET request to the ‘DfE Information’ API application-info endpoint."
-        },
-        {
-          "Type": "P",
-          "Body": "Issue a GET request to: https://dev-api-customerengagement.platform.education.gov.uk/DfE/application passing your newly issued access_token as an Authorization header with the type Bearer."
-        },
-        {
-          "Type": "CODE",
-          "Body": [
-            "// construct the GET request for our DFE Information endpoint\n",
-            "var client = new RestClient(\"https://dev-api-customerengagement.platform.education.gov.uk\");\n",
-            "var request = new RestRequest(\"DfE/application-info\", Method.GET);\n\n",
-            "// execute the request & extract result",
-            "var queryResult = client.Execute<List<Items>>(request).Data;\n\n",
-            "// extract the HTTP status",
-            "HttpStatusCode statusCode = response.StatusCode;\n",
-            "int numericStatusCode =(int)statusCode;"
-          ]
-        },
-        {
-          "Type": "P",
-          "Body": "This should give you a 'DFE department high level information' response."
         }
       ]
     },
@@ -712,13 +768,13 @@
               "<a href='#browser-support-for-oauth-2.0' class='govuk-link'>Browser support for OAuth 2.0</a>",
               "<a href='#coding-in-the-open' class='govuk-link'>Coding in the open</a>",
               "<a href='#cross-origin-resource-sharing-(cors)' class='govuk-link'>Cross-origin resource sharing (CORS)</a>",
-              "<a href='#redirect-uris' class='govuk-link'>Redirect URIs</a>",
+              "<a href='#redirect-uris' class='govuk-link'>Redirect URLs</a>",
               "<a href='#tls-standards' class='govuk-link'>TLS standards</a>"
             ]
           },
           {
             "Type": "P",
-            "Body": "Read the reference guide for actions you need to take to make sure your application integrates with DfE."
+            "Body": "Read the <a href='/documentation/reference-guide' class='govuk-link'>reference guide</a> for actions you need to take to make sure your application integrates with DfE."
           },
           {
             "Type": "P",
@@ -738,7 +794,7 @@
           },
           {
             "Type": "P",
-            "Body": "The DfE Developer Hub, the underlying API Platform and some of the APIs are coded in the open, as per the <a href='' class='govuk-link' target='_blank'>GOV.UK Digital Service Standard (opens in a new tab)</a>."
+            "Body": "The DfE Developer Hub, the underlying API Platform and some of the APIs are coded in the open, as per the <a href='https://www.gov.uk/service-manual/service-standard/make-all-new-source-code-open' class='govuk-link' target='_blank'>GOV.UK Digital Service Standard (opens in a new tab)</a>."
           },
           {
             "Type": "P",
@@ -754,23 +810,23 @@
           },
           {
             "Type": "H2",
-            "Body": "Redirect URIs"
+            "Body": "Redirect URLs"
           },
           {
             "Type": "P",
-            "Body": "We use redirect URIs to send the user back to your application after successful (or unsuccessful) authorisation, prior to your application accessing <a href='/documentation/authorisation' class='govuk-link'>user-restricted endpoints</a>."
+            "Body": "We use redirect URLs to send the user back to your application after successful (or unsuccessful) authorisation, prior to your application accessing <a href='/documentation/authorisation' class='govuk-link'>user-restricted endpoints</a>."
           },
           {
             "Type": "P",
-            "Body": "You must specify one or more redirect URIs when you create your application, and also specify one redirect URI when you send your user to our authorisation endpoint."
+            "Body": "You must specify a redirect URL when you create your application, and also specify one redirect URL when you send your user to our authorisation endpoint."
           },
           {
             "Type": "P",
-            "Body": "To protect your application from phishing attacks, the redirect URI you use for authorisation (in your call to <code class='code--slim'>/oauth/authorize</code>) must match one of those you specified when you created your application."
+            "Body": "To protect your application from phishing attacks, the redirect URL you use for authorisation (in your call to <code class='code--slim'>/oauth/authorize</code>) must match one of those you specified when you created your application."
           },
           {
             "Type": "P",
-            "Body": "Also, you must use the same redirect URI when exchanging your authorisation code for an access token (in your call to <code class='code--slim'>/oauth/token</code>) that you used for authorisation (in your call to /oauth/authorize)."
+            "Body": "Also, you must use the same redirect URL when exchanging your authorisation code for an access token (in your call to <code class='code--slim'>/oauth/token</code>) that you used for authorisation (in your call to /oauth/authorize)."
           },
           {
             "Type": "H3",
@@ -778,20 +834,20 @@
           },
           {
             "Type": "P",
-            "Body": "Examples of valid (and invalid) redirect URIs are:"
+            "Body": "Examples of valid (and invalid) redirect URLs are:"
           },
           {
             "Type": "TABLE",
             "Body": {
               "Headers": [
-                "Redirect URI",
+                "Redirect URL",
                 "Comments"
               ],
               "Rows": [
                 {
                   "Data": [
                     "<code class='code--slim'>https://www.example.com/auth-redirect</code>",
-                    "<strong>Valid</strong> - when creating your application, you can use the full redirect URI or a partial URI, for example: <p><code class='code--slim'>https://www.example.com/auth-redirect</code></p> <p><code class='code--slim'>https://www.example.com</code></p><p>When calling our authorisation endpoint, your redirect URI must be percent-encoded, for example:</p><p><code class='code--slim'>https%3A%2F%2Fwww.example.com%2Fauth-redirect</code></p>"
+                    "<strong>Valid</strong> - when creating your application, you can use the full redirect URL or a partial URL, for example: <p><code class='code--slim'>https://www.example.com/auth-redirect</code></p> <p><code class='code--slim'>https://www.example.com</code></p><p>When calling our authorisation endpoint, your redirect URL must be percent-encoded, for example:</p><p><code class='code--slim'>https%3A%2F%2Fwww.example.com%2Fauth-redirect</code></p>"
                   ]
                 },
                 {
@@ -809,7 +865,7 @@
                 {
                   "Data": [
                     "<code class='code--slim'>/auth-redirect</code>",
-                    "<strong>Invalid</strong> - is a relative URI, not an absolute URI"
+                    "<strong>Invalid</strong> - is a relative URL, not an absolute URL"
                   ]
                 },
                 {
@@ -969,7 +1025,7 @@
           },
           {
             "Type": "P",
-            "Body": "These terms of use explain what you can expect from us and what weexpect from you when creating and operating software services that consume DfE Application Programming Interfaces (APIs) hosted on the DfE Developer Hub. They do not create a legal relationship between HMRC and any software developer."
+            "Body": "These terms of use explain what you can expect from us and what weexpect from you when registering and operating software services that consume DfE Application Programming Interfaces (APIs) hosted on the DfE Developer Hub. They do not create a legal relationship between HMRC and any software developer."
           },
           {
             "Type": "P",
@@ -1062,7 +1118,7 @@
           },
           {
             "Type": "P",
-            "Body": "You may need to pay a data protection fee (opens in a new tab) if your software processes personal data"
+            "Body": "You may need to pay a <a href='https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/accountability-and-governance/data-protection-fee/' class='govuk-link' target='_blank'>data protection fee</a> (opens in a new tab) if your software processes personal data"
           },
           {
             "Type": "P",
@@ -1277,7 +1333,6 @@
             "Body": [
               "Add it to our test environment (sandbox).",
               "Choose which sandbox APIs you want to use.",
-              "Get credentials your application needs to interact with our APIs.",
               "Get credentials your application needs to interact with our APIs."
             ]
           },
@@ -1387,18 +1442,6 @@
           }
         ]
       }
-    },
-    "Create a test user": {
-      "Page": "Create a test user",
-      "Url": "/applications/create-a-test-user",
-      "Content": {
-        "Body": [
-          {
-            "Type": "P",
-            "Body": "Content to be finalized before Beta"
-          }
-        ]
-      }
     }
   },
   "ApplicationManagement": {
@@ -1414,11 +1457,15 @@
       "Content": [
         {
           "Type": "P",
-          "Body": "You must subscribe to an API so your application can access it. You'll receive notifications about its lifecycle events, such as new version introductions and old version retirements."
+          "Body": "In order for your application to integrate with a DfE API you must first subscribe to the required API, so that you can get access to a subscription key."
         },
         {
           "Type": "P",
-          "Body": "Learn more about our APIs in <a href='/apis' class='govuk-link'>API documentation</a>."
+          "Body": "Before any subscription keys are produced an internal process is carried out to grant access. Depending on the setup of the API this process can take up to a maximum of 3 working days."
+        },
+        {
+          "Type": "P",
+          "Body": "You can subscribe to either the sandbox or production version of the API depending on where you are in your development process. It is advisable to subscribe to the sandbox API first to ensure your developed software is fully functional before moving it to production (utilising production subscription key)."
         }
       ]
     },
@@ -1458,13 +1505,12 @@
       "Url": "/redirect-urls",
       "Content": [
         {
-          "Type": "INSET",
-          "Body": "You need admin rights to change redirect URIs."
+          "Type": "P",
+          "Body": "You can add and edit up to five redirect URLs using the link below."
         },
         {
-          "Type": "DETAILS",
-          "Title": "What is a redirect URL?",
-          "Description": "Your application needs your users permission to interact with DfE on their behalf when accessing <a class='govuk-link' href='/documentation/authorisation#application-restricted-endpoints'>application-restricted endpoints</a>. Users must sign in to their DfE Developer Hub account to grant this authority.<br><br> Afterwards, redirect URLs tell us where to return your users in your application.  Learn more about <a class='govuk-link' href='/documentation/reference-guide'>redirect URLs</a>."
+          "Type": "P",
+          "Body": "To protect your application from phishing attacks, the redirect URL you use for authorisation (in your call to DfE authorisation endpoint) must match one of those you specified when you registered your application."
         }
       ]
     },
@@ -1483,28 +1529,40 @@
     "Page": "Support",
     "Url": "/support",
     "Content": {
-      "Body": [
-        {
-          "Type": "P",
-          "Body": "Enterprise API Management is built and supported by the Government Department for Education."
-        },
-        {
-          "Type": "H2",
-          "Body": "Guidelines"
-        },
-        {
-          "Type": "P",
-          "Body": "For best practice and government guidelines to building APIs please refer to the GOV.uk API Technical and Data Standards - <a href=\"https://www.gov.uk/guidance/gds-api-technical-and-data-standards.\" target=\"_blank\">https://www.gov.uk/guidance/gds-api-technical-and-data-standards</a>."
-        },
-        {
-          "Type": "H2",
-          "Body": "Support Requests"
-        },
-        {
-          "Type": "P",
-          "Body": "To raise a support request please contact us at <a href=\"mailto:eapim.support@education.gov.uk\">eapim.support@education.gov.uk</a>."
-        }
-      ]
+      "Form": {
+        "Body": [
+          {
+            "Type": "P",
+            "Body": "Complete this short form to ask a question, for example, about:"
+          },
+          {
+            "Type": "UL",
+            "Body": [
+              "General enquiry",
+              "Issue with the website",
+              "Issue with an API",
+              "Other"
+            ]
+          },
+          {
+            "Type": "P",
+            "Body": "and our Support Team will get back to you within 2 working days. You can also check our <a href='/documentation/reference-guide' class='govuk-link'>reference guide</a> for answers."
+          }
+        ]
+      },
+      "Submitted": {
+        "Title": "Thank you",
+        "Body": [
+          {
+            "Type": "P",
+            "Body": "We will get back to you within 2 working days."
+          },
+          {
+            "Type": "P",
+            "Body": "Continue to the <a href='/' class='govuk-link'>home page</a>."
+          }
+        ]
+      }
     }
   },
   "Profile": {

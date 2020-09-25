@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import Router from 'next/router'
 import AccessChecker from 'components/common/AccessChecker'
 import Content from '../../content.json'
 import AuthWarning from 'components/common/AuthWarning'
@@ -50,7 +49,7 @@ class RegisteringApplications extends Component {
 
                     <ContentBuilder sectionNav={false} data={Content.Applications[page].Content.Body} />
                     {!isLoggedIn && <AuthWarning msalConfig={this.props.msalConfig} warning={Content.Applications[page].Content.Auth.Warning} />}
-                    {isLoggedIn && <button type='button' onClick={() => Router.push('/applications/create/step1')} className='govuk-button govuk-!-margin-top-7'>{Content.Applications[page].Content.Button}</button>}
+                    {isLoggedIn && <p className='govuk-body'>Go to <a href='/applications' className='govuk-link govuk-!-margin-top-7'>{Content.Applications[page].Content.Button}</a></p>}
                   </div>
                 </div>
               </div>

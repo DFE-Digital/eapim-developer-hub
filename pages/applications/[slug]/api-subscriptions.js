@@ -109,6 +109,9 @@ const ApplicationApiSubscriptions = ({ apis, application, subscriptions, user, r
               <div className='govuk-grid-row'>
                 <div className='govuk-grid-column-full'>
                   <h1 className='govuk-heading-xl'>{page}</h1>
+
+                  <ContentBuilder sectionNav={false} data={Content.ApplicationManagement[page].Content} />
+
                   <dl className='govuk-summary-list'>
                     <div className='govuk-summary-list__row'>
                       <dt className='govuk-summary-list__key'>
@@ -119,8 +122,6 @@ const ApplicationApiSubscriptions = ({ apis, application, subscriptions, user, r
                       </dd>
                     </div>
                   </dl>
-
-                  <ContentBuilder sectionNav={false} data={Content.ApplicationManagement[page].Content} />
 
                   <APISubscriptions
                     apis={subscriptionApis}

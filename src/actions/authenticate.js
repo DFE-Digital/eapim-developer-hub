@@ -9,8 +9,7 @@ export const CLEAR_ERRORS = Symbol('CLEAR_ERRORS')
 export const REQUEST_DELETE_ACCOUNT = Symbol('REQUEST_DELETE_ACCOUNT')
 export const RECEIVE_DELETE_ACCOUNT = Symbol('RECEIVE_DELETE_ACCOUNT')
 
-export const signIn = (msalConfig) => async dispatch => {
-  dispatch({ type: REQUEST_SIGNIN })
+export const signIn = async (msalConfig) => {
   const myMSALObj = new Msal.UserAgentApplication(msalConfig)
   myMSALObj.loginRedirect(loginRequest)
 }
@@ -58,4 +57,14 @@ export const deleteAccount = () => async dispatch => {
   setTimeout(() => {
     dispatch({ type: RECEIVE_DELETE_ACCOUNT })
   }, 1000)
+}
+
+export const signInLink = async (e, msalConfig) => {
+  e.preventDefault()
+  await signIn(msalConfig)
+}
+
+export const registerLink = async (e, msalConfig) => {
+  e.preventDefault()
+  await register(msalConfig)
 }
