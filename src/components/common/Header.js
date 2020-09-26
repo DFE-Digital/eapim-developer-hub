@@ -82,7 +82,7 @@ class Header extends Component {
                   if (!isLoggedIn && nav.Url.indexOf('register') > -1) {
                     return (
                       <MenuLink href={nav.Url} parentClass={'govuk-header__navigation-item'} key={i}>
-                        <a onClick={(e) => registerLink(e, this.props.msalConfig)} className='govuk-header__link'>{nav.Page}</a>
+                        <a onClick={(e) => registerLink(e, this.props.msalRegisterConfig)} className='govuk-header__link'>{nav.Page}</a>
                       </MenuLink>
                     )
                   }
