@@ -41,7 +41,7 @@ class Home extends Component {
                <div className='govuk-panel__body'>{Content[page].Content.Hero.Intro}</div>
                {!isLoggedIn && (
                  <div className='registerLinks govuk-!-margin-top-9'>
-                   <a href='/auth/register' onClick={(e) => registerLink(e, this.props.msalConfig)} className='btn white'>{Content[page].Content.Hero.Register}</a>
+                   <a href='/auth/register' onClick={(e) => registerLink(e, this.props.msalRegisterConfig)} className='btn white'>{Content[page].Content.Hero.Register}</a>
                    <p className='govuk-body'>or <a href='/auth/login' onClick={(e) => signInLink(e, this.props.msalConfig)} className='govuk-link govuk-!-margin-left-1'><strong>{ ReactHtmlParser(Content[page].Content.Hero.Signin) }</strong></a> to the {Content.PortalName}.</p>
                  </div>
                )}

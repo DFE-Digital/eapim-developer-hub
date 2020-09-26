@@ -3,7 +3,7 @@ import AuthWarning from 'components/common/AuthWarning'
 
 import Content from '../../content.json'
 
-const SchoolAPIInformation = ({ selectedApi, isLoggedIn, msalConfig }) => {
+const SchoolAPIInformation = ({ selectedApi, isLoggedIn, msalConfig, msalRegisterConfig }) => {
   return (
     <div className='api-information-page'>
       <h1 className='govuk-heading-xl govuk-!-margin-bottom-3'>
@@ -68,7 +68,7 @@ const SchoolAPIInformation = ({ selectedApi, isLoggedIn, msalConfig }) => {
 
       {
         !isLoggedIn
-          ? <AuthWarning msalConfig={msalConfig} warning={Content.Apis['APIs'].Content.Auth.Warning} />
+          ? <AuthWarning msalConfig={msalConfig} msalRegisterConfig={msalRegisterConfig} warning={Content.Apis['APIs'].Content.Auth.Warning} />
           : (
             <Fragment>
               <h2 className='govuk-heading-l' id='versioning'>2. Versioning</h2>

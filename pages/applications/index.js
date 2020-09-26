@@ -13,7 +13,7 @@ import { getApplications } from '../../lib/applicationService'
 
 const page = 'Applications'
 
-const Applications = ({ user, selectApplication, router, msalConfig }) => {
+const Applications = ({ user, selectApplication, router, msalConfig, msalRegisterConfig }) => {
   const [fetching, setFetching] = useState(false)
   const [applications, setApplications] = useState([])
 
@@ -66,7 +66,7 @@ const Applications = ({ user, selectApplication, router, msalConfig }) => {
                 <div className='govuk-grid-column-full'>
                   <h1 className='govuk-heading-xl'>{Content.Applications[page].Page}</h1>
 
-                  {!isLoggedIn && <AuthWarning msalConfig={msalConfig} warning={Content.Applications[page].Content.Auth.Warning} />}
+                  {!isLoggedIn && <AuthWarning msalConfig={msalConfig} msalRegisterConfig={msalRegisterConfig} warning={Content.Applications[page].Content.Auth.Warning} />}
                   {fetching && <Loading />}
 
                   {applications.length === 0 && !fetching && isLoggedIn && (

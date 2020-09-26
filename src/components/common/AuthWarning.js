@@ -5,7 +5,7 @@ import { signInLink, registerLink } from 'actions/authenticate'
 
 class AuthWarning extends Component {
   render () {
-    const { warning, msalConfig } = this.props
+    const { warning, msalConfig, msalRegisterConfig } = this.props
 
     return (
       <Fragment>
@@ -17,7 +17,7 @@ class AuthWarning extends Component {
         </div>
 
         <div className='flex'>
-          <a href='/auth/register' onClick={(e) => registerLink(e, msalConfig)} className='govuk-button'>Create an account</a>
+          <a href='/auth/register' onClick={(e) => registerLink(e, msalRegisterConfig)} className='govuk-button'>Create an account</a>
           <p className='govuk-body'>or <a href='/auth/login' onClick={(e) => signInLink(e, msalConfig)} className='govuk-link govuk-!-margin-left-1'><strong>sign in</strong></a> to the {Content.PortalName}.</p>
         </div>
       </Fragment>
