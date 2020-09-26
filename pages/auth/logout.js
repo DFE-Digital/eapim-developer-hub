@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
 import { signOut } from '../../src/actions/authenticate'
 
-const Logout = ({ signOut, msalConfig }) => {
+const Logout = ({ msalConfig }) => {
   useEffect(() => {
     async function handler () {
       await signOut(msalConfig)
@@ -24,4 +23,4 @@ const Logout = ({ signOut, msalConfig }) => {
   )
 }
 
-export default connect(null, { signOut })(Logout)
+export default Logout

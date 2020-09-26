@@ -73,7 +73,7 @@ class MyApp extends App {
           <Provider store={store}>
             <GlobalStyle />
             <IdleTimer msalConfig={msalConfig(msalAuthConfig)} />
-            <Layout>
+            <Layout msalConfig={msalConfig(msalAuthConfig)}>
               <Component
                 {...pageProps}
                 store={store}

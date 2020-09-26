@@ -13,7 +13,7 @@ class Home extends Component {
    componentDidMount = async () => {
      if (this.props.accountDeleted) {
        await this.props.store.__PERSISTOR.purge()
-       await this.props.signOut(this.props.msalConfig)
+       await signOut(this.props.msalConfig)
      }
    }
 
@@ -96,4 +96,4 @@ const mapStateToProps = (state) => {
 }
 
 export { Home }
-export default connect(mapStateToProps, { signOut })(Home)
+export default connect(mapStateToProps)(Home)

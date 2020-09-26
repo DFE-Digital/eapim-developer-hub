@@ -11,7 +11,7 @@ export default ({ href, parentClass, children }) => {
   return (
     <Fragment>
       <li className={className}>
-        <Link href={href} as={href}>{React.cloneElement(children)}</Link>
+        <Link href={href} as={href} passHref>{React.cloneElement(children)}</Link>
       </li>
     </Fragment>
   )

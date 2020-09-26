@@ -27,14 +27,14 @@ class Modal extends Component {
 
     componentDidMount () {
       let seconds = this.state.seconds
-      this.countdown = setInterval(() => {
+      this.countdown = setInterval(async () => {
         seconds--
         this.setState({ seconds: seconds })
 
         if (seconds === 0) {
           clearInterval(this.countdown)
           this.setState({ seconds: timer })
-          this.props.signOut(this.props.msalConfig)
+          await signOut(this.props.msalConfig)
           const myMSALObj = new Msal.UserAgentApplication(this.props.msalConfig)
           myMSALObj.logout()
           this.props.close()
@@ -87,4 +87,4 @@ const mapStateToProps = (state) => {
 }
 
 export { Modal }
-export default connect(mapStateToProps, { signOut })(Modal)
+export default connect(mapStateToProps)(Modal)

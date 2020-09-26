@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Content from '../../../content.json'
 import MenuLink from './MenuLink'
 import Link from 'next/link'
-import { signIn, signOut } from 'actions/authenticate'
+import { signInLink, signOutLink, registerLink } from 'actions/authenticate'
 
 class Header extends Component {
   constructor (props) {
@@ -65,11 +65,25 @@ class Header extends Component {
                 aria-hidden={!this.state.navToggled}
               >
                 {Content.Navigation.map((nav, i) => {
-                  if (!isLoggedIn && nav.NoAuth) {
+                  if (isLoggedIn && nav.Url.indexOf('logout') > -1) {
                     return (
-                      <li className='govuk-header__navigation-item' key={i}>
-                        <a href={nav.Url} className='govuk-header__link'>{nav.Page}</a>
-                      </li>
+                      <MenuLink href={nav.Url} parentClass={'govuk-header__navigation-item'} key={i}>
+                        <a onClick={(e) => signOutLink(e, this.props.msalConfig)} className='govuk-header__link'>{nav.Page}</a>
+                      </MenuLink>
+                    )
+                  }
+                  if (!isLoggedIn && nav.Url.indexOf('login') > -1) {
+                    return (
+                      <MenuLink href={nav.Url} parentClass={'govuk-header__navigation-item'} key={i}>
+                        <a onClick={(e) => signInLink(e, this.props.msalConfig)} className='govuk-header__link'>{nav.Page}</a>
+                      </MenuLink>
+                    )
+                  }
+                  if (!isLoggedIn && nav.Url.indexOf('register') > -1) {
+                    return (
+                      <MenuLink href={nav.Url} parentClass={'govuk-header__navigation-item'} key={i}>
+                        <a onClick={(e) => registerLink(e, this.props.msalConfig)} className='govuk-header__link'>{nav.Page}</a>
+                      </MenuLink>
                     )
                   }
                   if ((!isLoggedIn && nav.Auth) || (isLoggedIn && nav.NoAuth)) {
@@ -97,4 +111,4 @@ const mapStateToProps = (state) => {
 }
 
 export { Header }
-export default connect(mapStateToProps, { signIn, signOut })(Header)
+export default connect(mapStateToProps)(Header)

@@ -42,8 +42,8 @@ export const signInToken = (user) => async dispatch => {
   }
 }
 
-export const signOut = (msalConfig) => async dispatch => {
-  dispatch({ type: REQUEST_SIGNOUT })
+export const signOut = async (msalConfig) => {
+  window.localStorage.removeItem('persist:root')
   const myMSALObj = new Msal.UserAgentApplication(msalConfig)
   myMSALObj.logout()
 }
@@ -67,4 +67,9 @@ export const signInLink = async (e, msalConfig) => {
 export const registerLink = async (e, msalConfig) => {
   e.preventDefault()
   await register(msalConfig)
+}
+
+export const signOutLink = async (e, msalConfig) => {
+  e.preventDefault()
+  await signOut(msalConfig)
 }

@@ -13,7 +13,7 @@ class AccessChecker extends Component {
       const hasExpired = moment(now).isSameOrAfter(expired)
       if (hasExpired) {
         window.localStorage.clear()
-        await this.props.signOut(this.props.msalConfig)
+        await signOut(this.props.msalConfig)
       }
     }
   }
@@ -31,4 +31,4 @@ const mapStateToProps = (state) => {
 }
 
 export { AccessChecker }
-export default connect(mapStateToProps, { signOut })(AccessChecker)
+export default connect(mapStateToProps)(AccessChecker)
