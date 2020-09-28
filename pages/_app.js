@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import styledNormalize from 'styled-normalize'
 import { withRouter } from 'next/router'
 import App from 'next/app'
+import { withApplicationInsights } from '../src/components/withApplicationInsights'
 import createStore from 'store/createStore'
 import Layout from 'components/Layout'
 import IdleTimer from 'components/common/IdleTimer'
@@ -92,5 +93,7 @@ class MyApp extends App {
 }
 
 export default withRedux(createStore)(
-  withRouter(MyApp)
-)
+  withRouter(withApplicationInsights({
+    instrumentationKey: publicRuntimeConfig.INSTRUMENTATION_KEY,
+    isEnabled: true
+  })(MyApp)))

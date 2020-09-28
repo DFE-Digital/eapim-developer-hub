@@ -73,7 +73,7 @@ const Applications = ({ user, selectApplication, router, msalConfig, msalRegiste
                     <Fragment>
                       <p className='govuk-body'>{Content.Applications[page].Content.NoApplications.Copy}</p>
                       {isLoggedIn && (
-                        <button type='button' className='govuk-button govuk-!-margin-top-6' onClick={() => Router.push('/applications/registering-your-application')}>{Content.Applications[page].Content.NoApplications.Button}</button>
+                        <button type='button' className='govuk-button govuk-!-margin-top-6' onClick={() => Router.push('/applications/create/step1')}>{Content.Applications[page].Content.NoApplications.Button}</button>
                       )}
                     </Fragment>
                   )}

@@ -23,7 +23,8 @@ module.exports = withSass({
     B2C_PASSWORD_RESET_URL: '#{B2C_PASSWORD_RESET_URL}#',
     B2C_PROFILE_EDIT_URL: '#{B2C_PROFILE_EDIT_URL}#',
     APPID_URL: '#{APPID_URL}#',
-    CLIENT_ID: '#{CLIENT_ID}#'
+    CLIENT_ID: '#{CLIENT_ID}#',
+    INSTRUMENTATION_KEY: '#{INSTRUMENTATION_KEY}#'
   },
   webpack: (config, { dev }) => {
     config.output.publicPath = `${assetPrefix}${config.output.publicPath}`
