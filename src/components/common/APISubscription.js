@@ -4,7 +4,7 @@ const statusType = {
   default: { tag: 'green', button: 'subscribe' },
   active: { tag: 'turquoise', button: 'cancel' },
   pending: { tag: 'blue', button: 'cancel' },
-  submitted: { tag: 'purple', button: 'cancel', text: 'pending' },
+  submitted: { tag: 'purple', button: 'cancel', text: 'pending approval' },
   cancelled: { tag: 'orange', button: 'subscribe' },
   rejected: { tag: 'red', button: 'cancel' },
   suspended: { tag: 'yellow', button: 'cancel' }

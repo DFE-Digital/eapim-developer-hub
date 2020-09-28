@@ -52,7 +52,7 @@ class Home extends Component {
              <div className='govuk-grid-row flex-wrap govuk-!-padding-bottom-9 govuk-!-padding-top-9'>
                {columns.map((column, i) => {
                  return (
-                   <div className='govuk-grid-column-one-quarter' key={i}>
+                   <div className='govuk-grid-column-one-third' key={i}>
                      <h3 className='govuk-heading-m govuk-!-margin-bottom-2'>{column.Heading}</h3>
                      <hr className='govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-4' />
                      <ul className='govuk-list'>
