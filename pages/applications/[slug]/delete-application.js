@@ -34,8 +34,8 @@ const DeleteApplication = ({ application, router, msalConfig }) => {
 
               <p className='govuk-body'>Before deleting this application, check with all your <Link href='/applications/[slug]/team-members' as={`/applications/${application.applicationId}/team-members`}><a className={'govuk-link'}>team members</a></Link>.</p>
 
-              <Link href='/applications/[slug]/delete-confirm' as={`/applications/${application.applicationId}/delete-confirm`}>
-                <a className={'govuk-button govuk-!-margin-top-6'}>Continue</a>
+              <Link href='/applications/[slug]/delete-confirm' as={`/applications/${application.applicationId}/delete-confirm`} passHref>
+                <a className={'govuk-button govuk-!-margin-top-6'} role='button'>Continue</a>
               </Link>
             </div>
           </div>
