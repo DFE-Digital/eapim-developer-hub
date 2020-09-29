@@ -122,8 +122,8 @@ const observerCallback = (mutations, type, text) => {
   })
 }
 
-const givenNameCallback = (mutations) => observerCallback(mutations, 'givenName', 'given name')
-const surnameCallback = (mutations) => observerCallback(mutations, 'surname', 'surname')
+const givenNameCallback = (mutations) => observerCallback(mutations, 'givenName', 'first name')
+const surnameCallback = (mutations) => observerCallback(mutations, 'surname', 'last name')
 const emailCallback = (mutations) => observerCallback(mutations, 'email', 'email')
 const passwordCallback = (mutations) => observerCallback(mutations, 'newPassword', 'new password')
 const reenterPasswordCallback = (mutations) => observerCallback(mutations, 'reenterPassword', 'new password again')

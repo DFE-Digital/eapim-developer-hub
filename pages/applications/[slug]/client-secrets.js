@@ -16,7 +16,7 @@ import { getApplication } from '../../../lib/applicationService'
 
 const page = 'Client secrets'
 
-const ApplicationClientSecrets = ({ id, user, newClientKey, newClientKeyDisplayName, application, msalConfig }) => {
+const ApplicationClientSecrets = ({ id, user, newClientKey, newClientKeyDisplayName, startDateTime, endDateTime, application, msalConfig }) => {
   const router = useRouter()
 
   const [copied, setCopied] = useState(false)
@@ -165,8 +165,8 @@ const ApplicationClientSecrets = ({ id, user, newClientKey, newClientKeyDisplayN
                         ? (
                           <tr className='govuk-table__row'>
                             <td className='govuk-table__cell middle'>{newClientKey}</td>
-                            <td className='govuk-table__cell middle' />
-                            <td className='govuk-table__cell middle' />
+                            <td className='govuk-table__cell middle'>{moment(startDateTime).format('DD MMM YYYY')}</td>
+                            <td className='govuk-table__cell middle'>{moment(endDateTime).format('DD MMM YYYY')}</td>
                             <td className='govuk-table__cell middle govuk-table__cell--numeric'>
                               <button type='button' className='govuk-button govuk-!-margin-0' onClick={(e) => copyToClipboard(e, newClientKey)}>
                                 {copied ? `Copied` : `Copy`}
@@ -258,9 +258,14 @@ ApplicationClientSecrets.getInitialProps = async ({ req, query }) => {
         const application = await getApplication(query.slug)
         const newClientKey = data[`${KeyDisplayName}Secret`]
 
+        const keyObject = data.passwordCredentials.find(item => item.displayName === KeyDisplayName)
+        const { startDateTime, endDateTime } = keyObject
+
         return {
           newClientKey,
           application,
+          startDateTime,
+          endDateTime,
           newClientKeyDisplayName: KeyDisplayName,
           id: data.applicationId
         }
