@@ -178,7 +178,7 @@ const DfEAPIInformation = ({ selectedApi }) => {
         <div className='govuk-details__text'>
           <h4 className='govuk-heading'>Description</h4>
           <p className='govuk-body'>
-            A simple example for integrating with a low restriction DFE APIs.
+            A simple example for integrating with a low restriction DfE APIs.
           </p>
           <p className='govuk-body'>
             Any request to this endpoint returns a text paragraph providing high level information
