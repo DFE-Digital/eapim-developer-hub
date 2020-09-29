@@ -122,7 +122,7 @@
         },
         {
           "Type": "P",
-          "Body": "Go to <a href='/register' class='govuk-link'>create an account</a>."
+          "Body": "Go to <a href='/auth/register' class='govuk-link'>create an account</a>."
         },
         {
           "Type": "H2",

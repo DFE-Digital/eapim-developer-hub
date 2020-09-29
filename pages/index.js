@@ -57,9 +57,19 @@ class Home extends Component {
                      <hr className='govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-4' />
                      <ul className='govuk-list'>
                        {column.Links.map((link, x) => {
+                         if (link.Page === 'Create an account') {
+                           return (
+                             <li className='govuk-body-s' key={x}>
+                               <Link href={link.Url} passHref>
+                                 <a className='govuk-link' onClick={(e) => registerLink(e, this.props.msalRegisterConfig)}>{link.Page}</a>
+                               </Link>
+                             </li>
+                           )
+                         }
+
                          return (
                            <li className='govuk-body-s' key={x}>
-                             <Link href={link.Url}>
+                             <Link href={link.Url} passHref>
                                <a className='govuk-link'>{link.Page}</a>
                              </Link>
                            </li>
