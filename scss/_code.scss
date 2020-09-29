@@ -12,6 +12,10 @@
   text-shadow: 0 1px #fff;
   word-spacing: normal;
   font-weight: normal;
+
+  &.inline {
+    margin: 0
+  }
 }
 
 // Code styling

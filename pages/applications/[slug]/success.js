@@ -31,11 +31,10 @@ class CreateSuccess extends Component {
           <main className='govuk-main-wrapper ' id='main-content' role='main'>
             <div className='govuk-grid-row'>
               <div className='govuk-grid-column-full'>
-                <h1 className='govuk-heading-xl'>Application added to the sandbox</h1>
+                <h1 className='govuk-heading-xl'>Application added</h1>
 
                 <h2 className='govuk-heading-l'>You added {selectedApplication.applicationName}</h2>
-
-                <p className='govuk-body'>You can now use its credentials to test with sandbox APIs.</p>
+                <p className='govuk-body'>You can now use its credentials to test with APIs.</p>
 
                 <button type='button' className='govuk-button' onClick={() => this.viewCredentials()}>View application credentials</button>
               </div>

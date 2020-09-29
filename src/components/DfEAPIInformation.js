@@ -26,12 +26,6 @@ const DfEAPIInformation = ({ selectedApi }) => {
           <a className='govuk-link' href='#api-browser-and-swagger-file'>API browser and swagger file</a>
         </li>
         <li>
-          <a className='govuk-link' href='#authentication'>Authentication</a>
-        </li>
-        <li>
-          <a className='govuk-link' href='#consent-process'>Consent Process</a>
-        </li>
-        <li>
           <a className='govuk-link' href='#http-status-codes'>HTTP status codes</a>
         </li>
         <li>
@@ -51,39 +45,54 @@ const DfEAPIInformation = ({ selectedApi }) => {
       <p className='govuk-body'>
         The DfE Information API has been created as an example to demonstrate the
         capabilities of the DfE Developer Hub. It allows software developers to connect
-        with the DfE Developer Hub and access some basic information about the
-        Department to prove access to an unrestricted endpoint.
+        with the DfE Developer Hub and access some basic information about the Department
+        to prove access to:
       </p>
+      <ul className='govuk-list govuk-list--bullet'>
+        <li>
+          Low restricted endpoint APIs
+          <ul className='govuk-list govuk-list--bullet'>
+            <li>Open-info endpoint is an example of least restricted endpoint</li>
+          </ul>
+        </li>
+        <li>
+          Application restricted endpoint APIs
+          <ul className='govuk-list govuk-list--bullet'>
+            <li>Application-info endpoint is an example of application restricted endpoint</li>
+          </ul>
+        </li>
+        <li>
+          User restricted endpoint APIs
+          <ul className='govuk-list govuk-list--bullet'>
+            <li>User-info is an example of a user-restricted endpoin</li>
+          </ul>
+        </li>
+      </ul>
+      <p className='govuk-body'>
+        Further details of the different access levels are given on the <a href='/documentation/authorisation' className='govuk-link'>Authorisation</a> page.
+      </p>
+      <p className='govuk-body'>
+        For more information about how to develop your own client applications, including example clients for this API, see <a href='/documentation/tutorials' className='govuk-link'>Tutorials</a>.
+      </p>
+
       <h2 className='govuk-heading-l' id='versioning'>2. Versioning</h2>
       <p className='govuk-body'>
-        When an API changes, we will strive to make backwards compatible changes
-        were possible. When this is not possible, we will provide a notice on deprecated
-        endpoints and make a new endpoint available.
+        When an API changes, we will strive to make backwards compatible changes were possible.
+        When this is not possible, we will provide a notice on deprecated endpoints and make a
+        new endpoint available. The current live version of the DfE Information API is 1.0.
       </p>
 
       <h2 className='govuk-heading-l' id='api-browser-and-swagger-file'>3. API browser and swagger file</h2>
       <p className='govuk-body'>
-        For more detailed information on each API action, you can:
+        For more detailed schema information on each DfE Information API, you can:
       </p>
       <ul className='govuk-list govuk-list--bullet'>
-        <li>open the API browser</li>
-        <li>look at the API Swagger file: <a className='govuk-link' href='/static/dfe-information-api.openapi+json.json' download='dfe-information-api.json'>download</a></li>
-        <li>You can also generate a client library from the Swagger file using the Swagger
-        editor.</li>
+        <li>open the API browser like Swagger Editor</li>
+        <li>look at the DfE Information API Swagger file: <a className='govuk-link' href='/static/dfe-information-api.openapi+json.json' download='dfe-information-api.json'>download</a></li>
+        <li>You can also generate a client library from the Swagger file using the Swagger editor.</li>
       </ul>
 
-      <h2 className='govuk-heading-l' id='authentication'>4. Authentication</h2>
-      <p className='govuk-body'>
-        Usage of the DfE Information API does not require authentication – no API keys
-        are required, so you can start using it immediately.
-      </p>
-
-      <h2 className='govuk-heading-l' id='consent-process'>5. Consent process</h2>
-      <p className='govuk-body'>
-        Access to the DfE Information API does not utilise a consent process.
-      </p>
-
-      <h2 className='govuk-heading-l' id='http-status-codes'>6. HTTP status codes</h2>
+      <h2 className='govuk-heading-l' id='http-status-codes'>4. HTTP status codes</h2>
       <p className='govuk-body'>The DfE Information API uses standard HTTP response code conventions:</p>
       <ul className='govuk-list govuk-list--bullet'>
         <li>100 codes are informational</li>
@@ -139,12 +148,12 @@ const DfEAPIInformation = ({ selectedApi }) => {
         </tbody>
       </table>
 
-      <h2 className='govuk-heading-l' id='api-error-codes'>7. API error codes</h2>
+      <h2 className='govuk-heading-l' id='api-error-codes'>5. API error codes</h2>
       <p className='govuk-body'>
         There are no specific API error codes for the DfE Information API.
       </p>
 
-      <h2 className='govuk-heading-l' id='rate-limiting'>8. Rate Limiting</h2>
+      <h2 className='govuk-heading-l' id='rate-limiting'>6. Rate Limiting</h2>
       <p className='govuk-body'>We have introduced limits on API usage rates in terms of requests per minute.</p>
       <p className='govuk-body'>If you exceed this limit, you will receive a 429 Too Many Requests HTTP status
       code for each request made within the remainder of the time.</p>
@@ -153,16 +162,13 @@ const DfEAPIInformation = ({ selectedApi }) => {
         <li>Up to 10 GET requests per endpoint</li>
       </ul>
 
-      <h2 className='govuk-heading-l' id='endpoints'>9. Endpoints</h2>
+      <h2 className='govuk-heading-l' id='endpoints'>7. Endpoints</h2>
 
-      <p className='govuk-body'>
-        <code className='code--slim'>/dfe/<strong>information</strong></code>
-      </p>
       <details className='govuk-details' data-module='govuk-details'>
         <summary className='govuk-details__summary'>
           <div className='api-information-endpoint-title'>
             <span className='govuk-details__summary-text'>
-              Retrieve information about the Department for Education
+              /dfe/<strong>open-info</strong>
             </span>
           </div>
           <div className='api-information-endpoint-tag'>
@@ -170,18 +176,157 @@ const DfEAPIInformation = ({ selectedApi }) => {
           </div>
         </summary>
         <div className='govuk-details__text'>
+          <h4 className='govuk-heading'>Description</h4>
+          <p className='govuk-body'>
+            A simple example for integrating with a low restriction DFE APIs.
+          </p>
+          <p className='govuk-body'>
+            Any request to this endpoint returns a text paragraph providing high level information
+            about the department.
+          </p>
+          <h4 className='govuk-heading'>Authorisation</h4>
+          <p className='govuk-body'>
+            This endpoint is least restricted and requires no Authorisation header.
+            You would however need to send DfE Information API Subscription key in a
+            header. This key can be retrieved by Subscribing to the API.
+          </p>
+          <h4 className='govuk-heading'>Request headers</h4>
           <table className='govuk-table'>
             <thead className='govuk-table__head'>
               <tr className='govuk-table__row'>
+                <th scope='col' className='govuk-table__header govuk-!-width-one-half'>Name</th>
                 <th scope='col' className='govuk-table__header govuk-!-width-one-half'>Description</th>
               </tr>
             </thead>
             <tbody className='govuk-table__body'>
               <tr className='govuk-table__row'>
-                <td className='govuk-table__cell'>Returns information about the Department for Education.</td>
+                <td className='govuk-table__cell'>Ocp-Apim-Subscription-Key</td>
+                <td className='govuk-table__cell'>DfE Information API subscription key</td>
               </tr>
             </tbody>
           </table>
+
+          <h4 className='govuk-heading'>Response</h4>
+          <p className='govuk-body'>HTTP status: <code className='code--slim'>200 (OK)</code></p>
+          <code className='code--block'>
+            {`{
+  "Open Information: The Department for Education is responsible for children’s services and education, including early years, schools, higher and further education policy, apprenticeships and wider skills in England."
+}`}
+          </code>
+        </div>
+      </details>
+
+      <details className='govuk-details' data-module='govuk-details'>
+        <summary className='govuk-details__summary'>
+          <div className='api-information-endpoint-title'>
+            <span className='govuk-details__summary-text'>
+              /dfe/<strong>application-info</strong>
+            </span>
+          </div>
+          <div className='api-information-endpoint-tag'>
+            <strong className={`govuk-tag govuk-tag-round govuk-tag--blue`}>GET</strong>
+          </div>
+        </summary>
+        <div className='govuk-details__text'>
+          <h4 className='govuk-heading'>Description</h4>
+          <p className='govuk-body'>
+            A simple example for integrating with an application restricted endpoint.
+          </p>
+          <p className='govuk-body'>
+            Any request to this endpoint returns a text paragraph providing high level
+            information about the department.
+          </p>
+          <h4 className='govuk-heading'>Authorisation</h4>
+          <p className='govuk-body'>
+            This endpoint is application restricted and requires an access token to be sent
+            in the Authorisation header.  You also need to send a DfE Information API Subscription
+            key in a header. This key can be retrieved by Subscribing to the API.
+          </p>
+          <h4 className='govuk-heading'>Request headers</h4>
+          <table className='govuk-table'>
+            <thead className='govuk-table__head'>
+              <tr className='govuk-table__row'>
+                <th scope='col' className='govuk-table__header govuk-!-width-one-half'>Name</th>
+                <th scope='col' className='govuk-table__header govuk-!-width-one-half'>Description</th>
+              </tr>
+            </thead>
+            <tbody className='govuk-table__body'>
+              <tr className='govuk-table__row'>
+                <td className='govuk-table__cell'>Ocp-Apim-Subscription-Key</td>
+                <td className='govuk-table__cell'>DfE Information API subscription key</td>
+              </tr>
+              <tr className='govuk-table__row'>
+                <td className='govuk-table__cell'>Authorisation</td>
+                <td className='govuk-table__cell'>An OAuth 2.0 Bearer token. For example: <code className='code--slim'>Bearer d3931854e4f440138f8e2e9dc007635a</code></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4 className='govuk-heading'>Response</h4>
+          <p className='govuk-body'>HTTP status: <code className='code--slim'>200 (OK)</code></p>
+          <code className='code--block'>
+            {`{
+  "Open Information: The Department for Education is responsible for children’s services and education, including early years, schools, higher and further education policy, apprenticeships and wider skills in England."
+}`}
+          </code>
+        </div>
+      </details>
+
+      <details className='govuk-details' data-module='govuk-details'>
+        <summary className='govuk-details__summary'>
+          <div className='api-information-endpoint-title'>
+            <span className='govuk-details__summary-text'>
+              /dfe/<strong>user-info</strong>
+            </span>
+          </div>
+          <div className='api-information-endpoint-tag'>
+            <strong className={`govuk-tag govuk-tag-round govuk-tag--blue`}>GET</strong>
+          </div>
+        </summary>
+        <div className='govuk-details__text'>
+          <h4 className='govuk-heading'>Description</h4>
+          <p className='govuk-body'>
+            A simple example for integrating with a user restricted endpoint.
+          </p>
+          <p className='govuk-body'>
+            Any request to this endpoint returns a text paragraph providing high level
+            information about the department.
+          </p>
+          <h4 className='govuk-heading'>Authorisation</h4>
+          <p className='govuk-body'>
+            This endpoint is user restricted and requires an access token to be sent in
+            the Authorisation header. Read about user-restricted endpoints in the tutorial
+            section to understand more about these type of endpoints. You also need to send
+            a DfE Information API Subscription key in a header. This key can be retrieved by
+            Subscribing to the API.
+          </p>
+          <h4 className='govuk-heading'>Request headers</h4>
+          <table className='govuk-table'>
+            <thead className='govuk-table__head'>
+              <tr className='govuk-table__row'>
+                <th scope='col' className='govuk-table__header govuk-!-width-one-half'>Name</th>
+                <th scope='col' className='govuk-table__header govuk-!-width-one-half'>Description</th>
+              </tr>
+            </thead>
+            <tbody className='govuk-table__body'>
+              <tr className='govuk-table__row'>
+                <td className='govuk-table__cell'>Ocp-Apim-Subscription-Key</td>
+                <td className='govuk-table__cell'>DfE Information API subscription key</td>
+              </tr>
+              <tr className='govuk-table__row'>
+                <td className='govuk-table__cell'>Authorisation</td>
+                <td className='govuk-table__cell'>An OAuth 2.0 Bearer token. For example: <code className='code--slim'>Bearer d3931854e4f440138f8e2e9dc007635a</code></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4 className='govuk-heading'>Response</h4>
+          <p className='govuk-body'>HTTP status: <code className='code--slim'>200 (OK)</code></p>
+          <code className='code--block'>
+            {`{
+  "User Information: The Department for Education is responsible for children’s services and education, including early years, schools, higher and further education policy, apprenticeships and wider skills in England."
+}`}
+          </code>
         </div>
       </details>
 

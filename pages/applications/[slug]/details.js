@@ -71,14 +71,6 @@ const ApplicationDetails = ({ user, application, router, msalConfig }) => {
                     </div>
                     <div className='govuk-summary-list__row'>
                       <dt className='govuk-summary-list__key'>
-                        Environment:
-                      </dt>
-                      <dd className='govuk-summary-list__value'>
-                        Sandbox
-                      </dd>
-                    </div>
-                    <div className='govuk-summary-list__row'>
-                      <dt className='govuk-summary-list__key'>
                         Client id:
                       </dt>
                       <dd className='govuk-summary-list__value'>

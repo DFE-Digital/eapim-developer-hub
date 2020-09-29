@@ -111,14 +111,6 @@ class TeamMembers extends Component {
                           {(selectedApplication ? selectedApplication.applicationName : '')}
                         </dd>
                       </div>
-                      <div className='govuk-summary-list__row'>
-                        <dt className='govuk-summary-list__key'>
-                          Environment:
-                        </dt>
-                        <dd className='govuk-summary-list__value'>
-                          Sandbox
-                        </dd>
-                      </div>
                     </dl>
 
                     <table className='govuk-table govuk-!-margin-top-9'>

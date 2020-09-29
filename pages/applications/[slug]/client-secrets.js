@@ -81,7 +81,12 @@ const ApplicationClientSecrets = ({ id, user, newClientKey, newClientKeyDisplayN
               <div className='govuk-grid-row'>
                 <div className='govuk-grid-column-full'>
                   <h1 className='govuk-heading-xl'>{page}</h1>
-
+                  <p className='govuk-body'>
+                    The client secret is a secret known only to the application and the authorisation server. You must add the client secret to the request header whenever you make a request to an API.
+                  </p>
+                  <p className='govuk-body'>
+                    Primary and secondary secrets are provided in case you need to switch between keys.
+                  </p>
                   <dl className='govuk-summary-list'>
                     <div className='govuk-summary-list__row'>
                       <dt className='govuk-summary-list__key'>
@@ -92,13 +97,6 @@ const ApplicationClientSecrets = ({ id, user, newClientKey, newClientKeyDisplayN
                       </dd>
                     </div>
                   </dl>
-
-                  <p className='govuk-body'>
-                    The client secret is a secret known only to the application and the authorisation server. You must add the client secret to the request header whenever you make a request to an API.
-                  </p>
-                  <p className='govuk-body'>
-                    Primary and secondary secrets are provided in case you need to switch between keys.
-                  </p>
 
                   <table className='govuk-table'>
                     <thead className='govuk-table__head'>

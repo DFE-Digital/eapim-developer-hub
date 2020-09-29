@@ -39,8 +39,16 @@ const APISubscription = ({ api, subscription, renderSubscribeButton, renderCance
               <td className='govuk-table__cell middle'>{api.tags[`${subscription.environment.toLowerCase()}Url`]}</td>
             </tr>
             <tr className='govuk-table__row'>
+              <th scope='row' className='govuk-table__header govuk-!-font-weight-regular middle'>Token endpoint</th>
+              <td className='govuk-table__cell middle'>{api.tags.tokenEndpoint}</td>
+            </tr>
+            <tr className='govuk-table__row'>
+              <th scope='row' className='govuk-table__header govuk-!-font-weight-regular middle'>Authorisation endpoint</th>
+              <td className='govuk-table__cell middle text-wrap'><code className='code--block inline'>{api.tags.authEndpoint}</code></td>
+            </tr>
+            <tr className='govuk-table__row'>
               <th scope='row' className='govuk-table__header middle'>Subscription keys</th>
-              <td className='govuk-table__cell middle'>
+              <td className='govuk-table__cell govuk-table__cell--numeric middle'>
                 {!subscription.keys &&
                   <a className='govuk-link' href='#' onClick={(e) => handleFetching(e, apiName, subscription.environment, subscription.id)}>
                     {fetching[apiName] && fetching[apiName][subscription.environment] ? 'Loading...' : 'View keys' }

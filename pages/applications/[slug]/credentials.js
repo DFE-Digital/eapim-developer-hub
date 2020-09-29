@@ -73,11 +73,6 @@ class CreateCredentials extends Component {
                       <td className='govuk-table__cell govuk-table__cell--numeric' />
                     </tr>
                     <tr className='govuk-table__row'>
-                      <th scope='row' className='govuk-table__header'>Environment:</th>
-                      <td className='govuk-table__cell'>Sandbox</td>
-                      <td className='govuk-table__cell govuk-table__cell--numeric' />
-                    </tr>
-                    <tr className='govuk-table__row'>
                       <th scope='row' className='govuk-table__header'>Client Id:</th>
                       <td className='govuk-table__cell'>{selectedApplication ? selectedApplication.clientId : null}</td>
                       <td className='govuk-table__cell govuk-table__cell--numeric'>
