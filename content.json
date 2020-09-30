@@ -1321,66 +1321,36 @@
         "Body": [
           {
             "Type": "H2",
-            "Body": "Using DfE in the name"
+            "Body": "Naming your application"
           },
           {
             "Type": "P",
-            "Body": "Using DfE or making any reference to DfE as part of the name is not allowed and will result in your application being rejected."
-          },
-          {
-            "Type": "H2",
-            "Body": "Existing names"
-          },
-          {
-            "Type": "P",
-            "Body": "The name of your application can't be the same or similar to the nameof an application which has already requested production credentials on the Developer Hub."
-          },
-          {
-            "Type": "P",
-            "Body": "'The same' means a name that's either identical, or where the only difference is punctuation or a special character."
-          },
-          {
-            "Type": "H3",
-            "Body": "Exceptions"
-          },
-          {
-            "Type": "P",
-            "Body": "This doesn't apply if it meets both these conditions:"
+            "Body": "The name of your application cannot:"
           },
           {
             "Type": "UL",
             "Body": [
-              "The name will be part of a group with an existing application withthe same or similar name.",
-              "The admins of the existing application give you permission to use the name."
+              "use or refer to 'DfE'",
+              "be the same or similar to an existing name on the Developer Hub",
+              "be the same or similar to a trademarked name registered by another business outside the Developer Hub",
+              "contain offensive words or phrases",
+              "mislead users into believing it has special status or power - for example, associating your application with government, local authorities or institutions, like Royal Tax App"
             ]
           },
           {
-            "Type": "H2",
-            "Body": "Trademarked and registered names"
+            "Type": "P",
+            "Body": "'The same' means a name that is identical or where the only difference is punctuation or a special character."
           },
           {
             "Type": "P",
-            "Body": "Your application's name must not be the same or similar to a trademarked name that's registered by another business outside the DfE Developer Hub."
+            "Body": "This does not apply if both:"
           },
           {
-            "Type": "H2",
-            "Body": "Offensive names"
-          },
-          {
-            "Type": "P",
-            "Body": "Your name can't contain offensive words or phrases."
-          },
-          {
-            "Type": "H2",
-            "Body": "Misleading names"
-          },
-          {
-            "Type": "P",
-            "Body": "Your application's name cannot mislead users into believing your application has special status or power. Such names might associate your application with government, local authorities, or institutions. For example, the Royal Tax App could be misleading."
-          },
-          {
-            "Type": "H2",
-            "Body": "Removal from the Developer Hub"
+            "Type": "UL",
+            "Body": [
+              "the name will be part of a group with an existing application with the same or similar name",
+              "the administrators of the existing application give you permission to use the name"
+            ]
           },
           {
             "Type": "P",
@@ -1709,32 +1679,24 @@
     "Content": {
       "Body": [
         {
-          "Type": "H2",
-          "Body": "Your personal information"
-        },
-        {
           "Type": "P",
           "Body": "This privacy policy relates to the information we store about you as a Developer Hub user. It does not relate to the privacy of the end users of any application you develop; under our <a href='/documentation/terms-of-use' class='govuk-link'>terms of use</a> you are responsible for the information stored by your application."
         },
         {
           "Type": "P",
-          "Body": "We collect certain information about you when you use the Developer Hub and APIs. This page explains what kind of personal information we collect, how it's protected and how you can find out about it."
+          "Body": "We hold information about you as a software developer on the EU General Data Protection Regulation (GDPR) lawful basis of 'public task' so that we can run the Developer Hub as a service to you."
         },
         {
           "Type": "P",
-          "Body": "If we change this privacy policy, we’ll notify all Developer Hub users by email."
-        },
-        {
-          "Type": "H2",
-          "Body": "GDPR lawful basis"
+          "Body": "We do not knowingly hold personal information on children under the age of 16. The Developer Hub is not for use by children under this age."
         },
         {
           "Type": "P",
-          "Body": "We hold information about you as a software developer on the lawful basis of “public task” so that we can run the Developer Hub as a service to you."
+          "Body": "We will email you if we update our privacy policy."
         },
         {
           "Type": "H2",
-          "Body": "What personal information do we hold about you?"
+          "Body": "Your information"
         },
         {
           "Type": "P",
@@ -1743,50 +1705,57 @@
         {
           "Type": "UL",
           "Body": [
-            "your personal details including name, email address and optionally the name of your organisation",
-            "information about your applications and the email addresses of those of your colleagues with access to them",
+            "your personal details including name, email address and sometimes the name of your organisation",
+            "information about your applications and the email addresses of your colleagues who access them",
             "your IP address, and details of which version of <a href='https://www.gov.uk/help/browsers' class='govuk-link'>web browser</a> you use",
             "information on how you use our site, based on <a href='/cookies' class='govuk-link'>cookies</a> and page tagging techniques",
             "any questions, queries or feedback you leave, including your email address, if you contact our support team"
           ]
         },
+
         {
           "Type": "H2",
-          "Body": "How we use and share your data"
+          "Body": "How we use your data"
         },
         {
           "Type": "P",
-          "Body": "We use this information to create and administer user accounts on the Developer Hub. The information you give us will be used in a customer relationship management tool to help us manage our customer service obligations. We do not share this information with anyone else."
-        },
-        {
-          "Type": "P",
-          "Body": "We store your information so that your user account on the Developer Hub can function correctly, and so we can administer that access via our approval process for issuing production credentials. This includes sending you service updates and notices."
-        },
-        {
-          "Type": "P",
-          "Body": "We undertake the following checks for application approvals:"
+          "Body": "We use your personal information:"
         },
         {
           "Type": "UL",
           "Body": [
-            "<strong>Companies House</strong> – to check the status of the business is “Active”.",
-            "<strong>LinkedIn</strong> – to check the business digital footprint",
-            "<strong>Twitter</strong> – to check the business digital footprint.",
-            "<strong>Company website</strong> – to check the business digital footprint but also for reassurance we are dealing with a valid developer.",
-            "<strong>Sandbox testing</strong> – to check/validate the developer has conducted sufficient testing of the API before being provided access to the live environment."
+            "to create your account on the Developer Hub",
+            "to make sure your account works properly",
+            "to send you service updates and notices",
+            "in a customer relationship management tool to help us manage our obligations to you"
           ]
         },
         {
           "Type": "P",
-          "Body": "We delete your personal information when your user account is deleted, and keep audit records of your user account activity for up to 6 years."
-        },
-        {
-          "Type": "H2",
-          "Body": "How we protect your personal information"
+          "Body": "We do not share your information with anyone else."
         },
         {
           "Type": "P",
-          "Body": "We comply with the EU General Data Protection Regulation (GDPR)"
+          "Body": "When you apply for an account, we check:"
+        },
+        {
+          "Type": "UL",
+          "Body": [
+            "<strong>Companies House</strong> – to make sure the status of the business is 'active'",
+            "<strong>LinkedIn</strong> – to check the business's digital footprint",
+            "<strong>Twitter</strong> – to check the business's digital footprint",
+            "<strong>Company website</strong> – to check the business’s digital footprint and to make sure we’re dealing with a valid developer",
+            "<strong>Sandbox testing</strong> - to make sure you've sufficiently tested the API before we give access to the live environment"
+          ]
+        },
+        
+        {
+          "Type": "H2",
+          "Body": "How we protect your data"
+        },
+        {
+          "Type": "P",
+          "Body": "We comply with the GDPR to protect your personal information."
         },
         {
           "Type": "P",
@@ -1795,12 +1764,54 @@
         {
           "Type": "UL",
           "Body": [
-            "tell you why the information is needed",
-            "only ask for what's needed",
-            "make sure no one has access to it who shouldn't",
-            "only keep the information for as long as it's needed",
+            "tell you why we need the information",
+            "only ask for what we need",
+            "make sure no one has access to it who should not",
+            "only keep the information for as long as we need it",
             "not make it available for commercial use"
           ]
+        },
+        {
+          "Type": "P",
+          "Body": "Our staff are trained in handling information and understand how important it is to protect personal and other sensitive information."
+        },
+        {
+          "Type": "P",
+          "Body": "When you close your account, we’ll:"
+        },
+        {
+          "Type": "UL",
+          "Body": [
+            "delete your personal information",
+            "keep audit records of your user account activity for up to 6 years"
+          ]
+        },
+        {
+          "Type": "P",
+          "Body": "If you want us to delete all the information we hold about you, email our <a href='/support' class='govuk-link'>support team</a>."
+        },
+        {
+          "Type": "H2",
+          "Body": "Asking to see your information"
+        },
+        {
+          "Type": "P",
+          "Body": "If you want to see the personal information we hold about you:"
+        },
+        {
+          "Type": "UL",
+          "Body": [
+            "email our <a href='/support' class='govuk-link'>support team</a> to find out which DfE office to contact",
+            "address your GDPR request to the data protection officer"
+          ]
+        },
+        {
+          "Type": "P",
+          "Body": "There is no charge for this."
+        },
+        {
+          "Type": "P",
+          "Body": "Sometimes we can withhold information, for example to protect national security."
         },
         {
           "Type": "H2",
@@ -1808,11 +1819,11 @@
         },
         {
           "Type": "P",
-          "Body": "We use third party software to help us improve your experience on this website including Google Analytics."
+          "Body": "We use third party software to help us improve your experience on the Developer Hub, including Azure App Insights, Optimizely and SurveyMonkey."
         },
         {
           "Type": "P",
-          "Body": "The following information may be collected about your device and browser and held so it cannot be used to identify who you are:"
+          "Body": "We may collect your:"
         },
         {
           "Type": "UL",
@@ -1827,52 +1838,12 @@
             "preferred language used to display the webpage",
             "date and time when website pages were accessed",
             "mouse events (movements, location and clicks)",
-            "keypresses"
+            "key presses"
           ]
         },
         {
           "Type": "P",
-          "Body": "You can opt out of Google Analytics by <a href='' class='govuk-link' target='_blank'>installing their Opt out Browser Add-on (opens in a new tab)</a>."
-        },
-        {
-          "Type": "H2",
-          "Body": "Handling your information"
-        },
-        {
-          "Type": "P",
-          "Body": "Our staff are trained in handling information and understand how important it is to protect personal and other sensitive information."
-        },
-        {
-          "Type": "H2",
-          "Body": "Asking to see your information"
-        },
-        {
-          "Type": "P",
-          "Body": "You can ask to see the personal information we hold about you. To help locate the information you want and deal with your request more quickly, you should make your GDPR request to the DfE office advised by our <a href='/support' class='govuk-link'>support team</a>. You should address your request to the Data Protection Officer."
-        },
-        {
-          "Type": "P",
-          "Body": "There is no charge."
-        },
-        {
-          "Type": "P",
-          "Body": "Sometimes we can withhold information, for example, to protect national security."
-        },
-        {
-          "Type": "H2",
-          "Body": "Your GDPR right to be forgotten"
-        },
-        {
-          "Type": "P",
-          "Body": "You can ask us to delete all the information we hold about you, if you no longer wish to be a user of the Developer Hub. To do this contact our <a href='/support' class='govuk-link'>support team</a>."
-        },
-        {
-          "Type": "H2",
-          "Body": "Children"
-        },
-        {
-          "Type": "P",
-          "Body": "The Developer Hub is not for use by children under the age of 16. We do not knowingly hold personal information on children under the age of 16."
+          "Body": "We will store this information in a way that it cannot be used to identify you."
         }
       ]
     }
