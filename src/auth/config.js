@@ -3,7 +3,8 @@ export const b2cPolicies = {
     signIn: 'b2c_1a_eapim_signin',
     signUp: 'b2c_1a_eapim_signup',
     forgotPassword: 'b2c_1a_eapim_passwordreset',
-    editProfile: 'b2c_1a_eapim_profileedit'
+    editProfile: 'b2c_1a_eapim_profileedit',
+    verify: 'b2c_1a_eapim_signinredemption'
   }
 }
 

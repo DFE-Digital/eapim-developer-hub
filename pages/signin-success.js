@@ -16,12 +16,11 @@ class SignInSuccess extends Component {
     }
   }
 
-  componentWillReceiveProps = () => {
+  componentDidUpdate = () => {
     const myMSALObj = new Msal.UserAgentApplication(this.props.msalConfig)
 
     myMSALObj.handleRedirectCallback((error, response) => {
       console.log('props', this.props.msalConfig)
-
       console.log('MSAL Error Message: ', error && error.errorMessage)
       console.log('MSAL Response: ', response)
 
@@ -62,9 +61,8 @@ class SignInSuccess extends Component {
         // To learn more about b2c tokens, visit https://docs.microsoft.com/en-us/azure/active-directory-b2c/tokens-overview
 
         if (response.tokenType === 'id_token' && response.idToken.claims['acr'] === b2cPolicies.names.forgotPassword) {
-          console.log(response.idToken.claims['acr'])
           this.setState({ passwordChanged: true })
-        } else if (response.tokenType === 'id_token' && (response.idToken.claims['acr'] === b2cPolicies.names.signIn || response.idToken.claims['acr'] === b2cPolicies.names.signUp)) {
+        } else if (response.tokenType === 'id_token' && (response.idToken.claims['acr'] === b2cPolicies.names.signIn || response.idToken.claims['acr'] === b2cPolicies.names.signUp || response.idToken.claims['acr'] === b2cPolicies.names.verify)) {
           console.log('id_token acquired at: ' + new Date().toString())
 
           if (!myMSALObj.getAccount()) {

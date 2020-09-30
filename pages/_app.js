@@ -38,6 +38,13 @@ class MyApp extends App {
       clientId: publicRuntimeConfig.CLIENT_ID
     }
 
+    const msalAuthVerfiyConfig = {
+      authority: publicRuntimeConfig.B2C_SIGNIN_VERIFY_URL,
+      redirectUri: publicRuntimeConfig.REDIRECT_URL,
+      postLogoutRedirectUri: publicRuntimeConfig.ROOT_URL,
+      clientId: publicRuntimeConfig.CLIENT_ID
+    }
+
     const msalRegisterConfig = {
       authority: publicRuntimeConfig.B2C_SIGNUP_URL,
       redirectUri: publicRuntimeConfig.REDIRECT_URL,
@@ -83,6 +90,7 @@ class MyApp extends App {
                 msalEditProfileConfig={msalConfig(msalEditProfileConfig)}
                 msalForgotPasswordConfig={msalConfig(msalForgotPasswordConfig)}
                 msalRegisterConfig={msalConfig(msalRegisterConfig)}
+                msalAuthVerfiyConfig={msalConfig(msalAuthVerfiyConfig)}
               />
             </Layout>
           </Provider>
