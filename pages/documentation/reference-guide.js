@@ -45,7 +45,7 @@ class ReferenceGuide extends Component {
                 <div className='govuk-grid-row'>
                   <div className='govuk-grid-column-full'>
                     <h1 className='govuk-heading-xl'>{Content.Documentation[page].Page}</h1>
-                    <ContentBuilder sectionNav={false} data={Content.Documentation[page].Content.Body} />
+                    <ContentBuilder sectionNav data={Content.Documentation[page].Content} />
                   </div>
                 </div>
               </div>
