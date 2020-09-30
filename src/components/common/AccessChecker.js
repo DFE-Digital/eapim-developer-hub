@@ -19,7 +19,7 @@ class AccessChecker extends Component {
   }
 
   render () {
-    this.checkAccess()
+    // this.checkAccess()
     return null
   }
 }
