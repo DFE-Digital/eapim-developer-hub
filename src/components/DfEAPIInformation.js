@@ -12,6 +12,22 @@ const DfEAPIInformation = ({ selectedApi }) => {
             <th scope='row' className='govuk-table__header govuk-!-width-one-half'>Lifecycle stage</th>
             <td className='govuk-table__cell govuk-!-width-one-half'>{selectedApi.tags.lifecycleStage}</td>
           </tr>
+          {selectedApi.tags.swaggerFile && (
+            <tr className='govuk-table__row'>
+              <th scope='row' className='govuk-table__header govuk-!-width-one-half'>Swagger File</th>
+              <td className='govuk-table__cell govuk-!-width-one-half'>
+                <a className="govuk-link" href={selectedApi.tags.swaggerFile} download="dfe-information-api.json">Download Swagger file</a>
+              </td>
+            </tr>
+          )}
+          {selectedApi.tags.guideline && (
+            <tr className='govuk-table__row'>
+              <th scope='row' className='govuk-table__header govuk-!-width-one-half'>Guideline</th>
+              <td className='govuk-table__cell govuk-!-width-one-half'>
+                <a className="govuk-link" href={selectedApi.tags.guideline} download="dfe-information-api-guideline.json">Download Guideline</a>
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
 
@@ -88,7 +104,7 @@ const DfEAPIInformation = ({ selectedApi }) => {
       </p>
       <ul className='govuk-list govuk-list--bullet'>
         <li>open the API browser like Swagger Editor</li>
-        <li>look at the DfE Information API Swagger file: <a className='govuk-link' href='/static/dfe-information-api.openapi+json.json' download='dfe-information-api.json'>download</a></li>
+        <li>look at the DfE Information API Swagger file</li>
         <li>You can also generate a client library from the Swagger file using the Swagger editor.</li>
       </ul>
 
