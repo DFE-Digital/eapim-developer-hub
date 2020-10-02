@@ -1,4 +1,4 @@
 export const template = ({ fullname, email, api, reason, description }) => {
-  return `Name: ${fullname}\nEmail: ${email}\nReason: ${reason}\nAPI: ${api === undefined ? '' : api}\nDescription: ${description}`
+  return `<p>Name: ${fullname}</p><p>Email: ${email}</p><p>Reason: ${reason}</p><p>API: ${api === undefined ? '' : api}</p><p>Description: ${description}</p>`
 }
 

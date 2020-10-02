@@ -20,8 +20,9 @@ class Profile extends Component {
       if (error) {
         console.log('error.errorMessage', error.errorMessage)
 
+        // user cancelled action
         if (error.errorMessage.indexOf('AADB2C90091') > -1) {
-          Router.push(this.props.router.route || '/')
+          return Router.push('/')
         }
 
         // Check for forgot password error
