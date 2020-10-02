@@ -34,6 +34,11 @@ export const forgotPassword = async (msalForgotPasswordConfig) => {
   myMSALObj.loginRedirect({ authority: msalForgotPasswordConfig.auth.authority })
 }
 
+export const changePassword = async (msalChangePasswordConfig) => {
+  const myMSALObj = new Msal.UserAgentApplication(msalChangePasswordConfig)
+  myMSALObj.loginRedirect({ authority: msalChangePasswordConfig.auth.authority })
+}
+
 export const signInToken = (user) => async dispatch => {
   if (user) {
     dispatch({ type: RECEIVE_SIGNIN,
@@ -72,6 +77,11 @@ export const signInLink = async (e, msalConfig) => {
 export const registerLink = async (e, msalConfig) => {
   e.preventDefault()
   await register(msalConfig)
+}
+
+export const changePasswordLink = async (e, msalConfig) => {
+  e.preventDefault()
+  await changePassword(msalConfig)
 }
 
 export const signOutLink = async (e, msalConfig) => {

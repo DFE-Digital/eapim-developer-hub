@@ -1465,15 +1465,6 @@
       }
     }
   },
-  "PasswordChange": {
-    "Page": "Password Change",
-    "Url": "/password-change",
-    "Content": {
-      "Continue": {
-        "Button": "Back to profile"
-      }
-    }
-  },
   "Cookies": {
     "Page": "Cookies",
     "Url": "/cookies",

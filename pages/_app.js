@@ -63,6 +63,12 @@ class MyApp extends App {
       clientId: publicRuntimeConfig.CLIENT_ID
     }
 
+    const msalChangePasswordConfig = {
+      authority: publicRuntimeConfig.B2C_PASSWORD_CHANGE_URL,
+      redirectUri: publicRuntimeConfig.EDIT_PROFILE_REDIRECT_URL,
+      clientId: publicRuntimeConfig.CLIENT_ID
+    }
+
     return (
       <>
         <Helmet>
@@ -91,6 +97,7 @@ class MyApp extends App {
                 msalForgotPasswordConfig={msalConfig(msalForgotPasswordConfig)}
                 msalRegisterConfig={msalConfig(msalRegisterConfig)}
                 msalAuthVerfiyConfig={msalConfig(msalAuthVerfiyConfig)}
+                msalChangePasswordConfig={msalConfig(msalChangePasswordConfig)}
               />
             </Layout>
           </Provider>

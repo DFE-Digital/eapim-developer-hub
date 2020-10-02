@@ -51,6 +51,10 @@ const APP_ROUTES = [
     pattern: '/forgot-password'
   },
   {
+    page: '/auth/change-password',
+    pattern: '/change-password'
+  },
+  {
     page: '/auth/edit-profile',
     pattern: '/edit-profile'
   },

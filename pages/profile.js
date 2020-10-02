@@ -5,7 +5,7 @@ import Router from 'next/router'
 import AccessChecker from 'components/common/AccessChecker'
 import Content from '../content.json'
 import ReturnTo from 'components/common/ReturnTo'
-import { signInToken } from '../src/actions/authenticate'
+import { changePasswordLink, signInToken } from '../src/actions/authenticate'
 import { b2cPolicies } from '../src/auth/config'
 import { PrivateRoute } from 'components/common/PrivateRoute'
 
@@ -18,7 +18,6 @@ class Profile extends Component {
     myMSALObj.handleRedirectCallback((error, response) => {
       // Error handling
       if (error) {
-        console.log('props', this.props.msalEditProfileConfig)
         console.log('error.errorMessage', error.errorMessage)
 
         if (error.errorMessage.indexOf('AADB2C90091') > -1) {
@@ -92,6 +91,10 @@ class Profile extends Component {
                     <a href='/auth/edit-profile' className='govuk-button'>{Content[page].Content.AccountDetails.Button}</a>
                   </Fragment>
                 )}
+
+                <h2 className='govuk-heading-l govuk-!-margin-top-9'>{Content[page].Content.ChangePassword.Heading}</h2>
+                <a onClick={(e) => changePasswordLink(e, this.props.msalChangePasswordConfig)} href="/auth/change-password" className='govuk-button govuk-button--default'>{Content[page].Content.ChangePassword.Button}</a>
+
                 <h2 className='govuk-heading-l govuk-!-margin-top-9'>{Content[page].Content.DeleteAccount.Heading}</h2>
                 <p className='govuk-body'>{Content[page].Content.DeleteAccount.Copy}</p>
                 <button className='govuk-button govuk-button--warning' onClick={() => Router.push('/delete-account-confirm')}>{Content[page].Content.DeleteAccount.Button}</button>
