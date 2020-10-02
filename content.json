@@ -1454,10 +1454,23 @@
         "Heading": "Account details",
         "Button": "Edit profile"
       },
+      "ChangePassword": {
+        "Heading": "Change Password",
+        "Button": "Change your password"
+      },
       "DeleteAccount": {
         "Heading": "Delete account",
         "Copy": "You can ask us to delete your account and we will respond within 2 working days.",
         "Button": "Request account deletion"
+      }
+    }
+  },
+  "PasswordChange": {
+    "Page": "Password Change",
+    "Url": "/password-change",
+    "Content": {
+      "Continue": {
+        "Button": "Back to profile"
       }
     }
   },

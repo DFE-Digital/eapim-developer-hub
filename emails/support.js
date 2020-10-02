@@ -1,4 +1,4 @@
-export const template = async ({ fullname, email, api, reason, description }) => {
+export const template = ({ fullname, email, api, reason, description }) => {
   return `
 <div style="display:block;font-size:12px;margin-bottom:10px;">
   <h4 style="display:block;margin-bottom:5px;font-weight:bold;font-size:14px;">Name</h4>
