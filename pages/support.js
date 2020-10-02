@@ -5,10 +5,12 @@ import ReturnTo from 'components/common/ReturnTo'
 import ContentBuilder from 'components/common/ContentBuilder'
 
 import ValidationMessages from 'components/common/forms/validation-messages'
-
 import Radio from 'components/common/form/radio'
 import Input from 'components/common/form/input'
 import Textarea from 'components/common/form/textarea'
+
+import { send } from '../lib/emailService'
+import { template } from '../emails/support'
 
 import * as validation from 'utils/validation'
 
@@ -81,8 +83,6 @@ const Support = ({ router, msalConfig }) => {
   }
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-
     setErrors({})
     setErrorSummary([])
 
@@ -97,10 +97,9 @@ const Support = ({ router, msalConfig }) => {
     if (Object.keys(formErrors).length !== 0) {
       setErrors(formErrors)
       setErrorSummary(createErrorSummary(formErrors))
+      e.preventDefault()
       return false
     }
-
-    router.push('/support-submitted')
   }
 
   return (
@@ -126,7 +125,7 @@ const Support = ({ router, msalConfig }) => {
 
               <ValidationMessages errors={errorSummary} />
 
-              <form noValidate onSubmit={handleSubmit} ref={formRef}>
+              <form noValidate method="POST" onSubmit={handleSubmit} ref={formRef}>
                 <Input
                   ref={fullnameRef}
                   id='fullname'
@@ -189,6 +188,30 @@ const Support = ({ router, msalConfig }) => {
       </div>
     </Fragment>
   )
+}
+
+Support.getInitialProps = async ({ req, res }) => {
+  if (req && req.method === 'POST') {
+
+    try {
+      await send({
+        "email-to": process.env.SERVICE_NOW_EMAIL,
+        "email-from": req.body.email,
+        "subject": "Developer Hub Support Request",
+        "content-type": "text/html",
+        "email-content": template(req.body)
+      })
+
+      res.writeHead(301, { Location: '/support-submitted' });
+      res.end();
+    } catch (error) {
+      console.log(`Error sending support email: ${error}`)
+    }
+  }
+
+  return {
+    status: 200
+  }
 }
 
 export default Support

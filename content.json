@@ -254,7 +254,7 @@
         },
         {
           "Type": "P",
-          "Body": "If you require assistance in making the API calls, see our <a href='/documentation/tutorials' class='govuk-link'>Tutorials</a>"
+          "Body": "If you require assistance in making the API calls, see our <a href='/documentation/tutorials' class='govuk-link'>Tutorials</a>."
         }
       ]
     },
@@ -1383,6 +1383,10 @@
             "Update your application to use the updated client secret.",
             "Check that your application is working with the updated client secret."
           ]
+        },
+        {
+          "Type": "P",
+          "Body": "Read more on <a href='/documentation/authorisation#credentials' class='govuk-link' target='_blank'>client secrets</a> for further details."
         }
       ]
     },
@@ -1397,6 +1401,10 @@
         {
           "Type": "P",
           "Body": "To protect your application from phishing attacks, the redirect URL you use for authorisation (in your call to DfE authorisation endpoint) must match one of those you specified when you registered your application."
+        },
+        {
+          "Type": "P",
+          "Body": "Read more on <a href='/documentation/reference-guide#redirect-urls' class='govuk-link' target='_blank'>redirect URLs</a> for further details."
         }
       ]
     },
@@ -1419,20 +1427,7 @@
         "Body": [
           {
             "Type": "P",
-            "Body": "Complete this short form to ask a question, for example, about:"
-          },
-          {
-            "Type": "UL",
-            "Body": [
-              "General enquiry",
-              "Issue with the website",
-              "Issue with an API",
-              "Other"
-            ]
-          },
-          {
-            "Type": "P",
-            "Body": "and our Support Team will get back to you within 2 working days. You can also check our <a href='/documentation/reference-guide' class='govuk-link'>reference guide</a> for answers."
+            "Body": "Complete this short form and our Support Team will get back to you within 2 working days. You can also check our <a href='/documentation/reference-guide' class='govuk-link'>reference guide</a> for answers."
           }
         ]
       },

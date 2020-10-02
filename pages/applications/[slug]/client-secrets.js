@@ -112,8 +112,8 @@ const ApplicationClientSecrets = ({ id, user, newClientKey, newClientKeyDisplayN
                         ? (
                           <tr className='govuk-table__row'>
                             <td className='govuk-table__cell middle'>{newClientKey}</td>
-                            <td className='govuk-table__cell middle' />
-                            <td className='govuk-table__cell middle' />
+                            <td className='govuk-table__cell middle'>{moment(startDateTime).format('DD MMM YYYY')}</td>
+                            <td className='govuk-table__cell middle'>{moment(endDateTime).format('DD MMM YYYY')}</td>
                             <td className='govuk-table__cell middle govuk-table__cell--numeric'>
                               <button type='button' className='govuk-button govuk-!-margin-0' onClick={(e) => copyToClipboard(e, newClientKey)}>
                                 {copied ? `Copied` : `Copy`}

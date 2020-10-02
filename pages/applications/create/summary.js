@@ -13,7 +13,7 @@ class CreateSummary extends Component {
       userEmail: user.idToken['email'],
       userID: user.accountIdentifier,
       organization: user.idToken.extension_OrganizationName,
-      role: 'role', // user.idToken.extension_Role,
+      role: 'role',
       applicationName: details['app-name'],
       description: details['app-description'],
       redirectUri: details['app-redirect-url']

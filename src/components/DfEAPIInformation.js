@@ -14,9 +14,9 @@ const DfEAPIInformation = ({ selectedApi }) => {
           </tr>
           {selectedApi.tags.swaggerFile && (
             <tr className='govuk-table__row'>
-              <th scope='row' className='govuk-table__header govuk-!-width-one-half'>Swagger File</th>
+              <th scope='row' className='govuk-table__header govuk-!-width-one-half'>Swagger file</th>
               <td className='govuk-table__cell govuk-!-width-one-half'>
-                <a className="govuk-link" href={selectedApi.tags.swaggerFile} download="dfe-information-api.json">Download Swagger file</a>
+                <a className="govuk-link" href={selectedApi.tags.swaggerFile} download="dfe-information-api.json" target="_blank">View swagger file</a>
               </td>
             </tr>
           )}
@@ -24,7 +24,7 @@ const DfEAPIInformation = ({ selectedApi }) => {
             <tr className='govuk-table__row'>
               <th scope='row' className='govuk-table__header govuk-!-width-one-half'>Guideline</th>
               <td className='govuk-table__cell govuk-!-width-one-half'>
-                <a className="govuk-link" href={selectedApi.tags.guideline} download="dfe-information-api-guideline.json">Download Guideline</a>
+                <a className="govuk-link" href={selectedApi.tags.guideline} download="dfe-information-api-guideline">Download guideline</a>
               </td>
             </tr>
           )}
@@ -103,9 +103,9 @@ const DfEAPIInformation = ({ selectedApi }) => {
         For more detailed schema information on each DfE Information API, you can:
       </p>
       <ul className='govuk-list govuk-list--bullet'>
-        <li>open the API browser like Swagger Editor</li>
-        <li>look at the DfE Information API Swagger file</li>
-        <li>You can also generate a client library from the Swagger file using the Swagger editor.</li>
+        <li>open the API browser like <a href='https://editor.swagger.io/' className='govuk-link' target='_blank'>Swagger Editor</a></li>
+        <li>look at the DfE Information API swagger file</li>
+        <li>You can also generate a client library from the swagger file using Swagger Editor.</li>
       </ul>
 
       <h2 className='govuk-heading-l' id='http-status-codes'>4. HTTP status codes</h2>

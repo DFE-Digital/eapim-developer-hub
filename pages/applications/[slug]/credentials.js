@@ -64,6 +64,9 @@ class CreateCredentials extends Component {
                   We only show your client secrets once to help keep your data secure.<br />
                   Copy the client secrets immediately.
                 </div>
+                <p className="govuk-body">
+                  Read more on <a href='/documentation/authorisation#credentials' class='govuk-link' target='_blank'>credentials</a> for further details.
+                </p>
 
                 <table className='govuk-table'>
                   <tbody className='govuk-table__body'>
