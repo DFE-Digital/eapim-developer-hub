@@ -92,8 +92,8 @@ class Profile extends Component {
                   </Fragment>
                 )}
 
-                <h2 className='govuk-heading-l govuk-!-margin-top-9'>{Content[page].Content.ChangePassword.Heading}</h2>
-                <a onClick={(e) => changePasswordLink(e, this.props.msalChangePasswordConfig)} href="/auth/change-password" className='govuk-button govuk-button--default'>{Content[page].Content.ChangePassword.Button}</a>
+                {/* <h2 className='govuk-heading-l govuk-!-margin-top-9'>{Content[page].Content.ChangePassword.Heading}</h2>
+                <a onClick={(e) => changePasswordLink(e, this.props.msalChangePasswordConfig)} href="/auth/change-password" className='govuk-button govuk-button--default'>{Content[page].Content.ChangePassword.Button}</a> */}
 
                 <h2 className='govuk-heading-l govuk-!-margin-top-9'>{Content[page].Content.DeleteAccount.Heading}</h2>
                 <p className='govuk-body'>{Content[page].Content.DeleteAccount.Copy}</p>
