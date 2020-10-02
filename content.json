@@ -977,7 +977,7 @@
           },
           {
             "Type": "P",
-            "Body": "If you have any questions <a class='govuk-link' href='/support'>ask for support.</a>"
+            "Body": "If you have any questions <a class='govuk-link' href='/support'>contact us</a>."
           },
           {
             "Type": "H2",
@@ -1146,7 +1146,7 @@
           },
           {
             "Type": "P",
-            "Body": "You cannot share personal data for marketing without users' consent, as defined in the Direct Marketing Guidance PDF from the <a href='https://ico.org.uk/for-organisations/marketing/' class='govuk-link' target='_blank'>Information Commissioner's Office</a>."
+            "Body": "You cannot share personal data for marketing without users' consent, as defined in the Direct Marketing Guidance PDF from the <a href='https://ico.org.uk/media/1555/direct-marketing-guidance.pdf' class='govuk-link' target='_blank'>Information Commissioner's Office</a>."
           },
           {
             "Type": "H3",
@@ -1736,6 +1736,190 @@
         {
           "Type": "P",
           "Body": "We will store this information in a way that it cannot be used to identify you."
+        }
+      ]
+    }
+  },
+  "TermsAndConditions": {
+    "Page": "Terms and conditions",
+    "Url": "/terms-and-conditions",
+    "Content": {
+      "Body": [
+        {
+          "Type": "H2",
+          "Body": "Disclaimer"
+        },
+        {
+          "Type": "P",
+          "Body": "Read this disclaimer in conjunction with our <a href='/privacy-policy' class='govuk-link'>privacy policy</a>."
+        },
+        {
+          "Type": "P",
+          "Body": "The Department for Education (DfE) Developer Hub website and material relating to government information, products and services (or to third party information, products and services) is provided ‘as is’."
+        },
+        {
+          "Type": "P",
+          "Body": "We make no representation or endorsement and no warranty of any kind whether express or implied. This includes, but is not limited to, the implied warranties of:"
+        },
+        {
+          "Type": "UL",
+          "Body": [
+            "satisfactory quality",
+            "fitness for a particular purpose",
+            "non-infringement",
+            "compatibility",
+            "security",
+            "accuracy"
+          ]
+        },
+        {
+          "Type": "P",
+          "Body": "When you download materials from this website, it is your responsibility to keep them safe. We cannot accept any responsibility for any loss, liability, claim, demand or damages that happen when you download and use these materials."
+        },
+        {
+          "Type": "P",
+          "Body": "We make no warranty that:"
+        },
+        {
+          "Type": "UL",
+          "Body": [
+            "the functions contained in the material on this website will be uninterrupted or free of errors",
+            "defects will be corrected",
+            "this site or the servers that make it available are free of viruse",
+            "this site represents the full functionality, accuracy or reliability of the materials"
+          ]
+        },
+        {
+          "Type": "P",
+          "Body": "In no event will we be liable for:"
+        },
+        {
+          "Type": "UL",
+          "Body": [
+            "any loss or damage arising out of or in connection with the use of this website",
+            "any loss or damages whatsoever arising from the use, or loss of use, of data, or profits arising out of or in connection with the use of this website"
+          ]
+        },
+        {
+          "Type": "P",
+          "Body": "We updated these terms and conditions in August 2020."
+        },
+        {
+          "Type": "H2",
+          "Body": "Using our website"
+        },
+        {
+          "Type": "P",
+          "Body": "Our website is not for use by children under the age of 16."
+        },
+        {
+          "Type": "P",
+          "Body": "We maintain our website for your personal use and viewing. When you access and use our site, you accept these terms and conditions and they take effect on the date you first use the site."
+        },
+        {
+          "Type": "P",
+          "Body": "You should check the terms and conditions regularly as we may revise them at any time without notice. If you use the site after we’ve made a change, this means you accept the change."
+        },
+        {
+          "Type": "P",
+          "Body": "You agree to use this site only for lawful purposes and in a way that does not infringe the rights of, or restrict or inhibit the use and enjoyment of, this site by any third party. This includes, without limitation:"
+        },
+        {
+          "Type": "UL",
+          "Body": [
+            "unlawful conduct",
+            "harassment",
+            "causing distress or inconvenience",
+            "transmitting obscene or offensive content",
+            "disrupting the normal flow of dialogue within this site"
+          ]
+        },
+        {
+          "Type": "P",
+          "Body": "We use the information we collect for internal review, to improve or customise the content or layout of the site, and to provide information services to the site users. We do not share it with other organisations for commercial purposes."
+        },
+        {
+          "Type": "P",
+          "Body": "Our responsibilities and liabilities to you in providing this site and any associated services are limited as set out in our disclaimer."
+        },
+        {
+          "Type": "H2",
+          "Body": "Copyright and intellectual property rights"
+        },
+        {
+          "Type": "P",
+          "Body": "The material featured on this site is subject to crown copyright, third party copyright or both. For more details, read our <a href='https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/' class='govuk-link' target='_blank'>copyright notice</a>."
+        },
+        {
+          "Type": "P",
+          "Body": "The names, images and logos identifying DfE are our proprietary marks. You are not allowed to copy our logos or any third party logos accessed through this site unless you have prior approval from the copyright owner."
+        },
+        {
+          "Type": "P",
+          "Body": "We do not approve, accredit or endorse software developers or allow them to use our logo in their advertising."
+        },
+        {
+          "Type": "H2",
+          "Body": "Linking to our website"
+        },
+        {
+          "Type": "P",
+          "Body": "You can link directly to pages hosted on Developer Hub without permission, but:"
+        },
+        {
+          "Type": "UL",
+          "Body": [
+            "our page must load into the user’s entire window",
+            "you cannot load our pages into frames on your site"
+          ]
+        },
+        {
+          "Type": "H2",
+          "Body": "Links to external websites"
+        },
+        {
+          "Type": "P",
+          "Body": "We are not responsible for the content or reliability of any external websites that we link to and we do not necessarily endorse their views. A listing is not an endorsement of any kind."
+        },
+        {
+          "Type": "P",
+          "Body": "We cannot guarantee that the links will always work or if the pages will be available. We are not responsible for any privacy policies on external websites and we recommend you read the relevant statements on any other websites you visit."
+        },
+        {
+          "Type": "P",
+          "Body": "We are not responsible for the direct or indirect results of you linking to any other website from this site."
+        },
+        {
+          "Type": "H2",
+          "Body": "Virus protection"
+        },
+        {
+          "Type": "P",
+          "Body": "We make all reasonable attempts to check and test material at all stages of production, and to exclude viruses from this website."
+        },
+        {
+          "Type": "P",
+          "Body": "You should always run an up to date anti-virus program on all the material you download from the internet."
+        },
+        {
+          "Type": "P",
+          "Body": "We cannot accept any responsibility for any loss, disruption or damage to your data or your computer system while using material found on our site."
+        },
+        {
+          "Type": "H2",
+          "Body": "Privacy policy"
+        },
+        {
+          "Type": "P",
+          "Body": "Our <a href='/privacy-policy' class='govuk-link'>privacy policy</a> explains how we protect and respect the data we collect from you. When you use this site, you accept this policy."
+        },
+        {
+          "Type": "H2",
+          "Body": "Governing law"
+        },
+        {
+          "Type": "P",
+          "Body": "These terms and conditions shall be governed by and construed in accordance with the laws of England and Wales. Any dispute arising under these terms and conditions shall be subject to the exclusive jurisdiction of the courts of England and Wales."
         }
       ]
     }
