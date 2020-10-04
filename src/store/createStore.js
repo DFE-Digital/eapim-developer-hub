@@ -5,7 +5,6 @@ import { createStore, applyMiddleware, compose } from 'redux'
 
 import { persistStore } from 'redux-persist'
 
-import config from 'config'
 import rootReducer from 'reducers'
 
 function createMiddlewares ({ isServer }) {
@@ -13,7 +12,7 @@ function createMiddlewares ({ isServer }) {
     thunkMiddleware
   ]
 
-  if (config.env === 'development' && typeof window !== 'undefined') {
+  if (typeof window !== 'undefined') {
     middlewares.push(createLogger({
       level: 'info',
       collapsed: true,
@@ -44,7 +43,7 @@ function immutableChildren (obj) {
   return state
 }
 
-export default (initialState = {}, context) => {
+const initStore = (initialState = {}, context) => {
   const { isServer } = context
   const middlewares = createMiddlewares({ isServer })
   const state = immutableChildren(initialState)
@@ -76,3 +75,5 @@ export default (initialState = {}, context) => {
     )
   }
 }
+
+export default initStore

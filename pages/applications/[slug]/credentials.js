@@ -65,7 +65,7 @@ class CreateCredentials extends Component {
                   Copy the client secrets immediately.
                 </div>
                 <p className="govuk-body">
-                  Read more on <a href='/documentation/authorisation#credentials' class='govuk-link' target='_blank'>credentials</a> for further details.
+                  Read more on <a href='/documentation/authorisation#credentials' className='govuk-link' target='_blank'>credentials</a> for further details.
                 </p>
 
                 <table className='govuk-table'>

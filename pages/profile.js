@@ -12,7 +12,7 @@ import { PrivateRoute } from 'components/common/PrivateRoute'
 const page = 'Profile'
 
 class Profile extends Component {
-  componentWillReceiveProps = () => {
+  componentDidUpdate = () => {
     const myMSALObj = new Msal.UserAgentApplication(this.props.msalEditProfileConfig)
 
     myMSALObj.handleRedirectCallback((error, response) => {

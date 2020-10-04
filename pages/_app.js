@@ -15,9 +15,6 @@ import '../scss/main.scss'
 
 import { msalConfig } from '../src/auth/config'
 
-import getConfig from 'next/config'
-const { publicRuntimeConfig } = getConfig()
-
 const GlobalStyle = createGlobalStyle`
   ${styledNormalize}
 `
@@ -32,41 +29,41 @@ class MyApp extends App {
     const title = Content.PortalName
 
     const msalAuthConfig = {
-      authority: publicRuntimeConfig.B2C_SIGNIN_URL,
-      redirectUri: publicRuntimeConfig.REDIRECT_URL,
-      postLogoutRedirectUri: publicRuntimeConfig.ROOT_URL,
-      clientId: publicRuntimeConfig.CLIENT_ID
+      authority: process.env.NEXT_PUBLIC_B2C_SIGNIN_URL,
+      redirectUri: process.env.NEXT_PUBLIC_REDIRECT_URL,
+      postLogoutRedirectUri: process.env.NEXT_PUBLIC_ROOT_URL,
+      clientId: process.env.NEXT_PUBLIC_CLIENT_ID
     }
 
     const msalAuthVerfiyConfig = {
-      authority: publicRuntimeConfig.B2C_SIGNIN_VERIFY_URL,
-      redirectUri: publicRuntimeConfig.REDIRECT_URL,
-      postLogoutRedirectUri: publicRuntimeConfig.ROOT_URL,
-      clientId: publicRuntimeConfig.CLIENT_ID
+      authority: process.env.NEXT_PUBLIC_B2C_SIGNIN_VERIFY_URL,
+      redirectUri: process.env.NEXT_PUBLIC_REDIRECT_URL,
+      postLogoutRedirectUri: process.env.NEXT_PUBLIC_ROOT_URL,
+      clientId: process.env.NEXT_PUBLIC_CLIENT_ID
     }
 
     const msalRegisterConfig = {
-      authority: publicRuntimeConfig.B2C_SIGNUP_URL,
-      redirectUri: publicRuntimeConfig.REDIRECT_URL,
-      clientId: publicRuntimeConfig.CLIENT_ID
+      authority: process.env.NEXT_PUBLIC_B2C_SIGNUP_URL,
+      redirectUri: process.env.NEXT_PUBLIC_REDIRECT_URL,
+      clientId: process.env.NEXT_PUBLIC_CLIENT_ID
     }
 
     const msalEditProfileConfig = {
-      authority: publicRuntimeConfig.B2C_PROFILE_EDIT_URL,
-      redirectUri: publicRuntimeConfig.EDIT_PROFILE_REDIRECT_URL,
-      clientId: publicRuntimeConfig.CLIENT_ID
+      authority: process.env.NEXT_PUBLIC_B2C_PROFILE_EDIT_URL,
+      redirectUri: process.env.NEXT_PUBLIC_EDIT_PROFILE_REDIRECT_URL,
+      clientId: process.env.NEXT_PUBLIC_CLIENT_ID
     }
 
     const msalForgotPasswordConfig = {
-      authority: publicRuntimeConfig.B2C_PASSWORD_RESET_URL,
-      redirectUri: publicRuntimeConfig.REDIRECT_URL,
-      clientId: publicRuntimeConfig.CLIENT_ID
+      authority: process.env.NEXT_PUBLIC_B2C_PASSWORD_RESET_URL,
+      redirectUri: process.env.NEXT_PUBLIC_REDIRECT_URL,
+      clientId: process.env.NEXT_PUBLIC_CLIENT_ID
     }
 
     const msalChangePasswordConfig = {
-      authority: publicRuntimeConfig.B2C_PASSWORD_CHANGE_URL,
-      redirectUri: publicRuntimeConfig.EDIT_PROFILE_REDIRECT_URL,
-      clientId: publicRuntimeConfig.CLIENT_ID
+      authority: process.env.NEXT_PUBLIC_B2C_PASSWORD_CHANGE_URL,
+      redirectUri: process.env.NEXT_PUBLIC_EDIT_PROFILE_REDIRECT_URL,
+      clientId: process.env.NEXT_PUBLIC_CLIENT_ID
     }
 
     return (
@@ -109,6 +106,6 @@ class MyApp extends App {
 
 export default withRedux(createStore)(
   withRouter(withApplicationInsights({
-    instrumentationKey: publicRuntimeConfig.INSTRUMENTATION_KEY,
+    instrumentationKey: process.env.NEXT_PUBLIC_INSTRUMENTATION_KEY,
     isEnabled: true
   })(MyApp)))

@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import ReactHtmlParser from 'react-html-parser'
 import Details from 'components/common/Details'
 
-export default ({ data, sectionNav }) => {
+const ContentBuilder = ({ data, sectionNav }) => {
   return (
     <Fragment>
       {sectionNav && (
@@ -100,3 +100,5 @@ export default ({ data, sectionNav }) => {
     </Fragment>
   )
 }
+
+export default ContentBuilder
