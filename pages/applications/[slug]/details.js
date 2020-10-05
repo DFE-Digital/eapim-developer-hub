@@ -66,7 +66,7 @@ const ApplicationDetails = ({ user, application, router, msalConfig }) => {
                         Created on:
                       </dt>
                       <dd className='govuk-summary-list__value'>
-                        {(application ? timezone.tz(application.createdOn, 'MM/DD/YYYY HH:mm', 'Europe/London').add(1, 'hour').format('DD MMMM YYYY, HH:mma') : '')}
+                        {(application ? timezone.tz(application.createdOn, 'MM/DD/YYYY HH:mma', 'Europe/London').add(1, 'hour').format('DD MMMM YYYY, HH:mma') : '')}
                       </dd>
                     </div>
                     <div className='govuk-summary-list__row'>
