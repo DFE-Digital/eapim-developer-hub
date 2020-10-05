@@ -9,7 +9,7 @@ import { PrivateRoute } from 'components/common/PrivateRoute'
 
 import { getApplication } from '../../../lib/applicationService'
 
-const DeleteConfirm = ({ user, application, router, msalConfig, deleteApplication }) => {
+const ApplicationDeleteConfirm = ({ user, application, router, msalConfig, deleteApplication }) => {
   const [deleting, setDeleting] = useState(false)
 
   console.log(application)
@@ -105,5 +105,5 @@ const mapStateToProps = (state) => {
   }
 }
 
-export { DeleteConfirm }
-export default connect(mapStateToProps, { deleteApplication })(DeleteConfirm)
+export { ApplicationDeleteConfirm }
+export default connect(mapStateToProps, { deleteApplication })(ApplicationDeleteConfirm)

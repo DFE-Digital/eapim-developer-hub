@@ -6,7 +6,7 @@ import ReturnTo from 'components/common/ReturnTo'
 import { registerApplication, cancelApplication } from '../../../src/actions/application'
 import { PrivateRoute } from 'components/common/PrivateRoute'
 
-class CreateSummary extends Component {
+class ApplicationCreateSummary extends Component {
   async createApplication (user, details) {
     const appData = {
       userName: `${user.idToken.given_name} ${user.idToken.family_name}`,
@@ -96,5 +96,5 @@ const mapStateToProps = (state) => {
   }
 }
 
-export { CreateSummary }
-export default connect(mapStateToProps, { registerApplication, cancelApplication })(CreateSummary)
+export { ApplicationCreateSummary }
+export default connect(mapStateToProps, { registerApplication, cancelApplication })(ApplicationCreateSummary)

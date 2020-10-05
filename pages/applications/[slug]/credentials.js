@@ -5,7 +5,7 @@ import AccessChecker from 'components/common/AccessChecker'
 import ReturnTo from 'components/common/ReturnTo'
 import { PrivateRoute } from 'components/common/PrivateRoute'
 
-class CreateCredentials extends Component {
+class ApplicationCredentials extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -141,5 +141,5 @@ const mapStateToProps = (state) => {
   }
 }
 
-export { CreateCredentials }
-export default connect(mapStateToProps, null)(CreateCredentials)
+export { ApplicationCredentials }
+export default connect(mapStateToProps, null)(ApplicationCredentials)

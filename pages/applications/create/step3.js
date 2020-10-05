@@ -9,7 +9,7 @@ import { saveAppData, cancelApplication } from '../../../src/actions/application
 import { PrivateRoute } from 'components/common/PrivateRoute'
 import { urlPattern } from '../../../src/utils/patterns'
 
-class CreateStep3 extends Component {
+class ApplicationCreateStep3 extends Component {
   constructor (props) {
     super(props)
 
@@ -133,5 +133,5 @@ const mapStateToProps = (state) => {
   }
 }
 
-export { CreateStep3 }
-export default connect(mapStateToProps, { saveAppData, cancelApplication })(CreateStep3)
+export { ApplicationCreateStep3 }
+export default connect(mapStateToProps, { saveAppData, cancelApplication })(ApplicationCreateStep3)

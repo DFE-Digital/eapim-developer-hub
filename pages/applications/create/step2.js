@@ -8,7 +8,7 @@ import ValidationMessages from 'components/common/forms/validation-messages'
 import { saveAppData, cancelApplication } from '../../../src/actions/application'
 import { PrivateRoute } from 'components/common/PrivateRoute'
 
-class CreateStep2 extends Component {
+class ApplicationCreateStep2 extends Component {
   constructor (props) {
     super(props)
 
@@ -131,5 +131,5 @@ const mapStateToProps = (state) => {
   }
 }
 
-export { CreateStep2 }
-export default connect(mapStateToProps, { saveAppData, cancelApplication })(CreateStep2)
+export { ApplicationCreateStep2 }
+export default connect(mapStateToProps, { saveAppData, cancelApplication })(ApplicationCreateStep2)

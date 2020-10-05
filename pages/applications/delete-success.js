@@ -4,7 +4,7 @@ import Router from 'next/router'
 import ReturnTo from 'components/common/ReturnTo'
 import { PrivateRoute } from 'components/common/PrivateRoute'
 
-class DeleteSuccess extends Component {
+class ApplicationDeleteSuccess extends Component {
   render () {
     return (
       <Fragment>
@@ -32,4 +32,4 @@ class DeleteSuccess extends Component {
   }
 }
 
-export default DeleteSuccess
+export default ApplicationDeleteSuccess

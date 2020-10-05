@@ -11,7 +11,7 @@ import { getApplications } from '../../../lib/applicationService'
 import { PrivateRoute } from 'components/common/PrivateRoute'
 import { appNamePattern } from '../../../src/utils/patterns'
 
-const CreateStep1 = ({ user, application, saveAppData, cancelApplication, router, msalConfig }) => {
+const ApplicationCreateStep1 = ({ user, application, saveAppData, cancelApplication, router, msalConfig }) => {
   const [fields, setFields] = useState({})
   const [errors, setErrors] = useState([])
   const [fetching, setFetching] = useState(false)
@@ -146,5 +146,5 @@ const mapStateToProps = (state) => {
   }
 }
 
-export { CreateStep1 }
-export default connect(mapStateToProps, { saveAppData, cancelApplication })(CreateStep1)
+export { ApplicationCreateStep1 }
+export default connect(mapStateToProps, { saveAppData, cancelApplication })(ApplicationCreateStep1)

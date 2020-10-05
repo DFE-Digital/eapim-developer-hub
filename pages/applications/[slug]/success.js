@@ -6,7 +6,7 @@ import ReturnTo from 'components/common/ReturnTo'
 import { cancelApplication } from '../../../src/actions/application'
 import { PrivateRoute } from 'components/common/PrivateRoute'
 
-class CreateSuccess extends Component {
+class ApplicationCreateSuccess extends Component {
   componentDidMount () {
     this.props.cancelApplication()
   }
@@ -52,5 +52,5 @@ const mapStateToProps = (state) => {
   }
 }
 
-export { CreateSuccess }
-export default connect(mapStateToProps, { cancelApplication })(CreateSuccess)
+export { ApplicationCreateSuccess }
+export default connect(mapStateToProps, { cancelApplication })(ApplicationCreateSuccess)
