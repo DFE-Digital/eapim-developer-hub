@@ -84,6 +84,10 @@
             {
               "Page": "API documentation",
               "Url": "/apis"
+            },
+            {
+              "Page": "Reference guide",
+              "Url": "/documentation/reference-guide"
             }
           ]
         },

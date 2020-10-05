@@ -309,7 +309,7 @@ class ApplicationRedirectUrls extends Component {
 
                     {application.web.redirectUris.length === 5 && (
                       <div className='govuk-inset-text'>
-                        This is the maximum number of redirect URIs. To add another, delete one first.
+                        This is the maximum number of redirect URLs. To add another, delete one first.
                       </div>
                     )}
 
