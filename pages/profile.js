@@ -22,7 +22,7 @@ class Profile extends Component {
 
         // user cancelled action
         if (error.errorMessage.indexOf('AADB2C90091') > -1) {
-          return Router.push('/')
+          return Router.push('/profile')
         }
 
         // Check for forgot password error
