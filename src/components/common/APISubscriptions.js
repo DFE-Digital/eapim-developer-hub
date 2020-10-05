@@ -33,11 +33,11 @@ const APISubscriptions = ({ applicationId, apis, loadedRef, onSubscribe, onCance
     return (
       <button
         type='button'
-        className='govuk-button govuk-button--secondary govuk-!-margin-0'
+        className='govuk-button govuk-button--warning govuk-!-margin-0'
         onClick={(e) => handleCancel(e, subId, environment, apiName)}
         disabled={cancelling[apiName] && cancelling[apiName][environment]}
       >
-        {cancelling[apiName] && cancelling[apiName][environment] ? `Cancelling...` : 'Cancel'}
+        {cancelling[apiName] && cancelling[apiName][environment] ? `Unsubscribing...` : 'Unsubscribe'}
       </button>
     )
   }

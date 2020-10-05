@@ -1259,14 +1259,14 @@
           {
             "Type": "OL",
             "Body": [
-              "Add it to our test environment (sandbox).",
-              "Choose which sandbox APIs you want to use.",
-              "Get credentials your application needs to interact with our APIs."
+              "Add it to our test environment (sandbox)",
+              "Choose which sandbox APIs you want to use",
+              "Get credentials your application needs to interact with our APIs"
             ]
           },
           {
             "Type": "INSET",
-            "Body": "Make sure your application complies with our <a class='govuk-link' href='/documentation/terms-of-use'>terms of use</a>"
+            "Body": "Make sure your application complies with our <a class='govuk-link' href='/documentation/terms-of-use'>terms of use</a>."
           },
           {
             "Type": "P",
@@ -1275,9 +1275,9 @@
           {
             "Type": "BL",
             "Body": [
-              "Find out which <a class='govuk-link' href='/apis'>RESTful and XML APIs</a> you can use.",
-              "Read up on <a class='govuk-link' href='/documentation/authorisation'>authorisation</a>.",
-              "Familiarise yourself with the <a class='govuk-link' href='https://oauth.net/2/' rel='noreferrer noopener' target='_blank'>OAuth 2.0 specification."
+              "Find out which <a class='govuk-link' href='/apis'>RESTful and XML APIs</a> you can use",
+              "Read up on <a class='govuk-link' href='/documentation/authorisation'>authorisation</a>",
+              "Familiarise yourself with the <a class='govuk-link' href='https://oauth.net/2/' rel='noreferrer noopener' target='_blank'>OAuth 2.0 specification"
             ]
           }
         ],

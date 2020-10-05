@@ -49,7 +49,7 @@ class RegisteringApplications extends Component {
 
                     <ContentBuilder sectionNav={false} data={Content.Applications[page].Content.Body} />
                     {!isLoggedIn && <AuthWarning msalConfig={this.props.msalConfig} msalRegisterConfig={this.props.msalRegisterConfig} warning={Content.Applications[page].Content.Auth.Warning} />}
-                    {isLoggedIn && <p className='govuk-body'>Go to <a href='/applications' className='govuk-link govuk-!-margin-top-7'>{Content.Applications[page].Content.Button}</a></p>}
+                    {isLoggedIn && <p className='govuk-body'>Go to <a href='/applications' className='govuk-link govuk-!-margin-top-7'>{Content.Applications[page].Content.Button}</a>.</p>}
                   </div>
                 </div>
               </div>
