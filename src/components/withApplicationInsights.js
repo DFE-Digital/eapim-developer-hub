@@ -39,7 +39,7 @@ export const withApplicationInsights = (config) => {
 
       trackPageView () {
         if (appInsights) {
-          const name = (this.props.Component.WrappedComponent && this.props.Component.WrappedComponent.name) || this.props.Component.displayName || this.props.Component.name
+          const name = this.props.Component.displayName || (this.props.Component.WrappedComponent && this.props.Component.WrappedComponent.name) || this.props.Component.name
 
           const properties = {
             route: this.props.router.asPath
