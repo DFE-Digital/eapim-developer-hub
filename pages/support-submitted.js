@@ -27,4 +27,6 @@ const SupportSubmitted = () => {
   )
 }
 
+SupportSubmitted.displayName = 'SupportSubmitted'
+
 export default SupportSubmitted

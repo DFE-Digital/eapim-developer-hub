@@ -127,5 +127,7 @@ const mapStateToProps = (state) => {
   }
 }
 
+SignInSuccess.displayName = 'SignInSuccess'
+
 export { SignInSuccess }
 export default connect(mapStateToProps, { signInToken })(SignInSuccess)

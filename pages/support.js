@@ -214,4 +214,6 @@ Support.getInitialProps = async ({ req, res }) => {
   }
 }
 
+Support.displayName = 'Support'
+
 export default Support

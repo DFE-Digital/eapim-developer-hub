@@ -63,5 +63,7 @@ const mapStateToProps = (state) => {
   }
 }
 
+ReferenceGuide.displayName = 'ReferenceGuide'
+
 export { ReferenceGuide }
 export default connect(mapStateToProps)(ReferenceGuide)

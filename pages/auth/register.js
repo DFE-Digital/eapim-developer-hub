@@ -23,4 +23,6 @@ const Register = ({ msalRegisterConfig }) => {
   )
 }
 
+Register.displayName = 'Register'
+
 export default Register

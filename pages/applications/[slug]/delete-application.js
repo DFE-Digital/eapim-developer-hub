@@ -62,4 +62,6 @@ DeleteApplication.getInitialProps = async ({ query }) => {
   }
 }
 
+DeleteApplication.displayName = 'DeleteApplication'
+
 export default DeleteApplication

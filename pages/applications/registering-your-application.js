@@ -67,5 +67,7 @@ const mapStateToProps = (state) => {
   }
 }
 
+RegisteringApplications.displayName = 'RegisteringApplications'
+
 export { RegisteringApplications }
 export default connect(mapStateToProps)(RegisteringApplications)

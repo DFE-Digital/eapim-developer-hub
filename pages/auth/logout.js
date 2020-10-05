@@ -23,4 +23,6 @@ const Logout = ({ msalConfig }) => {
   )
 }
 
+Logout.displayName = 'Logout'
+
 export default Logout

@@ -63,5 +63,7 @@ const mapStateToProps = (state) => {
   }
 }
 
+Documentation.displayName = page
+
 export { Documentation }
 export default connect(mapStateToProps)(Documentation)

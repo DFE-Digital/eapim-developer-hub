@@ -52,5 +52,7 @@ const mapStateToProps = (state) => {
   }
 }
 
+ApplicationCreateSuccess.displayName = 'ApplicationCreateSuccess'
+
 export { ApplicationCreateSuccess }
 export default connect(mapStateToProps, { cancelApplication })(ApplicationCreateSuccess)

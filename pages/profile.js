@@ -114,5 +114,7 @@ const mapStateToProps = (state) => {
   }
 }
 
+Profile.displayName = page
+
 export { Profile }
 export default connect(mapStateToProps, { signInToken })(Profile)

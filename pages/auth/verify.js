@@ -28,4 +28,6 @@ Verify.getInitialProps = async ({ query }) => {
   return { id_token_hint }
 }
 
+Verify.displayName = 'Verify'
+
 export default Verify

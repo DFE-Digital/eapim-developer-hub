@@ -23,4 +23,6 @@ const Login = ({ msalConfig }) => {
   )
 }
 
+Login.displayName = 'Login'
+
 export default Login

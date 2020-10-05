@@ -93,5 +93,7 @@ const mapStateToProps = (state) => {
   }
 }
 
+DeleteAcountConfirm.displayName = 'DeleteAcountConfirm'
+
 export { DeleteAcountConfirm }
 export default connect(mapStateToProps)(DeleteAcountConfirm)

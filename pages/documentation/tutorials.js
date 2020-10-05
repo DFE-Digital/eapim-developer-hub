@@ -63,5 +63,7 @@ const mapStateToProps = (state) => {
   }
 }
 
+Tutorials.displayName = page
+
 export { Tutorials }
 export default connect(mapStateToProps)(Tutorials)

@@ -33,4 +33,6 @@ const PrivacyPolicy = ({ msalConfig, router }) => {
   )
 }
 
+PrivacyPolicy.displayName = 'PrivacyPolicy'
+
 export default PrivacyPolicy

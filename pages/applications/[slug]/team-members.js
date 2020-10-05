@@ -170,5 +170,7 @@ const mapStateToProps = (state) => {
   }
 }
 
+TeamMembers.displayName = 'TeamMembers'
+
 export { TeamMembers }
 export default connect(mapStateToProps, null)(TeamMembers)

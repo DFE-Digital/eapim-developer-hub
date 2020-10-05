@@ -131,5 +131,7 @@ const mapStateToProps = (state) => {
   }
 }
 
+ApplicationCreateStep2.displayName = 'ApplicationCreateStep2'
+
 export { ApplicationCreateStep2 }
 export default connect(mapStateToProps, { saveAppData, cancelApplication })(ApplicationCreateStep2)

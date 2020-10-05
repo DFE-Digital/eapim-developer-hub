@@ -32,4 +32,6 @@ class ApplicationDeleteSuccess extends Component {
   }
 }
 
+ApplicationDeleteSuccess.displayName = 'ApplicationDeleteSuccess'
+
 export default ApplicationDeleteSuccess

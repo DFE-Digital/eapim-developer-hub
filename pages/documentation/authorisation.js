@@ -63,5 +63,7 @@ const mapStateToProps = (state) => {
   }
 }
 
+Authorisation.displayName = page
+
 export { Authorisation }
 export default connect(mapStateToProps)(Authorisation)

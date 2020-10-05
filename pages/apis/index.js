@@ -99,5 +99,7 @@ const mapStateToProps = (state) => {
   }
 }
 
+Apis.displayName = 'Apis'
+
 export { Apis }
 export default connect(mapStateToProps, { storeApi })(Apis)

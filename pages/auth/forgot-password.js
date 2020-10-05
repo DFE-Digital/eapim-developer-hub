@@ -23,4 +23,6 @@ const ForgotPassword = ({ msalForgotPasswordConfig }) => {
   )
 }
 
+ForgotPassword.displayName = 'ForgotPassword'
+
 export default ForgotPassword

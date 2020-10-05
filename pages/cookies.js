@@ -33,4 +33,6 @@ const Cookies = ({ msalConfig, router }) => {
   )
 }
 
+Cookies.displayName = page
+
 export default Cookies

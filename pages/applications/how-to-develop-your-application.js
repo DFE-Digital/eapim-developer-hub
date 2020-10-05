@@ -63,5 +63,7 @@ const mapStateToProps = (state) => {
   }
 }
 
+ApplicationsHowTo.displayName = 'ApplicationsHowTo'
+
 export { ApplicationsHowTo }
 export default connect(mapStateToProps)(ApplicationsHowTo)

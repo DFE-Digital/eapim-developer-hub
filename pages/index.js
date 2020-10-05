@@ -105,5 +105,7 @@ const mapStateToProps = (state) => {
   }
 }
 
+Home.displayName = page
+
 export { Home }
 export default connect(mapStateToProps)(Home)

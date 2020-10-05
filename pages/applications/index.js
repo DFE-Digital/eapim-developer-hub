@@ -122,5 +122,7 @@ const mapStateToProps = (state) => {
   }
 }
 
+Applications.displayName = 'Applications'
+
 export { Applications }
 export default connect(mapStateToProps, { selectApplication })(Applications)
