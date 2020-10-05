@@ -33,6 +33,6 @@ const TermsAndConditions = ({ msalConfig, router }) => {
   )
 }
 
-TermsAndConditions.displayName = 'TermsAndConditions'
+TermsAndConditions.displayName = 'Terms and conditions'
 
 export default TermsAndConditions

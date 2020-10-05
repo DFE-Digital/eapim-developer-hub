@@ -278,7 +278,7 @@ ApplicationClientSecrets.getInitialProps = async ({ req, query }) => {
   }
 }
 
-ApplicationClientSecrets.displayName = 'ApplicationClientSecrets'
+ApplicationClientSecrets.displayName = 'Application Client Secrets'
 
 export { ApplicationClientSecrets }
 export default connect(mapStateToProps, null)(ApplicationClientSecrets)

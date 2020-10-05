@@ -141,7 +141,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-ApplicationCredentials.displayName = 'ApplicationCredentials'
+ApplicationCredentials.displayName = 'Application Credentials'
 
 export { ApplicationCredentials }
 export default connect(mapStateToProps, null)(ApplicationCredentials)

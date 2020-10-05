@@ -177,7 +177,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-ApplicationApiSubscriptions.displayName = 'ApplicationApiSubscriptions'
+ApplicationApiSubscriptions.displayName = 'Application Api Subscriptions'
 
 export { ApplicationApiSubscriptions }
 export default connect(mapStateToProps)(ApplicationApiSubscriptions)

@@ -10,7 +10,7 @@ const routes = require('./routes')
 const port = process.env.PORT || 3000
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
-const handler = routes.getRequestHandler(app)
+const handler = app.getRequestHandler()
 
 app
   .prepare()

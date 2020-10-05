@@ -350,7 +350,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-ApplicationRedirectUrls.displayName = 'ApplicationRedirectUrls'
+ApplicationRedirectUrls.displayName = 'Application Redirect Urls'
 
 export { ApplicationRedirectUrls }
 export default connect(mapStateToProps, { getApplications, updateApplication })(ApplicationRedirectUrls)

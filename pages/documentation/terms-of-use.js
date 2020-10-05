@@ -63,7 +63,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-TermsOfUse.displayName = 'TermsOfUse'
+TermsOfUse.displayName = page
 
 export { TermsOfUse }
 export default connect(mapStateToProps)(TermsOfUse)

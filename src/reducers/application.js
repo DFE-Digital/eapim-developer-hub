@@ -10,7 +10,7 @@ const INITIAL_STATE = {
   lastUpdate: Date.now()
 }
 
-export default (state = INITIAL_STATE, action) => {
+const applicationsReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ActionType.STORE_DATA: {
       return { ...state, details: { ...state.details, ...action.payload } }
@@ -52,3 +52,5 @@ export default (state = INITIAL_STATE, action) => {
       return state
   }
 }
+
+export default applicationsReducer

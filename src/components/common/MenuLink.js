@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-export default ({ href, parentClass, children }) => {
+const MenuLink = ({ href, parentClass, children }) => {
   const router = useRouter()
 
   let className = parentClass || ''
@@ -16,3 +16,5 @@ export default ({ href, parentClass, children }) => {
     </Fragment>
   )
 }
+
+export default MenuLink

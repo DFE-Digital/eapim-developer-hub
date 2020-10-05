@@ -105,7 +105,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-ApplicationDeleteConfirm.displayName = 'ApplicationDeleteConfirm'
+ApplicationDeleteConfirm.displayName = 'Application Delete Confirm'
 
 export { ApplicationDeleteConfirm }
 export default connect(mapStateToProps, { deleteApplication })(ApplicationDeleteConfirm)

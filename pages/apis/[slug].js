@@ -94,7 +94,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-ApiDetails.displayName = 'ApiDetails'
+ApiDetails.displayName = 'Api Details'
 
 export { ApiDetails }
 export default connect(mapStateToProps, null)(ApiDetails)

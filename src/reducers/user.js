@@ -9,7 +9,7 @@ const INITIAL_STATE = {
   lastUpdate: Date.now()
 }
 
-export default (state = INITIAL_STATE, action) => {
+const usersReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ActionType.REQUEST_SIGNIN: {
       return { ...state }
@@ -33,3 +33,5 @@ export default (state = INITIAL_STATE, action) => {
       return state
   }
 }
+
+export default usersReducer

@@ -24,6 +24,6 @@ const EditProfile = ({ msalEditProfileConfig }) => {
   )
 }
 
-EditProfile.displayName = 'EditProfile'
+EditProfile.displayName = 'Edit Profile'
 
 export default connect(null, { editProfile })(EditProfile)

@@ -27,6 +27,6 @@ const SupportSubmitted = () => {
   )
 }
 
-SupportSubmitted.displayName = 'SupportSubmitted'
+SupportSubmitted.displayName = 'Support Submitted'
 
 export default SupportSubmitted

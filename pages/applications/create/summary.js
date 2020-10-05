@@ -96,7 +96,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-ApplicationCreateSummary.displayName = 'ApplicationCreateSummary'
+ApplicationCreateSummary.displayName = 'Application Create Summary'
 
 export { ApplicationCreateSummary }
 export default connect(mapStateToProps, { registerApplication, cancelApplication })(ApplicationCreateSummary)

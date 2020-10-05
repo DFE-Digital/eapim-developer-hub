@@ -28,6 +28,6 @@ Verify.getInitialProps = async ({ query }) => {
   return { id_token_hint }
 }
 
-Verify.displayName = 'Verify'
+Verify.displayName = 'Verify email address'
 
 export default Verify

@@ -170,7 +170,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-TeamMembers.displayName = 'TeamMembers'
+TeamMembers.displayName = 'Team Members'
 
 export { TeamMembers }
 export default connect(mapStateToProps, null)(TeamMembers)

@@ -7,7 +7,7 @@ const INITIAL_STATE = {
   lastUpdate: Date.now()
 }
 
-export default (state = INITIAL_STATE, action) => {
+const apisReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ActionType.REQUEST_APIS: {
       return { ...state, fetching: true, apis: [] }
@@ -28,3 +28,5 @@ export default (state = INITIAL_STATE, action) => {
       return state
   }
 }
+
+export default apisReducer

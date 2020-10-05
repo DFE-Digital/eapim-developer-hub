@@ -63,7 +63,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-ApplicationsHowTo.displayName = 'ApplicationsHowTo'
+ApplicationsHowTo.displayName = `Application ${page}`
 
 export { ApplicationsHowTo }
 export default connect(mapStateToProps)(ApplicationsHowTo)

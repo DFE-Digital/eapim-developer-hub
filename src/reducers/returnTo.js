@@ -5,7 +5,7 @@ const INITIAL_STATE = {
   lastUpdate: Date.now()
 }
 
-export default (state = INITIAL_STATE, action) => {
+const returnToReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ActionType.SET_RETURN_URL: {
       return { ...state, returnUrl: action.payload }
@@ -14,3 +14,5 @@ export default (state = INITIAL_STATE, action) => {
       return state
   }
 }
+
+export default returnToReducer

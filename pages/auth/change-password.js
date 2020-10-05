@@ -23,6 +23,6 @@ const ChangePassword = ({ msalChangePasswordConfig }) => {
   )
 }
 
-ChangePassword.displayName = 'ChangePassword'
+ChangePassword.displayName = 'Change Password'
 
 export default ChangePassword
