@@ -48,7 +48,7 @@
     "Content": {
       "Hero": {
         "Heading": "DfE Developer Hub",
-        "Intro": "Build Education software using Department for Education APIs",
+        "Intro": "Connect to the Department for Education Digital services through our APIs",
         "Register": "Create an account",
         "Signin": "sign in"
       },
