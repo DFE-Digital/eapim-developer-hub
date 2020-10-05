@@ -82,7 +82,7 @@ const ApplicationDeleteConfirm = ({ user, application, router, msalConfig, delet
   )
 }
 
-DeleteConfirm.getInitialProps = async ({ query }) => {
+ApplicationDeleteConfirm.getInitialProps = async ({ query }) => {
   try {
     const application = await getApplication(query.slug)
 
