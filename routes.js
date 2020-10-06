@@ -15,7 +15,7 @@ const APP_ROUTES = [
     pattern: '/apis'
   },
   {
-    page: '/apis/[slug].js',
+    page: '/apis/[slug]',
     path: '/apis/:slug'
   },
   {
@@ -25,6 +25,10 @@ const APP_ROUTES = [
   {
     page: '/applications/[slug]',
     path: '/applications/:slug'
+  },
+  {
+    page: '/applications/[slug]/details',
+    path: '/applications/:slug/details'
   },
   {
     page: 'support',
