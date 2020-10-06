@@ -8,17 +8,17 @@
     ["module-resolver", {
       "root": ["./src"]
     }]
-  ],
-  "env": {
-    "test": {
-      "presets": [
-        ["next/babel", {
-           "preset-env": {
-              "modules": "commonjs",
-              "esmodules": true
-            }
-        }]
-      ]
-    }
-  }
+  ]
+  // "env": {
+  //   "test": {
+  //     "presets": [
+  //       ["next/babel", {
+  //          "preset-env": {
+  //             "modules": "commonjs",
+  //             "esmodules": true
+  //           }
+  //       }]
+  //     ]
+  //   }
+  // }
 }

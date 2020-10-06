@@ -14,7 +14,11 @@ import { getApplication } from '../../../lib/applicationService'
 
 const page = 'Application details'
 
-const ApplicationDetails = ({ user, application, router, msalConfig }) => {
+const ApplicationDetails = ({ id, user, error, application, router, msalConfig }) => {
+  console.log('id', id)
+  console.log('error', error)
+  console.log('application', application)
+
   if (!application) return <Loading />
 
   const { data } = user
