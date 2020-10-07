@@ -12,8 +12,6 @@ class ApplicationCreateSummary extends Component {
       userName: `${user.idToken.given_name} ${user.idToken.family_name}`,
       userEmail: user.idToken['email'],
       userID: user.accountIdentifier,
-      organization: user.idToken.extension_OrganizationName,
-      role: 'role',
       applicationName: details['app-name'],
       description: details['app-description'],
       redirectUri: details['app-redirect-url']

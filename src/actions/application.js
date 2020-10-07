@@ -18,9 +18,7 @@ export const getApplications = (user) => async dispatch => {
   const body = {
     userName: `${user.idToken.given_name} ${user.idToken.family_name}`,
     userEmail: user.idToken['email'],
-    userID: user.accountIdentifier,
-    organization: user.idToken.extension_OrganizationName,
-    role: 'role'
+    userID: user.accountIdentifier
   }
 
   try {
