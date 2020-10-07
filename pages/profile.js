@@ -83,10 +83,6 @@ class Profile extends Component {
                           <th scope='row' className='govuk-table__header'>Email address</th>
                           <td className='govuk-table__cell'>{data.User.idToken['email']}</td>
                         </tr>
-                        <tr className='govuk-table__row'>
-                          <th scope='row' className='govuk-table__header'>Organisation</th>
-                          <td className='govuk-table__cell'>{data.User.idToken.extension_OrganizationName}</td>
-                        </tr>
                       </tbody>
                     </table>
                     <a href='/auth/edit-profile' className='govuk-button'>{Content[page].Content.AccountDetails.Button}</a>
