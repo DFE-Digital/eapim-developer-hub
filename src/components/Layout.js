@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from 'components/common/Header'
 import PhaseBanner from 'components/common/PhaseBanner'
 import Footer from 'components/common/Footer'
@@ -10,7 +10,7 @@ import { useIsIE11 } from '../hooks'
 const Layout = ({ children, msalConfig, msalRegisterConfig }) => {
   if (useIsIE11()) return <IE11BrowserMessage />
 
-  const [bannerCookie, setBannerCookie] = useState()
+  const [bannerCookie, setBannerCookie] = useState(null)
 
   useEffect(() => {
     const cookies = (document.cookie.split(';'))
@@ -24,14 +24,14 @@ const Layout = ({ children, msalConfig, msalRegisterConfig }) => {
   }, [])
 
   return (
-    <Fragment>
-      {typeof window !== 'undefined' && !bannerCookie && <CookieBanner />}
+    <>
+      <CookieBanner cookie={bannerCookie} />
       <Header msalConfig={msalConfig} msalRegisterConfig={msalRegisterConfig} />
       <PhaseBanner />
       <a href='#main-content' className='govuk-skip-link'>Skip to main content</a>
       {children}
       <Footer />
-    </Fragment>
+    </>
   )
 }
 
