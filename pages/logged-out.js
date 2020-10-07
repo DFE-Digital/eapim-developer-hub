@@ -7,7 +7,7 @@ import Radio from 'components/common/form/radio'
 import Textarea from 'components/common/form/textarea'
 
 import { send } from '../lib/emailService'
-import { template } from '../emails/support'
+import { template } from '../emails/survey'
 
 import * as validation from 'utils/validation'
 
