@@ -1408,11 +1408,6 @@
         }
       ]
     },
-    "Team members": {
-      "Page": "Team members",
-      "Url": "/team-members",
-      "Content": []
-    },
     "Delete application": {
       "Page": "Delete application",
       "Url": "/delete-application",
