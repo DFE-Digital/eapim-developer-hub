@@ -28,7 +28,7 @@ const showFieldError = (inputId, type) => {
 
   const p = itemLevel.querySelector('p')
   p.classList.add('govuk-error-message')
-  p.innerHTML = 'Please enter your ' + type
+  p.innerHTML = 'Enter your ' + type
 
   itemLevel.style.display = 'block'
 

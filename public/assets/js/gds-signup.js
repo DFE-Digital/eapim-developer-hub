@@ -127,7 +127,7 @@ const surnameCallback = (mutations) => observerCallback(mutations, 'surname', 'l
 const emailCallback = (mutations) => observerCallback(mutations, 'email', 'email')
 const passwordCallback = (mutations) => observerCallback(mutations, 'newPassword', 'new password')
 const reenterPasswordCallback = (mutations) => observerCallback(mutations, 'reenterPassword', 'new password again')
-const organisationCallback = (mutations) => observerCallback(mutations, 'extension_OrganizationName', 'organisation')
+// const organisationCallback = (mutations) => observerCallback(mutations, 'extension_OrganizationName', 'organisation')
 
 ready(() => {
   const container = document.getElementById('api')
@@ -148,7 +148,7 @@ ready(() => {
   const emailObserver = new window.MutationObserver(emailCallback)
   const passwordObserver = new window.MutationObserver(passwordCallback)
   const reenterPasswordObserver = new window.MutationObserver(reenterPasswordCallback)
-  const organisationObserver = new window.MutationObserver(organisationCallback)
+  // const organisationObserver = new window.MutationObserver(organisationCallback)
 
   if (container) {
     passwordEntryMismatchObserver.observe(document.querySelector('#passwordEntryMismatch'), { attributes: true })
@@ -160,7 +160,7 @@ ready(() => {
     emailObserver.observe(document.querySelector('#email').closest('.attrEntry').querySelector('.itemLevel'), options)
     passwordObserver.observe(document.querySelector('#newPassword').closest('.attrEntry').querySelector('.itemLevel'), options)
     reenterPasswordObserver.observe(document.querySelector('#reenterPassword').closest('.attrEntry').querySelector('.itemLevel'), options)
-    organisationObserver.observe(document.querySelector('#extension_OrganizationName').closest('.attrEntry').querySelector('.itemLevel'), options)
+    // organisationObserver.observe(document.querySelector('#extension_OrganizationName').closest('.attrEntry').querySelector('.itemLevel'), options)
 
     const inputGroups = container.querySelectorAll('.entry-item')
     const attrEntry = container.querySelectorAll('.attrEntry')

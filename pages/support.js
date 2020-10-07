@@ -153,7 +153,7 @@ const Support = ({ router, msalConfig }) => {
                   items={[
                     { label: 'General enquiry', value: 'general-enquiry' },
                     { label: 'Issue with website', value: 'issue-with-website' },
-                    { label: 'Issue with API - Please specify what API you are having issue with', value: 'issue-with-api' },
+                    { label: 'Issue with API - Please specify what API you are having an issue with', value: 'issue-with-api' },
                     { label: 'Other', value: 'other' }
                   ]}
                 />
