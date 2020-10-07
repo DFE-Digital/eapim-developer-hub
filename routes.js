@@ -27,8 +27,12 @@ const APP_ROUTES = [
     path: '/applications/:slug'
   },
   {
-    page: '/applications/[slug]/details',
-    path: '/applications/:slug/details'
+    page: '/applications/[slug]',
+    path: '/applications/:slug'
+  },
+  {
+    page: '/applications/[slug]/unsubscribe/[subid]',
+    path: '/applications/:slug/unsubscribe/:subid'
   },
   {
     page: 'support',

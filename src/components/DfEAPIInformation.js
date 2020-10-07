@@ -16,7 +16,7 @@ const DfEAPIInformation = ({ selectedApi }) => {
             <tr className='govuk-table__row'>
               <th scope='row' className='govuk-table__header govuk-!-width-one-half'>Swagger file</th>
               <td className='govuk-table__cell govuk-!-width-one-half'>
-                <a className="govuk-link" href={selectedApi.tags.swaggerFile} download="dfe-information-api.json" target="_blank">View swagger file</a>
+                <a className='govuk-link' href={selectedApi.tags.swaggerFile} download='dfe-information-api.json' target='_blank'>View swagger file</a>
               </td>
             </tr>
           )}
@@ -24,7 +24,7 @@ const DfEAPIInformation = ({ selectedApi }) => {
             <tr className='govuk-table__row'>
               <th scope='row' className='govuk-table__header govuk-!-width-one-half'>Guideline</th>
               <td className='govuk-table__cell govuk-!-width-one-half'>
-                <a className="govuk-link" href={selectedApi.tags.guideline} download="dfe-information-api-guideline">Download guideline</a>
+                <a className='govuk-link' href={selectedApi.tags.guideline} download='dfe-information-api-guideline'>Download guideline</a>
               </td>
             </tr>
           )}

@@ -64,7 +64,7 @@ class ApplicationCredentials extends Component {
                   We only show your client secrets once to help keep your data secure.<br />
                   Copy the client secrets immediately.
                 </div>
-                <p className="govuk-body">
+                <p className='govuk-body'>
                   Read more on <a href='/documentation/authorisation#credentials' className='govuk-link' target='_blank'>credentials</a> for further details.
                 </p>
 

@@ -9,7 +9,6 @@ import App from 'next/app'
 import { withApplicationInsights } from '../src/components/withApplicationInsights'
 import createStore from 'store/createStore'
 import Layout from 'components/Layout'
-import IdleTimer from 'components/common/IdleTimer'
 import theme from 'theme'
 import '../scss/main.scss'
 
@@ -83,7 +82,6 @@ class MyApp extends App {
         <ThemeProvider theme={theme}>
           <Provider store={store}>
             <GlobalStyle />
-            <IdleTimer msalConfig={msalConfig(msalAuthConfig)} />
             <Layout msalConfig={msalConfig(msalAuthConfig)} msalRegisterConfig={msalConfig(msalRegisterConfig)}>
               <Component
                 {...pageProps}

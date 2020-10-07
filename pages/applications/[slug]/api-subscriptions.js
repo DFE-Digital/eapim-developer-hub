@@ -11,20 +11,18 @@ import APISubscriptions from 'components/common/APISubscriptions'
 
 import getInitialPropsErrorHandler from '../../../lib/getInitialPropsErrorHandler'
 
-import { getApis, getApiTags, mapSubscriptionsToAPI } from '../../../lib/apiServices'
+import { getApis, getApiTags } from '../../../lib/apiServices'
 import { getApplication } from '../../../lib/applicationService'
-import { getSubscriptions, getSubscriptionKeys, postSubscription, deleteSubscription } from '../../../lib/subscriptionService'
+import { getSubscriptions } from '../../../lib/subscriptionService'
 
 const page = 'API subscriptions'
 
-const ApplicationApiSubscriptions = ({ apis, application, subscriptions, user, router, msalConfig }) => {
-  const [subscriptionApis, setSubscriptionApis] = useState(apis)
+const ApplicationApiSubscriptions = ({ apis, application, subscriptions, router, msalConfig }) => {
+  const [updateSubscriptions, setUpdateSubscriptions] = useState(subscriptions)
   const [refLoaded, setRefLoaded] = useState(null)
   const loadedRef = useRef(null)
 
-  const [subscribing, setSubscribing] = useState({})
-  const [cancelling, setCancelling] = useState({})
-  const [fetching, setFetching] = useState({})
+  console.log(subscriptions)
 
   useEffect(() => {
     if (loadedRef.current !== refLoaded) {
@@ -33,46 +31,7 @@ const ApplicationApiSubscriptions = ({ apis, application, subscriptions, user, r
     }
   })
 
-  const onSubscribe = async (applicationId, apiName, environment) => {
-    setSubscribing({ [apiName]: { ...subscribing[apiName], [environment]: true } })
-
-    try {
-      const newApis = await postSubscription(applicationId, apiName, environment)
-      setSubscriptionApis(newApis)
-      setSubscribing({ [apiName]: { ...subscribing[apiName], [environment]: false } })
-    } catch (error) {
-      console.log(`Error posting subscrition: ${error}`)
-      setSubscribing({ [apiName]: { ...subscribing[apiName], [environment]: false } })
-    }
-  }
-
-  const onCancel = async (subId, environment, apiName) => {
-    setCancelling({ [apiName]: { ...cancelling[apiName], [environment]: true } })
-
-    try {
-      const newApis = await deleteSubscription(subId, environment, application.applicationId)
-      setSubscriptionApis(newApis)
-      setCancelling({ [apiName]: { ...cancelling[apiName], [environment]: false } })
-    } catch (error) {
-      console.log(`Error posting subscrition: ${error}`)
-      setCancelling({ [apiName]: { ...cancelling[apiName], [environment]: false } })
-    }
-  }
-
-  const onFetchKeys = async (apiName, environment, subId) => {
-    setFetching({ [apiName]: { ...fetching[apiName], [environment]: true, subId } })
-
-    try {
-      const keys = await getSubscriptionKeys(subId, environment)
-      const api = subscriptionApis.find(api => api.name === apiName)
-      const sub = api.subscriptions.find(sub => sub.id === subId && sub.environment === environment)
-      sub.keys = keys
-      setSubscriptionApis(subscriptionApis)
-      setFetching({ [apiName]: { ...fetching[apiName], [environment]: false, subId } })
-    } catch (error) {
-      console.log(`Error fetching keys: ${error}`)
-    }
-  }
+  const onSubscriptionChange = (subscriptions) => setUpdateSubscriptions(subscriptions)
 
   if (!apis || apis.length === 0) return <Loading />
   if (!application) return <Loading />
@@ -124,16 +83,11 @@ const ApplicationApiSubscriptions = ({ apis, application, subscriptions, user, r
                   </dl>
 
                   <APISubscriptions
-                    apis={subscriptionApis}
+                    apis={apis}
                     applicationId={application.applicationId}
-                    subscriptions={subscriptions}
-                    onSubscribe={onSubscribe}
-                    onCancel={onCancel}
-                    onFetchKeys={onFetchKeys}
                     loadedRef={loadedRef}
-                    subscribing={subscribing}
-                    cancelling={cancelling}
-                    fetching={fetching}
+                    subscriptions={updateSubscriptions}
+                    onSubscriptionChange={onSubscriptionChange}
                   />
                 </div>
               </div>
@@ -158,8 +112,6 @@ ApplicationApiSubscriptions.getInitialProps = async ({ req, res, query }) => {
       return api
     }))
 
-    mapSubscriptionsToAPI(apis, subscriptions)
-
     return {
       apis,
       application,
@@ -179,5 +131,4 @@ const mapStateToProps = (state) => {
 
 ApplicationApiSubscriptions.displayName = 'Application Api Subscriptions'
 
-export { ApplicationApiSubscriptions }
 export default connect(mapStateToProps)(ApplicationApiSubscriptions)

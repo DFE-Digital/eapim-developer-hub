@@ -18,14 +18,14 @@ const Layout = ({ children, msalConfig, msalRegisterConfig }) => {
     setBannerCookie(cookie)
     if (!bannerCookie) {
       const date = new Date()
-      date.setTime(date.getTime() + (28*24*60*60*1000))
+      date.setTime(date.getTime() + (28 * 24 * 60 * 60 * 1000))
       document.cookie = `seen_cookie_message=true; expires=${date.toUTCString()}; path=/`
     }
   }, [])
 
   return (
     <Fragment>
-      {typeof window !== 'unedefined' && !bannerCookie && <CookieBanner />}
+      {typeof window !== 'undefined' && !bannerCookie && <CookieBanner />}
       <Header msalConfig={msalConfig} msalRegisterConfig={msalRegisterConfig} />
       <PhaseBanner />
       <a href='#main-content' className='govuk-skip-link'>Skip to main content</a>

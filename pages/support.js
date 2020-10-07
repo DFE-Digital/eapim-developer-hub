@@ -125,7 +125,7 @@ const Support = ({ router, msalConfig }) => {
 
               <ValidationMessages errors={errorSummary} />
 
-              <form noValidate method="POST" onSubmit={handleSubmit} ref={formRef}>
+              <form noValidate method='POST' onSubmit={handleSubmit} ref={formRef}>
                 <Input
                   ref={fullnameRef}
                   id='fullname'
@@ -192,18 +192,17 @@ const Support = ({ router, msalConfig }) => {
 
 Support.getInitialProps = async ({ req, res }) => {
   if (req && req.method === 'POST') {
-
     try {
       await send({
-        "email-to": process.env.SERVICE_NOW_EMAIL,
-        "email-from": req.body.email,
-        "subject": "Developer Hub Support Request",
-        "content-type": "text/html",
-        "email-content": template(req.body)
+        'email-to': process.env.SERVICE_NOW_EMAIL,
+        'email-from': req.body.email,
+        subject: 'Developer Hub Support Request',
+        'content-type': 'text/html',
+        'email-content': template(req.body)
       })
 
-      res.writeHead(301, { Location: '/support-submitted' });
-      res.end();
+      res.writeHead(301, { Location: '/support-submitted' })
+      res.end()
     } catch (error) {
       console.log(`Error sending support email: ${error}`)
     }
