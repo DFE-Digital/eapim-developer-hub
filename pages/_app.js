@@ -30,14 +30,13 @@ class MyApp extends App {
     const msalAuthConfig = {
       authority: process.env.NEXT_PUBLIC_B2C_SIGNIN_URL,
       redirectUri: process.env.NEXT_PUBLIC_REDIRECT_URL,
-      postLogoutRedirectUri: process.env.NEXT_PUBLIC_ROOT_URL,
+      postLogoutRedirectUri: `${process.env.NEXT_PUBLIC_ROOT_URL}/logged-out`,
       clientId: process.env.NEXT_PUBLIC_CLIENT_ID
     }
 
     const msalAuthVerfiyConfig = {
       authority: process.env.NEXT_PUBLIC_B2C_SIGNIN_VERIFY_URL,
       redirectUri: process.env.NEXT_PUBLIC_REDIRECT_URL,
-      postLogoutRedirectUri: process.env.NEXT_PUBLIC_ROOT_URL,
       clientId: process.env.NEXT_PUBLIC_CLIENT_ID
     }
 

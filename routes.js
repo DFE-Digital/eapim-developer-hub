@@ -43,6 +43,10 @@ const APP_ROUTES = [
     pattern: '/profile'
   },
   {
+    page: 'logged-out',
+    pattern: '/logged-out'
+  },  
+  {
     page: '/auth/register',
     pattern: '/register'
   },

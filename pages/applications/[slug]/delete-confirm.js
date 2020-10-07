@@ -12,8 +12,6 @@ import { getApplication } from '../../../lib/applicationService'
 const ApplicationDeleteConfirm = ({ user, application, router, msalConfig, deleteApplication }) => {
   const [deleting, setDeleting] = useState(false)
 
-  console.log(application)
-
   const deleteConfirm = async () => {
     setDeleting(true)
 

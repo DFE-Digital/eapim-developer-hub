@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useRef, Fragment } from 'react'
 import Content from '../content.json'
 import ReturnTo from 'components/common/ReturnTo'
-import ContentBuilder from 'components/common/ContentBuilder'
 
 import ValidationMessages from 'components/common/forms/validation-messages'
 import Radio from 'components/common/form/radio'
-import Input from 'components/common/form/input'
 import Textarea from 'components/common/form/textarea'
 
 import { send } from '../lib/emailService'
@@ -13,13 +11,8 @@ import { template } from '../emails/support'
 
 import * as validation from 'utils/validation'
 
-const page = 'Support'
-
-const Support = ({ router }) => {
+const LoggedOut = ({ router }) => {
   const formRef = useRef()
-  const fullnameRef = useRef()
-  const emailRef = useRef()
-  const apiRef = useRef()
   const descriptionRef = useRef()
 
   const [reason, setReason] = useState('')
@@ -53,24 +46,12 @@ const Support = ({ router }) => {
   const validateForm = (fields) => {
     const formErrors = {}
 
-    if (validation.isEmpty(fields.fullname)) {
-      formErrors.fullname = 'Enter your full name'
-    }
-
-    if (!validation.isEmail(fields.email)) {
-      formErrors.email = 'Enter a valid email address'
-    }
-
     if (validation.isEmpty(fields.reason)) {
-      formErrors.reason = 'Choose an option for your enquiry'
-    }
-
-    if (fields.api !== undefined && fields.reason === 'issue-with-api' && validation.isEmpty(fields.api)) {
-      formErrors.api = 'Specify the API you are having an issue with'
+      formErrors.reason = 'Choose your satisfactory level with the Developer Hub'
     }
 
     if (validation.isEmpty(fields.description)) {
-      formErrors.description = 'Describe the problem you are having'
+      formErrors.description = 'Describe how we could improve the Developer Hub'
     }
 
     return formErrors
@@ -86,10 +67,7 @@ const Support = ({ router }) => {
     setErrorSummary([])
 
     const formErrors = validateForm({
-      fullname: fullnameRef.current.value,
-      email: emailRef.current.value,
       reason: formRef.current.reason.value,
-      api: apiRef.current && apiRef.current.value,
       description: descriptionRef.current.value
     })
 
@@ -103,82 +81,56 @@ const Support = ({ router }) => {
 
   return (
     <Fragment>
-      <ReturnTo parentPath={router.asPath} />
+      <ReturnTo parentPath='/' />
       <div className='govuk-width-container'>
         <div className='govuk-breadcrumbs'>
           <ol className='govuk-breadcrumbs__list'>
             <li className='govuk-breadcrumbs__list-item'>
               <a className='govuk-breadcrumbs__link' href={Content['Home'].Url}>{Content['Home'].Page}</a>
             </li>
-            <li className='govuk-breadcrumbs__list-item' aria-current='page'>{Content[page].Page}</li>
           </ol>
         </div>
         <main className='govuk-main-wrapper' id='main-content' role='main'>
           <div className='govuk-grid-row'>
             <div className='govuk-grid-column-three-quarters'>
-              <h1 className='govuk-heading-xl'>{Content[page].Page}</h1>
-              <ContentBuilder sectionNav={false} data={Content[page].Content.Form.Body} />
+              <h1 className='govuk-heading-l'>You are now signed out</h1>
+              <a href='/' className='govuk-button govuk-button--default' role='button'>Back to home page</a>
 
               <hr className='govuk-section-break govuk-section-break--l govuk-section-break--visible' />
+
+              <h2 className='govuk-heading-l'>Feedback survey</h2>
 
               <ValidationMessages errors={errorSummary} />
 
               <form noValidate method='POST' onSubmit={handleSubmit} ref={formRef}>
-                <Input
-                  ref={fullnameRef}
-                  id='fullname'
-                  name='fullname'
-                  label='Full name'
-                  type='text'
-                  error={errors.fullname}
-                />
-                <Input
-                  ref={emailRef}
-                  id='email'
-                  name='email'
-                  type='email'
-                  label='Email address'
-                  hint='We only use your email to respond to you.'
-                  error={errors.email}
-                />
                 <Radio
                   id='reason'
                   name='reason'
-                  legend='What specifically do you need help with?'
+                  legend='Overall, how satisfied were you with using the Developer Hub?'
                   onChange={handleInputChange}
                   value={reason}
                   error={errors.reason}
                   items={[
-                    { label: 'General enquiry', value: 'general-enquiry' },
-                    { label: 'Issue with website', value: 'issue-with-website' },
-                    { label: 'Issue with API - Please specify what API you are having an issue with', value: 'issue-with-api' },
-                    { label: 'Other', value: 'other' }
+                    { label: 'Very satisfied', value: 'very-satisfied' },
+                    { label: 'Somewhat satisfied', value: 'somewhat-satisfied' },
+                    { label: 'Neither satisfied nor dissatisfied', value: 'neither-satisfied-nor-dissatisfied' },
+                    { label: 'Somewhat dissatisfied', value: 'somewhat-dissatisfied' },
+                    { label: 'Very dissatisfied', value: 'very-dissatisfied' }
                   ]}
                 />
-                {reason && reason === 'issue-with-api' &&
-                  <Input
-                    ref={apiRef}
-                    id='api'
-                    name='api'
-                    type='text'
-                    label='Which API are you having issues with'
-                    error={errors.api}
-                    required={reason === 'issue-with-api'}
-                  />
-                }
                 <Textarea
                   inline
                   ref={descriptionRef}
                   id='description'
                   name='description'
-                  label='What do you need help with?'
+                  label='How could we improve the Developer Hub to better meet your needs?'
                   hint='Please provide as much information as possible. Do not provide any personal information.'
                   maxLength='3000'
                   value={description}
                   error={errors.description}
                   onChange={handleInputChange}
                 />
-                <button type='submit' className='govuk-button govuk-!-margin-right-1'>Submit</button>
+                <button type='submit' className='govuk-button govuk-!-margin-right-1'>Submit and go back to home page</button>
               </form>
             </div>
           </div>
@@ -188,18 +140,18 @@ const Support = ({ router }) => {
   )
 }
 
-Support.getInitialProps = async ({ req, res }) => {
+LoggedOut.getInitialProps = async ({ req, res }) => {
   if (req && req.method === 'POST') {
     try {
       await send({
         'email-to': process.env.SERVICE_NOW_EMAIL,
         'email-from': req.body.email,
-        subject: 'Developer Hub Support Request',
+        subject: 'Developer Hub Feedback Survey',
         'content-type': 'text/html',
         'email-content': template(req.body)
       })
 
-      res.writeHead(301, { Location: '/support-submitted' })
+      res.writeHead(301, { Location: '/' })
       res.end()
     } catch (error) {
       console.log(`Error sending support email: ${error}`)
@@ -211,6 +163,6 @@ Support.getInitialProps = async ({ req, res }) => {
   }
 }
 
-Support.displayName = 'Support'
+LoggedOut.displayName = 'Logged out'
 
-export default Support
+export default LoggedOut
