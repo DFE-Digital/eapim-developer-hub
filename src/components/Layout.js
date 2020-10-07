@@ -9,7 +9,7 @@ import { useIsIE11 } from '../hooks'
 
 const Layout = ({ children, msalConfig, msalRegisterConfig }) => {
   if (useIsIE11()) return <IE11BrowserMessage />
-
+  
   const [bannerCookie, setBannerCookie] = useState(null)
 
   useEffect(() => {
@@ -23,9 +23,10 @@ const Layout = ({ children, msalConfig, msalRegisterConfig }) => {
     }
   }, [])
 
+
   return (
     <>
-      <CookieBanner cookie={bannerCookie} />
+      {typeof window !== 'undefined' && !bannerCookie && <CookieBanner />}
       <Header msalConfig={msalConfig} msalRegisterConfig={msalRegisterConfig} />
       <PhaseBanner />
       <a href='#main-content' className='govuk-skip-link'>Skip to main content</a>

@@ -1,8 +1,6 @@
 import React from 'react'
 
-const CookieBanner = ({ cookie }) => {
-  if (cookie) return null
-
+const CookieBanner = () => {
   return (
     <div className='cookie-banner' id='govuk-banner-message'>
       <div className='govuk-width-container'>
