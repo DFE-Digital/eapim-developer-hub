@@ -68,9 +68,11 @@ class Home extends Component {
             <div className='homepage-services-section'>
               <div className='homepage-services-text'>
                 <h3 className='govuk-heading-m'>Integrate your application</h3>
-                <p className='govuk-body'>Connect your application to an APIs sandbox or production environment to begin building your software.</p>
                 <p className='govuk-body'>
-                  <a href='/applications' className='govuk-link'>Register an application</a> to start developing your software.
+                  Connect your application to an APIs sandbox environment to begin building your software. Simply request production access when you are ready to go live.
+                </p>
+                <p className='govuk-body'>
+                  Learn about <a href='/documentation' className='govuk-link'>how to get started</a>.
                 </p>
               </div>
               <div className='homepage-services-image'>
