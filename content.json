@@ -1237,10 +1237,6 @@
         "NoApplications": {
           "Copy": "You don't have any applications",
           "Button": "Register your first application"
-        },
-        "Production": {
-          "Copy": "After testing in the sandbox, you can apply for production credentials.",
-          "Button": "Get production credentials"
         }
       }
     },

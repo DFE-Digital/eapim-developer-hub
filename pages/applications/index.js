@@ -102,8 +102,6 @@ const Applications = ({ user, selectApplication, router, msalConfig, msalRegiste
                       {applications.length < 5 && (
                         <button type='button' className='govuk-button govuk-!-margin-top-6' onClick={() => Router.push('/applications/create/step1')}>Add new application</button>
                       )}
-                      <p className='govuk-body govuk-!-margin-top-9'>{Content.Applications[page].Content.Production.Copy}</p>
-                      <button type='button' className='govuk-button govuk-!-margin-bottom-0'>{Content.Applications[page].Content.Production.Button}</button>
                     </Fragment>
                   )}
                 </div>
