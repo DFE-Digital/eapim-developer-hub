@@ -35,7 +35,7 @@ class Home extends Component {
          <AccessChecker msalConfig={this.props.msalConfig} />
          <ReturnTo parentPath={this.props.router.asPath} />
          <main id='main-content' role='main'>
-           <div className='govuk-panel govuk-panel--confirmation govuk-panel--welcome'>
+          <div className='govuk-panel govuk-panel--confirmation govuk-panel--welcome'>
              <div className='govuk-width-container'>
                <h1 className='govuk-panel__title'>{Content[page].Content.Hero.Heading}</h1>
                <div className='govuk-panel__body'>{Content[page].Content.Hero.Intro}</div>
@@ -47,8 +47,37 @@ class Home extends Component {
                )}
              </div>
            </div>
-
-           <div className='govuk-width-container'>
+          
+          <div className='govuk-width-container homepage-services-container'>
+            <div className='homepage-services-section'>
+              <div className='homepage-services-text'>
+                <h3 className='govuk-heading-m'>Browse Department for Education APIs</h3>
+                <p className='govuk-body'>
+                  Use the DfE Developer Hub to find a number of open APIs, including schools information, finance and corporate entities.  
+                </p>
+                <p className='govuk-body'>
+                  See all the <a href='/apis' className='govuk-link'>public APIs</a> on the Developer Hub.
+                </p>
+              </div>
+              <div className='homepage-services-image'>
+                <img alt="Browse the Department for Education APIs" src="/assets/images/hp-apis.jpg" />
+              </div>
+            </div>
+            <div className='homepage-services-section'>
+              <div className='homepage-services-text'>
+                <h3 className='govuk-heading-m'>Integrate your application</h3>
+                <p className='govuk-body'>Connect your application to an APIs sandbox or production environment to begin building your software.</p>
+                <p className='govuk-body'>
+                  <a href='/applications' className='govuk-link'>Register an application</a> to start developing your software.
+                </p>
+              </div>
+              <div className='homepage-services-image'>
+                <img alt="Browse the Department for Education APIs" src="/assets/images/hp-int.jpg" />
+              </div>
+            </div>
+          </div>      
+          
+          <div className='govuk-width-container'>
              <div className='govuk-grid-row flex-wrap govuk-!-padding-bottom-9 govuk-!-padding-top-9'>
                {columns.map((column, i) => {
                  return (

@@ -3,6 +3,44 @@
   padding: 10px 0;
 }
 
+.homepage-services-section {
+  display: flex;
+  flex-direction: column;
+  padding: 40px 0;
+  border-bottom: 1px solid govuk-colour("mid-grey");
+
+  @media (min-width: 48.0625em) {
+    padding: 80px 0;
+    flex-direction: row;
+  }
+
+  .homepage-services-text {
+    width: 100%;
+    padding: 0 20px 20px 0;
+
+    @media (min-width: 48.0625em) {
+      width: 50%;
+      padding: 0 20px 0 0;
+    }
+  }
+
+  .homepage-services-image {
+    width: 100%;
+
+    @media (min-width: 48.0625em) {
+      max-width: 400px;
+      margin-left: auto;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+}  
+
+
+
 .text-wrap {
   word-break: break-word;
   white-space: pre-wrap;

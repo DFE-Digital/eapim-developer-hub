@@ -7,8 +7,9 @@ import SideBar from 'components/common/SideBar'
 import ReturnTo from 'components/common/ReturnTo'
 import { Loading } from 'components/common/Loading'
 import AuthWarning from 'components/common/AuthWarning'
-import { selectApplication } from '../../src/actions/application'
+import Breadcrumbs from 'components/common/Breadcrumbs'
 
+import { selectApplication } from '../../src/actions/application'
 import { getApplications } from '../../lib/applicationService'
 
 const page = 'Applications'
@@ -42,17 +43,7 @@ const Applications = ({ user, selectApplication, router, msalConfig, msalRegiste
       <AccessChecker msalConfig={msalConfig} />
       <ReturnTo parentPath={router.asPath} />
       <div className='govuk-width-container'>
-        <div className='govuk-breadcrumbs'>
-          <ol className='govuk-breadcrumbs__list'>
-            <li className='govuk-breadcrumbs__list-item'>
-              <a className='govuk-breadcrumbs__link' href={Content['Home'].Url}>{Content['Home'].Page}</a>
-            </li>
-            <li className='govuk-breadcrumbs__list-item'>
-              <a className='govuk-breadcrumbs__link' href='/applications'>Applications</a>
-            </li>
-            <li className='govuk-breadcrumbs__list-item' aria-current='page'>{Content.Applications[page].Page}</li>
-          </ol>
-        </div>
+        <Breadcrumbs items={[{ text: page }]} />
         <section className='mainWrapper govuk-!-margin-top-7'>
           <aside className='sideBar'>
             <div className='sideBar_content'>
