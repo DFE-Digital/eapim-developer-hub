@@ -100,12 +100,12 @@ const DfEAPIInformation = ({ selectedApi }) => {
 
       <h2 className='govuk-heading-l' id='api-browser-and-swagger-file'>3. API browser and swagger file</h2>
       <p className='govuk-body'>
-        For more detailed schema information on each DfE Information API, you can:
+        For more detailed schema information on the DfE Information API, you can:
       </p>
       <ul className='govuk-list govuk-list--bullet'>
-        <li>open the API browser like <a href='https://editor.swagger.io/' className='govuk-link' target='_blank'>Swagger Editor</a></li>
-        <li>look at the DfE Information API swagger file</li>
-        <li>You can also generate a client library from the swagger file using Swagger Editor.</li>
+        <li>Open an API browser like <a href='https://editor.swagger.io/' className='govuk-link' target='_blank'>Swagger Editor</a></li>
+        <li>Copy the swagger file content in to the Swagger Editor</li>
+        <li>You can also generate a client library from the swagger file using Swagger Editor</li>
       </ul>
 
       <h2 className='govuk-heading-l' id='http-status-codes'>4. HTTP status codes</h2>

@@ -10,6 +10,7 @@ import { useIsIE11 } from '../hooks'
 const Layout = ({ children, msalConfig, msalRegisterConfig }) => {
   if (useIsIE11()) return <IE11BrowserMessage />
   
+  const [siteLoaded, setSiteLoaded] = useState(false)
   const [bannerCookie, setBannerCookie] = useState(null)
 
   useEffect(() => {
@@ -20,13 +21,13 @@ const Layout = ({ children, msalConfig, msalRegisterConfig }) => {
       const date = new Date()
       date.setTime(date.getTime() + (28 * 24 * 60 * 60 * 1000))
       document.cookie = `seen_cookie_message=true; expires=${date.toUTCString()}; path=/`
+      setSiteLoaded(true)
     }
   }, [])
 
-
   return (
     <>
-      {typeof window !== 'undefined' && !bannerCookie && <CookieBanner />}
+      {siteLoaded && !bannerCookie && <CookieBanner cookie={bannerCookie} />}
       <Header msalConfig={msalConfig} msalRegisterConfig={msalRegisterConfig} />
       <PhaseBanner />
       <a href='#main-content' className='govuk-skip-link'>Skip to main content</a>
