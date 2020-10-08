@@ -53,7 +53,7 @@ class Home extends Component {
               <div className='homepage-services-text'>
                 <h3 className='govuk-heading-m'>Browse Department for Education APIs</h3>
                 <p className='govuk-body'>
-                  Use the DfE Developer Hub to find a number of open APIs, including schools information, finance and corporate entities.  
+                  Find a number of open APIs from different sectors including schools, finance and corporate entities.  
                 </p>
                 <p className='govuk-body'>
                   See all the <a href='/apis' className='govuk-link'>public APIs</a> on the Developer Hub.
