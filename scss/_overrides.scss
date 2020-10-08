@@ -19,7 +19,6 @@
     padding: 0 20px 20px 0;
 
     @media (min-width: 48.0625em) {
-      width: 50%;
       padding: 0 20px 0 0;
     }
   }
@@ -28,11 +27,10 @@
     width: 100%;
 
     @media (min-width: 48.0625em) {
-      max-width: 400px;
       margin-left: auto;
     }
 
-    img {
+    svg {
       max-width: 100%;
       height: auto;
     }

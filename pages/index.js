@@ -7,6 +7,8 @@ import { signInLink, registerLink, signOut } from 'actions/authenticate'
 import Content from '../content.json'
 import ReturnTo from 'components/common/ReturnTo'
 
+import { ReactSVG } from 'react-svg'
+
 const page = 'Home'
 
 class Home extends Component {
@@ -60,7 +62,7 @@ class Home extends Component {
                 </p>
               </div>
               <div className='homepage-services-image'>
-                <img alt="Browse the Department for Education APIs" src="/assets/images/hp-apis.jpg" />
+                <ReactSVG src="/assets/images/hp-apis.svg" fallback={() => <img src='/assets/images/hp-apis.jpg' alt="Browse Department for Education APIs" />} />
               </div>
             </div>
             <div className='homepage-services-section'>
@@ -72,7 +74,7 @@ class Home extends Component {
                 </p>
               </div>
               <div className='homepage-services-image'>
-                <img alt="Browse the Department for Education APIs" src="/assets/images/hp-int.jpg" />
+                <ReactSVG src="/assets/images/hp-int.svg" fallback={() => <img src='/assets/images/hp-int.jpg' alt="Integrate your application" />} />
               </div>
             </div>
           </div>      

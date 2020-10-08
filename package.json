@@ -49,6 +49,7 @@
     "react-html-parser": "^2.0.2",
     "react-is": "^16.13.1",
     "react-redux": "^7.0.3",
+    "react-svg": "^11.0.42",
     "react-testing-library": "^8.0.1",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
