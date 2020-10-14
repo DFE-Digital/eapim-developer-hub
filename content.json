@@ -704,11 +704,15 @@
             "var client = new RestClient('<Paste OAuth Token URL Here>');\n",
             "var request = new RestRequest(Method.POST);\n",
             "request.AddHeader(\"content-type\", \"application/x-www-form-urlencoded\");\n",
-            "request.AddParameter(\"application/x-www-form-urlencoded","grant_type=client_credentials&client_id=<Paste your client id here>&client_secret=<Paste your client secret here>&code=<Paste your authorisation code here>&redirect_URL=<Paste your redirect url here>\", ParameterType.RequestBody);\n",
+            "request.AddParameter(\"grant_type\", \"authorisation_code\");\n",
+            "request.AddParameter(\"code\", \"<Paste authorisation code here>\");\n",
+            "request.AddParameter(\"client_id\", \"<Paste your client id here>\");\n",
+            "request.AddParameter(\"client_secret\", \"<Paste your client secret here>\");\n",
+            "request.AddParameter(\"redirect_url\", \"<Paste your redirect url here>\");\n",
             "IRestResponse response = client.Execute(request);\n\n",
             "// Extract token\n",
-            "dynamic resp = JObject.Parse(response.Content);\n",
-            "string token = resp.access_token;"
+            "token = JObject.Parse(response.Content).SelectToken(\"$..access_token\").ToString();\n",
+            "refresh_token = JObject.Parse(response.Content).SelectToken(\"$..refresh_token\").ToString();"
           ]
         },
         {
@@ -746,9 +750,14 @@
             "var client = new RestClient(\"<Paste token endpoint here>\");\n",
             "var request = new RestRequest(Method.POST);\n",
             "request.AddHeader(\"content-type\", \"application/x-www-form-urlencoded\");\n",
-            "request.AddParameter(\"application/x-www-form-urlencoded","grant_type=client_credentials&client_id=<Paste your client id here>&client_secret=<Paste your client secret here>&code=<Paste your authorisation code here>\", ParameterType.RequestBody);\n\n",
+            "request.AddParameter(\"grant_type\", \"refresh_token\");\n",
+            "request.AddParameter(\"refresh_token\", \"<Paste refresh token here>\");\n",
+            "request.AddParameter(\"client_id\", \"<Paste your client id here>\");\n",
+            "request.AddParameter(\"client_secret\", \"<Paste your client secret here>\");\n",
             "// make a call to get refresh token\n",
-            "IRestResponse response = client.Execute(request);"
+            "IRestResponse response = client.Execute(request);\n\n",
+            "// Extract token\n",
+            "token = JObject.Parse(response.Content).SelectToken(\"$..access_token\").ToString();\n"
           ]
         }
       ]
@@ -926,7 +935,7 @@
           },
           {
             "Type": "P",
-            "Body": "The DfE Developer Hub does not support <a href='https://fetch.spec.whatwg.org/#http-cors-protocol' class='govuk-link' target='_blank'>CORS</a>. It is not possible to call our APIs from client-side code within a web browser, for example using Ajax"
+            "Body": "The DfE Developer Hub does not support <a href='https://fetch.spec.whatwg.org/#http-cors-protocol' class='govuk-link' target='_blank'>CORS</a>. It is not possible to call our APIs from client-side code within a web browser, for example using Ajax."
           },
           {
             "Type": "H2",
@@ -949,7 +958,7 @@
           },
           {
             "Type": "P",
-            "Body": "The breaking change will be published to the sandbox initially and we recommend you run your automated test pack against the sandbox ona regular basis."
+            "Body": "The breaking change will be published to the sandbox initially and we recommend you run your automated test pack against the sandbox on a regular basis."
           },
           {
             "Type": "P",
