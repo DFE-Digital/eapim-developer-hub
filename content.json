@@ -594,16 +594,20 @@
         {
           "Type": "CODE",
           "Body": [
-            "// construct the GET request for access token\n",
-            "var client = new RestClient('<Paste OAuth Token URL Here>');\n",
-            "var request = new RestRequest(Method.POST);\n",
+            "private string refresh_token { get; set; }\n",
+            "private string token { get; set; }\n\n",
+            "// construct the request for access token\n",
+            "var client = new RestClient(\"<Paste token endpoint here>\");\n",
+            "var request = new RestRequest(\"dfe/application-info\", Method.POST);\n",
             "request.AddHeader(\"content-type\", \"application/x-www-form-urlencoded\");\n",
-            "request.AddParameter(\"application/x-www-form-urlencoded","grant_type=client_credentials&client_id=<Paste client id here>&client_secret=<Paste client secret here>\", ParameterType.RequestBody);\n\n",
+            "request.AddParameter(\"grant_type\", \"client_credentials\");\n",
+            "request.AddParameter(\"client_id\", \"<Paste your client id here>\");\n",
+            "request.AddParameter(\"client_secret\", \"<Paste your client secret here>\");\n\n",
             "// make call to get token\n",
             "IRestResponse response = client.Execute(request);\n\n",
-            "// extract token\n",
-            "dynamic resp = JObject.Parse(response.Content);\n",
-            "string token = resp.access_token;\n\n"
+            "// Extract token\n",
+            "token = JObject.Parse(response.Content).SelectToken(\"$..access_token\").ToString();\n",
+            "refresh_token = JObject.Parse(response.Content).SelectToken(\"$..refresh_token\").ToString();"
           ]
         },
         {
