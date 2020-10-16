@@ -22,8 +22,6 @@ const ApplicationApiSubscriptions = ({ apis, application, subscriptions, router,
   const [refLoaded, setRefLoaded] = useState(null)
   const loadedRef = useRef(null)
 
-  console.log(subscriptions)
-
   useEffect(() => {
     if (loadedRef.current !== refLoaded) {
       window.GOVUKFrontend.initAll()

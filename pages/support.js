@@ -88,8 +88,8 @@ const Support = ({ router }) => {
     const formErrors = validateForm({
       fullname: fullnameRef.current.value,
       email: emailRef.current.value,
-      reason: formRef.current.reason.value,
-      api: apiRef.current && apiRef.current.value,
+      reason,
+      api: apiRef && apiRef.current && apiRef.current.value,
       description: descriptionRef.current.value
     })
 

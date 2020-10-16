@@ -3,6 +3,7 @@
     "next/babel"
   ],
   "plugins": [
+    "@babel/plugin-transform-template-literals",
     "inline-dotenv",
     "styled-components",
     ["module-resolver", {

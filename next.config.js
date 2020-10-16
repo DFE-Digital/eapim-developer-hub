@@ -11,6 +11,18 @@ module.exports = withSass({
   webpack: (config, { dev }) => {
     config.output.publicPath = `${assetPrefix}${config.output.publicPath}`
 
+    const _config = config.entry;
+
+    config.entry = async () => {
+      const entries = await _config()
+
+      if (entries['main.js'] && !entries['main.js'].includes('./src/polyfills.js')) {
+        entries['main.js'].unshift('./src/polyfills.js');
+      }
+
+      return entries
+    }
+
     return config
   }
 })

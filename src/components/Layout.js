@@ -2,14 +2,9 @@ import React, { useState, useEffect } from 'react'
 import Header from 'components/common/Header'
 import PhaseBanner from 'components/common/PhaseBanner'
 import Footer from 'components/common/Footer'
-import IE11BrowserMessage from 'components/common/IE11BrowserMessage'
 import CookieBanner from 'components/common/CookieBanner'
 
-import { useIsIE11 } from '../hooks'
-
-const Layout = ({ children, msalConfig, msalRegisterConfig }) => {
-  if (useIsIE11()) return <IE11BrowserMessage />
-  
+const Layout = ({ children, msalConfig, msalRegisterConfig }) => {  
   const [siteLoaded, setSiteLoaded] = useState(false)
   const [bannerCookie, setBannerCookie] = useState(null)
 

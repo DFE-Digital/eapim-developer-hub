@@ -13,6 +13,11 @@
   word-spacing: normal;
   font-weight: normal;
 
+  /* IE 10+ */
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    word-break: break-all;
+  }
+
   &.inline {
     margin: 0
   }
