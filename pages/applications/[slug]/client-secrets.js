@@ -14,6 +14,8 @@ import ApplicationSideBar from 'components/common/ApplicationSideBar'
 
 import { getApplication } from '../../../lib/applicationService'
 
+import clipboard from '../../../src/utils/clipboard'
+
 const page = 'Client secrets'
 
 const ApplicationClientSecrets = ({ id, user, newClientKey, newClientKeyDisplayName, startDateTime, endDateTime, application, msalConfig }) => {
@@ -23,15 +25,11 @@ const ApplicationClientSecrets = ({ id, user, newClientKey, newClientKeyDisplayN
   const [primaryRegenerating, setPrimaryRegenerating] = useState(false)
   const [secondaryRegenerating, setSecondaryRegenerating] = useState(false)
 
-  const copyToClipboard = (e, text) => {
+  const copyToClipboard = (e, element) => {
     e.preventDefault()
-    const textField = document.createElement('textarea')
-    textField.innerText = text
-    document.body.appendChild(textField)
-    textField.select()
-    document.execCommand('copy')
-    textField.remove()
-    setCopied(true)
+
+    const res = clipboard(element)
+    if (res) setCopied(true)
   }
 
   const isLoggedIn = !!((user.data && user.data.isAuthed))
@@ -111,11 +109,11 @@ const ApplicationClientSecrets = ({ id, user, newClientKey, newClientKeyDisplayN
                       {newClientKey && newClientKeyDisplayName === 'Primary'
                         ? (
                           <tr className='govuk-table__row'>
-                            <td className='govuk-table__cell middle'>{newClientKey}</td>
+                            <td id="newKeyPrimary" className='govuk-table__cell middle'>{newClientKey}</td>
                             <td className='govuk-table__cell middle'>{moment(startDateTime).format('DD MMM YYYY')}</td>
                             <td className='govuk-table__cell middle'>{moment(endDateTime).format('DD MMM YYYY')}</td>
                             <td className='govuk-table__cell middle govuk-table__cell--numeric'>
-                              <button type='button' className='govuk-button govuk-!-margin-0' onClick={(e) => copyToClipboard(e, newClientKey)}>
+                              <button type='button' className='govuk-button govuk-!-margin-0' onClick={(e) => copyToClipboard(e, '#newKeyPrimary')}>
                                 {copied ? `Copied` : `Copy`}
                               </button>
                             </td>
@@ -162,11 +160,11 @@ const ApplicationClientSecrets = ({ id, user, newClientKey, newClientKeyDisplayN
                       {newClientKey && newClientKeyDisplayName === 'Secondary'
                         ? (
                           <tr className='govuk-table__row'>
-                            <td className='govuk-table__cell middle'>{newClientKey}</td>
+                            <td id="newKeySecondary" className='govuk-table__cell middle'>{newClientKey}</td>
                             <td className='govuk-table__cell middle'>{moment(startDateTime).format('DD MMM YYYY')}</td>
                             <td className='govuk-table__cell middle'>{moment(endDateTime).format('DD MMM YYYY')}</td>
                             <td className='govuk-table__cell middle govuk-table__cell--numeric'>
-                              <button type='button' className='govuk-button govuk-!-margin-0' onClick={(e) => copyToClipboard(e, newClientKey)}>
+                              <button type='button' className='govuk-button govuk-!-margin-0' onClick={(e) => copyToClipboard(e, '#newKeySecondary')}>
                                 {copied ? `Copied` : `Copy`}
                               </button>
                             </td>

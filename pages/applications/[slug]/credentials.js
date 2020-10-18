@@ -5,6 +5,8 @@ import AccessChecker from 'components/common/AccessChecker'
 import ReturnTo from 'components/common/ReturnTo'
 import { PrivateRoute } from 'components/common/PrivateRoute'
 
+import clipboard from '../../../src/utils/clipboard'
+
 class ApplicationCredentials extends Component {
   constructor (props) {
     super(props)
@@ -23,15 +25,12 @@ class ApplicationCredentials extends Component {
     Router.push('/applications/[slug]/details', `/applications/${selectedApplication.applicationId}/details`)
   }
 
-  copyToClipboard = (e, text, keyType) => {
+  copyToClipboard = (e, keyType) => {
     e.preventDefault()
-    var textField = document.createElement('textarea')
-    textField.innerText = text
-    document.body.appendChild(textField)
-    textField.select()
-    document.execCommand('copy')
-    textField.remove()
-    this.setState({ [`${keyType}Copied`]: true })
+
+    const res = clipboard(`#${keyType}`)
+
+    if (res) this.setState({ [`${keyType}Copied`]: true })    
   }
 
   handleInputChange (event) {
@@ -77,27 +76,27 @@ class ApplicationCredentials extends Component {
                     </tr>
                     <tr className='govuk-table__row'>
                       <th scope='row' className='govuk-table__header'>Client Id:</th>
-                      <td className='govuk-table__cell'>{selectedApplication ? selectedApplication.clientId : null}</td>
+                      <td id="clientId" className='govuk-table__cell'>{selectedApplication ? selectedApplication.clientId : null}</td>
                       <td className='govuk-table__cell govuk-table__cell--numeric'>
-                        <a href='#' className='govuk-link' onClick={(e) => this.copyToClipboard(e, selectedApplication.clientId, 'clientId')}>
+                        <a href='#' className='govuk-link' onClick={(e) => this.copyToClipboard(e, 'clientId')}>
                           {this.state.clientIdCopied ? 'Copied' : 'Copy'}
                         </a>
                       </td>
                     </tr>
                     <tr className='govuk-table__row'>
                       <th scope='row' className='govuk-table__header'>Primary secret:</th>
-                      <td className='govuk-table__cell'>{selectedApplication ? selectedApplication.PrimarySecret : null}</td>
+                      <td id="primary" className='govuk-table__cell'>{selectedApplication ? selectedApplication.PrimarySecret : null}</td>
                       <td className='govuk-table__cell govuk-table__cell--numeric'>
-                        <a href='#' className='govuk-link' onClick={(e) => this.copyToClipboard(e, selectedApplication.PrimarySecret, 'primary')}>
+                        <a href='#' className='govuk-link' onClick={(e) => this.copyToClipboard(e, 'primary')}>
                           {this.state.primaryCopied ? 'Copied' : 'Copy'}
                         </a>
                       </td>
                     </tr>
                     <tr className='govuk-table__row'>
                       <th scope='row' className='govuk-table__header'>Secondary secret:</th>
-                      <td className='govuk-table__cell'>{selectedApplication ? selectedApplication.SecondarySecret : null}</td>
+                      <td id="secondary" className='govuk-table__cell'>{selectedApplication ? selectedApplication.SecondarySecret : null}</td>
                       <td className='govuk-table__cell govuk-table__cell--numeric'>
-                        <a href='#' className='govuk-link' onClick={(e) => this.copyToClipboard(e, selectedApplication.SecondarySecret, 'secondary')}>
+                        <a href='#' className='govuk-link' onClick={(e) => this.copyToClipboard(e, 'secondary')}>
                           {this.state.secondaryCopied ? 'Copied' : 'Copy'}
                         </a>
                       </td>
