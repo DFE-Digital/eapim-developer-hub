@@ -143,7 +143,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-ApplicationDetails.displayName = 'Application Details'
+ApplicationDetails.displayName = 'Application details (subscribe to APIs)'
 
 export { ApplicationDetails }
 export default connect(mapStateToProps, { clearApplication })(ApplicationDetails)

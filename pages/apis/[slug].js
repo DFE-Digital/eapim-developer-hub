@@ -90,7 +90,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-ApiDetails.displayName = 'Api Details'
+ApiDetails.displayName = 'API documentation'
 
 export { ApiDetails }
 export default connect(mapStateToProps, null)(ApiDetails)

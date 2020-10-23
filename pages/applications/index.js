@@ -111,7 +111,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-Applications.displayName = 'Applications'
+Applications.displayName = 'Applications listing'
 
 export { Applications }
 export default connect(mapStateToProps, { selectApplication })(Applications)

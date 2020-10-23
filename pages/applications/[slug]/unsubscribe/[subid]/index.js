@@ -111,6 +111,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-Unsubscribe.displayName = 'Application Unsubscribe'
+Unsubscribe.displayName = 'Would you unsubscribe'
 
 export default connect(mapStateToProps)(Unsubscribe)

@@ -45,6 +45,6 @@ UnsubscribeConfirmed.getInitialProps = ({ res, query }) => {
   return { applicationId: slug }
 }
 
-UnsubscribeConfirmed.displayName = 'Unsubscribe Confirmed'
+UnsubscribeConfirmed.displayName = 'Unsubscribe confirmed'
 
 export default UnsubscribeConfirmed

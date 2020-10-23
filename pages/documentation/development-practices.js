@@ -54,6 +54,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-DevelopmentPractices.displayName = page
+DevelopmentPractices.displayName = `${page} (doc)`
 
 export default connect(mapStateToProps)(DevelopmentPractices)

@@ -54,6 +54,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-ReferenceGuide.displayName = page
+ReferenceGuide.displayName = `${page} (doc)`
 
 export default connect(mapStateToProps)(ReferenceGuide)

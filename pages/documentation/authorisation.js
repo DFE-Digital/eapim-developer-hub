@@ -54,6 +54,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-Authorisation.displayName = page
+Authorisation.displayName = `${page} (doc)`
 
 export default connect(mapStateToProps)(Authorisation)
