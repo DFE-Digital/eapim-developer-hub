@@ -37,7 +37,7 @@ class Home extends Component {
          <AccessChecker msalConfig={this.props.msalConfig} />
          <ReturnTo parentPath={this.props.router.asPath} />
          <main id='main-content' role='main'>
-          <div className='govuk-panel govuk-panel--confirmation govuk-panel--welcome'>
+           <div className='govuk-panel govuk-panel--confirmation govuk-panel--welcome'>
              <div className='govuk-width-container'>
                <h1 className='govuk-panel__title'>{Content[page].Content.Hero.Heading}</h1>
                <div className='govuk-panel__body'>{Content[page].Content.Hero.Intro}</div>
@@ -49,39 +49,39 @@ class Home extends Component {
                )}
              </div>
            </div>
-          
-          <div className='govuk-width-container homepage-services-container'>
-            <div className='homepage-services-section'>
-              <div className='homepage-services-text'>
-                <h3 className='govuk-heading-m'>Browse Department for Education APIs</h3>
-                <p className='govuk-body'>
-                  Find a number of open APIs from different sectors including schools, finance and corporate entities.  
-                </p>
-                <p className='govuk-body'>
+
+           <div className='govuk-width-container homepage-services-container'>
+             <div className='homepage-services-section'>
+               <div className='homepage-services-text'>
+                 <h3 className='govuk-heading-m'>Browse Department for Education APIs</h3>
+                 <p className='govuk-body'>
+                  Find a number of open APIs from different sectors including schools, finance and corporate entities.
+                 </p>
+                 <p className='govuk-body'>
                   See all the <a href='/apis' className='govuk-link'>public APIs</a> on the Developer Hub.
-                </p>
-              </div>
-              <div className='homepage-services-image'>
-                <ReactSVG src="/assets/images/hp-apis.svg" fallback={() => <img src='/assets/images/hp-apis.jpg' alt="Browse Department for Education APIs" />} />
-              </div>
-            </div>
-            <div className='homepage-services-section'>
-              <div className='homepage-services-text'>
-                <h3 className='govuk-heading-m'>Integrate your application</h3>
-                <p className='govuk-body'>
+                 </p>
+               </div>
+               <div className='homepage-services-image'>
+                 <ReactSVG src='/assets/images/hp-apis.svg' fallback={() => <img src='/assets/images/hp-apis.jpg' alt='Browse Department for Education APIs' />} />
+               </div>
+             </div>
+             <div className='homepage-services-section'>
+               <div className='homepage-services-text'>
+                 <h3 className='govuk-heading-m'>Integrate your application</h3>
+                 <p className='govuk-body'>
                   Connect your application to an APIs sandbox environment to begin building your software. Simply request production access when you are ready to go live.
-                </p>
-                <p className='govuk-body'>
+                 </p>
+                 <p className='govuk-body'>
                   Learn about <a href='/documentation' className='govuk-link'>how to get started</a>.
-                </p>
-              </div>
-              <div className='homepage-services-image'>
-                <ReactSVG src="/assets/images/hp-int.svg" fallback={() => <img src='/assets/images/hp-int.jpg' alt="Integrate your application" />} />
-              </div>
-            </div>
-          </div>      
-          
-          <div className='govuk-width-container'>
+                 </p>
+               </div>
+               <div className='homepage-services-image'>
+                 <ReactSVG src='/assets/images/hp-int.svg' fallback={() => <img src='/assets/images/hp-int.jpg' alt='Integrate your application' />} />
+               </div>
+             </div>
+           </div>
+
+           <div className='govuk-width-container'>
              <div className='govuk-grid-row flex-wrap govuk-!-padding-bottom-9 govuk-!-padding-top-9'>
                {columns.map((column, i) => {
                  return (

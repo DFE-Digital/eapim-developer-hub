@@ -4,7 +4,7 @@ import PhaseBanner from 'components/common/PhaseBanner'
 import Footer from 'components/common/Footer'
 import CookieBanner from 'components/common/CookieBanner'
 
-const Layout = ({ children, msalConfig, msalRegisterConfig }) => {  
+const Layout = ({ children, msalConfig, msalRegisterConfig }) => {
   const [siteLoaded, setSiteLoaded] = useState(false)
   const [bannerCookie, setBannerCookie] = useState(null)
 

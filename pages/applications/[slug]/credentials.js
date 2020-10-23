@@ -30,7 +30,7 @@ class ApplicationCredentials extends Component {
 
     const res = clipboard(`#${keyType}`)
 
-    if (res) this.setState({ [`${keyType}Copied`]: true })    
+    if (res) this.setState({ [`${keyType}Copied`]: true })
   }
 
   handleInputChange (event) {
@@ -76,7 +76,7 @@ class ApplicationCredentials extends Component {
                     </tr>
                     <tr className='govuk-table__row'>
                       <th scope='row' className='govuk-table__header'>Client Id:</th>
-                      <td id="clientId" className='govuk-table__cell'>{selectedApplication ? selectedApplication.clientId : null}</td>
+                      <td id='clientId' className='govuk-table__cell'>{selectedApplication ? selectedApplication.clientId : null}</td>
                       <td className='govuk-table__cell govuk-table__cell--numeric'>
                         <a href='#' className='govuk-link' onClick={(e) => this.copyToClipboard(e, 'clientId')}>
                           {this.state.clientIdCopied ? 'Copied' : 'Copy'}
@@ -85,7 +85,7 @@ class ApplicationCredentials extends Component {
                     </tr>
                     <tr className='govuk-table__row'>
                       <th scope='row' className='govuk-table__header'>Primary secret:</th>
-                      <td id="primary" className='govuk-table__cell'>{selectedApplication ? selectedApplication.PrimarySecret : null}</td>
+                      <td id='primary' className='govuk-table__cell'>{selectedApplication ? selectedApplication.PrimarySecret : null}</td>
                       <td className='govuk-table__cell govuk-table__cell--numeric'>
                         <a href='#' className='govuk-link' onClick={(e) => this.copyToClipboard(e, 'primary')}>
                           {this.state.primaryCopied ? 'Copied' : 'Copy'}
@@ -94,7 +94,7 @@ class ApplicationCredentials extends Component {
                     </tr>
                     <tr className='govuk-table__row'>
                       <th scope='row' className='govuk-table__header'>Secondary secret:</th>
-                      <td id="secondary" className='govuk-table__cell'>{selectedApplication ? selectedApplication.SecondarySecret : null}</td>
+                      <td id='secondary' className='govuk-table__cell'>{selectedApplication ? selectedApplication.SecondarySecret : null}</td>
                       <td className='govuk-table__cell govuk-table__cell--numeric'>
                         <a href='#' className='govuk-link' onClick={(e) => this.copyToClipboard(e, 'secondary')}>
                           {this.state.secondaryCopied ? 'Copied' : 'Copy'}

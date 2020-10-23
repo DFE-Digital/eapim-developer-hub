@@ -1,6 +1,3 @@
-import 'react-app-polyfill/ie11';
-import 'react-app-polyfill/stable';
-
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import { Helmet } from 'react-helmet'
 import Content from '../content.json'

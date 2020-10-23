@@ -109,7 +109,7 @@ const ApplicationClientSecrets = ({ id, user, newClientKey, newClientKeyDisplayN
                       {newClientKey && newClientKeyDisplayName === 'Primary'
                         ? (
                           <tr className='govuk-table__row'>
-                            <td id="newKeyPrimary" className='govuk-table__cell middle'>{newClientKey}</td>
+                            <td id='newKeyPrimary' className='govuk-table__cell middle'>{newClientKey}</td>
                             <td className='govuk-table__cell middle'>{moment(startDateTime).format('DD MMM YYYY')}</td>
                             <td className='govuk-table__cell middle'>{moment(endDateTime).format('DD MMM YYYY')}</td>
                             <td className='govuk-table__cell middle govuk-table__cell--numeric'>
@@ -160,7 +160,7 @@ const ApplicationClientSecrets = ({ id, user, newClientKey, newClientKeyDisplayN
                       {newClientKey && newClientKeyDisplayName === 'Secondary'
                         ? (
                           <tr className='govuk-table__row'>
-                            <td id="newKeySecondary" className='govuk-table__cell middle'>{newClientKey}</td>
+                            <td id='newKeySecondary' className='govuk-table__cell middle'>{newClientKey}</td>
                             <td className='govuk-table__cell middle'>{moment(startDateTime).format('DD MMM YYYY')}</td>
                             <td className='govuk-table__cell middle'>{moment(endDateTime).format('DD MMM YYYY')}</td>
                             <td className='govuk-table__cell middle govuk-table__cell--numeric'>
