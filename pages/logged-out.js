@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, Fragment } from 'react'
-import Content from '../content.json'
 import ReturnTo from 'components/common/ReturnTo'
+import Breadcrumbs from 'components/common/Breadcrumbs'
 
 import ValidationMessages from 'components/common/forms/validation-messages'
 import Radio from 'components/common/form/radio'
@@ -83,13 +83,7 @@ const LoggedOut = ({ router }) => {
     <Fragment>
       <ReturnTo parentPath='/' />
       <div className='govuk-width-container'>
-        <div className='govuk-breadcrumbs'>
-          <ol className='govuk-breadcrumbs__list'>
-            <li className='govuk-breadcrumbs__list-item'>
-              <a className='govuk-breadcrumbs__link' href={Content['Home'].Url}>{Content['Home'].Page}</a>
-            </li>
-          </ol>
-        </div>
+        <Breadcrumbs items={[]} />
         <main className='govuk-main-wrapper' id='main-content' role='main'>
           <div className='govuk-grid-row'>
             <div className='govuk-grid-column-three-quarters'>

@@ -2,12 +2,12 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import AccessChecker from 'components/common/AccessChecker'
 import Content from '../../content.json'
-import AuthWarning from 'components/common/AuthWarning'
 import SideBar from 'components/common/SideBar'
 import ReturnTo from 'components/common/ReturnTo'
 import ContentBuilder from 'components/common/ContentBuilder'
 import Breadcrumbs from 'components/common/Breadcrumbs'
 
+const parent = 'Applications'
 const page = 'Registering your application'
 
 class RegisteringApplications extends Component {
@@ -25,7 +25,7 @@ class RegisteringApplications extends Component {
         <ReturnTo parentPath={this.props.router.asPath} />
         <div className='govuk-width-container'>
           <Breadcrumbs items={[
-            { text: 'Applications', href: '/applications' },
+            { text: parent, href: `/${this.props.router.asPath.split('/')[1]}` },
             { text: page }
           ]} />
           <section className='mainWrapper govuk-!-margin-top-7'>
@@ -42,8 +42,9 @@ class RegisteringApplications extends Component {
                     <h1 className='govuk-heading-xl'>{Content.Applications[page].Page}</h1>
 
                     <ContentBuilder sectionNav={false} data={Content.Applications[page].Content.Body} />
-                    {!isLoggedIn && <AuthWarning msalConfig={this.props.msalConfig} msalRegisterConfig={this.props.msalRegisterConfig} warning={Content.Applications[page].Content.Auth.Warning} />}
-                    {isLoggedIn && <p className='govuk-body'>Go to <a href='/applications' className='govuk-link govuk-!-margin-top-7'>{Content.Applications[page].Content.Button}</a>.</p>}
+                    <p className='govuk-body'>
+                      Go to <a href='/applications' className='govuk-link govuk-!-margin-top-7'>{Content.Applications[page].Content.Button}</a>.
+                    </p>
                   </div>
                 </div>
               </div>

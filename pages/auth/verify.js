@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { signInRedeem } from '../../src/actions/authenticate'
 
-const Verify = ({ id_token_hint, msalAuthVerfiyConfig }) => {
+const Verify = ({ idTokenHint, msalAuthVerfiyConfig }) => {
   useEffect(() => {
     async function handler () {
-      await signInRedeem(msalAuthVerfiyConfig, id_token_hint)
+      await signInRedeem(msalAuthVerfiyConfig, idTokenHint)
     }
 
     handler()
@@ -24,8 +24,7 @@ const Verify = ({ id_token_hint, msalAuthVerfiyConfig }) => {
 }
 
 Verify.getInitialProps = async ({ query }) => {
-  const { id_token_hint } = query
-  return { id_token_hint }
+  return { idTokenHint: query.id_token_hint }
 }
 
 Verify.displayName = 'Verify email address'

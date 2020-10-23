@@ -32,7 +32,12 @@ ready(() => {
     p.forEach(ptag => ptag.classList.add('govuk-body'))
     anchors.forEach(anchor => anchor.classList.add('govuk-link'))
 
-    intros.forEach(intro => intro.style.display = 'none')
-    dividers.forEach(divider => divider.style.display = 'none')
+    intros.forEach(intro => {
+      intro.style.display = 'none'
+    })
+
+    dividers.forEach(divider => {
+      divider.style.display = 'none'
+    })
   }
 })

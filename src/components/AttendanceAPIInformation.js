@@ -189,7 +189,7 @@ const AttendanceAPIInformation = ({ selectedApi, isLoggedIn, msalConfig, msalReg
               <ul className='govuk-list govuk-list--bullet'>
                 <li>Up to 1000 requests per endpoint for the same api client/IP address</li>
               </ul>
-              <p clasName='govuk-body'>Rate limiting threshold is subject to change based on the further engagement with API client developer.</p>
+              <p className='govuk-body'>Rate limiting threshold is subject to change based on the further engagement with API client developer.</p>
 
               <h2 className='govuk-heading-l' id='endpoints'>9. Endpoints</h2>
 

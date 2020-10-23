@@ -7,6 +7,7 @@ import ReturnTo from 'components/common/ReturnTo'
 import ContentBuilder from 'components/common/ContentBuilder'
 import Breadcrumbs from 'components/common/Breadcrumbs'
 
+const parent = 'Applications'
 const page = 'How to develop your application'
 
 class ApplicationsHowTo extends Component {
@@ -24,7 +25,7 @@ class ApplicationsHowTo extends Component {
         <ReturnTo parentPath={this.props.router.asPath} />
         <div className='govuk-width-container'>
           <Breadcrumbs items={[
-            { text: 'Applications', href: '/applications' },
+            { text: parent, href: `/${this.props.router.asPath.split('/')[1]}` },
             { text: page }
           ]} />
           <section className='mainWrapper govuk-!-margin-top-7'>

@@ -14,9 +14,9 @@ export const signIn = async (msalConfig) => {
   myMSALObj.loginRedirect(loginRequest)
 }
 
-export const signInRedeem = async (msalConfig, id_token_hint) => {
+export const signInRedeem = async (msalConfig, idTokenHint) => {
   const myMSALObj = new Msal.UserAgentApplication(msalConfig)
-  myMSALObj.loginRedirect({ ...loginRequest, extraQueryParameters: { id_token_hint } })
+  myMSALObj.loginRedirect({ ...loginRequest, extraQueryParameters: { id_token_hint: idTokenHint } })
 }
 
 export const register = async (msalRegisterConfig) => {

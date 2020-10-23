@@ -5,9 +5,10 @@ import Router from 'next/router'
 import AccessChecker from 'components/common/AccessChecker'
 import Content from '../content.json'
 import ReturnTo from 'components/common/ReturnTo'
-import { changePasswordLink, signInToken } from '../src/actions/authenticate'
+import { signInToken } from '../src/actions/authenticate'
 import { b2cPolicies } from '../src/auth/config'
 import { PrivateRoute } from 'components/common/PrivateRoute'
+import Breadcrumbs from 'components/common/Breadcrumbs'
 
 const page = 'Profile'
 
@@ -58,14 +59,7 @@ class Profile extends Component {
         <PrivateRoute redirect={'/'} />
         <ReturnTo parentPath={this.props.router.asPath} />
         <div className='govuk-width-container'>
-          <div className='govuk-breadcrumbs'>
-            <ol className='govuk-breadcrumbs__list'>
-              <li className='govuk-breadcrumbs__list-item'>
-                <a className='govuk-breadcrumbs__link' href={Content['Home'].Url}>{Content['Home'].Page}</a>
-              </li>
-              <li className='govuk-breadcrumbs__list-item' aria-current='page'>{Content[page].Page}</li>
-            </ol>
-          </div>
+          <Breadcrumbs items={[{ text: page }]} />
           <main className='govuk-main-wrapper' id='main-content' role='main'>
             <div className='govuk-grid-row'>
               <div className='govuk-grid-column-full'>

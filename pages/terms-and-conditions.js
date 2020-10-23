@@ -3,8 +3,9 @@ import Content from '../content.json'
 import AccessChecker from 'components/common/AccessChecker'
 import ReturnTo from 'components/common/ReturnTo'
 import ContentBuilder from 'components/common/ContentBuilder'
+import Breadcrumbs from 'components/common/Breadcrumbs'
 
-const page = 'TermsAndConditions'
+const page = 'Terms and conditions'
 
 const TermsAndConditions = ({ msalConfig, router }) => {
   return (
@@ -12,14 +13,7 @@ const TermsAndConditions = ({ msalConfig, router }) => {
       <AccessChecker msalConfig={msalConfig} />
       <ReturnTo parentPath={router.asPath} />
       <div className='govuk-width-container'>
-        <div className='govuk-breadcrumbs'>
-          <ol className='govuk-breadcrumbs__list'>
-            <li className='govuk-breadcrumbs__list-item'>
-              <a className='govuk-breadcrumbs__link' href={Content['Home'].Url}>{Content['Home'].Page}</a>
-            </li>
-            <li className='govuk-breadcrumbs__list-item' aria-current='page'>{Content[page].Page}</li>
-          </ol>
-        </div>
+        <Breadcrumbs items={[{ text: page }]} />
         <main className='govuk-main-wrapper' id='main-content' role='main'>
           <div className='govuk-grid-row'>
             <div className='govuk-grid-column-full'>

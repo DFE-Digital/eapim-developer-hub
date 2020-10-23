@@ -4,6 +4,8 @@ import AccessChecker from 'components/common/AccessChecker'
 import ReturnTo from 'components/common/ReturnTo'
 import ContentBuilder from 'components/common/ContentBuilder'
 
+import Breadcrumbs from 'components/common/Breadcrumbs'
+
 const page = 'Cookies'
 
 const Cookies = ({ msalConfig, router }) => {
@@ -12,6 +14,7 @@ const Cookies = ({ msalConfig, router }) => {
       <AccessChecker msalConfig={msalConfig} />
       <ReturnTo parentPath={router.asPath} />
       <div className='govuk-width-container'>
+        <Breadcrumbs items={[{ text: page }]} />
         <div className='govuk-breadcrumbs'>
           <ol className='govuk-breadcrumbs__list'>
             <li className='govuk-breadcrumbs__list-item'>

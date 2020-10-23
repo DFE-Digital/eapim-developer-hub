@@ -1,60 +1,51 @@
-import React, { Component, Fragment } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import Content from '../../content.json'
 import AccessChecker from 'components/common/AccessChecker'
 import SideBar from 'components/common/SideBar'
 import ReturnTo from 'components/common/ReturnTo'
 import ContentBuilder from 'components/common/ContentBuilder'
+import Breadcrumbs from 'components/common/Breadcrumbs'
 
+const parent = 'Documentation'
 const page = 'Terms of use'
 
-class TermsOfUse extends Component {
-  render () {
-    const {
-      user: { data }
-    } = this.props
+const TermsOfUse = ({ user, router, msalConfig }) => {
+  const { data } = user
 
-    let isLoggedIn = false
-    if (data && data.isAuthed) isLoggedIn = true
+  let isLoggedIn = false
+  if (data && data.isAuthed) isLoggedIn = true
 
-    return (
-      <Fragment>
-        <AccessChecker msalConfig={this.props.msalConfig} />
-        <ReturnTo parentPath={this.props.router.asPath} />
-        <div className='govuk-width-container'>
-          <div className='govuk-breadcrumbs'>
-            <ol className='govuk-breadcrumbs__list'>
-              <li className='govuk-breadcrumbs__list-item'>
-                <a className='govuk-breadcrumbs__link' href={Content['Home'].Url}>{Content['Home'].Page}</a>
-              </li>
-              <li className='govuk-breadcrumbs__list-item'>
-                <a className='govuk-breadcrumbs__link' href='/documentation'>Documentation</a>
-              </li>
-              <li className='govuk-breadcrumbs__list-item' aria-current='page'>{Content.Documentation[page].Page}</li>
-            </ol>
-          </div>
-          <section className='mainWrapper govuk-!-margin-top-7'>
-            <aside className='sideBar'>
-              <div className='sideBar_content'>
-                <SideBar nav={Content.Documentation} loggedIn={isLoggedIn} />
-              </div>
-            </aside>
+  return (
+    <>
+      <AccessChecker msalConfig={msalConfig} />
+      <ReturnTo parentPath={router.asPath} />
+      <div className='govuk-width-container'>
+        <Breadcrumbs items={[
+          { text: parent, href: `/${router.asPath.split('/')[1]}` },
+          { text: page }
+        ]} />
+        <section className='mainWrapper govuk-!-margin-top-7'>
+          <aside className='sideBar'>
+            <div className='sideBar_content'>
+              <SideBar nav={Content.Documentation} loggedIn={isLoggedIn} />
+            </div>
+          </aside>
 
-            <main className='mainContent' id='main-content' role='main'>
-              <div className='govuk-main-wrapper govuk-!-padding-top-0'>
-                <div className='govuk-grid-row'>
-                  <div className='govuk-grid-column-full'>
-                    <h1 className='govuk-heading-xl'>{Content.Documentation[page].Page}</h1>
-                    <ContentBuilder sectionNav={false} data={Content.Documentation[page].Content.Body} />
-                  </div>
+          <main className='mainContent' id='main-content' role='main'>
+            <div className='govuk-main-wrapper govuk-!-padding-top-0'>
+              <div className='govuk-grid-row'>
+                <div className='govuk-grid-column-full'>
+                  <h1 className='govuk-heading-xl'>{Content.Documentation[page].Page}</h1>
+                  <ContentBuilder sectionNav={false} data={Content.Documentation[page].Content.Body} />
                 </div>
               </div>
-            </main>
-          </section>
-        </div>
-      </Fragment>
-    )
-  }
+            </div>
+          </main>
+        </section>
+      </div>
+    </>
+  )
 }
 
 const mapStateToProps = (state) => {
@@ -65,5 +56,4 @@ const mapStateToProps = (state) => {
 
 TermsOfUse.displayName = page
 
-export { TermsOfUse }
 export default connect(mapStateToProps)(TermsOfUse)

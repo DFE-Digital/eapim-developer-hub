@@ -7,6 +7,7 @@ import ValidationMessages from 'components/common/forms/validation-messages'
 import Radio from 'components/common/form/radio'
 import Input from 'components/common/form/input'
 import Textarea from 'components/common/form/textarea'
+import Breadcrumbs from 'components/common/Breadcrumbs'
 
 import { send } from '../lib/emailService'
 import { template } from '../emails/support'
@@ -105,14 +106,7 @@ const Support = ({ router }) => {
     <Fragment>
       <ReturnTo parentPath={router.asPath} />
       <div className='govuk-width-container'>
-        <div className='govuk-breadcrumbs'>
-          <ol className='govuk-breadcrumbs__list'>
-            <li className='govuk-breadcrumbs__list-item'>
-              <a className='govuk-breadcrumbs__link' href={Content['Home'].Url}>{Content['Home'].Page}</a>
-            </li>
-            <li className='govuk-breadcrumbs__list-item' aria-current='page'>{Content[page].Page}</li>
-          </ol>
-        </div>
+        <Breadcrumbs items={[{ text: page }]} />
         <main className='govuk-main-wrapper' id='main-content' role='main'>
           <div className='govuk-grid-row'>
             <div className='govuk-grid-column-three-quarters'>

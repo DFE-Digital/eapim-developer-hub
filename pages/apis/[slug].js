@@ -4,6 +4,7 @@ import Content from '../../content.json'
 import AccessChecker from 'components/common/AccessChecker'
 import SideBar from 'components/common/SideBar'
 import ReturnTo from 'components/common/ReturnTo'
+import Breadcrumbs from 'components/common/Breadcrumbs'
 
 import ErrorPage from 'components/ErrorPage'
 import DfEAPIInformation from 'components/DfEAPIInformation'
@@ -12,6 +13,8 @@ import AttendanceAPIInformation from 'components/AttendanceAPIInformation'
 
 import { getApis, getApiTags } from '../../lib/apiServices'
 import getInitialPropsErrorHandler from '../../lib/getInitialPropsErrorHandler'
+
+const parent = 'APIs'
 
 const ApiDetails = ({ api, router, msalConfig, user }) => {
   let isLoggedIn = false
@@ -40,17 +43,10 @@ const ApiDetails = ({ api, router, msalConfig, user }) => {
       <AccessChecker msalConfig={msalConfig} />
       <ReturnTo parentPath={router.asPath} />
       <div className='govuk-width-container'>
-        <div className='govuk-breadcrumbs'>
-          <ol className='govuk-breadcrumbs__list'>
-            <li className='govuk-breadcrumbs__list-item'>
-              <a className='govuk-breadcrumbs__link' href={Content['Home'].Url}>{Content['Home'].Page}</a>
-            </li>
-            <li className='govuk-breadcrumbs__list-item'>
-              <a className='govuk-breadcrumbs__link' href={Content['Apis'].APIs.Url}>{Content['Apis'].APIs.Page}</a>
-            </li>
-            <li className='govuk-breadcrumbs__list-item' aria-current='page'>{(api ? api.properties.displayName : '')}</li>
-          </ol>
-        </div>
+        <Breadcrumbs items={[
+          { text: parent, href: `/${router.asPath.split('/')[1]}` },
+          { text: api ? api.properties.displayName : '' }
+        ]} />
         <section className='mainWrapper govuk-!-margin-top-7'>
           <aside className='sideBar'>
             <div className='sideBar_content'>
