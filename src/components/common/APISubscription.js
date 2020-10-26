@@ -12,8 +12,9 @@ const statusType = {
   suspended: { tag: 'yellow', button: 'cancel' }
 }
 
-const APISubscription = ({ applicationId, api, environment, subscription, onSubscriptionChange }) => {
-  const apiName = api.name
+const APISubscription = ({ applicationId, tag, subscription, onSubscriptionChange }) => {
+  const apiName = tag.apiName
+  const environment = tag.environment
 
   const [subscribing, setSubscribing] = useState(false)
   const [fetching, setFetching] = useState(false)
@@ -67,7 +68,7 @@ const APISubscription = ({ applicationId, api, environment, subscription, onSubs
 
   const renderCancelButton = (subId) => {
     return (
-      <a href={`/applications/${applicationId}/unsubscribe/${subId}`} role='button' className='govuk-button govuk-button--warning govuk-!-margin-0'>
+      <a href={`/applications/${applicationId}/unsubscribe/${subId}-${tag.environment}`} role='button' className='govuk-button govuk-button--warning govuk-!-margin-0'>
        Unsubscribe
       </a>
     )
@@ -80,7 +81,7 @@ const APISubscription = ({ applicationId, api, environment, subscription, onSubs
       <table className='govuk-table govuk-!-margin-bottom-6' key={`${applicationId}-${environment}`}>
         <thead className='govuk-table__head'>
           <tr className='govuk-table__row'>
-            <th scope='row' className='govuk-table__header govuk-!-width-one-half'>{environment}</th>
+            <th scope='row' className='govuk-table__header govuk-!-width-one-half'>{tag.name}</th>
             <td scope='row' className='govuk-table__cell govuk-!-width-one-half govuk-table__header--numeric'>
               {renderSubscribeButton()}
             </td>
@@ -96,7 +97,7 @@ const APISubscription = ({ applicationId, api, environment, subscription, onSubs
     <table className='govuk-table govuk-!-margin-bottom-6' key={`${applicationId}-${environment}`}>
       <thead className='govuk-table__head'>
         <tr className='govuk-table__row'>
-          <th scope='row' className='govuk-table__header govuk-!-width-one-half'>{environment}</th>
+          <th scope='row' className='govuk-table__header govuk-!-width-one-half'>{tag.name}</th>
           <td scope='row' className='govuk-table__cell govuk-!-width-one-half govuk-table__header--numeric'>
             {state.button === 'cancel' ? renderCancelButton(subscription.id) : renderSubscribeButton()}
           </td>
@@ -113,18 +114,18 @@ const APISubscription = ({ applicationId, api, environment, subscription, onSubs
           <>
             <tr className='govuk-table__row'>
               <th scope='row' className='govuk-table__header govuk-!-font-weight-regular middle'>API endpoint</th>
-              <td className='govuk-table__cell middle'>{api.tags[`${environment.toLowerCase()}Url`]}</td>
+              <td className='govuk-table__cell middle'>{tag.url}</td>
             </tr>
-            {api.tags.tokenEndpoint !== '' && (
+            {tag.tokenEndpoint !== '' && (
               <tr className='govuk-table__row'>
                 <th scope='row' className='govuk-table__header govuk-!-font-weight-regular middle'>Token endpoint</th>
-                <td className='govuk-table__cell middle'>{api.tags.tokenEndpoint}</td>
+                <td className='govuk-table__cell middle'>{tag.tokenEndpoint}</td>
               </tr>
             )}
-            {api.tags.authEndpoint !== '' && (
+            {tag.authEndpoint !== '' && (
               <tr className='govuk-table__row'>
                 <th scope='row' className='govuk-table__header govuk-!-font-weight-regular middle'>Authorisation endpoint</th>
-                <td className='govuk-table__cell middle text-wrap'><code className='code--block inline'>{api.tags.authEndpoint}</code></td>
+                <td className='govuk-table__cell middle text-wrap'><code className='code--block inline'>{tag.authEndpoint}</code></td>
               </tr>
             )}
             <tr className='govuk-table__row'>

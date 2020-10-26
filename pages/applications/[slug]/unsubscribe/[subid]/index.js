@@ -65,6 +65,9 @@ const Unsubscribe = ({ application, subscription, router, msalConfig }) => {
 
 Unsubscribe.getInitialProps = async ({ req, res, query }) => {
   if (req && req.method === 'GET') {
+    const subid = query.subid.substr(0, query.subid.lastIndexOf('-'))
+    const environment = query.subid.split('-').pop()
+
     try {
       const application = await getApplication(query.slug)
       const subscriptions = await getSubscriptions(application.applicationId)
@@ -72,7 +75,7 @@ Unsubscribe.getInitialProps = async ({ req, res, query }) => {
       if (!application) return getInitialPropsErrorHandler(res, 404)
 
       application.subscriptions = subscriptions
-      const subscription = subscriptions.find(sub => sub.id === query.subid)
+      const subscription = subscriptions.find(sub => sub.id === subid && sub.environment === environment)
 
       return {
         id: query.slug,

@@ -2,7 +2,6 @@ import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import AccessChecker from 'components/common/AccessChecker'
 import Content from '../../content.json'
-import { storeApi } from 'actions/apis'
 import SideBar from 'components/common/SideBar'
 import ReturnTo from 'components/common/ReturnTo'
 import ErrorPage from 'components/ErrorPage'
@@ -13,13 +12,7 @@ import getInitialPropsErrorHandler from '../../lib/getInitialPropsErrorHandler'
 
 const page = 'APIs'
 
-const Apis = ({ storeApi, user, apis, router, msalConfig }) => {
-  const selectApi = (e, api) => {
-    e.preventDefault()
-    storeApi(api)
-    router.push('/apis/[slug]', `/apis/${api.name}`)
-  }
-
+const Apis = ({ user, apis, router, msalConfig }) => {
   let isLoggedIn = false
   if (user.data && user.data.isAuthed) isLoggedIn = true
 
@@ -29,7 +22,7 @@ const Apis = ({ storeApi, user, apis, router, msalConfig }) => {
     return (
       <tr className='govuk-table__row' key={i}>
         <th scope='row' className={`govuk-table__header ${(api.requiresAuth && !isLoggedIn) ? ' lock' : ''}`}>
-          <a href='#' onClick={(e) => selectApi(e, api)}>{api.properties.displayName}</a>
+          <a href={`/apis/${api.name}`}>{api.properties.displayName}</a>
         </th>
         <td className='govuk-table__cell govuk-table__cell--numeric'>
           <strong className={'govuk-tag govuk-tag-round' + (api.flag ? ` ${api.flag}` : '')}>
@@ -96,4 +89,4 @@ const mapStateToProps = (state) => {
 Apis.displayName = 'APIs listing'
 
 export { Apis }
-export default connect(mapStateToProps, { storeApi })(Apis)
+export default connect(mapStateToProps)(Apis)

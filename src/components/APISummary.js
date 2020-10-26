@@ -4,6 +4,8 @@ import ReactHtmlParser from 'react-html-parser'
 import APISummaryBuilder from 'components/APISummaryBuilder'
 
 const APISummary = ({ api, summary }) => {
+  if (!summary) return null
+
   const sectionTitles = summary.sections.map(section => section.title)
 
   return (

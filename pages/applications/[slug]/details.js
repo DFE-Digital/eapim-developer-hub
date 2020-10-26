@@ -14,11 +14,7 @@ import { getApplication } from '../../../lib/applicationService'
 
 const page = 'Application details'
 
-const ApplicationDetails = ({ id, user, error, application, router, msalConfig }) => {
-  console.log('id', id)
-  console.log('error', error)
-  console.log('application', application)
-
+const ApplicationDetails = ({ user, application, router, msalConfig }) => {
   if (!application) return <Loading />
 
   const { data } = user
@@ -131,8 +127,7 @@ ApplicationDetails.getInitialProps = async ({ query }) => {
   } catch (error) {
     console.log(`Error getting application: ${error}`)
     return {
-      error,
-      id: query.slug
+      status: 500
     }
   }
 }
