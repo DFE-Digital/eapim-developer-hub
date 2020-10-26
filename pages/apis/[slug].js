@@ -7,16 +7,15 @@ import ReturnTo from 'components/common/ReturnTo'
 import Breadcrumbs from 'components/common/Breadcrumbs'
 
 import ErrorPage from 'components/ErrorPage'
-import DfEAPIInformation from 'components/DfEAPIInformation'
+import APISummary from 'components/APISummary'
 import SchoolAPIInformation from 'components/SchoolAPIInformation'
-import AttendanceAPIInformation from 'components/AttendanceAPIInformation'
 
-import { getApis, getApiTags } from '../../lib/apiServices'
+import { getApis, getApiTags, getSummary } from '../../lib/apiServices'
 import getInitialPropsErrorHandler from '../../lib/getInitialPropsErrorHandler'
 
 const parent = 'APIs'
 
-const ApiDetails = ({ api, router, msalConfig, user }) => {
+const ApiDetails = ({ api, summary, router, msalConfig, user }) => {
   let isLoggedIn = false
   if (user.data && user.data.isAuthed) isLoggedIn = true
 
@@ -29,14 +28,9 @@ const ApiDetails = ({ api, router, msalConfig, user }) => {
     case 'schools-information-api':
       informationComonent = <SchoolAPIInformation msalConfig={msalConfig} selectedApi={api} isLoggedIn={isLoggedIn} />
       break
-    case 'AttendanceApi_V1':
-      informationComonent = <AttendanceAPIInformation msalConfig={msalConfig} selectedApi={api} isLoggedIn={isLoggedIn} />
-      break
     default:
-      informationComonent = <DfEAPIInformation selectedApi={api} isLoggedIn={isLoggedIn} />
+      informationComonent = <APISummary api={api} summary={summary} />
   }
-
-  console.log(api)
 
   return (
     <Fragment>
@@ -75,9 +69,11 @@ ApiDetails.getInitialProps = async ({ res, query }) => {
     const api = apis.find(api => api.name === query.slug)
     api.tags = await getApiTags(api.name)
 
+    const summary = await getSummary(api.tags.summary)
+
     if (!api) return getInitialPropsErrorHandler(res, 404)
 
-    return { api }
+    return { api, summary }
   } catch (error) {
     console.log(`Error fetching apis: ${error}`)
     return getInitialPropsErrorHandler(res, 500, error)
