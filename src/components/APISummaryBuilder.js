@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactHtmlParser from 'react-html-parser'
+import Highlight from 'react-highlight.js'
 
 const builder = (item) => {
   switch (item.type) {
@@ -7,7 +8,11 @@ const builder = (item) => {
     case 'H4': return <h4 className='govuk-heading-s'>{ReactHtmlParser(item.body)}</h4>
     case 'HR': return <hr className='govuk-section-break govuk-section-break--visible govuk-!-margin-top-6 govuk-!-margin-bottom-6' />
     case 'P': return <p className='govuk-body'>{ReactHtmlParser(item.body)}</p>
-    case 'CODE': return <code className='code--block'>{ReactHtmlParser(item.body)}</code>
+    case 'CODE': return (
+      <Highlight language='javascript'>
+        <div>{item.body}</div>
+      </Highlight>
+    )
     case 'UL':
     case 'OL': {
       const hasInner = typeof item.body[0] === 'object'

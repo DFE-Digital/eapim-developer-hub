@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import ReactHtmlParser from 'react-html-parser'
+import Highlight from 'react-highlight.js'
 import Details from 'components/common/Details'
 
 const ContentBuilder = ({ data, sectionNav }) => {
@@ -93,7 +94,13 @@ const ContentBuilder = ({ data, sectionNav }) => {
         }
         if (item.Type === 'DETAILS') return <Details title={item.Title} details={item.Description} key={i} />
 
-        if (item.Type === 'CODE') return <code key={i} className='code--block'>{item.Body}</code>
+        if (item.Type === 'CODE') {
+          return (
+            <Highlight language='csharp' key={i}>
+              <div>{item.Body}</div>
+            </Highlight>
+          )
+        }
 
         return null
       })}

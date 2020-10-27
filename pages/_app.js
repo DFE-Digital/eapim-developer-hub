@@ -74,6 +74,7 @@ class MyApp extends App {
           <link rel='apple-touch-icon' sizes='167x167' href='/assets/images/govuk-apple-touch-icon-167x167.png' />
           <link rel='apple-touch-icon' sizes='152x152' href='/assets/images/govuk-apple-touch-icon-152x152.png' />
           <link rel='apple-touch-icon' href='/assets/images/govuk-apple-touch-icon.png' />
+          <link rel='stylesheet' href='//highlightjs.org/static/demo/styles/github.css' />
           <meta name='viewport' content='width=device-width, initial-scale=1' />
           <meta property='og:title' content={title} />
           <script src='/assets/js/govuk-frontend.js' />
