@@ -11,7 +11,7 @@ const APISubscriptions = ({ applicationId, apis, subscriptions, loadedRef, onSub
             <div className='govuk-accordion__section-header'>
               <h2 className='govuk-accordion__section-heading'>
                 <span className='govuk-accordion__section-button' id='accordion-subscriptions-heading'>
-                  {api.name}
+                  {api.properties.displayName}
                 </span>
               </h2>
             </div>

@@ -113,7 +113,7 @@ const APISubscription = ({ applicationId, tag, subscription, onSubscriptionChang
         {subscription.state === 'active' && (
           <>
             <tr className='govuk-table__row'>
-              <th scope='row' className='govuk-table__header govuk-!-font-weight-regular middle'>API endpoint</th>
+              <th scope='row' className='govuk-table__header govuk-!-font-weight-regular middle'>API URL</th>
               <td className='govuk-table__cell middle'>{tag.url}</td>
             </tr>
             {tag.tokenEndpoint !== '' && (
