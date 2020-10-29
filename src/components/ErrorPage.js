@@ -36,7 +36,7 @@ const ErrorPage = ({ statusCode, router }) => {
             <div className='govuk-grid-column-full'>
               <h1 className='govuk-heading-xl'>{title}</h1>
               <p className='govuk-body'>{caption}</p>
-              <a href='/' className='govuk-link govuk-!-margin-top-7'>Go back to the homepage</a>
+              <a href='/' className='govuk-body govuk-link govuk-!-margin-top- govuk-!-margin-bottom-0'>Go back to the homepage</a>
             </div>
           </div>
         </main>
