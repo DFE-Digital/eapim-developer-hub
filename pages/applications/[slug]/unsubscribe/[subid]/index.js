@@ -4,13 +4,16 @@ import AccessChecker from 'components/common/AccessChecker'
 import Router from 'next/router'
 import ReturnTo from 'components/common/ReturnTo'
 import { PrivateRoute } from 'components/common/PrivateRoute'
+import ErrorPage from 'components/ErrorPage'
 
 import { getApplication } from '../../../../../lib/applicationService'
 import { getSubscriptions, deleteSubscription } from '../../../../../lib/subscriptionService'
 
 import getInitialPropsErrorHandler from '../../../../../lib/getInitialPropsErrorHandler'
 
-const Unsubscribe = ({ application, subscription, router, msalConfig }) => {
+const Unsubscribe = ({ application, subscription, router, msalConfig, errorCode }) => {
+  if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
+
   return (
     <>
       <AccessChecker msalConfig={msalConfig} />
@@ -65,17 +68,20 @@ const Unsubscribe = ({ application, subscription, router, msalConfig }) => {
 
 Unsubscribe.getInitialProps = async ({ req, res, query }) => {
   if (req && req.method === 'GET') {
-    const subid = query.subid.substr(0, query.subid.lastIndexOf('-'))
-    const environment = query.subid.split('-').pop()
-
     try {
-      const application = await getApplication(query.slug)
-      const subscriptions = await getSubscriptions(application.applicationId)
+      const subid = query.subid.substr(0, query.subid.lastIndexOf('-'))
+      const environment = query.subid.split('-').pop()
 
+      const application = await getApplication(query.slug)
       if (!application) return getInitialPropsErrorHandler(res, 404)
 
+      const subscriptions = await getSubscriptions(application.applicationId)
+      if (!subscriptions) return getInitialPropsErrorHandler(res, 404)
+
       application.subscriptions = subscriptions
+
       const subscription = subscriptions.find(sub => sub.id === subid && sub.environment === environment)
+      if (!subscription) return getInitialPropsErrorHandler(res, 404)
 
       return {
         id: query.slug,
@@ -83,11 +89,7 @@ Unsubscribe.getInitialProps = async ({ req, res, query }) => {
         subscription
       }
     } catch (error) {
-      console.log(`Error getting application: ${error}`)
-      return {
-        error,
-        id: query.slug
-      }
+      return getInitialPropsErrorHandler(res, 500, error)
     }
   }
 
@@ -99,11 +101,7 @@ Unsubscribe.getInitialProps = async ({ req, res, query }) => {
       res.writeHead(301, { Location: `/applications/${applicationId}/unsubscribe/confirmed` })
       res.end()
     } catch (error) {
-      console.log(`Error unsubscribing: ${error}`)
-      return {
-        error,
-        id: query.slug
-      }
+      return getInitialPropsErrorHandler(res, 500, error)
     }
   }
 }

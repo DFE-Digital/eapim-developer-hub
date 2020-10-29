@@ -1,9 +1,9 @@
 import React, { useRef, useState, useEffect, Fragment } from 'react'
+import ErrorPage from 'components/ErrorPage'
 import { connect } from 'react-redux'
 import Content from '../../../content.json'
 import AccessChecker from 'components/common/AccessChecker'
 import ReturnTo from 'components/common/ReturnTo'
-import { Loading } from 'components/common/Loading'
 import ContentBuilder from 'components/common/ContentBuilder'
 import { PrivateRoute } from 'components/common/PrivateRoute'
 import ApplicationSideBar from 'components/common/ApplicationSideBar'
@@ -17,7 +17,9 @@ import { getSubscriptions } from '../../../lib/subscriptionService'
 
 const page = 'API subscriptions'
 
-const ApplicationApiSubscriptions = ({ apis, application, subscriptions, router, msalConfig }) => {
+const ApplicationApiSubscriptions = ({ apis, application, subscriptions, router, msalConfig, errorCode }) => {
+  if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
+
   const [updateSubscriptions, setUpdateSubscriptions] = useState(subscriptions)
   const [refLoaded, setRefLoaded] = useState(null)
   const loadedRef = useRef(null)
@@ -30,9 +32,6 @@ const ApplicationApiSubscriptions = ({ apis, application, subscriptions, router,
   })
 
   const onSubscriptionChange = (subscriptions) => setUpdateSubscriptions(subscriptions)
-
-  if (!apis || apis.length === 0) return <Loading />
-  if (!application) return <Loading />
 
   return (
     <Fragment>
@@ -97,13 +96,15 @@ const ApplicationApiSubscriptions = ({ apis, application, subscriptions, router,
   )
 }
 
-ApplicationApiSubscriptions.getInitialProps = async ({ req, res, query }) => {
+ApplicationApiSubscriptions.getInitialProps = async ({ res, query }) => {
   try {
     const application = await getApplication(query.slug)
-    const apis = await getApis()
-    const subscriptions = await getSubscriptions(application.applicationId)
-
     if (!application) return getInitialPropsErrorHandler(res, 404)
+
+    const apis = await getApis()
+    if (!apis) return getInitialPropsErrorHandler(res, 404)
+
+    const subscriptions = await getSubscriptions(application.applicationId)
 
     await Promise.all(apis.map(async (api) => {
       api.tags = await getApiTags(api.name)
@@ -116,7 +117,6 @@ ApplicationApiSubscriptions.getInitialProps = async ({ req, res, query }) => {
       subscriptions
     }
   } catch (error) {
-    console.log(`Error fetching application: ${error}`)
     return getInitialPropsErrorHandler(res, 500, error)
   }
 }

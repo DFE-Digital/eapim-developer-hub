@@ -5,17 +5,18 @@ import Link from 'next/link'
 import AccessChecker from 'components/common/AccessChecker'
 import Content from '../../../content.json'
 import ReturnTo from 'components/common/ReturnTo'
-import { Loading } from 'components/common/Loading'
 import { clearApplication } from 'actions/application'
 import { PrivateRoute } from 'components/common/PrivateRoute'
 import ApplicationSideBar from 'components/common/ApplicationSideBar'
+import ErrorPage from 'components/ErrorPage'
 
 import { getApplication } from '../../../lib/applicationService'
+import getInitialPropsErrorHandler from '../../../lib/getInitialPropsErrorHandler'
 
 const page = 'Application details'
 
-const ApplicationDetails = ({ user, application, router, msalConfig }) => {
-  if (!application) return <Loading />
+const ApplicationDetails = ({ user, application, router, msalConfig, errorCode }) => {
+  if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
 
   const { data } = user
 
@@ -116,19 +117,17 @@ const ApplicationDetails = ({ user, application, router, msalConfig }) => {
   )
 }
 
-ApplicationDetails.getInitialProps = async ({ query }) => {
+ApplicationDetails.getInitialProps = async ({ res, query }) => {
   try {
     const application = await getApplication(query.slug)
+    if (!application) return getInitialPropsErrorHandler(res, 404)
 
     return {
       id: query.slug,
       application
     }
   } catch (error) {
-    console.log(`Error getting application: ${error}`)
-    return {
-      status: 500
-    }
+    return getInitialPropsErrorHandler(res, 500, error)
   }
 }
 

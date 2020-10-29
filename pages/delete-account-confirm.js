@@ -6,10 +6,15 @@ import AccessChecker from 'components/common/AccessChecker'
 import Content from '../content.json'
 import ReturnTo from 'components/common/ReturnTo'
 import { PrivateRoute } from 'components/common/PrivateRoute'
+import ErrorPage from 'components/ErrorPage'
+
+import getInitialPropsErrorHandler from '../lib/getInitialPropsErrorHandler'
 
 const page = 'Profile'
 
-const DeleteAcountConfirm = ({ user, msalConfig, router }) => {
+const DeleteAcountConfirm = ({ user, msalConfig, router, errorCode }) => {
+  if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
+
   return (
     <Fragment>
       <AccessChecker msalConfig={msalConfig} />
@@ -59,11 +64,10 @@ const DeleteAcountConfirm = ({ user, msalConfig, router }) => {
   )
 }
 
-DeleteAcountConfirm.getInitialProps = async ({ req, res, store }) => {
+DeleteAcountConfirm.getInitialProps = async ({ req, res }) => {
   if (req && req.method === 'POST') {
-    const { userName, userEmail, userID } = req.body
-
     try {
+      const { userName, userEmail, userID } = req.body
       const url = `${process.env.PLATFORM_API_URL}/Account`
 
       const response = await fetch(url, {
@@ -72,7 +76,9 @@ DeleteAcountConfirm.getInitialProps = async ({ req, res, store }) => {
         body: JSON.stringify({ userName, userEmail, userID })
       })
 
-      if (response.status !== 204) throw new Error('Error deleting account')
+      if (response.status !== 204) {
+        return getInitialPropsErrorHandler(res, response.status)
+      }
 
       res.setHeader('x-deleted-account', 'true')
       res.redirect('/?account=deleted')
@@ -80,7 +86,7 @@ DeleteAcountConfirm.getInitialProps = async ({ req, res, store }) => {
 
       return {}
     } catch (error) {
-      console.log(error)
+      return getInitialPropsErrorHandler(res, 500, error)
     }
   } else {
     return { status: 200 }

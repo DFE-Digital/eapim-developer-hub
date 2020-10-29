@@ -3,20 +3,20 @@ import Content from '../../content.json'
 import ReturnTo from 'components/common/ReturnTo'
 
 const ErrorPage = ({ statusCode, router }) => {
-  let message
+  let title
   let caption
 
   switch (statusCode) {
     case 404:
-      message = 'Not Found'
-      caption = 'Page not found'
+      title = 'Page not found.'
+      caption = 'If you entered a web address please check it was correct.'
       break
     case 500:
-      message = 'Server Error'
+      title = 'Server Error'
       caption = 'Page contains a server error'
       break
     default:
-      message = 'Server Error'
+      title = 'Server Error'
       caption = 'Page contains a server error'
   }
 
@@ -34,8 +34,9 @@ const ErrorPage = ({ statusCode, router }) => {
         <main className='govuk-main-wrapper' id='main-content' role='main'>
           <div className='govuk-grid-row'>
             <div className='govuk-grid-column-full'>
-              <h1 className='govuk-heading-xl'>{statusCode} {message}</h1>
+              <h1 className='govuk-heading-xl'>{title}</h1>
               <p className='govuk-body'>{caption}</p>
+              <a href='/' className='govuk-link govuk-!-margin-top-7'>Go back to the homepage</a>
             </div>
           </div>
         </main>

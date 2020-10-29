@@ -3,15 +3,16 @@ import { connect } from 'react-redux'
 import Content from '../../../content.json'
 import AccessChecker from 'components/common/AccessChecker'
 import ReturnTo from 'components/common/ReturnTo'
-import { Loading } from 'components/common/Loading'
 import ContentBuilder from 'components/common/ContentBuilder'
 import { getApplications, updateApplication } from 'actions/application'
 import { PrivateRoute } from 'components/common/PrivateRoute'
 import ApplicationSideBar from 'components/common/ApplicationSideBar'
 import ValidationMessages from 'components/common/forms/validation-messages'
+import Input from 'components/common/form/input'
+import ErrorPage from 'components/ErrorPage'
 
 import { getApplication } from '../../../lib/applicationService'
-import Input from 'components/common/form/input'
+import getInitialPropsErrorHandler from '../../../lib/getInitialPropsErrorHandler'
 
 import { isEmpty, isValidURL } from 'utils/validation'
 
@@ -191,9 +192,9 @@ class ApplicationRedirectUrls extends Component {
   }
 
   render () {
-    const { application } = this.props
+    const { application, router, errorCode } = this.props
 
-    if (!application) return <Loading />
+    if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
 
     return (
       <Fragment>
@@ -327,20 +328,17 @@ class ApplicationRedirectUrls extends Component {
   }
 }
 
-ApplicationRedirectUrls.getInitialProps = async ({ req, query }) => {
+ApplicationRedirectUrls.getInitialProps = async ({ res, query }) => {
   try {
     const application = await getApplication(query.slug)
+    if (!application) return getInitialPropsErrorHandler(res, 404)
 
     return {
       id: query.slug,
       application
     }
   } catch (error) {
-    console.log(`Error getting application: ${error}`)
-    return {
-      error,
-      id: query.slug
-    }
+    return getInitialPropsErrorHandler(res, 500, error)
   }
 }
 

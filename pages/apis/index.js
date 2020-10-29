@@ -12,11 +12,11 @@ import getInitialPropsErrorHandler from '../../lib/getInitialPropsErrorHandler'
 
 const page = 'APIs'
 
-const Apis = ({ user, apis, router, msalConfig }) => {
+const Apis = ({ user, apis, router, msalConfig, errorCode }) => {
+  if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
+
   let isLoggedIn = false
   if (user.data && user.data.isAuthed) isLoggedIn = true
-
-  if (!apis) return <ErrorPage statusCode={404} router={router} msalConfig={msalConfig} />
 
   const apiList = apis.map((api, i) => {
     return (
@@ -70,12 +70,10 @@ const Apis = ({ user, apis, router, msalConfig }) => {
 Apis.getInitialProps = async ({ res }) => {
   try {
     const apis = await getApis()
-
-    if (!apis || apis.length === 0) return getInitialPropsErrorHandler(res, 404)
+    if (!apis) return getInitialPropsErrorHandler(res, 404)
 
     return { apis }
   } catch (error) {
-    console.log(`Error fetching apis: ${error}`)
     return getInitialPropsErrorHandler(res, 500, error)
   }
 }

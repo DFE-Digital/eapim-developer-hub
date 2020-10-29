@@ -1,13 +1,16 @@
 import React from 'react'
 import Content from '../../../../content.json'
 
+import ErrorPage from 'components/ErrorPage'
 import AccessChecker from 'components/common/AccessChecker'
 import PrivateRoute from 'components/common/PrivateRoute'
 import ReturnTo from 'components/common/ReturnTo'
 
 import getInitialPropsErrorHandler from '../../../../lib/getInitialPropsErrorHandler'
 
-const UnsubscribeConfirmed = ({ applicationId, router, msalConfig }) => {
+const UnsubscribeConfirmed = ({ applicationId, router, msalConfig, errorCode }) => {
+  if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
+
   return (
     <>
       <AccessChecker msalConfig={msalConfig} />

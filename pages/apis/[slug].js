@@ -15,13 +15,13 @@ import getInitialPropsErrorHandler from '../../lib/getInitialPropsErrorHandler'
 
 const parent = 'APIs'
 
-const ApiDetails = ({ api, summary, router, msalConfig, user }) => {
+const ApiDetails = ({ api, summary, router, msalConfig, user, errorCode }) => {
+  if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
+
   let isLoggedIn = false
   if (user.data && user.data.isAuthed) isLoggedIn = true
 
   let informationComonent
-
-  if (!api) return <ErrorPage statusCode={404} router={router} msalConfig={msalConfig} />
 
   switch (api.name) {
     case 'SchoolsInformationApi_V1':
@@ -66,16 +66,18 @@ const ApiDetails = ({ api, summary, router, msalConfig, user }) => {
 ApiDetails.getInitialProps = async ({ res, query }) => {
   try {
     const apis = await getApis()
+    if (!apis) return getInitialPropsErrorHandler(res, 404)
+
     const api = apis.find(api => api.name === query.slug)
+    if (!api) return getInitialPropsErrorHandler(res, 404)
+
     api.tags = await getApiTags(api.name)
 
     const summary = await getSummary(api.tags.summary)
-
-    if (!api) return getInitialPropsErrorHandler(res, 404)
+    if (!summary) return getInitialPropsErrorHandler(res, 404)
 
     return { api, summary }
   } catch (error) {
-    console.log(`Error fetching apis: ${error}`)
     return getInitialPropsErrorHandler(res, 500, error)
   }
 }

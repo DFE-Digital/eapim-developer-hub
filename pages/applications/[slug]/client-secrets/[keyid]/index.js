@@ -2,6 +2,8 @@ import fetch from 'isomorphic-unfetch'
 import React, { useState } from 'react'
 import moment from 'moment'
 import { connect } from 'react-redux'
+
+import ErrorPage from 'components/ErrorPage'
 import AccessChecker from 'components/common/AccessChecker'
 import ReturnTo from 'components/common/ReturnTo'
 import { PrivateRoute } from 'components/common/PrivateRoute'
@@ -10,7 +12,9 @@ import getInitialPropsErrorHandler from '../../../../../lib/getInitialPropsError
 import { getApplication } from '../../../../../lib/applicationService'
 import clipboard from '../../../../../src/utils/clipboard'
 
-const ApplicationClientSecretsConfirm = ({ user, id, secret, applicationName, router, msalConfig, newClientKey, newClientKeyDisplayName, startDateTime, endDateTime }) => {
+const ApplicationClientSecretsConfirm = ({ user, id, secret, applicationName, router, msalConfig, errorCode, newClientKey, newClientKeyDisplayName, startDateTime, endDateTime }) => {
+  if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
+
   const [copied, setCopied] = useState(false)
 
   const copyToClipboard = (e, element) => {
@@ -110,9 +114,10 @@ ApplicationClientSecretsConfirm.getInitialProps = async ({ req, res, query }) =>
   if (req && req.method === 'GET') {
     try {
       const application = await getApplication(query.slug)
-      const secret = application.passwordCredentials.find(item => item.keyId === query.keyid)
+      if (!application) return getInitialPropsErrorHandler(res, 404)
 
-      if (!application || !secret) return getInitialPropsErrorHandler(res, 404)
+      const secret = application.passwordCredentials.find(item => item.keyId === query.keyid)
+      if (!secret) return getInitialPropsErrorHandler(res, 404)
 
       return {
         secret,
@@ -120,11 +125,7 @@ ApplicationClientSecretsConfirm.getInitialProps = async ({ req, res, query }) =>
         applicationName: application.applicationName
       }
     } catch (error) {
-      console.log(`Error getting application: ${error}`)
-      return {
-        error,
-        id: query.slug
-      }
+      return getInitialPropsErrorHandler(res, 500, error)
     }
   }
 

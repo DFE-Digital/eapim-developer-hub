@@ -6,10 +6,14 @@ import Router from 'next/router'
 import ReturnTo from 'components/common/ReturnTo'
 import { deleteApplication } from 'actions/application'
 import { PrivateRoute } from 'components/common/PrivateRoute'
+import ErrorPage from 'components/ErrorPage'
 
 import { getApplication } from '../../../lib/applicationService'
+import getInitialPropsErrorHandler from '../../../lib/getInitialPropsErrorHandler'
 
-const ApplicationDeleteConfirm = ({ user, application, router, msalConfig, deleteApplication }) => {
+const ApplicationDeleteConfirm = ({ user, application, router, msalConfig, errorCode, deleteApplication }) => {
+  if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
+
   const [deleting, setDeleting] = useState(false)
 
   const deleteConfirm = async () => {
@@ -80,20 +84,17 @@ const ApplicationDeleteConfirm = ({ user, application, router, msalConfig, delet
   )
 }
 
-ApplicationDeleteConfirm.getInitialProps = async ({ query }) => {
+ApplicationDeleteConfirm.getInitialProps = async ({ res, query }) => {
   try {
     const application = await getApplication(query.slug)
+    if (!application) return getInitialPropsErrorHandler(res, 404)
 
     return {
       id: query.slug,
       application
     }
   } catch (error) {
-    console.log(`Error getting application: ${error}`)
-    return {
-      error,
-      id: query.slug
-    }
+    return getInitialPropsErrorHandler(res, 500, error)
   }
 }
 

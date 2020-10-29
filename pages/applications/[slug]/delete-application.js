@@ -3,15 +3,16 @@ import Link from 'next/link'
 import Router from 'next/router'
 import AccessChecker from 'components/common/AccessChecker'
 import ReturnTo from 'components/common/ReturnTo'
-import { Loading } from 'components/common/Loading'
 import { PrivateRoute } from 'components/common/PrivateRoute'
+import ErrorPage from 'components/ErrorPage'
 
 import { getApplication } from '../../../lib/applicationService'
+import getInitialPropsErrorHandler from '../../../lib/getInitialPropsErrorHandler'
 
 const page = 'Delete application'
 
-const DeleteApplication = ({ application, router, msalConfig }) => {
-  if (!application) return <Loading />
+const DeleteApplication = ({ application, router, msalConfig, errorCode }) => {
+  if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
 
   return (
     <>
@@ -43,20 +44,17 @@ const DeleteApplication = ({ application, router, msalConfig }) => {
   )
 }
 
-DeleteApplication.getInitialProps = async ({ query }) => {
+DeleteApplication.getInitialProps = async ({ res, query }) => {
   try {
     const application = await getApplication(query.slug)
+    if (!application) return getInitialPropsErrorHandler(res, 404)
 
     return {
       id: query.slug,
       application
     }
   } catch (error) {
-    console.log(`Error getting application: ${error}`)
-    return {
-      error,
-      id: query.slug
-    }
+    return getInitialPropsErrorHandler(res, 500, error)
   }
 }
 

@@ -1,25 +1,22 @@
 import moment from 'moment'
 import React from 'react'
 import { connect } from 'react-redux'
-import { useRouter } from 'next/router'
 import Content from '../../../../content.json'
 
+import ErrorPage from 'components/ErrorPage'
 import ReturnTo from 'components/common/ReturnTo'
 import AccessChecker from 'components/common/AccessChecker'
-import { Loading } from 'components/common/Loading'
 import ContentBuilder from 'components/common/ContentBuilder'
 import { PrivateRoute } from 'components/common/PrivateRoute'
 import ApplicationSideBar from 'components/common/ApplicationSideBar'
 
 import { getApplication } from '../../../../lib/applicationService'
+import getInitialPropsErrorHandler from '../../../../lib/getInitialPropsErrorHandler'
 
 const page = 'Client secrets'
 
-const ApplicationClientSecrets = ({ id, user, application, msalConfig }) => {
-  const router = useRouter()
-
-  if (!id) return <Loading />
-  if (!application) return <Loading />
+const ApplicationClientSecrets = ({ id, application, router, msalConfig, errorCode }) => {
+  if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
 
   application.passwordCredentials.sort((a, b) => {
     if (a.displayName < b.displayName) { return -1 }
@@ -148,21 +145,18 @@ const mapStateToProps = (state) => {
   }
 }
 
-ApplicationClientSecrets.getInitialProps = async ({ req, query }) => {
+ApplicationClientSecrets.getInitialProps = async ({ req, res, query }) => {
   if (req && req.method === 'GET') {
     try {
       const application = await getApplication(query.slug)
+      if (!application) return getInitialPropsErrorHandler(res, 404)
 
       return {
         id: query.slug,
         application
       }
     } catch (error) {
-      console.log(`Error getting application: ${error}`)
-      return {
-        error,
-        id: query.slug
-      }
+      return getInitialPropsErrorHandler(res, 500, error)
     }
   }
 
