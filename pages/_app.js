@@ -64,8 +64,6 @@ class MyApp extends App {
       clientId: process.env.NEXT_PUBLIC_CLIENT_ID
     }
 
-    console.log('process', process.env)
-
     return (
       <>
         <Helmet>
