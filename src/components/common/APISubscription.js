@@ -116,13 +116,13 @@ const APISubscription = ({ applicationId, tag, subscription, onSubscriptionChang
               <th scope='row' className='govuk-table__header govuk-!-font-weight-regular middle'>API URL</th>
               <td className='govuk-table__cell middle'>{tag.url}</td>
             </tr>
-            {tag.tokenEndpoint !== '' && (
+            {tag.tokenEndpoint && (
               <tr className='govuk-table__row'>
                 <th scope='row' className='govuk-table__header govuk-!-font-weight-regular middle'>Token endpoint</th>
                 <td className='govuk-table__cell middle'>{tag.tokenEndpoint}</td>
               </tr>
             )}
-            {tag.authEndpoint !== '' && (
+            {tag.authEndpoint && (
               <tr className='govuk-table__row'>
                 <th scope='row' className='govuk-table__header govuk-!-font-weight-regular middle'>Authorisation endpoint</th>
                 <td className='govuk-table__cell middle text-wrap'><code className='code--block inline'>{tag.authEndpoint}</code></td>
