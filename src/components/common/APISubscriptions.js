@@ -19,6 +19,7 @@ const APISubscriptions = ({ applicationId, apis, subscriptions, loadedRef, onSub
             <div id='accordion-subscriptions' className='govuk-accordion__section-content' aria-labelledby='accordion-subscriptions-heading'>
               {api.tags.environments.map(tag => {
                 if (!tag.apiName) return null
+                if (tag.visible.toLowerCase() !== 'true') return null
 
                 const subscription = subscriptions.find(sub => sub.apiName.toLowerCase() === tag.apiName.toLowerCase() && sub.environment === tag.environment)
 
