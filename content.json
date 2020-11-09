@@ -48,7 +48,7 @@
     "Content": {
       "Hero": {
         "Heading": "DfE Developer Hub",
-        "Intro": "Connect to the Department for Education Digital services through our APIs",
+        "Intro": "Connect to the Department for Education digital services through our APIs.",
         "Register": "Create an account",
         "Signin": "sign in"
       },
@@ -122,7 +122,7 @@
         },
         {
           "Type": "P",
-          "Body": "Create an account with the DfE Developer Hub to gain access to APIs and their relevant subscription keys."
+          "Body": "You will need to create an account with the DfE Developer Hub to gain access to APIs and their subscription keys."
         },
         {
           "Type": "P",
@@ -134,11 +134,15 @@
         },
         {
           "Type": "P",
-          "Body": "Registering an application allows DfE to understand who is accessing our data and for what reasons. Once you have signed in go to <a href='/applications/registering-your-application' class='govuk-link'>Registering your application</a> and follow the process."
+          "Body": "You will need to register your application to help keep it and our data secure."
         },
         {
           "Type": "P",
-          "Body": "Registering an application is quick and easy and gives you access to a unique client identifier and secret(s) for use when calling DfE APIs. Using this client id and secret helps keep your applications and our data secure."
+          "Body": "To register an application, sign in to your account, go to <a href='/applications/registering-your-application' class='govuk-link'>registering your application</a> and follow the process."
+        },
+        {
+          "Type": "P",
+          "Body": "When you register you will receive a unique client ID and a client ‘secret’ - a kind of password. You will need these to call DfE APIs."
         },
         {
           "Type": "H2",
@@ -146,27 +150,29 @@
         },
         {
           "Type": "P",
-          "Body": "In order to integrate with a DfE API you must first subscribe to the required API so that you can get access to a subscription key. The subscription key is unique to each client for the DfE API. If you need to connect to multiple DfE APIs you must subscribe to each one."
+          "Body": "To integrate with a DfE API, you need to subscribe to the API. When you subscribe you will receive a subscription key that is unique to each client for the API. If you need to connect to more than one API, you must subscribe to each one."
         },
         {
           "Type": "P",
-          "Body": "You can subscribe to either the sandbox or production version of the API depending on where you are in your development process. It is advisable to subscribe to the sandbox API first to ensure your developed software is fully functional before moving it to production (utilising production subscription key)."
+          "Body": "To subscribe to an API:"
         },
         {
-          "Type": "P",
-          "Body": "Once you have registered your application you will be able to view your credential details and save them. Viewing your application details will allow you to click on the link Subscribe to APIs. Select the API you wish to integrate with and choose sandbox or production."
+          "Type": "OL",
+          "Body": [
+            "Register your application",
+            "View your application details (you can save these)",
+            "Click on 'Subscribe to APIs'",
+            "Select the API you want to integrate with",
+            "Choose 'sandbox' (when you’re building and testing your software) or'‘production' (when you know your software works properly)"
+          ]
         },
         {
           "Type": "H2",
-          "Body": "4. Getting subscription keys"
+          "Body": "4. Get a subscription key"
         },
         {
           "Type": "P",
-          "Body": "Before any subscription keys are produced an internal process is carried out to grant access. Depending on the setup of the API this process can take up to a maximum of 3 working days."
-        },
-        {
-          "Type": "P",
-          "Body": "Once your subscription request has been agreed an email notification will be sent out to the email address you have registered with."
+          "Body": "It can take up to 3 working days to receive a subscription key. When we have agreed your subscription request, we will email you at the address you registered with."
         },
         {
           "Type": "P",
@@ -177,45 +183,14 @@
           "Body": "The statuses are as follows:"
         },
         {
-          "Type": "TABLE",
-          "Body": {
-            "Headers": [
-              "Status",
-              "Description"
-            ],
-            "Rows": [
-              {
-                "Data": [
-                  "Pending approval",
-                  "The subscription request has been made and is pending DfE approval"
-                ]
-              },
-              {
-                "Data": [
-                  "Active",
-                  "The subscription is ready for use. A primary and secondary subscription key is displayed along with the URL"
-                ]
-              },
-              {
-                "Data": [
-                  "Rejected",
-                  "The subscription has been reviewed by DfE and they have rejected your request. A rejection reason will be displayed"
-                ]
-              },
-              {
-                "Data": [
-                  "Cancelled",
-                  "The subscription request has been cancelled by the user. DfE will not progress any further unless a new request is made"
-                ]
-              },
-              {
-                "Data": [
-                  "Suspended",
-                  "The subscription has been suspended. Contact support via the Support tab and complete the form to have the request unsuspended"
-                ]
-              }
-            ]
-          }
+          "Type": "UL",
+          "Body": [
+            "pending approval - you have made a subscription request and are waiting for us to approve it",
+            "active - the subscription is ready for you to use - a primary and secondary subscription key will be displayed with the URL",
+            "rejected - we have reviewed and rejected your subscription request - the reason will be displayed",
+            "cancelled - you have cancelled the subscription request and we will not progress any further unless you make a new request",
+            "suspended - the subscription request has been suspended - to unsuspend it, fill in the form in the 'Support' tab"
+          ]
         },
         {
           "Type": "H2",
@@ -223,42 +198,42 @@
         },
         {
           "Type": "P",
-          "Body": "When you first register an application, you are required to provide a redirect URL. You can add and edit up to five redirect URLs."
+          "Body": "When you first register an application, you must provide a redirect URL. You can add and edit up to 5 redirect URLs."
         },
         {
           "Type": "P",
-          "Body": "We use redirect URLs to send the user back to your application after successful (or unsuccessful) authorisation, prior to your application accessing <a href='/documentation/authorisation#user-restricted-endpoints' class='govuk-link'>user-restricted endpoints</a>."
+          "Body": "Redirect URLs send the user back to your application after successful (or unsuccessful) authorisation, before your application accesses <a href='/documentation/authorisation#user-restricted-endpoints' class='govuk-link'>user-restricted endpoints</a>."
         },
         {
           "Type": "P",
-          "Body": "You must specify one redirect URL when you register your application, and also specify one redirect URL when you send your user to our authorisation endpoint. Multiple redirect URLs can be added at a later stage if required."
+          "Body": "You must specify one redirect URL when you register your application and one when you send your user to our authorisation endpoint. You can add more redirect URLs later if you need to."
         },
         {
           "Type": "P",
-          "Body": "To protect your application from phishing attacks, the redirect URL you use for authorisation (in your call to DfE authorisation endpoint) must match one of those you specified when you registered your application."
+          "Body": "The redirect URL you use for authorisation in your call to the DfE authorisation endpoint must match one of those you specified when you registered your application. This will protect your application from phishing attacks."
         },
         {
           "Type": "H2",
-          "Body": "6. Calling an API"
+          "Body": "6. Call an API"
         },
         {
           "Type": "P",
-          "Body": "Once all of the previous 5 steps have been completed you will have access to the required elements to make an API call:"
+          "Body": "When you have subscribed to an API and received your subscription key, you’ll have everything you need to make an API call:"
         },
         {
           "Type": "OL",
           "Body": [
             "The DfE API URL and endpoint",
-            "A unique client id and secret",
-            "A unique API subscription key",
-            "A registered redirect URL",
-            "An OAuth 2.0 token endpoint (for an application-restricted endpoint)",
-            "An OAuth 2.0 authorisation URL (for a user-restricted endpoint)"
+            "your unique client ID and secret",
+            "your unique API subscription key",
+            "registered redirect URL",
+            "OAuth 2.0 token endpoint (for an application-restricted endpoint)",
+            "OAuth 2.0 authorisation URL (for a user-restricted endpoint)"
           ]
         },
         {
           "Type": "P",
-          "Body": "If you require assistance in making the API calls, see our <a href='/documentation/tutorials' class='govuk-link'>Tutorials</a>."
+          "Body": "If you need help making an API, see our <a href='/documentation/tutorials' class='govuk-link'>Tutorials</a>."
         }
       ]
     },
@@ -268,119 +243,23 @@
       "Content": [
         {
           "Type": "H2",
-          "Body": "Introduction"
+          "Body": "Endpoint types"
         },
         {
           "Type": "P",
-          "Body": "Our APIs have 3 types of endpoint. Each endpoint has its own:"
+          "Body": "DfE APIs have 3 types of endpoint:"
         },
         {
-          "Type": "BL",
+          "Type": "UL",
           "Body": [
-            "Access level",
-            "Authorisation token",
-            "Authorisation procedure"
+            "open access",
+            "application-restricted",
+            "user-restricted"
           ]
         },
         {
-          "Type": "H2",
-          "Body": "Endpoint types and their required tokens"
-        },
-        {
-          "Type": "TABLE",
-          "Body": {
-            "Headers": [
-              "Endpoint access level",
-              "Required authorisation token"
-            ],
-            "Rows": [
-              {
-                "Data": [
-                  "Open access",
-                  "No token required (subscription key needed)"
-                ]
-              },
-              {
-                "Data": [
-                  "Application-restricted",
-                  "OAuth 2.0 access token (subscription key needed)\nGenerated using <a href='https://oauth.net/2/grant-types/client-credentials' class='govuk-link' target='_blank'>OAuth 2.0 Client Credentials Grant</a>"
-                ]
-              },
-              {
-                "Data": [
-                  "User-restricted",
-                  "OAuth 2.0 access token (subscription key needed)\nGenerated using <a href='https://oauth.net/2/grant-types/authorization-code' class='govuk-link' target='_blank'>OAuth 2.0 Authorisation Code Grant</a>"
-                ]
-              }
-            ]
-          }
-        },
-        {
           "Type": "P",
-          "Body": "As per the latest <a href='https://tools.ietf.org/html/draft-ietf-oauth-security-topics-13#section-3.4' class='govuk-link' target='_blank'>OAuth 2.0 Security Best Current Practice</a> DfE API's do not support implicit and password OAuth grant types."
-        },
-        {
-          "Type": "H2",
-          "Body": "Credentials"
-        },
-        {
-          "Type": "P",
-          "Body": "Your credentials are your client id and your client secret. Developer Hub supplies two active client secrets (primary and secondary) at any one time."
-        },
-        {
-          "Type": "P",
-          "Body": "Credentials are used:"
-        },
-        {
-          "Type": "BL",
-          "Body": [
-            "To identify and authorise your application during each step of the journey",
-            "When you test your application with sandbox APIs or run against the production APIs"
-          ]
-        },
-        {
-          "Type": "H3",
-          "Body": "Client id"
-        },
-        {
-          "Type": "P",
-          "Body": "Your client id is a unique identifier we create when you register your application on the Developer Hub."
-        },
-        {
-          "Type": "H3",
-          "Body": "Client secrets"
-        },
-        {
-          "Type": "P",
-          "Body": "Client secrets are unique passphrases that you generate to authorise your application. They are known only to your application and the authorising server."
-        },
-        {
-          "Type": "P",
-          "Body": "The client secret is the equivalent of a password and should not be stored in plain text. Only store an encrypted version of the client secret to reduce the chance of it being compromised."
-        },
-        {
-          "Type": "H3",
-          "Body": "Rotate your client secret regularly"
-        },
-        {
-          "Type": "P",
-          "Body": "Rotate your application's client secret to shorten the period an access key is active, reducing the impact to your business if it is compromised."
-        },
-        {
-          "Type": "P",
-          "Body": "To rotate your client secret:"
-        },
-        {
-          "Type": "OL",
-          "Body": [
-            "Once you register your application, your application is assigned two secrets (primary and secondary)",
-            "These secrets are usually valid for 2 years",
-            "Use the primary secret along with the client id to integrate with DfE APIs",
-            "If you need to rotate your primary secret, login to the Developer Hub and check that your secondary secret for the application has a reasonable amount of time remaining until expiry (e.g. 6 months at least)",
-            "Update your application to use the secondary secret",
-            "Check that your application is working with the secondary secret",
-            "Regenerate your primary secret"
-          ]
+          "Body": "Each type of endpoint has a different level of authorisation."
         },
         {
           "Type": "H2",
@@ -388,11 +267,22 @@
         },
         {
           "Type": "P",
-          "Body": "These endpoints are the least restricted and service general data held by the department. These endpoints only require a subscription key to be passed and there is no requirement for an access token. These endpoints usually allow self-approval for subscriptions."
+          "Body": "Open access endpoints are the least restricted type of endpoint and service general data held by DfE."
         },
         {
           "Type": "P",
-          "Body": "For more information, see the open access endpoint in the <a href='/documentation/tutorials#accessing-an-open-endpoint' class='govuk-link'>Tutorials</a> section."
+          "Body": "Open access endpoints:"
+        },
+        {
+          "Type": "UL",
+          "Body": [
+            "only need a valid API subscription key to be passed (no access token)",
+            "usually allow self-approval for subscriptions"
+          ]
+        },
+        {
+          "Type": "P",
+          "Body": "For more information, see the open access endpoint in the <a href='/documentation/tutorials' class='govuk-link'>tutorials</a> section."
         },
         {
           "Type": "H2",
@@ -400,19 +290,34 @@
         },
         {
           "Type": "P",
-          "Body": "Application-restricted endpoints do not require authorisation from the end user. These endpoints do not give access to sensitive personal data."
+          "Body": "Application-restricted endpoints do not need to be authorised by the end user. These endpoints do not give access to sensitive personal data."
         },
         {
           "Type": "P",
-          "Body": "We use the open standard <a href='https://oauth.net/2/' class='govuk-link' target='_blank'>OAuth 2.0</a> with the <a href='https://oauth.net/2/grant-types/client-credentials' class='govuk-link' target='_blank'>Client Credentials Grant</a> to generate an <a href='/documentation/tutorials#accessing-an-application-restricted-endpoint' class='govuk-link'>access token</a>. If the endpoint requires a <a href='https://oauth.net/2/scope/' class='govuk-link' target='_blank'>scope</a>, your application must include this scope when creating the access token. Along with the access token, a valid API subscription key is also required when accessing the API."
+          "Body": "To pass an application-restricted endpoint, you need:"
+        },
+        {
+          "Type": "UL",
+          "Body": [
+            "a valid API subscription key",
+            "An access token"
+          ]
         },
         {
           "Type": "P",
-          "Body": "The access token lasts for 1 hour. When it expires you must generate a new token."
+          "Body": "Find out <a href='/documentation/tutorials#accessing-an-application-restricted-endpoint' class='govuk-link' how to request an access token for application-restricted endpoints</a> in our tutorial."
         },
         {
           "Type": "P",
-          "Body": "Read specific API endpoint documentation for the authorisation rules."
+          "Body": "We use the open standard <a href='https://oauth.net/2/' target='_blank' class='govuk-link'>OAuth 2.0</a> with the <a href='https://oauth.net/2/grant-types/client-credentials' target='_blank' class=''>client credentials grant</a> to generate an access token. If the endpoint requires a <a href='https://oauth.net/2/scope/' target='_blank' class='govuk-link'>scope</a>, your application must include this scope when creating the access token."
+        },
+        {
+          "Type": "P",
+          "Body": "The access token lasts for one hour. When it expires you must request a new one."
+        },
+        {
+          "Type": "P",
+          "Body": "For the authorisation rules, read the specific API endpoint documentation."
         },
         {
           "Type": "H2",
@@ -420,27 +325,103 @@
         },
         {
           "Type": "P",
-          "Body": "These endpoints require specific authorisation from the end user (e.g. Academy trusts or school authorities) and they generally give access to sensitive personal data."
+          "Body": "User-restricted endpoints need to be authorised by the end user (for example, academy trusts or school authorities). They generally give access to sensitive personal data."
         },
         {
           "Type": "P",
-          "Body": "We use the open standard <a href='https://oauth.net/2/' class='govuk-link' target='_blank'>OAuth 2.0</a> with the <a href='https://oauth.net/2/grant-types/client-credentials' class='govuk-link' target='_blank'>Client Credentials Grant</a>. This allows the end users (e.g. Academy trusts or school authorities) to grant authority to your application to interact with DfE on their behalf, without sharing their access credentials."
+          "Body": "To pass a user-restricted endpoint, you need:"
+        },
+        {
+          "Type": "UL",
+          "Body": [
+            "a valid API subscription key",
+            "an access token"
+          ]
         },
         {
           "Type": "P",
-          "Body": "The end user authenticates directly with us using their IDAMS and DfE sign-in accounts, and grants authority for specific scopes."
+          "Body": "Find out <a href='/documentation/tutorials#accessing-an-application-restricted-endpoint' class='govuk-link' how to request an access token for application-restricted endpoints</a> in our tutorial."
         },
         {
           "Type": "P",
-          "Body": "We then issue an OAuth 2.0 access token that’s specific to the end user. Your application passes the access token in subsequent API requests to user-restricted endpoints."
+          "Body": "We use the open standard <a href='https://oauth.net/2/' target='_blank' class='govuk-link'>OAuth 2.0</a> with the <a href='https://oauth.net/2/grant-types/client-credentials' target='_blank' class=''>client credentials grant</a> to generate an access token. This allows the end users to authorise your application to interact with DfE on their behalf without sharing their access credentials."
         },
         {
           "Type": "P",
-          "Body": "Along with the access token, a valid API subscription key is also required when accessing the API."
+          "Body": "The end user authenticates directly with us, using their IDAMS and DfE sign-in accounts, and authorises specific scopes."
         },
         {
           "Type": "P",
-          "Body": "For a working example of the 3 authorisation use cases, see the <a href='/documentation/tutorials' class='govuk-link'>Tutorials</a> section."
+          "Body": "We then issue an OAuth 2.0 access token that is specific to the end user. Your application passes the access token in subsequent API requests to user-restricted endpoints."
+        },
+        {
+          "Type": "P",
+          "Body": "Following the latest <a href='https://tools.ietf.org/html/draft-ietf-oauth-security-topics-13#section-3.4' class='govuk-link' target='_blank'>OAuth 2.0 security best current practice</a>, DfE APIs do not support implicit and password OAuth grant types."
+        },
+        {
+          "Type": "H2",
+          "Body": "Credentials"
+        },
+        {
+          "Type": "P",
+          "Body": "Your credentials are your client ID and your client ‘secret’ - a kind of password. Developer Hub supplies 2 active client secrets (primary and secondary) at any one time."
+        },
+        {
+          "Type": "P",
+          "Body": "We use your credentials:"
+        },
+        {
+          "Type": "UL",
+          "Body": [
+            "to identify and authorise your application during each step of the process",
+            "when you test your application with sandbox APIs or run against the production APIs"
+          ]
+        },
+        {
+          "Type": "H3",
+          "Body": "Client ID"
+        },
+        {
+          "Type": "P",
+          "Body": "Your client ID is a unique identifier that we create when you register your application on the Developer Hub."
+        },
+        {
+          "Type": "H3",
+          "Body": "Client secret"
+        },
+        {
+          "Type": "P",
+          "Body": "A client secret is a unique passphrase that you generate to authorise your application. It is known only to your application and the authorising server."
+        },
+        {
+          "Type": "P",
+          "Body": "The client secret is the same as a password. You should not store it as plain text. You must encrypt your client secret before you store it so it is less likely to be compromised."
+        },
+        {
+          "Type": "H3",
+          "Body": "Rotate your client secrets regularly"
+        },
+        {
+          "Type": "P",
+          "Body": "When you register your application, we assign your application 2 client secrets - primary and secondary. They are usually valid for 2 years."
+        },
+        {
+          "Type": "P",
+          "Body": "You can rotate your primary and secondary secrets to shorten the time an access key is active. This will reduce the impact to your business if it is compromised."
+        },
+        {
+          "Type": "P",
+          "Body": "To rotate your client secrets:"
+        },
+        {
+          "Type": "UL",
+          "Body": [
+            "Sign in to the Developer Hub",
+            "Check that your secondary secret for the application has a reasonable amount of time before it expires (for example, at least 6 months)",
+            "Update your application to use the secondary secret",
+            "Check that your application is working with the secondary secret",
+            "Regenerate your primary secret."
+          ]
         }
       ]
     },
@@ -1254,23 +1235,20 @@
       }
     },
     "Registering your application": {
-      "Page": "Registering your application",
+      "Page": "Before you register your application",
       "Url": "/applications/registering-your-application",
       "Content": {
-        "Auth": {
-          "Warning": "You need an account to register applications."
-        },
         "Body": [
           {
             "Type": "P",
-            "Body": "To start using our RESTful APIs with your application, you'll need to:"
+            "Body": "To start using our RESTful APIs with your application:"
           },
           {
             "Type": "OL",
             "Body": [
-              "Add it to our test environment (sandbox)",
+              "Add the application to our test environment (sandbox)",
               "Choose which sandbox APIs you want to use",
-              "Get credentials your application needs to interact with our APIs"
+              "Get the credentials your application needs to interact with our APIs"
             ]
           },
           {
@@ -1284,13 +1262,13 @@
           {
             "Type": "BL",
             "Body": [
-              "Find out which <a class='govuk-link' href='/apis'>RESTful and XML APIs</a> you can use",
-              "Read up on <a class='govuk-link' href='/documentation/authorisation'>authorisation</a>",
-              "Familiarise yourself with the <a class='govuk-link' href='https://oauth.net/2/' rel='noreferrer noopener' target='_blank'>OAuth 2.0 specification"
+              "see which <a class='govuk-link' href='/apis'>public APIs</a> you can use",
+              "read up on <a href='/documentation/authorisation' class='govuk-link'>authorisation</a>",
+              "read the <a class='govuk-link' href='https://oauth.net/2/' rel='noreferrer noopener' target='_blank'>OAuth 2.0 specification</a>"
             ]
           }
         ],
-        "Button": "Register application"
+        "Button": "register application"
       }
     },
     "How to develop your application": {

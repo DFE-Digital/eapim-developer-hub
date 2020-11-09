@@ -55,10 +55,7 @@ class Home extends Component {
                <div className='homepage-services-text'>
                  <h3 className='govuk-heading-m'>Browse Department for Education APIs</h3>
                  <p className='govuk-body'>
-                  Find a number of open APIs from different sectors including schools, finance and corporate entities.
-                 </p>
-                 <p className='govuk-body'>
-                  See all the <a href='/apis' className='govuk-link'>public APIs</a> on the Developer Hub.
+                 You can browse <a href='/apis' className='govuk-link'>public APIs</a> from different sectors including schools, finance and corporate entities.
                  </p>
                </div>
                <div className='homepage-services-image'>
@@ -69,10 +66,10 @@ class Home extends Component {
                <div className='homepage-services-text'>
                  <h3 className='govuk-heading-m'>Integrate your application</h3>
                  <p className='govuk-body'>
-                  Connect your application to an APIs sandbox environment to begin building your software. Simply request production access when you are ready to go live.
+                 Connect your application to an API sandbox environment to begin building your software. When you're ready to go live, ask for production access.
                  </p>
                  <p className='govuk-body'>
-                  Learn about <a href='/documentation' className='govuk-link'>how to get started</a>.
+                  To get started, read <a href='/documentation' className='govuk-link'>using the developer hub</a>.
                  </p>
                </div>
                <div className='homepage-services-image'>
