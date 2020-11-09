@@ -15,7 +15,7 @@ const builder = (item) => {
     )
     case 'UL':
     case 'OL': {
-      const hasInner = typeof item.body[0] === 'object'
+      const hasInner = !!item.body[0].body
 
       const lis = item.body.map(li => {
         if (hasInner) {
