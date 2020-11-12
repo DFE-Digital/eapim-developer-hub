@@ -7,15 +7,6 @@ const requiredFieldMissingTitle = 'A required field is missing. Please fill out 
 const fieldIncorrectTitle = 'One or more fields are filled out incorrectly. Please check your entries and try again.'
 const passwordEntryMismatchTitle = 'The password entry fields do not match. Please enter the same password in both fields and try again.'
 
-const wrapPageError = (toWrap) => {
-  const content = toWrap.querySelector('.govuk-body')
-  const heading = document.createElement('h2')
-  heading.innerText = 'There is a problem'
-  heading.classList.add('govuk-error-summary__title')
-  toWrap.insertBefore(heading, content)
-  return toWrap
-}
-
 const showFormGroupError = (inputId) => {
   document.querySelector(inputId).classList.add('govuk-input--error')
   document.querySelector(inputId).closest('.govuk-form-group').classList.add('govuk-form-group--error')
@@ -162,88 +153,6 @@ ready(() => {
     reenterPasswordObserver.observe(document.querySelector('#reenterPassword').closest('.attrEntry').querySelector('.itemLevel'), options)
     // organisationObserver.observe(document.querySelector('#extension_OrganizationName').closest('.attrEntry').querySelector('.itemLevel'), options)
 
-    const inputGroups = container.querySelectorAll('.entry-item')
-    const attrEntry = container.querySelectorAll('.attrEntry')
-    const labels = container.querySelectorAll('label')
-    const inputs = container.querySelectorAll('input')
-    const buttons = container.querySelectorAll('button')
-    const anchors = container.querySelectorAll('a')
-    const intros = container.querySelectorAll('.intro')
-    const dividers = container.querySelectorAll('.divider')
-    const p = container.querySelectorAll('p')
-    const verificationInfoText = container.querySelectorAll('.verificationInfoText')
-    const verificationErrorText = container.querySelectorAll('.verificationErrorText')
-    const verificationSuccessText = container.querySelectorAll('.verificationSuccessText')
-    const continueBtn = container.querySelector('#continue')
-    const cancelBtn = container.querySelector('#cancel')
-    const pageErrors = container.querySelectorAll('.error.pageLevel')
-    const itemErrors = container.querySelectorAll('.error.itemLevel')
-
-    continueBtn.classList.add('govuk-!-margin-right-1')
-    cancelBtn.classList.add('govuk-button--secondary')
-
-    inputGroups.forEach(group => group.classList.add('govuk-form-group'))
-    attrEntry.forEach(group => group.classList.add('govuk-form-group'))
-    labels.forEach(label => label.classList.add('govuk-label'))
-    inputs.forEach(input => input.classList.add('govuk-input'))
-    buttons.forEach(button => button.classList.add('govuk-button'))
-
-    anchors.forEach(anchor => anchor.classList.add('govuk-link'))
-    intros.forEach(intro => {
-      intro.style.display = 'none'
-    })
-    dividers.forEach(divider => {
-      divider.style.display = 'none'
-    })
-    p.forEach(ptag => {
-      ptag.classList.add('govuk-body')
-    })
-    verificationInfoText.forEach(text => text.classList.add('govuk-inset-text'))
-
-    verificationErrorText.forEach(error => {
-      const copy = error.innerText
-      error.innerText = null
-      const newCopy = document.createElement('p')
-      newCopy.innerText = copy
-      newCopy.classList.add('govuk-body')
-      newCopy.classList.add('govuk-!-margin-bottom-0')
-      error.appendChild(newCopy)
-      error.classList.add('govuk-error-summary')
-    })
-
-    verificationSuccessText.forEach(success => {
-      const copy = success.innerText
-      success.innerText = null
-      const newCopy = document.createElement('p')
-      newCopy.innerText = copy
-      newCopy.classList.add('govuk-body')
-      newCopy.classList.add('govuk-!-margin-bottom-0')
-      success.appendChild(newCopy)
-      success.classList.add('notification')
-      success.classList.add('notification-success')
-    })
-
-    pageErrors.forEach(error => {
-      const copy = error.innerText
-      error.innerText = null
-      const newCopy = document.createElement('p')
-      newCopy.innerText = copy
-      newCopy.classList.add('govuk-body')
-      newCopy.classList.add('govuk-!-margin-bottom-2')
-      error.appendChild(newCopy)
-      error.classList.add('govuk-error-summary')
-    })
-
-    itemErrors.forEach(error => {
-      const copy = error.innerText
-      error.innerText = null
-      const newCopy = document.createElement('p')
-      newCopy.innerText = copy
-      newCopy.classList.add('govuk-body')
-      newCopy.classList.add('govuk-!-margin-bottom-0')
-      error.appendChild(newCopy)
-    })
-
     const passwordInput = document.querySelector('#newPassword')
     const passwordHelperText = document.createElement('span')
     passwordHelperText.classList.add('govuk-hint')
@@ -279,11 +188,4 @@ ready(() => {
     const form = document.querySelector('#attributeList')
     form.parentNode.insertBefore(termsEl, form.nextSibling)
   }
-
-  setTimeout(() => {
-    const errorSummary = document.querySelectorAll('.govuk-error-summary')
-    errorSummary.forEach(summary => {
-      wrapPageError(summary)
-    })
-  }, 300)
 })

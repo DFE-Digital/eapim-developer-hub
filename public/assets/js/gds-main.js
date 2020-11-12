@@ -1,9 +1,9 @@
-const ready = (callback) => {
+const main = (callback) => {
   if (document.readyState !== 'loading') callback()
   else document.addEventListener('DOMContentLoaded', callback)
 }
 
-ready(() => {
+main(() => {
   const container = document.getElementById('api')
 
   if (container) {
@@ -19,6 +19,7 @@ ready(() => {
     const create = container.querySelector('.create')
     const continueBtn = container.querySelector('#continue')
     const cancelBtn = container.querySelector('#cancel')
+    const pageErrors = container.querySelectorAll('.error.pageLevel')
 
     if (create) create.parentNode.removeChild(create)
     if (continueBtn) continueBtn.classList.add('govuk-!-margin-right-1')
@@ -38,6 +39,25 @@ ready(() => {
 
     dividers.forEach(divider => {
       divider.style.display = 'none'
+    })
+
+    pageErrors.forEach(error => {
+      const copy = error.innerText.trim()
+      error.innerText = null
+
+      const h2 = document.createElement('h2')
+      h2.classList.add('govuk-error-summary__title')
+      h2.innerText = 'There is a problem'
+      error.appendChild(h2)
+
+      const p = document.createElement('p')
+      p.classList.add('govuk-body')
+      p.classList.add('govuk-!-margin-bottom-2')
+      p.innerText = copy
+
+      error.appendChild(p)
+
+      error.classList.add('govuk-error-summary')
     })
   }
 })
