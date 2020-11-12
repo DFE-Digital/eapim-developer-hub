@@ -1,9 +1,9 @@
-const ready = (callback) => {
+const ready = function (callback) {
   if (document.readyState !== 'loading') callback()
   else document.addEventListener('DOMContentLoaded', callback)
 }
 
-const wrapForgotPassword = (toWrap) => {
+const wrapForgotPassword = function (toWrap) {
   const wrapper = document.createElement('p')
   wrapper.classList.add('govuk-body')
   wrapper.classList.add('govuk-!-margin-top-2')
@@ -11,7 +11,7 @@ const wrapForgotPassword = (toWrap) => {
   return wrapper.appendChild(toWrap)
 }
 
-const createErrorLink = (id, html) => {
+const createErrorLink = function (id, html) {
   const a = document.createElement('a')
   a.classList.add('govuk-link')
   a.setAttribute('href', id)
@@ -19,11 +19,11 @@ const createErrorLink = (id, html) => {
   return a
 }
 
-const showFormGroupError = (inputId) => {
+const showFormGroupError = function (inputId) {
   document.querySelector(inputId).closest('.govuk-form-group').classList.add('govuk-form-group--error')
 }
 
-const showFieldError = (inputId, type) => {
+const showFieldError = function (inputId, type) {
   const itemLevel = document.querySelector(inputId).closest('.entry-item').querySelector('.itemLevel')
 
   const p = itemLevel.querySelector('p')
@@ -35,16 +35,16 @@ const showFieldError = (inputId, type) => {
   document.querySelector(inputId).classList.add('highlightError')
 }
 
-const showPageLevel = () => {
+const showPageLevel = function () {
   document.querySelector('.pageLevel').style.display = 'block'
 }
 
-const hidePageLevel = () => {
+const hidePageLevel = function () {
   document.querySelector('.pageLevel').style.display = 'none'
 }
 
-const summaryErrorMessageCallback = (mutations) => {
-  mutations.forEach(mutation => {
+const summaryErrorMessageCallback = function (mutations) {
+  mutations.forEach(function (mutation) {
     const entry = mutation.target
 
     if (entry.style.display === 'block') {
@@ -58,8 +58,8 @@ const summaryErrorMessageCallback = (mutations) => {
   })
 }
 
-const emailErrorMessageCallback = (mutations) => {
-  mutations.forEach(mutation => {
+const emailErrorMessageCallback = function (mutations) {
+  mutations.forEach(function (mutation) {
     const entry = mutation.target
     const mutated = entry.querySelector('.govuk-body') ? entry.querySelector('.govuk-body') : (entry.tagName === 'P' && entry)
 
@@ -90,8 +90,8 @@ const emailErrorMessageCallback = (mutations) => {
   })
 }
 
-const passwordErrorMessageCallback = (mutations) => {
-  mutations.forEach(mutation => {
+const passwordErrorMessageCallback = function (mutations) {
+  mutations.forEach(function (mutation) {
     const entry = mutation.target
     const mutated = entry.querySelector('.govuk-body') ? entry.querySelector('.govuk-body') : (entry.tagName === 'P' && entry)
 
@@ -120,7 +120,7 @@ const passwordErrorMessageCallback = (mutations) => {
   })
 }
 
-ready(() => {
+ready(function () {
   const container = document.getElementById('api')
   const options = {
     attributes: true,
@@ -142,7 +142,7 @@ ready(() => {
     const pageError = container.querySelector('.error.pageLevel')
     const types = ['error-summary-email', 'error-summary-password']
 
-    types.forEach(type => {
+    types.forEach(function (type) {
       const body = document.createElement('div')
       body.classList.add(type)
       pageError.append(body)
@@ -150,7 +150,7 @@ ready(() => {
   }
 
   /** Move forgot password link to below input field */
-  setTimeout(() => {
+  setTimeout(function () {
     const forgotPassword = document.getElementById('forgotPassword')
     const moveTo = document.querySelectorAll('.entry-item')[1]
 
