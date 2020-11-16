@@ -53,7 +53,7 @@ class Home extends Component {
            <div className='govuk-width-container homepage-services-container'>
              <div className='homepage-services-section'>
                <div className='homepage-services-text'>
-                 <h3 className='govuk-heading-m'>Browse Department for Education APIs</h3>
+                 <h3 className='govuk-heading-m'>Browse DfE APIs</h3>
                  <p className='govuk-body'>
                  You can browse <a href='/apis' className='govuk-link'>public APIs</a> from different sectors including schools, finance and corporate entities.
                  </p>
@@ -69,7 +69,7 @@ class Home extends Component {
                  Connect your application to an API sandbox environment to begin building your software. When you're ready to go live, ask for production access.
                  </p>
                  <p className='govuk-body'>
-                  To get started, read <a href='/documentation' className='govuk-link'>using the developer hub</a>.
+                  To get started, read <a href='/documentation' className='govuk-link'>using the Developer Hub</a>.
                  </p>
                </div>
                <div className='homepage-services-image'>

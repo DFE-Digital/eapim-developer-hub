@@ -159,11 +159,11 @@
         {
           "Type": "OL",
           "Body": [
-            "Register your application",
-            "View your application details (you can save these)",
-            "Click on 'Subscribe to APIs'",
-            "Select the API you want to integrate with",
-            "Choose 'sandbox' (when you’re building and testing your software) or'‘production' (when you know your software works properly)"
+            "Register your application.",
+            "View your application details (you can save these).",
+            "Click on 'Subscribe to APIs'.",
+            "Select the API you want to integrate with.",
+            "Choose 'sandbox' (when you’re building and testing your software) or 'production' (when you know your software works properly)."
           ]
         },
         {
@@ -180,7 +180,7 @@
         },
         {
           "Type": "P",
-          "Body": "The statuses are as follows:"
+          "Body": "The statuses are:"
         },
         {
           "Type": "UL",
@@ -223,17 +223,17 @@
         {
           "Type": "OL",
           "Body": [
-            "The DfE API URL and endpoint",
-            "your unique client ID and secret",
-            "your unique API subscription key",
-            "registered redirect URL",
-            "OAuth 2.0 token endpoint (for an application-restricted endpoint)",
-            "OAuth 2.0 authorisation URL (for a user-restricted endpoint)"
+            "The DfE API URL and endpoint.",
+            "Your unique client ID and secret.",
+            "Your unique API subscription key.",
+            "registered redirect URL.",
+            "OAuth 2.0 token endpoint (for an application-restricted endpoint).",
+            "OAuth 2.0 authorisation URL (for a user-restricted endpoint)."
           ]
         },
         {
           "Type": "P",
-          "Body": "If you need help making an API, see our <a href='/documentation/tutorials' class='govuk-link'>Tutorials</a>."
+          "Body": "If you need help making an API call, see our <a href='/documentation/tutorials' class='govuk-link'>Tutorials</a>."
         }
       ]
     },
@@ -300,12 +300,12 @@
           "Type": "UL",
           "Body": [
             "a valid API subscription key",
-            "An access token"
+            "an access token"
           ]
         },
         {
           "Type": "P",
-          "Body": "Find out <a href='/documentation/tutorials#accessing-an-application-restricted-endpoint' class='govuk-link' how to request an access token for application-restricted endpoints</a> in our tutorial."
+          "Body": "Find out <a href='/documentation/tutorials#accessing-an-application-restricted-endpoint' class='govuk-link'>how to request an access token for application-restricted endpoints</a> in our tutorial."
         },
         {
           "Type": "P",
@@ -340,7 +340,7 @@
         },
         {
           "Type": "P",
-          "Body": "Find out <a href='/documentation/tutorials#accessing-an-application-restricted-endpoint' class='govuk-link' how to request an access token for application-restricted endpoints</a> in our tutorial."
+          "Body": "Find out <a href='/documentation/tutorials#accessing-an-application-restricted-endpoint' class='govuk-link'>how to request an access token for application-restricted endpoints</a> in our tutorial."
         },
         {
           "Type": "P",
@@ -414,12 +414,12 @@
           "Body": "To rotate your client secrets:"
         },
         {
-          "Type": "UL",
+          "Type": "OL",
           "Body": [
-            "Sign in to the Developer Hub",
-            "Check that your secondary secret for the application has a reasonable amount of time before it expires (for example, at least 6 months)",
-            "Update your application to use the secondary secret",
-            "Check that your application is working with the secondary secret",
+            "Sign in to the Developer Hub.",
+            "Check that your secondary secret for the application has a reasonable amount of time before it expires (for example, at least 6 months).",
+            "Update your application to use the secondary secret.",
+            "Check that your application is working with the secondary secret.",
             "Regenerate your primary secret."
           ]
         }
@@ -439,7 +439,7 @@
         },
         {
           "Type": "P",
-          "Body": "All code snippets in these tutorials are in CSharp (C#). They use the <a class='govuk-link' href='https://restsharp.dev/' rel='noreferrer noopener' target='_blank'>RestSharp</a> library for accessing HTTP resources."
+          "Body": "All code snippets in these tutorials are in CSharp (C#). They use the <a class='govuk-link' href='https://restsharp.dev/' rel='noreferrer noopener' target='_blank'>RestSharp</a> library to access HTTP resources."
         },
         {
           "Type": "P",
@@ -459,45 +459,19 @@
         },
         {
           "Type": "P",
-          "Body": "These tutorials use a simple DfE Information (example) API that exposes 3 endpoints:"
+          "Body": "These tutorials use a simple DfE Information (example) API that exposes 3 endpoints. The paths are:"
         },
         {
-          "Type": "TABLE",
-          "Body": {
-            "Caption": "Endpoints exposed by DfE Information API",
-            "Headers": [
-              "Method",
-              "Path",
-              "Authorisation",
-              "Message"
-            ],
-            "Rows": [
-              {
-                "Data": [
-                  "GET",
-                  "/dfe/open-info",
-                  "None",
-                  "DfE Information"
-                ]
-              },
-              {
-                "Data": [
-                  "GET",
-                  "/dfe/application-info",
-                  "Application (OAuth 2.0 access token)",
-                  "DfE Information"
-                ]
-              },
-              {
-                "Data": [
-                  "GET",
-                  "/dfe/user-info",
-                  "Application (OAuth 2.0 Authorisation Grant Flow)",
-                  "DfE Information"
-                ]
-              }
-            ]
-          }
+          "Type": "UL",
+          "Body": [
+            "<code>/dfe/open-info</code>",
+            "<code>/dfe/application-info</code> (application authorises it using OAuth 2.0 access token)",
+            "<code>/dfe/user-info</code> (application authorises it using OAuth 2.0 authorisation grant flow)"
+          ]
+        },
+        {
+          "Type": "P",
+          "Body": "All 3 use the GET method and give the message 'DfE Information'"
         },
         {
           "Type": "H2",
@@ -505,17 +479,17 @@
         },
         {
           "Type": "P",
-          "Body": "All the above endpoints require an API subscription key header. Before running <b>any</b> of these examples follow the steps below"
+          "Body": "You'll need an API subscription key header for all 3 endpoints. Before running any of the examples, follow these steps:"
         },
         {
-          "Type": "UL",
+          "Type": "OL",
           "Body": [
-            "Create an account in the DfE Developer Hub",
-            "Register your application which will integrate with the DfE APIs",
-            "Copy your client id and secret details",
-            "Subscribe to the DfE Information API and choose the sandbox environment",
-            "This should provide you with a primary and secondary subscription key",
-            "Copy the primary key for the below tests"
+            "Create an account in the DfE Developer Hub.",
+            "Register your application which will integrate with the DfE APIs.",
+            "Copy your client id and secret details.",
+            "Subscribe to the DfE Information API and choose the sandbox environment.",
+            "This should provide you with a primary and secondary subscription key.",
+            "Copy the primary key for the below tests."
           ]
         },
         {
@@ -524,11 +498,11 @@
         },
         {
           "Type": "P",
-          "Body": "In this example, you'll access the DfE Information API open-info endpoint."
+          "Body": "In this example, you will access the DfE Information API open-info endpoint."
         },
         {
           "Type": "P",
-          "Body": "This endpoint does not require an authorisation header so you can access it without an access token. You are still required to send a subscription key (copied from the above step)."
+          "Body": "You do not need an access token for this endpoint because it does not need an authorisation header. You do need to send a subscription key"
         },
         {
           "Type": "H4",
@@ -558,7 +532,7 @@
         },
         {
           "Type": "P",
-          "Body": "In this example, you will request an access token in your code (utilising your client id and client secret details) and then use it to access the DfE Information API 'application-info' endpoint."
+          "Body": "In this example, you will request an access token in your code (utilising your client ID and secret) and then use it to access the DfE Information API application-info endpoint."
         },
         {
           "Type": "P",
@@ -621,11 +595,11 @@
         },
         {
           "Type": "P",
-          "Body": "In this example, you will request an OAuth 2.0 access token in your code (utilising your client id and client secret details) and use it to access the DfE Information API user-info endpoint."
+          "Body": "In this example, you will request an OAuth 2.0 access token in your code (using your client ID and secret) and use it to access the DfE Information API user-info endpoint."
         },
         {
           "Type": "P",
-          "Body": "The user restricted endpoints provide details on the API page about their authorisation endpoint. Follow steps below to obtain access token and then make a call to the endpoint."
+          "Body": "The user-restricted endpoints give details about their authorisation endpoint on the API page."
         },
         {
           "Type": "H3",
@@ -633,18 +607,18 @@
         },
         {
           "Type": "P",
-          "Body": "To begin the flow, you'll need to get the user's authorisation. This step may include one or more of the following processes:"
+          "Body": "To begin the flow, you'll need to get the user's authorisation. This may include one or both of:"
         },
         {
           "Type": "UL",
           "Body": [
-            "Authenticating the user",
-            "Obtaining user consent for the requested permission level, unless consent has been previously given"
+            "authenticating the user",
+            "obtaining user consent for the requested permission level (if you do not have it)"
           ]
         },
         {
           "Type": "P",
-          "Body": "To authorise the user, your app must send the user to the authorisation URL provided on the user-restricted API page. The scope details would also be provided on the specific API page."
+          "Body": "To authorise the user, your app must send the user to the authorisation URL provided on the user-restricted API page. The scope details would also be provided on the specific API page."
         },
         {
           "Type": "H4",
@@ -664,19 +638,15 @@
         },
         {
           "Type": "P",
-          "Body": "The user will be redirected to the DfE Identity login screen. When they've submitted their credentials, they'll be asked to authorise the application to access the requested scope."
+          "Body": "The user will be redirected to the DfE Identity login screen. When they've entered their credentials, they'll be asked to authorise the application to access the requested scope."
         },
         {
           "Type": "P",
-          "Body": "Once the user has granted the requested authority, we will return to the application via the redirect URL. We'll provide an authorisation code as a query string parameter."
+          "Body": "When the user has given the requested authority, we will return to the application via the redirect URL. We'll provide an authorisation code as a query string parameter."
         },
         {
           "Type": "P",
           "Body": "This authorisation code can then be exchanged for an OAuth 2.0 <code class='code--slim'>access_token</code> and a <code class='code--slim'>refresh_token</code>."
-        },
-        {
-          "Type": "P",
-          "Body": ""
         },
         {
           "Type": "H4",
@@ -1246,9 +1216,9 @@
           {
             "Type": "OL",
             "Body": [
-              "Add the application to our test environment (sandbox)",
-              "Choose which sandbox APIs you want to use",
-              "Get the credentials your application needs to interact with our APIs"
+              "Add the application to our test environment (sandbox).",
+              "Choose which sandbox APIs you want to use.",
+              "Get the credentials your application needs to interact with our APIs."
             ]
           },
           {
@@ -1260,7 +1230,7 @@
             "Body": "If you have not already done so:"
           },
           {
-            "Type": "BL",
+            "Type": "UL",
             "Body": [
               "see which <a class='govuk-link' href='/apis'>public APIs</a> you can use",
               "read up on <a href='/documentation/authorisation' class='govuk-link'>authorisation</a>",
@@ -1366,7 +1336,7 @@
         {
           "Type": "OL",
           "Body": [
-            "Regenerate one of your client secrets",
+            "Regenerate one of your client secrets.",
             "Update your application to use the updated client secret.",
             "Check that your application is working with the updated client secret."
           ]

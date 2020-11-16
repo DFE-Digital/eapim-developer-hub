@@ -128,6 +128,14 @@ const APISubscription = ({ applicationId, tag, subscription, onSubscriptionChang
                 <td className='govuk-table__cell middle text-wrap'><code className='code--block inline'>{tag.authEndpoint}</code></td>
               </tr>
             )}
+            {tag.scopes && (
+              <tr className='govuk-table__row'>
+                <th scope='row' className='govuk-table__header govuk-!-font-weight-regular middle'>Scopes</th>
+                <td className='govuk-table__cell middle'>
+                  <ul className='govuk-list govuk-list--bullet govuk-!-margin-bottom-0'>{tag.scopes.map(scope => <li key={scope}>{scope}</li>)}</ul>
+                </td>
+              </tr>
+            )}
             <tr className='govuk-table__row'>
               <th scope='row' className='govuk-table__header middle'>Subscription keys</th>
               <td className='govuk-table__cell govuk-table__cell--numeric middle'>
