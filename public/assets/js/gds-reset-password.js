@@ -3,165 +3,125 @@ const ready = (callback) => {
   else document.addEventListener('DOMContentLoaded', callback)
 }
 
-const wrapPageError = (toWrap) => {
-  const content = toWrap.querySelector('.govuk-body')
-  const heading = document.createElement('h2')
-  heading.innerText = 'There is a problem'
-  heading.classList.add('govuk-error-summary__title')
-  toWrap.insertBefore(heading, content)
-  return toWrap
+function removeElement (id) {
+  const elem = document.getElementById(id)
+  return elem.parentNode.removeChild(elem)
 }
 
-const mCallback = (mutations) => {
-  for (const mutation of mutations) {
-    if (mutation.type === 'attributes') {
-      const mutated = mutation.target
-      if (mutated.classList.contains('error') && mutated.classList.contains('itemLevel')) {
-        if (mutated.classList.contains('show')) {
-          const pBody = mutated.querySelector('.govuk-body')
-          if (pBody) {
-            pBody.classList.add('govuk-error-message')
-          } else {
-            const copy = mutated.innerText
-            mutated.innerText = null
-            const newCopy = document.createElement('span')
-            newCopy.innerText = copy
-            newCopy.classList.add('govuk-error-message')
-            mutated.appendChild(newCopy)
-          }
-          mutated.closest('.govuk-form-group').classList.add('govuk-form-group--error')
-        } else {
-          mutated.closest('.govuk-form-group').classList.remove('govuk-form-group--error')
-        }
-      }
-      if (mutated.classList.contains('error') && mutated.classList.contains('pageLevel')) {
-        if (mutated.getAttribute('style') === 'display: block;') {
-          window.scroll({
-            behavior: 'smooth',
-            left: 0,
-            top: mutated.offsetTop
-          })
-          const pBody = mutated.querySelector('.govuk-body')
-          if (!pBody) {
-            const heading = document.createElement('h2')
-            heading.innerText = 'There is a problem'
-            heading.classList.add('govuk-error-summary__title')
-            const copy = mutated.innerText
-            mutated.innerText = null
-            const newCopy = document.createElement('p')
-            newCopy.innerText = copy
-            newCopy.classList.add('govuk-body')
-            newCopy.classList.add('govuk-!-margin-bottom-0')
-            mutated.appendChild(newCopy)
-            mutated.insertBefore(heading, newCopy)
-          }
-        }
-      }
-    }
+const pageLevels = Array.from(document.querySelectorAll('.pageLevel'))
+const requiredPageLevel = document.querySelector('#requiredFieldMissing')
+
+const formGroupError = (entry, action) => {
+  const parent = entry.parentNode
+  const input = entry.nextElementSibling
+
+  if (action === 'add') {
+    parent.classList.add('govuk-form-group--error')
+    input.classList.add('govuk-input--error')
+    entry.classList.add('govuk-error-message')
+  }
+
+  if (action === 'remove') {
+    parent.classList.remove('govuk-form-group--error')
+    input.classList.remove('govuk-input--error')
+    entry.classList.remove('govuk-error-message')
   }
 }
+
+const createErrorLink = (id, html) => {
+  const a = document.createElement('a')
+  a.classList.add('govuk-link')
+  a.setAttribute('href', '#' + id)
+  a.setAttribute('id', 'link-' + id)
+
+  const p = document.createElement('p')
+  p.classList.add('govuk-error-message')
+  p.innerText = html.innerText
+
+  a.appendChild(p)
+  return a
+}
+
+const passwordEntryMismatchObserverCallback = (mutations) => {
+  mutations.forEach(mutation => {
+    document.querySelectorAll('.Password')[0].querySelector('.itemLevel').innerText = 'Enter your old password'
+    document.querySelectorAll('.Password')[1].querySelector('.itemLevel').innerText = 'Enter your new password'
+    document.querySelectorAll('.Password')[2].querySelector('.itemLevel').innerText = 'Enter your new password again'
+  })
+}
+
+const observerCallback = (mutations, id, label) => {
+  mutations.forEach(mutation => {
+    const entry = mutation.target
+
+    /**
+     * Remove form group error
+     */
+    if (entry.innerText === '') {
+      formGroupError(entry, 'remove')
+      removeElement('link-' + id)
+      return false
+    }
+
+    /**
+     * Get the summary that is visible
+     */
+    let visiblePageLevel = pageLevels.find(node => node.style.display === 'block')
+
+    /**
+     * If there had been an error with the values submitted to B2C, and the user makes a field error,
+     * hide the B2C claims error summary and show the required field summary
+     */
+    if (visiblePageLevel && visiblePageLevel.getAttribute('id') === 'claimVerificationServerError') {
+      visiblePageLevel.style.display = 'none'
+
+      visiblePageLevel = requiredPageLevel
+      visiblePageLevel.style.display = 'block'
+    }
+
+    /**
+     * Changing the text of the entry will cause the mutation to loop.
+     * We only want to chane text once
+     */
+    if (entry.innerText.indexOf('{ClaimType}') >= 0) {
+      entry.innerText = entry.innerText.replace(/{ClaimType}/g, label)
+    }
+
+    /**
+     * Only append error link if doesn't exist
+     */
+    if (visiblePageLevel && !visiblePageLevel.querySelector('#link-' + id)) {
+      const a = createErrorLink(id, entry.cloneNode(true))
+      visiblePageLevel.appendChild(a)
+    }
+
+    /**
+     * Show form group error
+     */
+    formGroupError(entry, 'add')
+
+    console.log(mutation.type)
+    console.log(entry)
+    console.log('\n')
+  })
+}
+
+const oldPasswordObserverCallback = (mutations) => observerCallback(mutations, 'oldPassword', 'old password')
+const newPasswordObserverCallback = (mutations) => observerCallback(mutations, 'newPassword', 'new password')
+const reenterPasswordObserverCallback = (mutations) => observerCallback(mutations, 'reenterPassword', 'new password again')
 
 ready(() => {
   const container = document.getElementById('api')
-  const options = {
-    attributes: true,
-    characterData: true,
-    childList: true,
-    subtree: true,
-    attributeOldValue: true,
-    characterDataOldValue: true
-  }
-  const observer = new window.MutationObserver(mCallback)
+
+  const passwordEntryMismatchObserver = new window.MutationObserver(passwordEntryMismatchObserverCallback)
+  const oldPasswordObserver = new window.MutationObserver(oldPasswordObserverCallback)
+  const newPasswordObserver = new window.MutationObserver(newPasswordObserverCallback)
+  const reenterPasswordObserver = new window.MutationObserver(reenterPasswordObserverCallback)
 
   if (container) {
-    observer.observe(container, options)
-    const inputGroups = container.querySelectorAll('.entry-item')
-    const attrEntry = container.querySelectorAll('.attrEntry')
-    const labels = container.querySelectorAll('label')
-    const inputs = container.querySelectorAll('input')
-    const buttons = container.querySelectorAll('button')
-    const anchors = container.querySelectorAll('a')
-    const intros = container.querySelectorAll('.intro')
-    const dividers = container.querySelectorAll('.divider')
-    const p = container.querySelectorAll('p')
-    const verificationInfoText = container.querySelectorAll('.verificationInfoText')
-    const verificationErrorText = container.querySelectorAll('.verificationErrorText')
-    const verificationSuccessText = container.querySelectorAll('.verificationSuccessText')
-    const continueBtn = container.querySelector('#continue')
-    const cancelBtn = container.querySelector('#cancel')
-    const pageErrors = container.querySelectorAll('.error.pageLevel')
-    const itemErrors = container.querySelectorAll('.error.itemLevel')
-
-    continueBtn.classList.add('govuk-!-margin-right-1')
-    cancelBtn.classList.add('govuk-button--secondary')
-
-    inputGroups.forEach(group => group.classList.add('govuk-form-group'))
-    attrEntry.forEach(group => group.classList.add('govuk-form-group'))
-    labels.forEach(label => label.classList.add('govuk-label'))
-    inputs.forEach(input => input.classList.add('govuk-input'))
-    buttons.forEach(button => button.classList.add('govuk-button'))
-
-    anchors.forEach(anchor => anchor.classList.add('govuk-link'))
-    intros.forEach(intro => {
-      intro.style.display = 'none'
-    })
-    dividers.forEach(divider => {
-      divider.style.display = 'none'
-    })
-    p.forEach(ptag => {
-      ptag.classList.add('govuk-body')
-    })
-    verificationInfoText.forEach(text => text.classList.add('govuk-inset-text'))
-
-    verificationErrorText.forEach(error => {
-      const copy = error.innerText
-      error.innerText = null
-      const newCopy = document.createElement('p')
-      newCopy.innerText = copy
-      newCopy.classList.add('govuk-body')
-      newCopy.classList.add('govuk-!-margin-bottom-0')
-      error.appendChild(newCopy)
-      error.classList.add('govuk-error-summary')
-    })
-
-    verificationSuccessText.forEach(success => {
-      const copy = success.innerText
-      success.innerText = null
-      const newCopy = document.createElement('p')
-      newCopy.innerText = copy
-      newCopy.classList.add('govuk-body')
-      newCopy.classList.add('govuk-!-margin-bottom-0')
-      success.appendChild(newCopy)
-      success.classList.add('notification')
-      success.classList.add('notification-success')
-    })
-
-    pageErrors.forEach(error => {
-      const copy = error.innerText
-      error.innerText = null
-      const newCopy = document.createElement('p')
-      newCopy.innerText = copy
-      newCopy.classList.add('govuk-body')
-      newCopy.classList.add('govuk-!-margin-bottom-0')
-      error.appendChild(newCopy)
-      error.classList.add('govuk-error-summary')
-    })
-
-    itemErrors.forEach(error => {
-      const copy = error.innerText
-      error.innerText = null
-      const newCopy = document.createElement('p')
-      newCopy.innerText = copy
-      newCopy.classList.add('govuk-body')
-      newCopy.classList.add('govuk-!-margin-bottom-0')
-      error.appendChild(newCopy)
-    })
+    passwordEntryMismatchObserver.observe(document.querySelector('#passwordEntryMismatch'), { attributes: true })
+    oldPasswordObserver.observe(document.querySelectorAll('.Password')[0].querySelector('.itemLevel'), { childList: true })
+    newPasswordObserver.observe(document.querySelectorAll('.Password')[1].querySelector('.itemLevel'), { childList: true })
+    reenterPasswordObserver.observe(document.querySelectorAll('.Password')[2].querySelector('.itemLevel'), { childList: true })
   }
-
-  setTimeout(() => {
-    const errorSummary = document.querySelectorAll('.govuk-error-summary')
-    errorSummary.forEach(summary => {
-      wrapPageError(summary)
-    })
-  }, 300)
 })
