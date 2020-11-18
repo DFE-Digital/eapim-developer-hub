@@ -1292,14 +1292,14 @@ $switch-trigger-size: $switch-height - $switch-trigger-gap * 2;
     display: table;
     width: 100%;
 
-    .api-information-endpoint-title,
-    .api-information-endpoint-tag {
+    .details-title,
+    .details-tag {
       display: table-cell;
       vertical-align: middle;
       width: 100%;
     }
 
-    .api-information-endpoint-tag {
+    .details-tag {
       text-align: right;
       width: 50%;
       

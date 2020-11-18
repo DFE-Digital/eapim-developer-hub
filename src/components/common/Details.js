@@ -1,34 +1,28 @@
-import { Component } from 'react'
-import ReactHtmlParser from 'react-html-parser'
+import { useState } from 'react'
+import { useIsIE11 } from 'hooks'
 
-class Details extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      open: false
-    }
-  }
+const Details = ({ title, content, tag }) => {
+  const isIE = useIsIE11()
+  const [open, setOpen] = useState(false)
 
-    toggleDetails = () => {
-      this.setState({ open: !this.state.open })
-    }
+  const props = {}
+  if (isIE) props.open = open
 
-    componentWillUnmount () {
-      this.setState({ open: false })
-    }
-
-    render () {
-      const props = this.props
-      return (
-        <details className='govuk-details'>
-          <summary className='govuk-details__summary' onClick={() => this.toggleDetails()}>
-            <span className='govuk-details__summary-text'>{ ReactHtmlParser(props.title) }</span>
-          </summary>
-          {this.state.open && <div className='govuk-details__text'>{ ReactHtmlParser(props.details) }</div>}
-        </details>
-      )
-    }
+  return (
+    <details className='govuk-details' data-module='govuk-details' {...props}>
+      <summary className='govuk-details__summary' onClick={() => setOpen(!open)}>
+        <div className='details-title'>
+          <span className='govuk-details__summary-text'>{title}</span>
+        </div>
+        {tag &&
+          <div className='details-tag'>
+            <strong className={`govuk-tag govuk-tag-round govuk-tag--blue`}>{tag}</strong>
+          </div>
+        }
+      </summary>
+      <div className='govuk-details__text' style={{ display: open ? 'block' : 'none' }}>{content}</div>
+    </details>
+  )
 }
 
-export { Details }
-export default (Details)
+export default Details

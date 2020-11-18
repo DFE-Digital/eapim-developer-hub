@@ -1,9 +1,20 @@
 const clipboard = (element) => {
   const el = document.querySelector(element)
-  const range = document.createRange()
 
-  range.selectNode(el)
-  window.getSelection().addRange(range)
+  if (document.body.createTextRange) {
+    const range = document.body.createTextRange()
+    range.moveToElementText(el)
+    range.select()
+  } else if (window.getSelection) {
+    const selection = window.getSelection()
+    const range = document.createRange()
+    range.selectNodeContents(el)
+    selection.addRange(range)
+  } else {
+    const range = document.createRange()
+    range.selectNode(el)
+    window.getSelection().addRange(range)
+  }
 
   try {
     document.execCommand('copy')

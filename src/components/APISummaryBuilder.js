@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactHtmlParser from 'react-html-parser'
 import Highlight from 'react-highlight.js'
+import Details from 'components/common/Details'
 
 const builder = (item) => {
   switch (item.type) {
@@ -66,23 +67,11 @@ const builder = (item) => {
     }
     case 'DETAIL': {
       return (
-        <details className='govuk-details' data-module='govuk-details'>
-          <summary className='govuk-details__summary'>
-            <div className='api-information-endpoint-title'>
-              <span className='govuk-details__summary-text'>
-                {ReactHtmlParser(item.body.title)}
-              </span>
-            </div>
-            <div className='api-information-endpoint-tag'>
-              <strong className={`govuk-tag govuk-tag-round govuk-tag--blue`}>
-                {ReactHtmlParser(item.body.tag)}
-              </strong>
-            </div>
-          </summary>
-          <div className='govuk-details__text'>
-            {item.body.body.map((item, index) => <div key={`${item.body.title}-${index}`}>{builder(item)}</div>)}
-          </div>
-        </details>
+        <Details
+          tag={ReactHtmlParser(item.body.tag)}
+          title={ReactHtmlParser(item.body.title)}
+          content={item.body.body.map((item, index) => <div key={`${item.body.title}-${index}`}>{builder(item)}</div>)}
+        />
       )
     }
 
