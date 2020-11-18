@@ -455,10 +455,6 @@
         },
         {
           "Type": "P",
-          "Body": "Most of our APIs use HTTP verbs and a RESTful interface. You can find out more information on these online."
-        },
-        {
-          "Type": "P",
           "Body": "These tutorials use a simple DfE Information (example) API that exposes 3 endpoints. The paths are:"
         },
         {
@@ -485,11 +481,11 @@
           "Type": "OL",
           "Body": [
             "Create an account in the DfE Developer Hub.",
-            "Register your application which will integrate with the DfE APIs.",
-            "Copy your client id and secret details.",
+            "Register your application that will integrate with the DfE APIs.",
+            "Copy your client ID and secret details.",
             "Subscribe to the DfE Information API and choose the sandbox environment.",
-            "This should provide you with a primary and secondary subscription key.",
-            "Copy the primary key for the below tests."
+            "Make sure you have a primary and secondary subscription key.",
+            "Copy the primary key to use in the examples."
           ]
         },
         {
@@ -532,11 +528,11 @@
         },
         {
           "Type": "P",
-          "Body": "In this example, you will request an access token in your code (utilising your client ID and secret) and then use it to access the DfE Information API application-info endpoint."
+          "Body": "In this example, you will request an access token in your code (using your client ID and secret) and then use it to access the DfE Information API application-info endpoint."
         },
         {
           "Type": "P",
-          "Body": "See the <a href='/documentation/authorisation#user-restricted-endpoints' class='govuk-link'>authorisation</a> section for information about requesting an Access token."
+          "Body": "See the <a href='/documentation/authorisation#user-restricted-endpoints' class='govuk-link'>authorisation</a> section for information about requesting an access token."
         },
         {
           "Type": "H4",
