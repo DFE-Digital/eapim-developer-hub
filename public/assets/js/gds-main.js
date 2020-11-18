@@ -46,6 +46,30 @@ if (window.HTMLCollection && !window.HTMLCollection.prototype.forEach) {
       }
     })
   })
+})([window.Element.prototype, window.Document.prototype, window.DocumentFragment.prototype]);
+
+(function (arr) {
+  arr.forEach(function (item) {
+    if (item.hasOwnProperty('prepend')) {
+      return
+    }
+    Object.defineProperty(item, 'prepend', {
+      configurable: true,
+      enumerable: true,
+      writable: true,
+      value: function prepend () {
+        var argArr = Array.prototype.slice.call(arguments)
+        var docFrag = document.createDocumentFragment()
+
+        argArr.forEach(function (argItem) {
+          var isNode = argItem instanceof window.Node
+          docFrag.appendChild(isNode ? argItem : document.createTextNode(String(argItem)))
+        })
+
+        this.insertBefore(docFrag, this.firstChild)
+      }
+    })
+  })
 })([window.Element.prototype, window.Document.prototype, window.DocumentFragment.prototype])
 
 const main = function (callback) {
@@ -93,6 +117,7 @@ main(function () {
 
     pageErrors.forEach(function (error) {
       const copy = error.innerText.trim()
+      error.innerText = ''
 
       const h2 = document.createElement('h2')
       h2.classList.add('govuk-error-summary__title')
