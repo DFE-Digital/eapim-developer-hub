@@ -1,10 +1,10 @@
-const ready = (callback) => {
+const ready = function (callback) {
   if (document.readyState !== 'loading') callback()
   else document.addEventListener('DOMContentLoaded', callback)
 }
 
-const mCallback = (mutations) => {
-  for (const mutation of mutations) {
+const mCallback = function (mutations) {
+  mutations.forEach(function (mutation) {
     if (mutation.type === 'attributes') {
       const mutated = mutation.target
       if (mutated.classList.contains('error') && mutated.classList.contains('itemLevel')) {
@@ -14,7 +14,7 @@ const mCallback = (mutations) => {
             pBody.classList.add('govuk-error-message')
           } else {
             const copy = mutated.innerText
-            mutated.innerText = null
+            mutated.innerText = ''
             const newCopy = document.createElement('span')
             newCopy.innerText = copy
             newCopy.classList.add('govuk-error-message')
@@ -38,7 +38,7 @@ const mCallback = (mutations) => {
             heading.innerText = 'There is a problem'
             heading.classList.add('govuk-error-summary__title')
             const copy = mutated.innerText
-            mutated.innerText = null
+            mutated.innerText = ''
             const newCopy = document.createElement('p')
             newCopy.innerText = copy
             newCopy.classList.add('govuk-body')
@@ -49,10 +49,10 @@ const mCallback = (mutations) => {
         }
       }
     }
-  }
+  })
 }
 
-ready(() => {
+ready(function () {
   const container = document.getElementById('api')
 
   const options = {

@@ -1,4 +1,4 @@
-const ready = (callback) => {
+const ready = function (callback) {
   if (document.readyState !== 'loading') callback()
   else document.addEventListener('DOMContentLoaded', callback)
 }
@@ -7,22 +7,22 @@ const requiredFieldMissingTitle = 'A required field is missing. Please fill out 
 const fieldIncorrectTitle = 'One or more fields are filled out incorrectly. Please check your entries and try again.'
 const passwordEntryMismatchTitle = 'The password entry fields do not match. Please enter the same password in both fields and try again.'
 
-const showFormGroupError = (inputId) => {
+const showFormGroupError = function (inputId) {
   document.querySelector(inputId).classList.add('govuk-input--error')
   document.querySelector(inputId).closest('.govuk-form-group').classList.add('govuk-form-group--error')
 }
 
-const removeFormGroupError = (inputId) => {
+const removeFormGroupError = function (inputId) {
   document.querySelector(inputId).classList.remove('govuk-input--error')
   document.querySelector(inputId).closest('.govuk-form-group').classList.remove('govuk-form-group--error')
 }
 
-const showPageLevel = () => {
+const showPageLevel = function () {
   document.querySelector('#requiredFieldMissing p').innerText = requiredFieldMissingTitle
   document.querySelector('#requiredFieldMissing').style.display = 'block'
 }
 
-const createErrorLink = (id, html) => {
+const createErrorLink = function (id, html) {
   const a = document.createElement('a')
   a.classList.add('govuk-link')
   a.setAttribute('href', id)
@@ -30,9 +30,9 @@ const createErrorLink = (id, html) => {
   return a
 }
 
-const createErrorMessage = (html, text) => {
+const createErrorMessage = function (html, text) {
   const copy = html.innerText.replace(/{ClaimType}/, text)
-  html.innerText = null
+  html.innerText = ''
 
   const span = document.createElement('span')
   span.innerText = copy
@@ -41,8 +41,8 @@ const createErrorMessage = (html, text) => {
   return span
 }
 
-const pageSummaryObserver = (mutations, type) => {
-  mutations.forEach(mutation => {
+const pageSummaryObserver = function (mutations, type) {
+  mutations.forEach(function (mutation) {
     if (mutation.target.style.display === 'block') {
       if (type === 'claimVerificationServerError') {
         const text = mutation.target.innerText
@@ -83,12 +83,12 @@ const pageSummaryObserver = (mutations, type) => {
   })
 }
 
-const passwordEntryMismatchCallback = (mutations) => pageSummaryObserver(mutations, 'passwordEntryMismatch')
-const fieldIncorrectCallback = (mutations) => pageSummaryObserver(mutations, 'fieldIncorrect')
-const claimVerificationServerErrorCallback = (mutations) => pageSummaryObserver(mutations, 'claimVerificationServerError')
+const passwordEntryMismatchCallback = function (mutations) { pageSummaryObserver(mutations, 'passwordEntryMismatch') }
+const fieldIncorrectCallback = function (mutations) { pageSummaryObserver(mutations, 'fieldIncorrect') }
+const claimVerificationServerErrorCallback = function (mutations) { pageSummaryObserver(mutations, 'claimVerificationServerError') }
 
-const observerCallback = (mutations, type, text) => {
-  mutations.forEach(mutation => {
+const observerCallback = function (mutations, type, text) {
+  mutations.forEach(function (mutation) {
     const entry = mutation.target
 
     const mutated = entry.innerText !== '' ? entry : false
@@ -113,14 +113,14 @@ const observerCallback = (mutations, type, text) => {
   })
 }
 
-const givenNameCallback = (mutations) => observerCallback(mutations, 'givenName', 'first name')
-const surnameCallback = (mutations) => observerCallback(mutations, 'surname', 'last name')
-const emailCallback = (mutations) => observerCallback(mutations, 'email', 'email')
-const passwordCallback = (mutations) => observerCallback(mutations, 'newPassword', 'new password')
-const reenterPasswordCallback = (mutations) => observerCallback(mutations, 'reenterPassword', 'new password again')
-// const organisationCallback = (mutations) => observerCallback(mutations, 'extension_OrganizationName', 'organisation')
+const givenNameCallback = function (mutations) { observerCallback(mutations, 'givenName', 'first name') }
+const surnameCallback = function (mutations) { observerCallback(mutations, 'surname', 'last name') }
+const emailCallback = function (mutations) { observerCallback(mutations, 'email', 'email') }
+const passwordCallback = function (mutations) { observerCallback(mutations, 'newPassword', 'new password') }
+const reenterPasswordCallback = function (mutations) { observerCallback(mutations, 'reenterPassword', 'new password again') }
+// const organisationCallback = function (mutations) { observerCallback(mutations, 'extension_OrganizationName', 'organisation') }
 
-ready(() => {
+ready(function () {
   const container = document.getElementById('api')
   const options = {
     attributes: true,
@@ -167,11 +167,10 @@ ready(() => {
       'error-summary-surname',
       'error-summary-email',
       'error-summary-newPassword',
-      'error-summary-reenterPassword',
-      'error-summary-extension_OrganizationName'
+      'error-summary-reenterPassword'
     ]
 
-    types.forEach(type => {
+    types.forEach(function (type) {
       const body = document.createElement('div')
       body.classList.add(type)
       pageError.appendChild(body)

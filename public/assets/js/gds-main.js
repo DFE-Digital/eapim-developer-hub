@@ -93,6 +93,7 @@ main(function () {
 
     pageErrors.forEach(function (error) {
       const copy = error.innerText.trim()
+      error.innerText = ''
 
       const h2 = document.createElement('h2')
       h2.classList.add('govuk-error-summary__title')
