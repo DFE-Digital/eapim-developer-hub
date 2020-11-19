@@ -16,22 +16,20 @@
   position: absolute;
   width: 100%;
   height: 100vh;
-  top: 390px;
+  top: 0;
   left: 0;
   background-color: #fff;
 }
-
-@media screen and (min-width: 40.0625em) {
+/* @media screen and (min-width: 40.0625em) {
   .verifying-modal {
     top: 420px;
   }
 }
-
 @media screen and (min-width: 47.938em) {
   .verifying-modal {
-    top: 190px;
+    top: 0;
   }
-}
+} */
 
 
 #verifying_blurb,
@@ -45,6 +43,7 @@
   margin: 60px auto;
   font-size: 10px;
   position: fixed;
+  top: 10%;
   left: calc(50% - 30px);
   z-index: 999;
   text-indent: -9999em;
