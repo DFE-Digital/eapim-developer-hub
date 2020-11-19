@@ -31,6 +31,9 @@
   }
 } */
 
+#ResendEmailVerificationMessage {
+  display: none;
+}
 
 #verifying_blurb,
 #verifying_blurb:after {

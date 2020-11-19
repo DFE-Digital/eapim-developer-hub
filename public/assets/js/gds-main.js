@@ -106,8 +106,21 @@ main(function () {
       p.innerText = copy
 
       error.appendChild(p)
-
       error.classList.add('govuk-error-summary')
     })
+
+    /** Resend verification page */
+    const resendMessage = document.querySelector('#ResendEmailVerificationMessage')
+
+    if (resendMessage) {
+      const text = resendMessage.innerText
+      const resendLink = document.createElement('a')
+      resendLink.href = text.substring(text.indexOf('https'), text.lastIndexOf('"'))
+      resendLink.innerText = 'I have not received the email'
+
+      resendMessage.innerHTML = ''
+      resendMessage.append(resendLink)
+      resendMessage.style.display = 'block'
+    }
   }
 })
