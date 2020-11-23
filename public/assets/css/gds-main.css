@@ -3319,10 +3319,8 @@ html, body {
     font-size: 14px;
     font-size: 0.875rem;
     line-height: 1.14286;
-    display: block;
     padding: 10px 15px; }
     .govuk-skip-link:active, .govuk-skip-link:focus {
-      position: static !important;
       width: auto !important;
       height: auto !important;
       margin: inherit !important;

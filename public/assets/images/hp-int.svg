@@ -48,23 +48,23 @@
                             <path d="M30.8532,18.9611 C30.4392,18.5571 30.0472,17.8121 29.7412,16.6751 L28.5252,20.7241 C29.2652,20.2151 29.8352,19.8861 30.4882,19.8711 C29.3312,22.3631 27.8852,23.0051 26.9482,22.8321 C25.8042,22.6221 25.2782,21.6021 25.4562,20.7371 C25.7192,19.5111 26.9772,19.1921 27.5642,20.6181 C28.6892,18.3261 26.7822,17.6111 25.5552,18.2901 C27.4392,16.4101 27.6552,14.7391 26.1342,12.7171 C24.0142,14.3371 23.9902,15.9421 24.9432,18.1991 C23.7052,16.7821 21.7802,17.5431 22.4762,19.8321 C23.3682,18.4501 24.5502,19.3191 24.3642,20.6321 C24.2072,21.7751 22.6982,22.6991 20.8172,22.5351 C18.1232,22.2911 17.9632,20.4311 17.8952,18.8921 C18.5572,18.7691 19.7502,19.3841 20.7672,20.8121 L21.1422,16.5171 C20.0362,17.6701 19.0302,17.8891 17.9132,17.9251 C18.2852,16.7651 19.9942,14.8641 19.9942,14.8641 L17.5112,14.8641 L17.5102,14.8641 L17.5082,14.8641 L14.6332,14.8641 C14.6332,14.8641 16.3422,16.7651 16.7142,17.9251 C15.5972,17.8891 14.5912,17.6701 13.4852,16.5171 L13.8592,20.8121 C14.8772,19.3841 16.0692,18.7701 16.7322,18.8921 C16.6652,20.4311 16.5052,22.2911 13.8102,22.5351 C11.9292,22.6991 10.4192,21.7751 10.2632,20.6321 C10.0772,19.3191 11.2592,18.4501 12.1522,19.8321 C12.8472,17.5431 10.9212,16.7821 9.6842,18.1991 C10.6372,15.9421 10.6122,14.3371 8.4932,12.7171 C6.9722,14.7391 7.1882,16.4101 9.0722,18.2901 C7.8452,17.6111 5.9392,18.3261 7.0622,20.6181 C7.6502,19.1921 8.9092,19.5111 9.1712,20.7371 C9.3482,21.6021 8.8222,22.6231 7.6792,22.8321 C6.7422,23.0051 5.2972,22.3631 4.1392,19.8711 C4.7922,19.8861 5.3622,20.2151 6.1022,20.7241 L4.8862,16.6751 C4.5802,17.8121 4.1882,18.5571 3.7742,18.9611 C3.4942,18.1421 3.5342,17.5491 3.7832,16.2741 L1.2752,17.1681 C2.6072,18.9871 3.8982,21.5411 4.9582,25.9991 C8.6922,25.4651 12.8822,25.1651 17.3112,25.1651 C21.7402,25.1651 25.9332,25.4651 29.6692,26.0001 C30.7292,21.5411 32.0192,18.9871 33.3522,17.1681 L30.8432,16.2741 C31.0932,17.5491 31.1322,18.1421 30.8532,18.9611" id="Fill-21"></path>
                         </g>
                         <text id="gov.uk" font-family="Helvetica" font-size="28" font-weight="normal" letter-spacing="1">
-                            <tspan x="42" y="28">GOV.UK</tspan>
+                            <tspan aria-hidden="true" x="42" y="28">GOV.UK</tspan>
                         </text>
                     </g>
                 </g>
             </g>
         </g>
         <text id="API-subscriptions" font-family="Arial-BoldMT, Arial" font-size="48" font-weight="bold" line-spacing="50" fill="#0B0C0C">
-            <tspan x="38" y="195">API subscriptions</tspan>
+            <tspan aria-hidden="true" x="38" y="195">API subscriptions</tspan>
         </text>
         <text id="Subscribe" font-family="ArialMT, Arial" font-size="19" font-weight="normal" fill="#FFFFFF">
-            <tspan x="780.755615" y="372">Subscribe</tspan>
+            <tspan aria-hidden="true" x="780.755615" y="372">Subscribe</tspan>
         </text>
         <text id="Sandbox" font-family="Arial-BoldMT, Arial" font-size="22" font-weight="bold" fill="#000000">
-            <tspan x="38" y="391">Sandbox</tspan>
+            <tspan aria-hidden="true" x="38" y="391">Sandbox</tspan>
         </text>
         <text id="Production" font-family="Arial-BoldMT, Arial" font-size="22" font-weight="bold" fill="#000000">
-            <tspan x="38" y="482">Production</tspan>
+            <tspan aria-hidden="true" x="38" y="482">Production</tspan>
         </text>
         <g id="Standard---focussed" transform="translate(739.000000, 453.000000)">
             <g id="Click-Area">
@@ -72,7 +72,7 @@
                 <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
             </g>
             <text id="Unsubscribe" font-family="ArialMT, Arial" font-size="19" font-weight="normal" fill="#FFFFFF">
-                <tspan x="37.197998" y="27">Unsubscribe</tspan>
+                <tspan aria-hidden="true" x="37.197998" y="27">Unsubscribe</tspan>
             </text>
         </g>
         <g id="Standard---focussed-Copy" transform="translate(739.000000, 351.000000)">
@@ -81,25 +81,25 @@
                 <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-3"></use>
             </g>
             <text id="Subscribe" font-family="ArialMT, Arial" font-size="19" font-weight="normal" fill="#FFFFFF">
-                <tspan x="47.7556152" y="27">Subscribe</tspan>
+                <tspan aria-hidden="true" x="47.7556152" y="27">Subscribe</tspan>
             </text>
         </g>
         <text id="Status" font-family="ArialMT, Arial" font-size="18" font-weight="normal" fill="#000000">
-            <tspan x="38" y="539">Status</tspan>
+            <tspan aria-hidden="true" x="38" y="539">Status</tspan>
         </text>
         <g id="Accordion" transform="translate(38.000000, 248.000000)">
             <g id="Row-1" transform="translate(0.000000, 22.000000)">
                 <path d="M0,145.699115 L881,145.699115" id="Line" stroke="#B1B4B6" stroke-linecap="square"></path>
                 <path d="M0,1.30088496 L881,1.30088496" id="Line" stroke="#B1B4B6" stroke-linecap="square"></path>
                 <text id="Attendance-API" font-family="Arial-BoldMT, Arial" font-size="28" font-weight="bold" fill="#2A61AD">
-                    <tspan x="0" y="48.1769912">Attendance API</tspan>
+                    <tspan aria-hidden="true" x="0" y="48.1769912">Attendance API</tspan>
                 </text>
                 <g id="4---granular-components/-" transform="translate(834.852381, 39.026549)" fill="#0B0C0C">
                     <polygon id="-" points="3.06353153 4.16823611 3.06353153 1.3017342 17.8411501 1.3017342 17.8411501 4.16823611"></polygon>
                 </g>
             </g>
             <text id="Close-all" font-family="Helvetica" font-size="16" font-weight="normal" fill="#1D70B8">
-                <tspan x="818.640625" y="15">Close all</tspan>
+                <tspan aria-hidden="true" x="818.640625" y="15">Close all</tspan>
             </text>
         </g>
         <path d="M39.632,559 L919,559" id="Line-2" stroke="#979797" stroke-linecap="square"></path>
@@ -107,7 +107,7 @@
         <g id="COMPLETE-tag" transform="translate(739.000000, 518.000000)">
             <rect id="Tag" fill="#D5CFE5" x="0" y="0" width="180" height="28"></rect>
             <text id="PENDING-APPROVAL" font-family="Arial-BoldMT, Arial" font-size="14" font-weight="bold" letter-spacing="0.875" fill="#341E67">
-                <tspan x="11.0483398" y="20">PENDING APPROVAL</tspan>
+                <tspan aria-hidden="true" x="11.0483398" y="20">PENDING APPROVAL</tspan>
             </text>
         </g>
     </g>

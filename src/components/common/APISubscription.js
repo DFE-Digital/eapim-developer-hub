@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import APISubscriptionKeys from './APISubscriptionKeys'
 
 import { getSubscriptionKeys, postSubscription } from '../../../lib/subscriptionService'
 
@@ -60,108 +61,87 @@ const APISubscription = ({ applicationId, tag, subscription, onSubscriptionChang
     onFetchKeys(e, subId)
   }
 
-  const renderSubscribeButton = () => (
-    <button type='button' className='govuk-button govuk-!-margin-0' onClick={onSubscribe} disabled={subscribing}>
-      {subscribing ? `Subscribing...` : 'Subscribe'}
-    </button>
-  )
+  const renderSubscriptionButton = (subscription) => {
+    let text = subscribing ? 'Subscribing...' : 'Subscribe'
+    let href = '#'
+    let onClick = onSubscribe
 
-  const renderCancelButton = (subId) => {
+    if (subscription) {
+      text = 'Unsubscribe'
+      href = `/applications/${applicationId}/unsubscribe/${subscription.id}-${tag.environment}`
+      onClick = null
+    }
+
     return (
-      <a href={`/applications/${applicationId}/unsubscribe/${subId}-${tag.environment}`} role='button' className='govuk-button govuk-button--warning govuk-!-margin-0'>
-       Unsubscribe
+      <a href={href} onClick={onClick} role='button' className={`govuk-button govuk-!-margin-0 ${subscription ? 'govuk-button--warning' : ''}`}>
+        {text}
       </a>
     )
   }
 
-  const subscriptionHasKeys = Object.keys(subscriptionKeys).length !== 0
+  const state = subscription ? statusType[subscription.state] : statusType.default
 
-  if (!subscription) {
-    return (
+  return (
+    <>
       <table className='govuk-table govuk-!-margin-bottom-6' key={`${applicationId}-${environment}`}>
         <thead className='govuk-table__head'>
           <tr className='govuk-table__row'>
-            <th scope='row' className='govuk-table__header govuk-!-width-one-half'>{tag.name}</th>
+            <th scope='row' className='govuk-table__header govuk-!-width-one-half'><span className='govuk-visually-hidden'>Environment: </span>{tag.name}</th>
             <td scope='row' className='govuk-table__cell govuk-!-width-one-half govuk-table__header--numeric'>
-              {renderSubscribeButton()}
+              {renderSubscriptionButton(subscription)}
             </td>
           </tr>
         </thead>
-      </table>
-    )
-  }
-
-  const state = statusType[subscription.state] || statusType.default
-
-  return (
-    <table className='govuk-table govuk-!-margin-bottom-6' key={`${applicationId}-${environment}`}>
-      <thead className='govuk-table__head'>
-        <tr className='govuk-table__row'>
-          <th scope='row' className='govuk-table__header govuk-!-width-one-half'>{tag.name}</th>
-          <td scope='row' className='govuk-table__cell govuk-!-width-one-half govuk-table__header--numeric'>
-            {state.button === 'cancel' ? renderCancelButton(subscription.id) : renderSubscribeButton()}
-          </td>
-        </tr>
-      </thead>
-      <tbody className='govuk-table__body'>
-        <tr className='govuk-table__row'>
-          <th scope='row' className='govuk-table__header govuk-!-font-weight-regular middle'>Status</th>
-          <td className='govuk-table__cell govuk-table__cell--numeric middle'>
-            <strong className={`govuk-tag govuk-tag-round govuk-!-margin-right-0 govuk-tag--${state.tag}`}>{state.text || subscription.state}</strong>
-          </td>
-        </tr>
-        {subscription.state === 'active' && (
-          <>
+        {subscription && (
+          <tbody className='govuk-table__body'>
             <tr className='govuk-table__row'>
-              <th scope='row' className='govuk-table__header govuk-!-font-weight-regular middle'>API URL</th>
-              <td className='govuk-table__cell middle'>{tag.url}</td>
-            </tr>
-            {tag.tokenEndpoint && (
-              <tr className='govuk-table__row'>
-                <th scope='row' className='govuk-table__header govuk-!-font-weight-regular middle'>Token endpoint</th>
-                <td className='govuk-table__cell middle'>{tag.tokenEndpoint}</td>
-              </tr>
-            )}
-            {tag.authEndpoint && (
-              <tr className='govuk-table__row'>
-                <th scope='row' className='govuk-table__header govuk-!-font-weight-regular middle'>Authorisation endpoint</th>
-                <td className='govuk-table__cell middle text-wrap'><code className='code--block inline'>{tag.authEndpoint}</code></td>
-              </tr>
-            )}
-            {tag.scopes && (
-              <tr className='govuk-table__row'>
-                <th scope='row' className='govuk-table__header govuk-!-font-weight-regular middle'>Scopes</th>
-                <td className='govuk-table__cell middle'>
-                  <ul className='govuk-list govuk-list--bullet govuk-!-margin-bottom-0'>{tag.scopes.map(scope => <li key={scope}>{scope}</li>)}</ul>
-                </td>
-              </tr>
-            )}
-            <tr className='govuk-table__row'>
-              <th scope='row' className='govuk-table__header middle'>Subscription keys</th>
+              <th scope='row' className='govuk-table__header govuk-!-font-weight-regular middle'>Status</th>
               <td className='govuk-table__cell govuk-table__cell--numeric middle'>
-                {!subscription.keys &&
-                  <a className='govuk-link' href='#' onClick={(e) => onViewKeys(e, subscription.id)}>
-                    {!subscriptionHasKeys && fetching ? 'Loading...' : (showKeys ? 'Hide keys' : 'View keys')}
-                  </a>
-                }
+                <strong className={`govuk-tag govuk-tag-round govuk-!-margin-right-0 govuk-tag--${state.tag}`}>{state.text || subscription.state}</strong>
               </td>
             </tr>
-          </>
+            {subscription.state === 'active' && (
+              <>
+                <tr className='govuk-table__row'>
+                  <th scope='row' className='govuk-table__header govuk-!-font-weight-regular middle'>API URL</th>
+                  <td className='govuk-table__cell middle'>{tag.url}</td>
+                </tr>
+                {tag.tokenEndpoint && (
+                  <tr className='govuk-table__row'>
+                    <th scope='row' className='govuk-table__header govuk-!-font-weight-regular middle'>Token endpoint</th>
+                    <td className='govuk-table__cell middle'>{tag.tokenEndpoint}</td>
+                  </tr>
+                )}
+                {tag.authEndpoint && (
+                  <tr className='govuk-table__row'>
+                    <th scope='row' className='govuk-table__header govuk-!-font-weight-regular middle'>Authorisation endpoint</th>
+                    <td className='govuk-table__cell middle text-wrap'><code className='code--block inline'>{tag.authEndpoint}</code></td>
+                  </tr>
+                )}
+                {tag.scopes && (
+                  <tr className='govuk-table__row'>
+                    <th scope='row' className='govuk-table__header govuk-!-font-weight-regular middle'>Scopes</th>
+                    <td className='govuk-table__cell middle'>
+                      <ul className='govuk-list govuk-list--bullet govuk-!-margin-bottom-0'>{tag.scopes.map(scope => <li key={scope}>{scope}</li>)}</ul>
+                    </td>
+                  </tr>
+                )}
+              </>
+            )}
+          </tbody>
         )}
-        {subscriptionHasKeys && showKeys && (
-          <>
-            <tr className='govuk-table__row'>
-              <th scope='row' className='govuk-table__header govuk-!-font-weight-regular middle'>Primary key</th>
-              <td className='govuk-table__cell middle'>{subscriptionKeys.primaryKey || '-'}</td>
-            </tr>
-            <tr className='govuk-table__row'>
-              <th scope='row' className='govuk-table__header govuk-!-font-weight-regular middle'>Secondary key</th>
-              <td className='govuk-table__cell middle'>{subscriptionKeys.secondaryKey || '-'}</td>
-            </tr>
-          </>
-        )}
-      </tbody>
-    </table>
+      </table>
+
+      {subscription && (
+        <APISubscriptionKeys
+          subscription={subscription}
+          fetching={fetching}
+          showKeys={showKeys}
+          onViewKeys={onViewKeys}
+          subscriptionKeys={subscriptionKeys}
+        />
+      )}
+    </>
   )
 }
 

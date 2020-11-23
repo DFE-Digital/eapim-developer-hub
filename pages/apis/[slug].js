@@ -44,7 +44,7 @@ const ApiDetails = ({ api, summary, router, msalConfig, user, errorCode }) => {
         <section className='mainWrapper govuk-!-margin-top-7'>
           <aside className='sideBar'>
             <div className='sideBar_content'>
-              <SideBar nav={Content.Apis} loggedIn={isLoggedIn} />
+              <SideBar title={parent} nav={Content.Apis} loggedIn={isLoggedIn} />
             </div>
           </aside>
 

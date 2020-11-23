@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import Router from 'next/router'
 import AccessChecker from 'components/common/AccessChecker'
 import ReturnTo from 'components/common/ReturnTo'
-import { Loading } from 'components/common/Loading'
 import InputWithValidation from 'components/common/forms/input-with-validation'
 import ValidationMessages from 'components/common/forms/validation-messages'
 import { saveAppData, cancelApplication } from '../../../src/actions/application'
@@ -11,20 +10,24 @@ import { getApplications } from '../../../lib/applicationService'
 import { PrivateRoute } from 'components/common/PrivateRoute'
 import { appNamePattern } from '../../../src/utils/patterns'
 
+import { useFocusMain } from 'hooks'
+
 const ApplicationCreateStep1 = ({ user, application, saveAppData, cancelApplication, router, msalConfig }) => {
   const [fields, setFields] = useState({})
   const [errors, setErrors] = useState([])
-  const [fetching, setFetching] = useState(false)
+  // const [fetching, setFetching] = useState(false)
   const [applications, setApplications] = useState([])
 
   const appName = React.createRef()
 
+  useFocusMain()
+
   useEffect(() => {
     const fetchApplications = async () => {
-      setFetching(true)
+      // setFetching(true)
       const apps = await getApplications(user.data.User)
       setApplications(apps)
-      setFetching(false)
+      // setFetching(false)
     }
 
     if (user.data && user.data.User) fetchApplications()
@@ -74,15 +77,13 @@ const ApplicationCreateStep1 = ({ user, application, saveAppData, cancelApplicat
 
   const { details } = application
 
-  if (fetching) return <Loading />
-
   return (
     <Fragment>
       <AccessChecker msalConfig={msalConfig} />
       <PrivateRoute redirect={'/applications'} />
       <ReturnTo parentPath={router.asPath} />
       <div className='govuk-width-container'>
-        <a href='#' className='govuk-back-link' onClick={() => Router.back()}>Back</a>
+        <a href='#' className='govuk-back-link' onClick={() => Router.back()}>Back<span className='govuk-visually-hidden'> to application list</span></a>
         <main className='govuk-main-wrapper ' id='main-content' role='main'>
           <div className='govuk-grid-row'>
             <div className='govuk-grid-column-full'>

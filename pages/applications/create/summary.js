@@ -33,7 +33,7 @@ class ApplicationCreateSummary extends Component {
         <PrivateRoute redirect={'/applications'} />
         <ReturnTo parentPath={this.props.router.asPath} />
         <div className='govuk-width-container'>
-          <a href='#' className='govuk-back-link' onClick={() => Router.back()}>Back</a>
+          <a href='#' className='govuk-back-link' onClick={() => Router.back()}>Back <span className='govuk-visually-hidden'>to what is your applications redirect URL</span></a>
           <main className='govuk-main-wrapper ' id='main-content' role='main'>
             <div className='govuk-grid-row'>
               <div className='govuk-grid-column-full'>

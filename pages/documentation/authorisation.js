@@ -28,7 +28,7 @@ const Authorisation = ({ user, router, msalConfig }) => {
         <section className='mainWrapper govuk-!-margin-top-7'>
           <aside className='sideBar'>
             <div className='sideBar_content'>
-              <SideBar nav={Content.Documentation} loggedIn={isLoggedIn} />
+              <SideBar title={parent} nav={Content.Documentation} loggedIn={isLoggedIn} />
             </div>
           </aside>
 

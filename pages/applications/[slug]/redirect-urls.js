@@ -272,13 +272,14 @@ class ApplicationRedirectUrls extends Component {
 
                               {this.state.redirectUrlToChange !== redirectUri && (
                                 <td className='govuk-table__cell govuk-table__cell--numeric' style={{ minWidth: '145px' }}>
-                                  <a href='#' className='govuk-link govuk-!-margin-right-2' onClick={(e) => this.changeRedirectUrl(e, redirectUri)}>Change</a>
-                                  {application.web.redirectUris.length > 1 && <a href='#' className='govuk-link' onClick={(e) => this.removeRedirectUrl(e, redirectUri)}>Remove</a>}
+                                  <a role='button' href='#' className='govuk-link govuk-!-margin-right-2' onClick={(e) => this.changeRedirectUrl(e, redirectUri)}>Change</a>
+                                  {application.web.redirectUris.length > 1 && <a role='button' href='#' className='govuk-link' onClick={(e) => this.removeRedirectUrl(e, redirectUri)}>Remove</a>}
                                 </td>
                               )}
                               {this.state.redirectUrlToChange === redirectUri && (
                                 <td className='govuk-table__cell govuk-table__cell--numeric' style={{ minWidth: '145px' }}>
-                                  <a href='#' className='govuk-link govuk-!-margin-right-2' onClick={(e) => this.saveRedirectUrl(e, redirectUri)}>Save</a> <a href='#' className='govuk-link' onClick={(e) => this.cancelRedirectUrl(e)}>Cancel</a>
+                                  <a role='button' href='#' className='govuk-link govuk-!-margin-right-2' onClick={(e) => this.saveRedirectUrl(e, redirectUri)}>Save</a>
+                                  <a role='button' href='#' className='govuk-link' onClick={(e) => this.cancelRedirectUrl(e)}>Cancel</a>
                                 </td>
                               )}
                             </tr>
@@ -300,8 +301,8 @@ class ApplicationRedirectUrls extends Component {
                               />
                             </th>
                             <td className='govuk-table__cell govuk-table__cell--numeric' style={{ minWidth: '145px' }}>
-                              <a href='#' onClick={(e) => this.saveNewRedirectUrl(e)} className='govuk-link govuk-!-margin-right-2'>Save</a>
-                              <a href='#' className='govuk-link' onClick={(e) => this.cancelNewRedirectUrl(e)}>Cancel</a>
+                              <a role='button' href='#' onClick={(e) => this.saveNewRedirectUrl(e)} className='govuk-link govuk-!-margin-right-2'>Save</a>
+                              <a role='button' href='#' className='govuk-link' onClick={(e) => this.cancelNewRedirectUrl(e)}>Cancel</a>
                             </td>
                           </tr>
                         )}

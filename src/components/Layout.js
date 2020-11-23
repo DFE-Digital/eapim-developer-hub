@@ -25,7 +25,6 @@ const Layout = ({ children, msalConfig, msalRegisterConfig }) => {
       {siteLoaded && !bannerCookie && <CookieBanner cookie={bannerCookie} />}
       <Header msalConfig={msalConfig} msalRegisterConfig={msalRegisterConfig} />
       <PhaseBanner />
-      <a href='#main-content' className='govuk-skip-link'>Skip to main content</a>
       {children}
       <Footer />
     </>

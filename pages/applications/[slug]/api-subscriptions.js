@@ -106,6 +106,8 @@ ApplicationApiSubscriptions.getInitialProps = async ({ res, query }) => {
 
     const subscriptions = await getSubscriptions(application.applicationId)
 
+    console.log(subscriptions)
+
     await Promise.all(apis.map(async (api) => {
       api.tags = await getApiTags(api.name)
       return api

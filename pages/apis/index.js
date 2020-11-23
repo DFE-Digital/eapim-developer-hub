@@ -43,7 +43,7 @@ const Apis = ({ user, apis, router, msalConfig, errorCode }) => {
         <section className='mainWrapper govuk-!-margin-top-7'>
           <aside className='sideBar'>
             <div className='sideBar_content'>
-              <SideBar nav={Content.Apis} loggedIn={isLoggedIn} />
+              <SideBar title={page} nav={Content.Apis} loggedIn={isLoggedIn} />
             </div>
           </aside>
 

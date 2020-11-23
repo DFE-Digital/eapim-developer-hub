@@ -1,9 +1,10 @@
 import React from 'react'
 import SidebarLink from './SidebarLink'
 
-const SideBar = ({ nav, loggedIn }) => {
+const SideBar = ({ nav, title, loggedIn }) => {
   return (
     <nav>
+      {title && <h2 className='govuk-visually-hidden'>{title} navigation</h2>}
       <ul>
         {Object.keys(nav).map((item, i) => {
           if (!nav[item].Secure || (nav[item].Secure && loggedIn)) {

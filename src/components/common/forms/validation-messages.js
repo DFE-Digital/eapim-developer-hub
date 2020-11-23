@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 const ValidationMessages = ({ errors }) => {
+  useEffect(() => {
+    if (errors.length) document.querySelector('.govuk-error-summary').focus()
+  }, [errors])
+
   return (
     <>
       {errors.length > 0 && (

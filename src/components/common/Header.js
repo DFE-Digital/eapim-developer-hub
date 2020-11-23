@@ -41,6 +41,7 @@ class Header extends Component {
               </span>
             </a>
           </div>
+          <a href='#main-content' className='govuk-skip-link'>Skip to main content</a>
           <div className='govuk-header__content'>
             <Link href='/'>
               <a className='govuk-header__link govuk-header__link--service-name'>
@@ -62,7 +63,6 @@ class Header extends Component {
                 id='navigation'
                 className={'govuk-header__navigation' + (this.state.jsEnabled ? ' govuk-js-header__navigation' : '') + (this.state.navToggled ? ' govuk-header__navigation--open' : '')}
                 aria-label='Top Level Navigation'
-                aria-hidden={!this.state.navToggled}
               >
                 {Content.Navigation.map((nav, i) => {
                   if (isLoggedIn && nav.Url.indexOf('logout') > -1) {

@@ -1,6 +1,5 @@
-import React, { Component, Fragment } from 'react'
+import React, { useState, useRef } from 'react'
 import { connect } from 'react-redux'
-import Router from 'next/router'
 import AccessChecker from 'components/common/AccessChecker'
 import ReturnTo from 'components/common/ReturnTo'
 import InputWithValidation from 'components/common/forms/input-with-validation'
@@ -8,41 +7,39 @@ import ValidationMessages from 'components/common/forms/validation-messages'
 import { saveAppData, cancelApplication } from '../../../src/actions/application'
 import { PrivateRoute } from 'components/common/PrivateRoute'
 
-class ApplicationCreateStep2 extends Component {
-  constructor (props) {
-    super(props)
+import { useFocusMain } from 'hooks'
 
-    this.state = {
-      fields: {},
-      errors: []
-    }
+const ApplicationCreateStep2 = ({ application, saveAppData, cancelApplication, router, msalConfig }) => {
+  const [fields, setFields] = useState({})
+  const [errors, setErrors] = useState([])
 
-    this.appDescription = React.createRef()
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleInputChange = this.handleInputChange.bind(this)
-  }
+  const appDescriptionRef = useRef()
 
-  handleSubmit (e) {
+  useFocusMain()
+
+  const handleSubmit = (e) => {
     e.preventDefault()
-    if (!this.appDescription.current.validateInput(e)) {
-      this.appDescription.current.validateInput(e)
+    if (!appDescriptionRef.current.validateInput(e)) {
+      appDescriptionRef.current.validateInput(e)
       return false
     }
-    this.props.saveAppData(this.state.fields)
-    Router.push('/applications/create/step3')
+
+    saveAppData(fields)
+    router.push('/applications/create/step3')
+
     return true
   }
 
-  handleInputChange (event) {
-    const target = event.target
+  const handleInputChange = (e) => {
+    const target = e.target
     const value = target.value.trim()
     const name = target.name
-    const fields = { ...this.state.fields }
-    fields[name] = value
-    this.setState({ fields })
+    const updatedFields = { ...fields }
+    updatedFields[name] = value
+    setFields(updatedFields)
   }
 
-  showError = () => {
+  const showError = () => {
     const validationErrors = []
     setTimeout(() => {
       Array.from(document.querySelectorAll(`[id^="error-msg-for__"]`)).forEach(element => {
@@ -53,76 +50,72 @@ class ApplicationCreateStep2 extends Component {
           })
         }
       })
-      this.setState({ errors: validationErrors })
+      setErrors(validationErrors)
     }, 0)
   }
 
-  render () {
-    const {
-      application: { details }
-    } = this.props
+  const { details } = application
 
-    return (
-      <Fragment>
-        <AccessChecker msalConfig={this.props.msalConfig} />
-        <PrivateRoute redirect={'/applications'} />
-        <ReturnTo parentPath={this.props.router.asPath} />
-        <div className='govuk-width-container'>
-          <a href='#' className='govuk-back-link' onClick={() => Router.back()}>Back</a>
-          <main className='govuk-main-wrapper ' id='main-content' role='main'>
-            <div className='govuk-grid-row'>
-              <div className='govuk-grid-column-full'>
-                <ValidationMessages errors={this.state.errors} />
-              </div>
+  return (
+    <>
+      <AccessChecker msalConfig={msalConfig} />
+      <PrivateRoute redirect={'/applications'} />
+      <ReturnTo parentPath={router.asPath} />
+      <div className='govuk-width-container'>
+        <a href='#' className='govuk-back-link' onClick={() => router.back()}>Back<span className='govuk-visually-hidden'> to what is your applications name</span></a>
+        <main className='govuk-main-wrapper ' id='main-content' role='main'>
+          <div className='govuk-grid-row'>
+            <div className='govuk-grid-column-full'>
+              <ValidationMessages errors={errors} />
             </div>
-            <div className='govuk-grid-row'>
-              <div className='govuk-grid-column-two-thirds'>
-                <form noValidate onSubmit={this.handleSubmit}>
-                  <div className='govuk-form-group'>
-                    <fieldset className='govuk-fieldset'>
-                      <legend className='govuk-fieldset__legend govuk-fieldset__legend--xl'>
-                        <h1 className='govuk-fieldset__heading govuk-!-margin-bottom-6'>
-                                        What is your application for?
-                        </h1>
-                      </legend>
-                      <InputWithValidation
-                        ref={this.appDescription}
-                        friendlyName={'application description'}
-                        name={'app-description'}
-                        inputId={'app-description'}
-                        inputErrorId={'error-msg-for__app-description'}
-                        label={`Application description`}
-                        hint={`Please describe in as much detail what your application is for and how it will be used.`}
-                        customErrorMessage='Describe your application'
-                        isRequired
-                        textArea
-                        onChange={this.handleInputChange}
-                        onFocus={() => this.showError()}
-                        inputValue={details ? details['app-description'] : this.state.fields['app-description']}
-                        setErrors={() => this.showError()}
-                      />
-                    </fieldset>
-                  </div>
+          </div>
+          <div className='govuk-grid-row'>
+            <div className='govuk-grid-column-two-thirds'>
+              <form noValidate onSubmit={handleSubmit}>
+                <div className='govuk-form-group'>
+                  <fieldset className='govuk-fieldset'>
+                    <legend className='govuk-fieldset__legend govuk-fieldset__legend--xl'>
+                      <h1 className='govuk-fieldset__heading govuk-!-margin-bottom-6'>
+                        What is your application for?
+                      </h1>
+                    </legend>
+                    <InputWithValidation
+                      ref={appDescriptionRef}
+                      friendlyName={'application description'}
+                      name={'app-description'}
+                      inputId={'app-description'}
+                      inputErrorId={'error-msg-for__app-description'}
+                      label={`Application description`}
+                      hint={`Please describe in as much detail what your application is for and how it will be used.`}
+                      customErrorMessage='Describe your application'
+                      isRequired
+                      textArea
+                      onChange={handleInputChange}
+                      onFocus={() => showError()}
+                      inputValue={details ? details['app-description'] : fields['app-description']}
+                      setErrors={() => showError()}
+                    />
+                  </fieldset>
+                </div>
 
-                  <button type='submit' className='govuk-button govuk-!-margin-right-1'>Continue</button>
-                  <button
-                    type='button'
-                    className='govuk-button govuk-button--secondary'
-                    onClick={() => {
-                      this.props.cancelApplication()
-                      Router.push('/applications')
-                    }}
-                  >
-                    Cancel
-                  </button>
-                </form>
-              </div>
+                <button type='submit' className='govuk-button govuk-!-margin-right-1'>Continue</button>
+                <button
+                  type='button'
+                  className='govuk-button govuk-button--secondary'
+                  onClick={() => {
+                    cancelApplication()
+                    router.push('/applications')
+                  }}
+                >
+                  Cancel
+                </button>
+              </form>
             </div>
-          </main>
-        </div>
-      </Fragment>
-    )
-  }
+          </div>
+        </main>
+      </div>
+    </>
+  )
 }
 
 const mapStateToProps = (state) => {

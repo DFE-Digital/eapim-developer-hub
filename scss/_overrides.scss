@@ -1,3 +1,15 @@
+.govuk-skip-link {
+  display: inline-block;
+  top: 0;
+  left: 0;
+
+  &:focus,
+  &:active {
+    position: absolute !important;
+    margin: 0 !important;
+  }
+}
+
 .cookie-banner {
   background-color:	lighten(govuk-colour("light-blue"), 25%);
   padding: 10px 0;

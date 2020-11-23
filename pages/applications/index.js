@@ -47,7 +47,7 @@ const Applications = ({ user, selectApplication, router, msalConfig, msalRegiste
         <section className='mainWrapper govuk-!-margin-top-7'>
           <aside className='sideBar'>
             <div className='sideBar_content'>
-              <SideBar nav={Content.Applications} loggedIn={isLoggedIn} />
+              <SideBar title={page} nav={Content.Applications} loggedIn={isLoggedIn} />
             </div>
           </aside>
 

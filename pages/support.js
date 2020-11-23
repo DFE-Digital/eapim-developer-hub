@@ -6,6 +6,7 @@ import ContentBuilder from 'components/common/ContentBuilder'
 import ValidationMessages from 'components/common/forms/validation-messages'
 import Radio from 'components/common/form/radio'
 import Input from 'components/common/form/input'
+import Select from 'components/common/form/Select'
 import Textarea from 'components/common/form/textarea'
 import Breadcrumbs from 'components/common/Breadcrumbs'
 
@@ -14,15 +15,17 @@ import { template } from '../emails/support'
 
 import * as validation from 'utils/validation'
 
+import { getApis } from '../lib/apiServices'
+
 const page = 'Support'
 
-const Support = ({ router }) => {
+const Support = ({ apis, router }) => {
   const formRef = useRef()
   const fullnameRef = useRef()
   const emailRef = useRef()
-  const apiRef = useRef()
   const descriptionRef = useRef()
 
+  const [api, setApi] = useState('')
   const [reason, setReason] = useState('')
   const [description, setDescription] = useState('')
 
@@ -42,12 +45,17 @@ const Support = ({ router }) => {
   }, [errors])
 
   const handleInputChange = (e) => {
+    console.log(e.target.name, e.target.value)
     if (e.target.name === 'reason') {
       setReason(e.target.value)
     }
 
     if (e.target.name === 'description') {
       setDescription(e.target.value)
+    }
+
+    if (e.target.name === 'api') {
+      setApi(e.target.value)
     }
   }
 
@@ -90,7 +98,7 @@ const Support = ({ router }) => {
       fullname: fullnameRef.current.value,
       email: emailRef.current.value,
       reason,
-      api: apiRef && apiRef.current && apiRef.current.value,
+      api,
       description: descriptionRef.current.value
     })
 
@@ -150,14 +158,15 @@ const Support = ({ router }) => {
                   ]}
                 />
                 {reason && reason === 'issue-with-api' &&
-                  <Input
-                    ref={apiRef}
+                  <Select
                     id='api'
                     name='api'
-                    type='text'
                     label='Which API are you having issues with'
                     error={errors.api}
+                    items={[{ label: 'Select an API', value: '' }, ...apis]}
                     required={reason === 'issue-with-api'}
+                    value={api}
+                    onChange={handleInputChange}
                   />
                 }
                 <Textarea
@@ -183,6 +192,16 @@ const Support = ({ router }) => {
 }
 
 Support.getInitialProps = async ({ req, res }) => {
+  if (req && req.method === 'GET') {
+    try {
+      const apis = await getApis()
+      const data = apis.map(api => { return { label: api.properties.displayName, value: api.properties.displayName } })
+      return { apis: data }
+    } catch (error) {
+      console.log(`Error fetching APIs: ${error}`)
+    }
+  }
+
   if (req && req.method === 'POST') {
     try {
       await send({

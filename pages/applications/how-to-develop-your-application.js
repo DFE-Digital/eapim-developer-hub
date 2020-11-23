@@ -31,7 +31,7 @@ class ApplicationsHowTo extends Component {
           <section className='mainWrapper govuk-!-margin-top-7'>
             <aside className='sideBar'>
               <div className='sideBar_content'>
-                <SideBar nav={Content.Applications} loggedIn={isLoggedIn} />
+                <SideBar title={parent} nav={Content.Applications} loggedIn={isLoggedIn} />
               </div>
             </aside>
 

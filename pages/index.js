@@ -53,18 +53,28 @@ class Home extends Component {
            <div className='govuk-width-container homepage-services-container'>
              <div className='homepage-services-section'>
                <div className='homepage-services-text'>
-                 <h3 className='govuk-heading-m'>Browse DfE APIs</h3>
+                 <h2 className='govuk-heading-m'>Browse DfE APIs</h2>
                  <p className='govuk-body'>
                  You can browse <a href='/apis' className='govuk-link'>public APIs</a> from different sectors including schools, finance and corporate entities.
                  </p>
                </div>
                <div className='homepage-services-image'>
-                 <ReactSVG src='/assets/images/hp-apis.svg' fallback={() => <img src='/assets/images/hp-apis.jpg' alt='Browse Department for Education APIs' />} />
+                 <ReactSVG
+                   src='/assets/images/hp-apis.svg'
+                   role='img'
+                   aria-label='A user-facing page showing a list of public APIs.'
+                   beforeInjection={(svg) => {
+                     const title = document.createElementNS('http://www.w3.org/2000/svg', 'title')
+                     title.innerHTML = 'A user-facing page showing a list of public APIs.'
+                     svg.prepend(title)
+                   }}
+                   fallback={() => <img src='/assets/images/hp-apis.jpg' alt='Browse Department for Education APIs' />}
+                 />
                </div>
              </div>
              <div className='homepage-services-section'>
                <div className='homepage-services-text'>
-                 <h3 className='govuk-heading-m'>Integrate your application</h3>
+                 <h2 className='govuk-heading-m'>Integrate your application</h2>
                  <p className='govuk-body'>
                  Connect your application to an API sandbox environment to begin building your software. When you're ready to go live, ask for production access.
                  </p>
@@ -73,7 +83,17 @@ class Home extends Component {
                  </p>
                </div>
                <div className='homepage-services-image'>
-                 <ReactSVG src='/assets/images/hp-int.svg' fallback={() => <img src='/assets/images/hp-int.jpg' alt='Integrate your application' />} />
+                 <ReactSVG
+                   src='/assets/images/hp-int.svg'
+                   role='img'
+                   aria-label='A user-facing page showing an application that has subscribed to an API.'
+                   beforeInjection={(svg) => {
+                     const title = document.createElementNS('http://www.w3.org/2000/svg', 'title')
+                     title.innerHTML = 'A user-facing page showing an application that has subscribed to an API.'
+                     svg.prepend(title)
+                   }}
+                   fallback={() => <img src='/assets/images/hp-int.jpg' alt='Integrate your application' />}
+                 />
                </div>
              </div>
            </div>
