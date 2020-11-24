@@ -79,7 +79,7 @@ class ApplicationCredentials extends Component {
                       <td id='clientId' className='govuk-table__cell'>{selectedApplication ? selectedApplication.clientId : null}</td>
                       <td className='govuk-table__cell govuk-table__cell--numeric'>
                         <a href='#' className='govuk-link' onClick={(e) => this.copyToClipboard(e, 'clientId')}>
-                          {this.state.clientIdCopied ? 'Copied' : 'Copy'}
+                          {this.state.clientIdCopied ? 'Copied' : 'Copy'} <span className='govuk-visually-hidden'>client ID</span>
                         </a>
                       </td>
                     </tr>
@@ -88,7 +88,7 @@ class ApplicationCredentials extends Component {
                       <td id='primary' className='govuk-table__cell'>{selectedApplication ? selectedApplication.PrimarySecret : null}</td>
                       <td className='govuk-table__cell govuk-table__cell--numeric'>
                         <a href='#' className='govuk-link' onClick={(e) => this.copyToClipboard(e, 'primary')}>
-                          {this.state.primaryCopied ? 'Copied' : 'Copy'}
+                          {this.state.primaryCopied ? 'Copied' : 'Copy'} <span className='govuk-visually-hidden'>primary secret</span>
                         </a>
                       </td>
                     </tr>
@@ -97,7 +97,7 @@ class ApplicationCredentials extends Component {
                       <td id='secondary' className='govuk-table__cell'>{selectedApplication ? selectedApplication.SecondarySecret : null}</td>
                       <td className='govuk-table__cell govuk-table__cell--numeric'>
                         <a href='#' className='govuk-link' onClick={(e) => this.copyToClipboard(e, 'secondary')}>
-                          {this.state.secondaryCopied ? 'Copied' : 'Copy'}
+                          {this.state.secondaryCopied ? 'Copied' : 'Copy'} <span className='govuk-visually-hidden'>secondary secret</span>
                         </a>
                       </td>
                     </tr>

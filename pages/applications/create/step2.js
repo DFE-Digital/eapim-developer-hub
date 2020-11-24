@@ -25,7 +25,7 @@ const ApplicationCreateStep2 = ({ application, saveAppData, cancelApplication, r
     }
 
     saveAppData(fields)
-    router.push('/applications/create/step3')
+    window.location.href = '/applications/create/step3'
 
     return true
   }

@@ -3,8 +3,8 @@ import SidebarLink from './SidebarLink'
 
 const SideBar = ({ nav, title, loggedIn }) => {
   return (
-    <nav>
-      {title && <h2 className='govuk-visually-hidden'>{title} navigation</h2>}
+    <nav tabIndex='0'>
+      {title && <h5 className='govuk-visually-hidden'>{title} navigation</h5>}
       <ul>
         {Object.keys(nav).map((item, i) => {
           if (!nav[item].Secure || (nav[item].Secure && loggedIn)) {

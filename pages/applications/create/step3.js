@@ -25,7 +25,7 @@ const ApplicationCreateStep3 = ({ application, saveAppData, cancelApplication, r
       return false
     }
     saveAppData(fields)
-    router.push('/applications/create/summary')
+    window.location.href = '/applications/create/summary'
     return true
   }
 

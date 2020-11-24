@@ -17,7 +17,7 @@ const APISubscriptionKey = ({ name, subscriptionKey = '-' }) => {
       <td className='govuk-table__cell middle' id={`${name}-subscriptionKey`}>{subscriptionKey}</td>
       <td className='govuk-table__cell middle govuk-table__cell--numeric'>
         <a href='#' role='button' className='govuk-link govuk-!-margin-0' onClick={(e) => copyToClipboard(e, `#${name}-subscriptionKey`)}>
-          {copied ? `Copied` : `Copy`}
+          {copied ? `Copied` : `Copy`} <span className='govuk-visually-hidden'>{name} key</span>
         </a>
       </td>
     </tr>

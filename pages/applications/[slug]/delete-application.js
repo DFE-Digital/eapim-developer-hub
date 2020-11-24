@@ -1,5 +1,4 @@
 import React from 'react'
-import Link from 'next/link'
 import Router from 'next/router'
 import AccessChecker from 'components/common/AccessChecker'
 import ReturnTo from 'components/common/ReturnTo'
@@ -33,9 +32,8 @@ const DeleteApplication = ({ application, router, msalConfig, errorCode }) => {
                 </div>
               </dl>
 
-              <Link href='/applications/[slug]/delete-confirm' as={`/applications/${application.applicationId}/delete-confirm`} passHref>
-                <a className={'govuk-button govuk-!-margin-top-6'} role='button'>Continue</a>
-              </Link>
+              <a href={`/applications/${application.applicationId}/delete-confirm`} className={'govuk-button govuk-!-margin-top-6 govuk-!-margin-right-1'} role='button'>Continue</a>
+              <a href={`/applications/${application.applicationId}/details`} className='govuk-button govuk-button--secondary govuk-!-margin-top-6' role='button'>Cancel</a>
             </div>
           </div>
         </main>

@@ -30,6 +30,7 @@ const APISubscription = ({ applicationId, tag, subscription, onSubscriptionChang
       const newSubscriptions = await postSubscription(applicationId, apiName, environment)
       onSubscriptionChange(newSubscriptions)
       setSubscribing(false)
+      // document.querySelector(`#status-${applicationId}-${environment}`).focus()
     } catch (error) {
       console.log(`Error posting subscrition: ${error}`)
       setSubscribing(false)
@@ -96,7 +97,7 @@ const APISubscription = ({ applicationId, tag, subscription, onSubscriptionChang
           <tbody className='govuk-table__body'>
             <tr className='govuk-table__row'>
               <th scope='row' className='govuk-table__header govuk-!-font-weight-regular middle'>Status</th>
-              <td className='govuk-table__cell govuk-table__cell--numeric middle'>
+              <td tabIndex='0' id={`status-${applicationId}-${environment}`} className='govuk-table__cell govuk-table__cell--numeric middle'>
                 <strong className={`govuk-tag govuk-tag-round govuk-!-margin-right-0 govuk-tag--${state.tag}`}>{state.text || subscription.state}</strong>
               </td>
             </tr>
@@ -122,7 +123,7 @@ const APISubscription = ({ applicationId, tag, subscription, onSubscriptionChang
                   <tr className='govuk-table__row'>
                     <th scope='row' className='govuk-table__header govuk-!-font-weight-regular middle'>Scopes</th>
                     <td className='govuk-table__cell middle'>
-                      <ul className='govuk-list govuk-list--bullet govuk-!-margin-bottom-0'>{tag.scopes.map(scope => <li key={scope}>{scope}</li>)}</ul>
+                      {tag.scopes.map(scope => <p className='govuk-body govuk-!-margin-bottom-2' key={scope}>{scope}</p>)}
                     </td>
                   </tr>
                 )}

@@ -6,7 +6,7 @@ const Footer = () => {
       <div className='govuk-width-container '>
         <div className='govuk-footer__meta'>
           <div className='govuk-footer__meta-item govuk-footer__meta-item--grow'>
-            <span className='govuk-visually-hidden'>Footer links</span>
+            <h4 className='govuk-visually-hidden'>Footer links</h4>
             <ul className='govuk-footer__inline-list'>
               <li className='govuk-footer__inline-list-item'>
                 <a className='govuk-footer__link' href='/cookies'>Cookies</a>

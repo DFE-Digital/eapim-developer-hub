@@ -47,7 +47,7 @@ const ApplicationCreateStep1 = ({ user, application, saveAppData, cancelApplicat
     }
 
     saveAppData(fields)
-    Router.push('/applications/create/step2')
+    window.location.href = '/applications/create/step2'
     return true
   }
 
