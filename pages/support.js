@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, Fragment } from 'react'
+import { connect } from 'react-redux'
 import Content from '../content.json'
 import ReturnTo from 'components/common/ReturnTo'
 import ContentBuilder from 'components/common/ContentBuilder'
@@ -19,7 +20,7 @@ import { getApis } from '../lib/apiServices'
 
 const page = 'Support'
 
-const Support = ({ apis, router }) => {
+const Support = ({ apis, router, user }) => {
   const formRef = useRef()
   const fullnameRef = useRef()
   const emailRef = useRef()
@@ -110,7 +111,8 @@ const Support = ({ apis, router }) => {
     }
   }
 
-  console.log('api', apis)
+  const userEmail = user.data && user.data.User && user.data.User.idToken['email']
+  const userName = user.data && user.data.User && `${user.data.User.idToken.family_name} ${user.data.User.idToken.given_name}`
 
   return (
     <Fragment>
@@ -134,6 +136,7 @@ const Support = ({ apis, router }) => {
                   name='fullname'
                   label='Full name'
                   type='text'
+                  value={userName}
                   error={errors.fullname}
                 />
                 <Input
@@ -143,6 +146,7 @@ const Support = ({ apis, router }) => {
                   type='email'
                   label='Email address'
                   hint='We only use your email to respond to you.'
+                  value={userEmail}
                   error={errors.email}
                 />
                 <Radio
@@ -225,6 +229,12 @@ Support.getInitialProps = async ({ req, res }) => {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
+
 Support.displayName = 'Support'
 
-export default Support
+export default connect(mapStateToProps)(Support)
