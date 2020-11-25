@@ -14,9 +14,11 @@ steps:
     versionSpec: '10.x'
 
 - task: Npm@1
-  displayName: 'npm install --timing'
+  displayName: 'npm install'
   inputs:
     command: install
+    customCommand: --timing
+    customRegistry: useNpmrc
 
 - task: Npm@1
   displayName: 'npm run build'
