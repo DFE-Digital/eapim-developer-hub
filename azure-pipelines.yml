@@ -14,7 +14,7 @@ steps:
     versionSpec: '10.x'
 
 - task: Npm@1
-  displayName: 'npm install'
+  displayName: 'npm install --timing'
   inputs:
     command: install
 
@@ -37,3 +37,4 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     pathtoPublish: $(Build.ArtifactStagingDirectory)
+  condition: succeededOrFailed()
