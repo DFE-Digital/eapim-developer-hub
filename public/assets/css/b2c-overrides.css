@@ -34,7 +34,7 @@
 #ResendEmailVerificationMessage {
   display: none;
 }
-
+/* 
 #verifying_blurb,
 #verifying_blurb:after {
   border-radius: 50%;
@@ -79,4 +79,4 @@
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
-}
+} */
