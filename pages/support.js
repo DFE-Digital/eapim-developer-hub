@@ -6,7 +6,7 @@ import ContentBuilder from 'components/common/ContentBuilder'
 import ValidationMessages from 'components/common/forms/validation-messages'
 import Radio from 'components/common/form/radio'
 import Input from 'components/common/form/input'
-import Select from 'components/common/form/Select'
+import Select from 'components/common/form/select'
 import Textarea from 'components/common/form/textarea'
 import Breadcrumbs from 'components/common/Breadcrumbs'
 
