@@ -16,8 +16,8 @@ steps:
 - task: Npm@1
   displayName: 'npm install'
   inputs:
-    command: install
-    customCommand: --timing
+    command: custom
+    customCommand: install --timing
     customRegistry: useNpmrc
 
 - task: Npm@1
