@@ -19,6 +19,7 @@ steps:
     command: custom
     customCommand: 'install --timing'
     customRegistry: useNpmrc
+    verbose: true
 
 - task: Npm@1
   displayName: 'npm run build'
