@@ -11,15 +11,20 @@ pool:
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '10.x'
+    versionSpec: '12.x'
+    checkLatest: true
 
-- task: Npm@1
+- script: |
+    npm install
   displayName: 'npm install'
-  inputs:
-    command: custom
-    customCommand: 'install --timing'
-    customRegistry: useNpmrc
-    verbose: true
+
+# - task: Npm@1
+#   displayName: 'npm install'
+#   inputs:
+#     command: custom
+#     customCommand: 'install --timing'
+#     customRegistry: useNpmrc
+#     verbose: true
 
 - task: Npm@1
   displayName: 'npm run build'
