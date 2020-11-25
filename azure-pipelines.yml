@@ -6,7 +6,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'Ubuntu-20.04'
+  vmImage: 'ubuntu-18.04'
 
 steps:
 - task: NodeTool@0
