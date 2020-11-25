@@ -11,7 +11,7 @@
   /* display: none !important; */
   background: none !important;
 }
-.verifying-modal {
+/* .verifying-modal {
   display: none;
   position: absolute;
   width: 100%;
@@ -19,7 +19,7 @@
   top: 0;
   left: 0;
   background-color: #fff;
-}
+} */
 /* @media screen and (min-width: 40.0625em) {
   .verifying-modal {
     top: 420px;

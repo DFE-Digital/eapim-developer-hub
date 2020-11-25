@@ -110,6 +110,8 @@ const Support = ({ apis, router }) => {
     }
   }
 
+  console.log('api', apis)
+
   return (
     <Fragment>
       <ReturnTo parentPath={router.asPath} />
@@ -192,16 +194,6 @@ const Support = ({ apis, router }) => {
 }
 
 Support.getInitialProps = async ({ req, res }) => {
-  if (req && req.method === 'GET') {
-    try {
-      const apis = await getApis()
-      const data = apis.map(api => { return { label: api.properties.displayName, value: api.properties.displayName } })
-      return { apis: data }
-    } catch (error) {
-      console.log(`Error fetching APIs: ${error}`)
-    }
-  }
-
   if (req && req.method === 'POST') {
     try {
       await send({
@@ -219,8 +211,17 @@ Support.getInitialProps = async ({ req, res }) => {
     }
   }
 
+  try {
+    const apis = await getApis()
+    const data = apis.map(api => { return { label: api.properties.displayName, value: api.properties.displayName } })
+    return { apis: data }
+  } catch (error) {
+    console.log(`Error fetching APIs: ${error}`)
+  }
+
   return {
-    status: 200
+    status: 200,
+    apis: []
   }
 }
 

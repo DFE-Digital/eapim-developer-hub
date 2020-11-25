@@ -18,7 +18,7 @@ steps:
   displayName: 'npm install'
   inputs:
     command: custom
-    customCommand: 'install --timing'
+    customCommand: 'install --timing --verbose'
     customRegistry: useNpmrc
     verbose: true
 
