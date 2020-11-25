@@ -1,5 +1,5 @@
 import timezone from 'moment-timezone'
-import React, { Fragment } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import Link from 'next/link'
 import AccessChecker from 'components/common/AccessChecker'
@@ -21,7 +21,7 @@ const ApplicationDetails = ({ user, application, router, msalConfig, errorCode }
   const { data } = user
 
   return (
-    <Fragment>
+    <>
       <AccessChecker msalConfig={msalConfig} />
       <PrivateRoute redirect={'/applications'} />
       <ReturnTo parentPath={router.asPath} />
@@ -113,7 +113,7 @@ const ApplicationDetails = ({ user, application, router, msalConfig, errorCode }
           </main>
         </section>
       </div>
-    </Fragment>
+    </>
   )
 }
 
