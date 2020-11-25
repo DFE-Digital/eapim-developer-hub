@@ -14,17 +14,13 @@ steps:
     versionSpec: '12.x'
     checkLatest: true
 
-- script: |
-    npm install
+- task: Npm@1
   displayName: 'npm install'
-
-# - task: Npm@1
-#   displayName: 'npm install'
-#   inputs:
-#     command: custom
-#     customCommand: 'install --timing'
-#     customRegistry: useNpmrc
-#     verbose: true
+  inputs:
+    command: custom
+    customCommand: 'install --timing'
+    customRegistry: useNpmrc
+    verbose: true
 
 - task: Npm@1
   displayName: 'npm run build'
