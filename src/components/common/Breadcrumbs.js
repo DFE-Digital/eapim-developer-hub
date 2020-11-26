@@ -18,6 +18,8 @@ const builder = (router) => {
 }
 
 const Breadcrumbs = ({ router, back }) => {
+  if (!router) return null
+
   if (back) {
     return <a className='govuk-back-link' href={`/${router.asPath.split('/')[1]}`}>Back<span className='govuk-visually-hidden'> {back}</span></a>
   }

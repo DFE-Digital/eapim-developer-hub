@@ -8,7 +8,7 @@ const AuthNavigation = ({ user }) => {
   const { msal } = useContext(AuthContext)
 
   const userEmail = user.data && user.data.User && user.data.User.idToken['email']
-  const userName = user.data && user.data.User && `${user.data.User.idToken.family_name} ${user.data.User.idToken.given_name}`
+  const userName = user.data && user.data.User && `${user.data.User.idToken.given_name} ${user.data.User.idToken.family_name}`
 
   return (
     <div className='govuk-width-container auth-navigation'>

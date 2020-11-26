@@ -4,7 +4,6 @@ import ReactHtmlParser from 'react-html-parser'
 import Link from 'next/link'
 import { signInLink, registerLink, signOut } from 'actions/authenticate'
 import Content from '../content.json'
-import ReturnTo from 'components/common/ReturnTo'
 import Header from 'components/common/Header'
 import PhaseBanner from 'components/common/PhaseBanner'
 import Banner from 'components/common/Banner'
@@ -14,7 +13,7 @@ import { ReactSVG } from 'react-svg'
 
 const page = 'Home'
 
-const Home = ({ user, accountDeleted, router, store, msalConfig, msalRegisterConfig, msalEditProfileConfig }) => {
+const Home = ({ user, accountDeleted, store, msalConfig, msalRegisterConfig }) => {
   useEffect(() => {
     const handleSignOut = async () => {
       await store.__PERSISTOR.purge()
@@ -32,9 +31,8 @@ const Home = ({ user, accountDeleted, router, store, msalConfig, msalRegisterCon
   return (
     <>
       <Header />
-      <Banner />
       <PhaseBanner />
-      <ReturnTo parentPath={router.asPath} />
+      <Banner />
       <main id='main-content' role='main'>
         <div className='govuk-panel govuk-panel--confirmation govuk-panel--welcome'>
           <div className='govuk-width-container'>
@@ -156,5 +154,4 @@ const mapStateToProps = (state) => {
 
 Home.displayName = page
 
-export { Home }
 export default connect(mapStateToProps)(Home)
