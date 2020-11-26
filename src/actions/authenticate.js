@@ -26,7 +26,7 @@ export const register = async (msalRegisterConfig) => {
 
 export const editProfile = async (msalEditProfileConfig) => {
   const myMSALObj = new Msal.UserAgentApplication(msalEditProfileConfig)
-  myMSALObj.loginRedirect(loginRequest)
+  myMSALObj.loginRedirect({ authority: msalEditProfileConfig.auth.authority })
 }
 
 export const forgotPassword = async (msalForgotPasswordConfig) => {
@@ -77,6 +77,11 @@ export const signInLink = async (e, msalConfig) => {
 export const registerLink = async (e, msalConfig) => {
   e.preventDefault()
   await register(msalConfig)
+}
+
+export const editProfileLink = async (e, msalConfig) => {
+  e.preventDefault()
+  await editProfile(msalConfig)
 }
 
 export const changePasswordLink = async (e, msalConfig) => {

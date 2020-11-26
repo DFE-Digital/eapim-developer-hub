@@ -1,65 +1,28 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import Content from '../../content.json'
-import AccessChecker from 'components/common/AccessChecker'
 import SideBar from 'components/common/SideBar'
-import ReturnTo from 'components/common/ReturnTo'
-import Breadcrumbs from 'components/common/Breadcrumbs'
+import Page from 'components/Page'
 
 import ErrorPage from 'components/ErrorPage'
 import APISummary from 'components/APISummary'
-import SchoolAPIInformation from 'components/SchoolAPIInformation'
 
 import { getApis, getApiTags, getSummary } from '../../lib/apiServices'
 import getInitialPropsErrorHandler from '../../lib/getInitialPropsErrorHandler'
 
 const parent = 'APIs'
 
-const ApiDetails = ({ api, summary, router, msalConfig, user, errorCode }) => {
+const ApiDetails = ({ api, summary, router, user, errorCode }) => {
   if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
 
-  let isLoggedIn = false
-  if (user.data && user.data.isAuthed) isLoggedIn = true
-
-  let informationComonent
-
-  switch (api.name) {
-    case 'SchoolsInformationApi_V1':
-    case 'schools-information-api':
-      informationComonent = <SchoolAPIInformation msalConfig={msalConfig} selectedApi={api} isLoggedIn={isLoggedIn} />
-      break
-    default:
-      informationComonent = <APISummary api={api} summary={summary} />
-  }
-
   return (
-    <Fragment>
-      <AccessChecker msalConfig={msalConfig} />
-      <ReturnTo parentPath={router.asPath} />
-      <div className='govuk-width-container'>
-        <Breadcrumbs items={[
-          { text: parent, href: `/${router.asPath.split('/')[1]}` },
-          { text: api ? api.properties.displayName : '' }
-        ]} />
-        <section className='mainWrapper govuk-!-margin-top-7'>
-          <aside className='sideBar'>
-            <div className='sideBar_content'>
-              <SideBar title={parent} nav={Content.Apis} loggedIn={isLoggedIn} />
-            </div>
-          </aside>
-
-          <main className='mainContent' id='main-content' role='main'>
-            <div className='govuk-main-wrapper govuk-!-padding-top-0'>
-              <div className='govuk-grid-row'>
-                <div className='govuk-grid-column-full'>
-                  {informationComonent}
-                </div>
-              </div>
-            </div>
-          </main>
-        </section>
-      </div>
-    </Fragment>
+    <Page
+      page={parent}
+      router={router}
+      sidebarComponent={<SideBar title={parent} nav={Content.Apis} />}
+    >
+      <APISummary api={api} summary={summary} />
+    </Page>
   )
 }
 

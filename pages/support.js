@@ -1,15 +1,14 @@
-import React, { useState, useEffect, useRef, Fragment } from 'react'
+import React, { useContext, useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
 import Content from '../content.json'
-import ReturnTo from 'components/common/ReturnTo'
 import ContentBuilder from 'components/common/ContentBuilder'
+import Page from 'components/Page'
 
 import ValidationMessages from 'components/common/forms/validation-messages'
 import Radio from 'components/common/form/radio'
 import Input from 'components/common/form/input'
 import Select from 'components/common/form/select'
 import Textarea from 'components/common/form/textarea'
-import Breadcrumbs from 'components/common/Breadcrumbs'
 
 import { send } from '../lib/emailService'
 import { template } from '../emails/support'
@@ -17,10 +16,13 @@ import { template } from '../emails/support'
 import * as validation from 'utils/validation'
 
 import { getApis } from '../lib/apiServices'
+import AuthContext from '../src/auth/context'
 
 const page = 'Support'
 
 const Support = ({ apis, router, user }) => {
+  const context = useContext(AuthContext)
+
   const formRef = useRef()
   const fullnameRef = useRef()
   const emailRef = useRef()
@@ -115,85 +117,77 @@ const Support = ({ apis, router, user }) => {
   const userName = user.data && user.data.User && `${user.data.User.idToken.family_name} ${user.data.User.idToken.given_name}`
 
   return (
-    <Fragment>
-      <ReturnTo parentPath={router.asPath} />
-      <div className='govuk-width-container'>
-        <Breadcrumbs items={[{ text: page }]} />
-        <main className='govuk-main-wrapper' id='main-content' role='main'>
-          <div className='govuk-grid-row'>
-            <div className='govuk-grid-column-three-quarters'>
-              <h1 className='govuk-heading-xl'>{Content[page].Page}</h1>
-              <ContentBuilder sectionNav={false} data={Content[page].Content.Form.Body} />
+    <Page router={router} layout='three-quarters'>
+      <h1 className='govuk-heading-xl'>{Content[page].Page}</h1>
+      <ContentBuilder sectionNav={false} data={Content[page].Content.Form.Body} />
 
-              <hr className='govuk-section-break govuk-section-break--l govuk-section-break--visible' />
+      <button onClick={() => context.login()}>login</button>
 
-              <ValidationMessages errors={errorSummary} />
+      <hr className='govuk-section-break govuk-section-break--l govuk-section-break--visible' />
 
-              <form noValidate method='POST' onSubmit={handleSubmit} ref={formRef}>
-                <Input
-                  ref={fullnameRef}
-                  id='fullname'
-                  name='fullname'
-                  label='Full name'
-                  type='text'
-                  value={userName}
-                  error={errors.fullname}
-                />
-                <Input
-                  ref={emailRef}
-                  id='email'
-                  name='email'
-                  type='email'
-                  label='Email address'
-                  hint='We only use your email to respond to you.'
-                  value={userEmail}
-                  error={errors.email}
-                />
-                <Radio
-                  id='reason'
-                  name='reason'
-                  legend='What specifically do you need help with?'
-                  onChange={handleInputChange}
-                  value={reason}
-                  error={errors.reason}
-                  items={[
-                    { label: 'General enquiry', value: 'general-enquiry' },
-                    { label: 'Issue with website', value: 'issue-with-website' },
-                    { label: 'Issue with API - Please specify what API you are having an issue with', value: 'issue-with-api' },
-                    { label: 'Other', value: 'other' }
-                  ]}
-                />
-                {reason && reason === 'issue-with-api' &&
-                  <Select
-                    id='api'
-                    name='api'
-                    label='Which API are you having issues with'
-                    error={errors.api}
-                    items={[{ label: 'Select an API', value: '' }, ...apis]}
-                    required={reason === 'issue-with-api'}
-                    value={api}
-                    onChange={handleInputChange}
-                  />
-                }
-                <Textarea
-                  inline
-                  ref={descriptionRef}
-                  id='description'
-                  name='description'
-                  label='What do you need help with?'
-                  hint='Please provide as much information as possible. Do not provide any personal information.'
-                  maxLength='3000'
-                  value={description}
-                  error={errors.description}
-                  onChange={handleInputChange}
-                />
-                <button type='submit' className='govuk-button govuk-!-margin-right-1'>Submit</button>
-              </form>
-            </div>
-          </div>
-        </main>
-      </div>
-    </Fragment>
+      <ValidationMessages errors={errorSummary} />
+
+      <form noValidate method='POST' onSubmit={handleSubmit} ref={formRef}>
+        <Input
+          ref={fullnameRef}
+          id='fullname'
+          name='fullname'
+          label='Full name'
+          type='text'
+          value={userName}
+          error={errors.fullname}
+        />
+        <Input
+          ref={emailRef}
+          id='email'
+          name='email'
+          type='email'
+          label='Email address'
+          hint='We only use your email to respond to you.'
+          value={userEmail}
+          error={errors.email}
+        />
+        <Radio
+          id='reason'
+          name='reason'
+          legend='What specifically do you need help with?'
+          onChange={handleInputChange}
+          value={reason}
+          error={errors.reason}
+          items={[
+            { label: 'General enquiry', value: 'general-enquiry' },
+            { label: 'Issue with website', value: 'issue-with-website' },
+            { label: 'Issue with API - Please specify what API you are having an issue with', value: 'issue-with-api' },
+            { label: 'Other', value: 'other' }
+          ]}
+        />
+        {reason && reason === 'issue-with-api' &&
+          <Select
+            id='api'
+            name='api'
+            label='Which API are you having issues with'
+            error={errors.api}
+            items={[{ label: 'Select an API', value: '' }, ...apis]}
+            required={reason === 'issue-with-api'}
+            value={api}
+            onChange={handleInputChange}
+          />
+        }
+        <Textarea
+          inline
+          ref={descriptionRef}
+          id='description'
+          name='description'
+          label='What do you need help with?'
+          hint='Please provide as much information as possible. Do not provide any personal information.'
+          maxLength='3000'
+          value={description}
+          error={errors.description}
+          onChange={handleInputChange}
+        />
+        <button type='submit' className='govuk-button govuk-!-margin-right-1'>Submit</button>
+      </form>
+    </Page>
   )
 }
 

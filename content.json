@@ -16,26 +16,6 @@
     {
       "Page": "Support",
       "Url": "/support"
-    },
-    {
-      "Page": "Profile",
-      "Url": "/profile",
-      "Auth": true
-    },
-    {
-      "Page": "Sign out",
-      "Url": "/auth/logout",
-      "Auth": true
-    },
-    {
-      "Page": "Create an account",
-      "Url": "/auth/register",
-      "NoAuth": true
-    },
-    {
-      "Page": "Sign in",
-      "Url": "/auth/login",
-      "NoAuth": true
     }
   ],
   "PhaseBanner": {
@@ -823,351 +803,347 @@
     "Development practices": {
       "Page": "Best Practices",
       "Url": "/documentation/development-practices",
-      "Content": {
-        "Body": [
-          {
-            "Type": "P",
-            "Body": "Follow best practice to make sure your application does not fail when the Developer Hub makes changes to the production environment."
-          },
-          {
-            "Type": "H2",
-            "Body": "Coupling to DfE"
-          },
-          {
-            "Type": "P",
-            "Body": "Avoid tightly coupling your application to DfE. The systems will be dependent on one another so a change to one will affect both."
-          },
-          {
-            "Type": "P",
-            "Body": "Use loose coupling - this reduces dependencies so that non-breaking changes will not affect your application."
-          },
-          {
-            "Type": "H2",
-            "Body": "HTTPS certificates"
-          },
-          {
-            "Type": "P",
-            "Body": "Use a global root CA keystore and do not pin DfE specific certificates."
-          },
-          {
-            "Type": "P",
-            "Body": "The Developer Hub’s HTTPS certificates can change - this includes the leaf, intermediary and root certificates."
-          },
-          {
-            "Type": "P",
-            "Body": "If you import any DfE specific certificates into your keystore or load balancer, your application may fail to connect when changes are made to the certificate."
-          },
-          {
-            "Type": "H2",
-            "Body": "IP addresses"
-          },
-          {
-            "Type": "P",
-            "Body": "IP addresses can change because we cannot supply static addresses."
-          },
-          {
-            "Type": "P",
-            "Body": "To access our API platform and token generation with your application:"
-          },
-          {
-            "Type": "UL",
-            "Body": [
-              "you might need to configure your network",
-              "any end users might need to configure their own network"
-            ]
-          },
-          {
-            "Type": "P",
-            "Body": "You need to configure your network access in your proxy, not your firewall."
-          },
-          {
-            "Type": "H2",
-            "Body": "Cross-origin resource sharing (CORS)"
-          },
-          {
-            "Type": "P",
-            "Body": "The DfE Developer Hub does not support <a href='https://fetch.spec.whatwg.org/#http-cors-protocol' class='govuk-link' target='_blank'>CORS</a>. It is not possible to call our APIs from client-side code within a web browser, for example using Ajax."
-          },
-          {
-            "Type": "H2",
-            "Body": "Changes will affect your application"
-          },
-          {
-            "Type": "P",
-            "Body": "A breaking change is a change to the DfE API platform that requires you to make changes to your application so it continues to work."
-          },
-          {
-            "Type": "P",
-            "Body": "Breaking changes can be:"
-          },
-          {
-            "Type": "UL",
-            "Body": [
-              "API specific",
-              "Platform wide (for example TLS version and cipher suite changes)"
-            ]
-          },
-          {
-            "Type": "P",
-            "Body": "The breaking change will be published to the sandbox initially and we recommend you run your automated test pack against the sandbox on a regular basis."
-          },
-          {
-            "Type": "P",
-            "Body": "See the <a href='/documentation/reference-guide' class='govuk-body'>reference guide</a> for further detail."
-          }
-        ]
-      }
+      "Content": [
+        {
+          "Type": "P",
+          "Body": "Follow best practice to make sure your application does not fail when the Developer Hub makes changes to the production environment."
+        },
+        {
+          "Type": "H2",
+          "Body": "Coupling to DfE"
+        },
+        {
+          "Type": "P",
+          "Body": "Avoid tightly coupling your application to DfE. The systems will be dependent on one another so a change to one will affect both."
+        },
+        {
+          "Type": "P",
+          "Body": "Use loose coupling - this reduces dependencies so that non-breaking changes will not affect your application."
+        },
+        {
+          "Type": "H2",
+          "Body": "HTTPS certificates"
+        },
+        {
+          "Type": "P",
+          "Body": "Use a global root CA keystore and do not pin DfE specific certificates."
+        },
+        {
+          "Type": "P",
+          "Body": "The Developer Hub’s HTTPS certificates can change - this includes the leaf, intermediary and root certificates."
+        },
+        {
+          "Type": "P",
+          "Body": "If you import any DfE specific certificates into your keystore or load balancer, your application may fail to connect when changes are made to the certificate."
+        },
+        {
+          "Type": "H2",
+          "Body": "IP addresses"
+        },
+        {
+          "Type": "P",
+          "Body": "IP addresses can change because we cannot supply static addresses."
+        },
+        {
+          "Type": "P",
+          "Body": "To access our API platform and token generation with your application:"
+        },
+        {
+          "Type": "UL",
+          "Body": [
+            "you might need to configure your network",
+            "any end users might need to configure their own network"
+          ]
+        },
+        {
+          "Type": "P",
+          "Body": "You need to configure your network access in your proxy, not your firewall."
+        },
+        {
+          "Type": "H2",
+          "Body": "Cross-origin resource sharing (CORS)"
+        },
+        {
+          "Type": "P",
+          "Body": "The DfE Developer Hub does not support <a href='https://fetch.spec.whatwg.org/#http-cors-protocol' class='govuk-link' target='_blank'>CORS</a>. It is not possible to call our APIs from client-side code within a web browser, for example using Ajax."
+        },
+        {
+          "Type": "H2",
+          "Body": "Changes will affect your application"
+        },
+        {
+          "Type": "P",
+          "Body": "A breaking change is a change to the DfE API platform that requires you to make changes to your application so it continues to work."
+        },
+        {
+          "Type": "P",
+          "Body": "Breaking changes can be:"
+        },
+        {
+          "Type": "UL",
+          "Body": [
+            "API specific",
+            "Platform wide (for example TLS version and cipher suite changes)"
+          ]
+        },
+        {
+          "Type": "P",
+          "Body": "The breaking change will be published to the sandbox initially and we recommend you run your automated test pack against the sandbox on a regular basis."
+        },
+        {
+          "Type": "P",
+          "Body": "See the <a href='/documentation/reference-guide' class='govuk-body'>reference guide</a> for further detail."
+        }
+      ]
     },
     "Terms of use": {
       "Page": "Terms of use",
       "Url": "/documentation/terms-of-use",
-      "Content": {
-        "Body": [
-          {
-            "Type": "P",
-            "Body": "Version 1 issued 18 August 2020"
-          },
-          {
-            "Type": "P",
-            "Body": "These terms of use explain what you can expect from us and what we expect from you when you create and operate software services on the DfE Developer Hub. This is not a legal relationship between DfE and any software developer."
-          },
-          {
-            "Type": "P",
-            "Body": "We reserve the right to remove your access to the Developer Hub and its application programming interfaces (APIs) temporarily or permanently."
-          },
-          {
-            "Type": "P",
-            "Body": "These terms may change from time to time and we will let you know when this happens. If the changes are minor, we will assume you agree to them unless we hear from you. If they are major, you may need to re-accept these terms of use."
-          },
-          {
-            "Type": "P",
-            "Body": "If you have any questions <a class='govuk-link' href='/support'>contact us</a>."
-          },
-          {
-            "Type": "H2",
-            "Body": "Background checks"
-          },
-          {
-            "Type": "P",
-            "Body": "We may carry out basic background checks on your organisation, including:"
-          },
-          {
-            "Type": "UL",
-            "Body": [
-              "information held by Companies House",
-              "your website"
-            ]
-          },
-          {
-            "Type": "H2",
-            "Body": "What you can expect from us"
-          },
-          {
-            "Type": "P",
-            "Body": "We will:"
-          },
-          {
-            "Type": "UL",
-            "Body": [
-              "give you at least 6 months' notice of changes affecting any stable APIs",
-              "make sure any minor changes made to stable APIs are backwards compatible",
-              "provide reasonable notice of changes affecting beta APIs, which can change fairly frequently",
-              "warn you before we retire an API"
-            ]
-          },
-          {
-            "Type": "H2",
-            "Body": "What we expect from you"
-          },
-          {
-            "Type": "P",
-            "Body": "Your software must take into account the <a href='https://www.gov.uk/service-manual/service-standard' class='govuk-link' target='_blank'>Digital Service Standard</a>."
-          },
-          {
-            "Type": "P",
-            "Body": "We take the protection of customer data seriously and we expect you to do the same."
-          },
-          {
-            "Type": "P",
-            "Body": "You will need to follow:"
-          },
-          {
-            "Type": "UL",
-            "Body": [
-              "<a href='https://www.ncsc.gov.uk/collection/digital-service-security' class='govuk-link' target='_blank'>National Cyber Security Centre's Digital Service Security (opensin a new tab)</a>",
-              "<a href='https://www.ncsc.gov.uk/blog-post/secure-development-and-deployment' class='govuk-link' target='_blank'>National Cyber Security Centre's Guidance for secure development and deployment</a>",
-              "<a href='https://www.ncsc.gov.uk/guidance/tls-external-facing-services' class='govuk-link' target='_blank'>Transport Layer Security principles for protecting data</a>",
-              "<a href='https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr' class='govuk-link' target='_blank'>General Data Protection Regulation - GDPR</a>",
-              "<a href='https://ico.org.uk/about-the-ico/what-we-do/legislation-we-cover/privacy-and-electronic-communications-regulations/' class='govuk-link' target='_blank'>Privacy and Electronic Communications (EC Directive) Regulations 2003 - as amended</a>",
-              "<a href='https://www.legislation.gov.uk/ukpga/2010/15/contents' class='govuk-link' target='_blank'>Equality Act 2010</a>",
-              "<a href='https://ico.org.uk/for-organisations/' class='govuk-link' target='_blank'>Information Commissioner's Office</a>",
-              "<a href='https://ico.org.uk/for-organisations/data-protection-act-2018/' class='govuk-link' target='_blank'>Data Protection Act 2018</a>"
-            ]
-          },
-          {
-            "Type": "P",
-            "Body": "You must continue to follow these acts and regulations if they change or are replaced."
-          },
-          {
-            "Type": "H3",
-            "Body": "Accessing data"
-          },
-          {
-            "Type": "P",
-            "Body": "You must give your users access to their data. We may also ask to access their data if we open an investigation."
-          },
-          {
-            "Type": "P",
-            "Body": "If you withdraw a piece of software or a user stops using it, you must let them retrieve and export all their data so they can meet their obligations to us."
-          },
-          {
-            "Type": "P",
-            "Body": "We recommend you use multi-factor authentication to protect personal data."
-          },
-          {
-            "Type": "H3",
-            "Body": "Processing data"
-          },
-          {
-            "Type": "P",
-            "Body": "If your software processes personal data, you may need to pay a <a href='https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/accountability-and-governance/guide-to-the-data-protection-fee/' class='govuk-link' target='_blank'>data protection fee</a>."
-          },
-          {
-            "Type": "P",
-            "Body": "Use your API’s HTTP headers to pass audit data to us. This will help us protect our users’ confidential data."
-          },
-          {
-            "Type": "P",
-            "Body": "To find out if header information is compulsory for your API, that you use, read its' <a href='/apis' class='govuk-link'>API documentation</a>. All headers will become compulsory so you should start using them now."
-          },
-          {
-            "Type": "H3",
-            "Body": "Storing data"
-          },
-          {
-            "Type": "P",
-            "Body": "If you store and process personal data, you must tell users:"
-          },
-          {
-            "Type": "UL",
-            "Body": [
-              "what personal data you’ll be processing and what you’ll use it for",
-              "that you’re responsible for protecting their data",
-              "if you intend to store their data outside the European Economic Area (EEA)",
-              "your <a href='https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/lawful-basis-for-processing/' class='govuk-link' target='_blank'>lawful basis</a> for processing their personal data"
-            ]
-          },
-          {
-            "Type": "P",
-            "Body": "Follow <a href='https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/lawful-basis-for-processing/consent/' class='govuk-link' target='_blank'>GDPR rules on obtaining consent</a>, if you need users' consent to store and process their personal data."
-          },
-          {
-            "Type": "P",
-            "Body": "If you store or process data outside the EEA, you must follow GDPR guidance on <a href='https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/international-transfers/' class='govuk-link' target='_blank'>international transfers</a>."
-          },
-          {
-            "Type": "H3",
-            "Body": "Accessibility"
-          },
-          {
-            "Type": "P",
-            "Body": "You must:"
-          },
-          {
-            "Type": "UL",
-            "Body": [
-              "meet <a href='https://www.w3.org/TR/WCAG21/' class='govuk-link' target='_blank'>W3C's Web Content Accessibility Guidelines</a> at a minimum level of AA if your software's web-based, or <a href='https://www.w3.org/TR/mobile-accessibility-mapping/' class='govuk-link' target='_blank'>W3C's guidelines for mobile software</a>",
-              "give us evidence that your software meets the guidelines if we ask for it",
-              "<a href='/support' class='govuk-link' target='_blank'>contact us</a> if you have any concerns meeting these guidelines"
-            ]
-          },
-          {
-            "Type": "H3",
-            "Body": "Advertising and marketing"
-          },
-          {
-            "Type": "P",
-            "Body": "Any advertising that appears in your software must follow both:"
-          },
-          {
-            "Type": "UL",
-            "Body": [
-              "<a href='https://www.asa.org.uk/codes-and-rulings/advertising-codes.html' class='govuk-link' target='_blank'>Advertising Standards Authority Codes</a>",
-              "<a href='https://www.gov.uk/marketing-advertising-law/regulations-that-affect-advertising' class='govuk-link' target='_blank'>UK marketing and advertising laws</a>"
-            ]
-          },
-          {
-            "Type": "P",
-            "Body": "You must not use advertising that promotes:"
-          },
-          {
-            "Type": "UL",
-            "Body": [
-              "adult themes",
-              "dating",
-              "gaming"
-            ]
-          },
-          {
-            "Type": "P",
-            "Body": "You cannot share personal data for marketing without users' consent, as defined in the <a href='https://ico.org.uk/media/1555/direct-marketing-guidance.pdf' class='govuk-link' target='_blank'>Information Commissioner's Office</a>."
-          },
-          {
-            "Type": "H3",
-            "Body": "Licence agreements"
-          },
-          {
-            "Type": "P",
-            "Body": "You must make the terms of the licence agreement between you and your users clear to them."
-          },
-          {
-            "Type": "H3",
-            "Body": "Security"
-          },
-          {
-            "Type": "P",
-            "Body": "You must:"
-          },
-          {
-            "Type": "UL",
-            "Body": [
-              "check software for vulnerabilities through secure development and pre-release testing",
-              "check open source or reused proprietary code using resources like the <a href='https://cve.mitre.org/' class='govuk-link' target='_blank'>Common Vulnerabilities and Exposures</a> database",
-              "react quickly if you find vulnerabilities in your code",
-              "have a patching policy in place"
-            ]
-          },
-          {
-            "Type": "P",
-            "Body": "Your re-releases and upgrades should also follow secure development practices and pre-release testing."
-          },
-          {
-            "Type": "P",
-            "Body": "We recommend following the security principles of:"
-          },
-          {
-            "Type": "UL",
-            "Body": [
-              "the <a href='https://www.ncsc.gov.uk/' class='govuk-link' target='_blank'>National Cyber Security Centre</a>",
-              "<a href='https://www.ncsc.gov.uk/blog-post/secure-development-and-deployment' class='govuk-link' target='_blank'>National Cyber Security Centre's Guidance for secure development and deployment</a>",
-              "the <a href='https://www.owasp.org/index.php/Main_Page' class='govuk-link' target='_blank'>Open Web Application Security Project</a>",
-              "<a href='https://www.cyberessentials.ncsc.gov.uk/' class='govuk-link' target='_blank'>Cyber Essentials or Cyber Essentials Plus certification</a>"
-            ]
-          },
-          {
-            "Type": "P",
-            "Body": "You should look out for and block suspicious attempts to access or manipulate user accounts."
-          },
-          {
-            "Type": "H2",
-            "Body": "Support"
-          },
-          {
-            "Type": "P",
-            "Body": "You must give software support to your users. If you need help <a href='/support' class='govuk-link'>contact us</a>."
-          }
-        ]
-      }
+      "Content": [
+        {
+          "Type": "P",
+          "Body": "Version 1 issued 18 August 2020"
+        },
+        {
+          "Type": "P",
+          "Body": "These terms of use explain what you can expect from us and what we expect from you when you create and operate software services on the DfE Developer Hub. This is not a legal relationship between DfE and any software developer."
+        },
+        {
+          "Type": "P",
+          "Body": "We reserve the right to remove your access to the Developer Hub and its application programming interfaces (APIs) temporarily or permanently."
+        },
+        {
+          "Type": "P",
+          "Body": "These terms may change from time to time and we will let you know when this happens. If the changes are minor, we will assume you agree to them unless we hear from you. If they are major, you may need to re-accept these terms of use."
+        },
+        {
+          "Type": "P",
+          "Body": "If you have any questions <a class='govuk-link' href='/support'>contact us</a>."
+        },
+        {
+          "Type": "H2",
+          "Body": "Background checks"
+        },
+        {
+          "Type": "P",
+          "Body": "We may carry out basic background checks on your organisation, including:"
+        },
+        {
+          "Type": "UL",
+          "Body": [
+            "information held by Companies House",
+            "your website"
+          ]
+        },
+        {
+          "Type": "H2",
+          "Body": "What you can expect from us"
+        },
+        {
+          "Type": "P",
+          "Body": "We will:"
+        },
+        {
+          "Type": "UL",
+          "Body": [
+            "give you at least 6 months' notice of changes affecting any stable APIs",
+            "make sure any minor changes made to stable APIs are backwards compatible",
+            "provide reasonable notice of changes affecting beta APIs, which can change fairly frequently",
+            "warn you before we retire an API"
+          ]
+        },
+        {
+          "Type": "H2",
+          "Body": "What we expect from you"
+        },
+        {
+          "Type": "P",
+          "Body": "Your software must take into account the <a href='https://www.gov.uk/service-manual/service-standard' class='govuk-link' target='_blank'>Digital Service Standard</a>."
+        },
+        {
+          "Type": "P",
+          "Body": "We take the protection of customer data seriously and we expect you to do the same."
+        },
+        {
+          "Type": "P",
+          "Body": "You will need to follow:"
+        },
+        {
+          "Type": "UL",
+          "Body": [
+            "<a href='https://www.ncsc.gov.uk/collection/digital-service-security' class='govuk-link' target='_blank'>National Cyber Security Centre's Digital Service Security (opensin a new tab)</a>",
+            "<a href='https://www.ncsc.gov.uk/blog-post/secure-development-and-deployment' class='govuk-link' target='_blank'>National Cyber Security Centre's Guidance for secure development and deployment</a>",
+            "<a href='https://www.ncsc.gov.uk/guidance/tls-external-facing-services' class='govuk-link' target='_blank'>Transport Layer Security principles for protecting data</a>",
+            "<a href='https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr' class='govuk-link' target='_blank'>General Data Protection Regulation - GDPR</a>",
+            "<a href='https://ico.org.uk/about-the-ico/what-we-do/legislation-we-cover/privacy-and-electronic-communications-regulations/' class='govuk-link' target='_blank'>Privacy and Electronic Communications (EC Directive) Regulations 2003 - as amended</a>",
+            "<a href='https://www.legislation.gov.uk/ukpga/2010/15/contents' class='govuk-link' target='_blank'>Equality Act 2010</a>",
+            "<a href='https://ico.org.uk/for-organisations/' class='govuk-link' target='_blank'>Information Commissioner's Office</a>",
+            "<a href='https://ico.org.uk/for-organisations/data-protection-act-2018/' class='govuk-link' target='_blank'>Data Protection Act 2018</a>"
+          ]
+        },
+        {
+          "Type": "P",
+          "Body": "You must continue to follow these acts and regulations if they change or are replaced."
+        },
+        {
+          "Type": "H3",
+          "Body": "Accessing data"
+        },
+        {
+          "Type": "P",
+          "Body": "You must give your users access to their data. We may also ask to access their data if we open an investigation."
+        },
+        {
+          "Type": "P",
+          "Body": "If you withdraw a piece of software or a user stops using it, you must let them retrieve and export all their data so they can meet their obligations to us."
+        },
+        {
+          "Type": "P",
+          "Body": "We recommend you use multi-factor authentication to protect personal data."
+        },
+        {
+          "Type": "H3",
+          "Body": "Processing data"
+        },
+        {
+          "Type": "P",
+          "Body": "If your software processes personal data, you may need to pay a <a href='https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/accountability-and-governance/guide-to-the-data-protection-fee/' class='govuk-link' target='_blank'>data protection fee</a>."
+        },
+        {
+          "Type": "P",
+          "Body": "Use your API’s HTTP headers to pass audit data to us. This will help us protect our users’ confidential data."
+        },
+        {
+          "Type": "P",
+          "Body": "To find out if header information is compulsory for your API, that you use, read its' <a href='/apis' class='govuk-link'>API documentation</a>. All headers will become compulsory so you should start using them now."
+        },
+        {
+          "Type": "H3",
+          "Body": "Storing data"
+        },
+        {
+          "Type": "P",
+          "Body": "If you store and process personal data, you must tell users:"
+        },
+        {
+          "Type": "UL",
+          "Body": [
+            "what personal data you’ll be processing and what you’ll use it for",
+            "that you’re responsible for protecting their data",
+            "if you intend to store their data outside the European Economic Area (EEA)",
+            "your <a href='https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/lawful-basis-for-processing/' class='govuk-link' target='_blank'>lawful basis</a> for processing their personal data"
+          ]
+        },
+        {
+          "Type": "P",
+          "Body": "Follow <a href='https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/lawful-basis-for-processing/consent/' class='govuk-link' target='_blank'>GDPR rules on obtaining consent</a>, if you need users' consent to store and process their personal data."
+        },
+        {
+          "Type": "P",
+          "Body": "If you store or process data outside the EEA, you must follow GDPR guidance on <a href='https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/international-transfers/' class='govuk-link' target='_blank'>international transfers</a>."
+        },
+        {
+          "Type": "H3",
+          "Body": "Accessibility"
+        },
+        {
+          "Type": "P",
+          "Body": "You must:"
+        },
+        {
+          "Type": "UL",
+          "Body": [
+            "meet <a href='https://www.w3.org/TR/WCAG21/' class='govuk-link' target='_blank'>W3C's Web Content Accessibility Guidelines</a> at a minimum level of AA if your software's web-based, or <a href='https://www.w3.org/TR/mobile-accessibility-mapping/' class='govuk-link' target='_blank'>W3C's guidelines for mobile software</a>",
+            "give us evidence that your software meets the guidelines if we ask for it",
+            "<a href='/support' class='govuk-link' target='_blank'>contact us</a> if you have any concerns meeting these guidelines"
+          ]
+        },
+        {
+          "Type": "H3",
+          "Body": "Advertising and marketing"
+        },
+        {
+          "Type": "P",
+          "Body": "Any advertising that appears in your software must follow both:"
+        },
+        {
+          "Type": "UL",
+          "Body": [
+            "<a href='https://www.asa.org.uk/codes-and-rulings/advertising-codes.html' class='govuk-link' target='_blank'>Advertising Standards Authority Codes</a>",
+            "<a href='https://www.gov.uk/marketing-advertising-law/regulations-that-affect-advertising' class='govuk-link' target='_blank'>UK marketing and advertising laws</a>"
+          ]
+        },
+        {
+          "Type": "P",
+          "Body": "You must not use advertising that promotes:"
+        },
+        {
+          "Type": "UL",
+          "Body": [
+            "adult themes",
+            "dating",
+            "gaming"
+          ]
+        },
+        {
+          "Type": "P",
+          "Body": "You cannot share personal data for marketing without users' consent, as defined in the <a href='https://ico.org.uk/media/1555/direct-marketing-guidance.pdf' class='govuk-link' target='_blank'>Information Commissioner's Office</a>."
+        },
+        {
+          "Type": "H3",
+          "Body": "Licence agreements"
+        },
+        {
+          "Type": "P",
+          "Body": "You must make the terms of the licence agreement between you and your users clear to them."
+        },
+        {
+          "Type": "H3",
+          "Body": "Security"
+        },
+        {
+          "Type": "P",
+          "Body": "You must:"
+        },
+        {
+          "Type": "UL",
+          "Body": [
+            "check software for vulnerabilities through secure development and pre-release testing",
+            "check open source or reused proprietary code using resources like the <a href='https://cve.mitre.org/' class='govuk-link' target='_blank'>Common Vulnerabilities and Exposures</a> database",
+            "react quickly if you find vulnerabilities in your code",
+            "have a patching policy in place"
+          ]
+        },
+        {
+          "Type": "P",
+          "Body": "Your re-releases and upgrades should also follow secure development practices and pre-release testing."
+        },
+        {
+          "Type": "P",
+          "Body": "We recommend following the security principles of:"
+        },
+        {
+          "Type": "UL",
+          "Body": [
+            "the <a href='https://www.ncsc.gov.uk/' class='govuk-link' target='_blank'>National Cyber Security Centre</a>",
+            "<a href='https://www.ncsc.gov.uk/blog-post/secure-development-and-deployment' class='govuk-link' target='_blank'>National Cyber Security Centre's Guidance for secure development and deployment</a>",
+            "the <a href='https://www.owasp.org/index.php/Main_Page' class='govuk-link' target='_blank'>Open Web Application Security Project</a>",
+            "<a href='https://www.cyberessentials.ncsc.gov.uk/' class='govuk-link' target='_blank'>Cyber Essentials or Cyber Essentials Plus certification</a>"
+          ]
+        },
+        {
+          "Type": "P",
+          "Body": "You should look out for and block suspicious attempts to access or manipulate user accounts."
+        },
+        {
+          "Type": "H2",
+          "Body": "Support"
+        },
+        {
+          "Type": "P",
+          "Body": "You must give software support to your users. If you need help <a href='/support' class='govuk-link'>contact us</a>."
+        }
+      ]
     }
   },
   "Apis": {

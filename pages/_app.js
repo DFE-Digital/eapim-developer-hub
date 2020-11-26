@@ -8,11 +8,12 @@ import { withRouter } from 'next/router'
 import App from 'next/app'
 import { withApplicationInsights } from '../src/components/withApplicationInsights'
 import createStore from 'store/createStore'
-import Layout from 'components/Layout'
 import theme from 'theme'
 import '../scss/main.scss'
 
 import { msalConfig } from '../src/auth/config'
+import AuthContext from '../src/auth/context'
+import { signIn, signOut } from '../src/actions/authenticate'
 
 const GlobalStyle = createGlobalStyle`
   ${styledNormalize}
@@ -64,6 +65,20 @@ class MyApp extends App {
       clientId: process.env.NEXT_PUBLIC_CLIENT_ID
     }
 
+    const msal = {
+      login: msalConfig(msalAuthConfig),
+      logout: msalConfig(msalAuthConfig),
+      editProfile: msalConfig(msalEditProfileConfig)
+    }
+
+    const login = async () => {
+      await signIn(msal.login)
+    }
+
+    const logout = async () => {
+      await signOut(msal.login)
+    }
+
     return (
       <>
         <Helmet>
@@ -81,8 +96,8 @@ class MyApp extends App {
         </Helmet>
         <ThemeProvider theme={theme}>
           <Provider store={store}>
-            <GlobalStyle />
-            <Layout msalConfig={msalConfig(msalAuthConfig)} msalRegisterConfig={msalConfig(msalRegisterConfig)}>
+            <AuthContext.Provider value={{ token: null, login, logout, msal }}>
+              <GlobalStyle />
               <Component
                 {...pageProps}
                 store={store}
@@ -94,7 +109,7 @@ class MyApp extends App {
                 msalAuthVerfiyConfig={msalConfig(msalAuthVerfiyConfig)}
                 msalChangePasswordConfig={msalConfig(msalChangePasswordConfig)}
               />
-            </Layout>
+            </AuthContext.Provider>
           </Provider>
         </ThemeProvider>
       </>

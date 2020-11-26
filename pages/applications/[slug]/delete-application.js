@@ -1,44 +1,29 @@
 import React from 'react'
-import Router from 'next/router'
-import AccessChecker from 'components/common/AccessChecker'
-import ReturnTo from 'components/common/ReturnTo'
-import { PrivateRoute } from 'components/common/PrivateRoute'
 import ErrorPage from 'components/ErrorPage'
+import Page from 'components/Page'
 
 import { getApplication } from '../../../lib/applicationService'
 import getInitialPropsErrorHandler from '../../../lib/getInitialPropsErrorHandler'
 
 const page = 'Delete application'
 
-const DeleteApplication = ({ application, router, msalConfig, errorCode }) => {
+const DeleteApplication = ({ application, router, errorCode }) => {
   if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
 
   return (
-    <>
-      <AccessChecker msalConfig={msalConfig} />
-      <PrivateRoute redirect={'/applications'} />
-      <ReturnTo parentPath={router.asPath} />
-      <div className='govuk-width-container'>
-        <a href='#' className='govuk-back-link' onClick={() => Router.back()}>Back</a>
-        <main className='govuk-main-wrapper ' id='main-content' role='main'>
-          <div className='govuk-grid-row'>
-            <div className='govuk-grid-column-two-thirds'>
-              <h1 className='govuk-heading-xl'>{page}</h1>
+    <Page router={router} layout='two-thirds' back='to application details page'>
+      <h1 className='govuk-heading-xl'>{page}</h1>
 
-              <dl className='govuk-summary-list'>
-                <div className='govuk-summary-list__row'>
-                  <dt className='govuk-summary-list__key'>Application:</dt>
-                  <dd className='govuk-summary-list__value'>{(application ? application.applicationName : '')}</dd>
-                </div>
-              </dl>
+      <dl className='govuk-summary-list'>
+        <div className='govuk-summary-list__row'>
+          <dt className='govuk-summary-list__key'>Application:</dt>
+          <dd className='govuk-summary-list__value'>{(application ? application.applicationName : '')}</dd>
+        </div>
+      </dl>
 
-              <a href={`/applications/${application.applicationId}/delete-confirm`} className={'govuk-button govuk-!-margin-top-6 govuk-!-margin-right-1'} role='button'>Continue</a>
-              <a href={`/applications/${application.applicationId}/details`} className='govuk-button govuk-button--secondary govuk-!-margin-top-6' role='button'>Cancel</a>
-            </div>
-          </div>
-        </main>
-      </div>
-    </>
+      <a href={`/applications/${application.applicationId}/delete-confirm`} className={'govuk-button govuk-!-margin-top-6 govuk-!-margin-right-1'} role='button'>Continue</a>
+      <a href={`/applications/${application.applicationId}/details`} className='govuk-button govuk-button--secondary govuk-!-margin-top-6' role='button'>Cancel</a>
+    </Page>
   )
 }
 

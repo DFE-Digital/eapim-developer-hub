@@ -1,11 +1,9 @@
 import React, { useState, useRef } from 'react'
 import { connect } from 'react-redux'
-import AccessChecker from 'components/common/AccessChecker'
-import ReturnTo from 'components/common/ReturnTo'
+import Page from 'components/Page'
 import InputWithValidation from 'components/common/forms/input-with-validation'
 import ValidationMessages from 'components/common/forms/validation-messages'
 import { saveAppData, cancelApplication } from '../../../src/actions/application'
-import { PrivateRoute } from 'components/common/PrivateRoute'
 import { urlPattern } from '../../../src/utils/patterns'
 
 import { useFocusMain } from 'hooks'
@@ -56,65 +54,49 @@ const ApplicationCreateStep3 = ({ application, saveAppData, cancelApplication, r
   const { details } = application
 
   return (
-    <>
-      <AccessChecker msalConfig={msalConfig} />
-      <PrivateRoute redirect={'/applications'} />
-      <ReturnTo parentPath={router.asPath} />
-      <div className='govuk-width-container'>
-        <a href='#' className='govuk-back-link' onClick={() => router.back()}>Back<span className='govuk-visually-hidden'> to what is your applications description</span></a>
-        <main className='govuk-main-wrapper ' id='main-content' role='main'>
-          <div className='govuk-grid-row'>
-            <div className='govuk-grid-column-full'>
-              <ValidationMessages errors={errors} />
-            </div>
-          </div>
-          <div className='govuk-grid-row'>
-            <div className='govuk-grid-column-two-thirds'>
-              <form noValidate onSubmit={handleSubmit}>
-                <div className='govuk-form-group'>
-                  <fieldset className='govuk-fieldset'>
-                    <legend className='govuk-fieldset__legend govuk-fieldset__legend--xl'>
-                      <h1 className='govuk-fieldset__heading govuk-!-margin-bottom-6'>
-                        What is your redirect URL?
-                      </h1>
-                    </legend>
-                    <InputWithValidation
-                      ref={appRedirectUrlRef}
-                      friendlyName={'redirect url'}
-                      name={'app-redirect-url'}
-                      inputId={'app-redirect-url'}
-                      inputErrorId={'error-msg-for__app-redirect-url'}
-                      label={`Redirect URL`}
-                      hint={`This will be the URL that you want to redirect users back to. It must begin with https://`}
-                      customErrorMessage='Enter a redirect URL, like https://www.gov.uk'
-                      customValidationMessage='URL must contain https://. If you are using localhost, prefix it with http://'
-                      isRequired
-                      pattern={urlPattern}
-                      onChange={handleInputChange}
-                      onFocus={() => showError()}
-                      inputValue={details ? details['app-redirect-url'] : fields['app-redirect-url']}
-                      setErrors={() => showError()}
-                    />
-                  </fieldset>
-                </div>
+    <Page router={router} layout='two-thirds' back='to what is your applications description'>
+      <ValidationMessages errors={errors} />
+      <form noValidate onSubmit={handleSubmit}>
+        <div className='govuk-form-group'>
+          <fieldset className='govuk-fieldset'>
+            <legend className='govuk-fieldset__legend govuk-fieldset__legend--xl'>
+              <h1 className='govuk-fieldset__heading govuk-!-margin-bottom-6'>
+                What is your redirect URL?
+              </h1>
+            </legend>
+            <InputWithValidation
+              ref={appRedirectUrlRef}
+              friendlyName={'redirect url'}
+              name={'app-redirect-url'}
+              inputId={'app-redirect-url'}
+              inputErrorId={'error-msg-for__app-redirect-url'}
+              label={`Redirect URL`}
+              hint={`This will be the URL that you want to redirect users back to. It must begin with https://`}
+              customErrorMessage='Enter a redirect URL, like https://www.gov.uk'
+              customValidationMessage='URL must contain https://. If you are using localhost, prefix it with http://'
+              isRequired
+              pattern={urlPattern}
+              onChange={handleInputChange}
+              onFocus={() => showError()}
+              inputValue={details ? details['app-redirect-url'] : fields['app-redirect-url']}
+              setErrors={() => showError()}
+            />
+          </fieldset>
+        </div>
 
-                <button type='submit' className='govuk-button govuk-!-margin-right-1'>Continue</button>
-                <button
-                  type='button'
-                  className='govuk-button govuk-button--secondary'
-                  onClick={() => {
-                    cancelApplication()
-                    router.push('/applications')
-                  }}
-                >
-                  Cancel
-                </button>
-              </form>
-            </div>
-          </div>
-        </main>
-      </div>
-    </>
+        <button type='submit' className='govuk-button govuk-!-margin-right-1'>Continue</button>
+        <button
+          type='button'
+          className='govuk-button govuk-button--secondary'
+          onClick={() => {
+            cancelApplication()
+            router.push('/applications')
+          }}
+        >
+          Cancel
+        </button>
+      </form>
+    </Page>
   )
 }
 
@@ -126,5 +108,4 @@ const mapStateToProps = (state) => {
 
 ApplicationCreateStep3.displayName = 'Application create redirect-url'
 
-export { ApplicationCreateStep3 }
 export default connect(mapStateToProps, { saveAppData, cancelApplication })(ApplicationCreateStep3)
