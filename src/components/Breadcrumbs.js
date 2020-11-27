@@ -9,8 +9,7 @@ const builder = (router) => {
 
   if (childs.length) {
     childs.map(item => {
-      if (parent !== 'apis') item = item.replace(/-/g, ' ')
-      items.push({ text: item, href: `/${parent}/${item}` })
+      items.push({ text: item.replace(/-/g, ' '), href: `/${parent}/${item}` })
     })
   }
 

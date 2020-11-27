@@ -68,28 +68,3 @@ export const deleteAccount = () => async dispatch => {
     dispatch({ type: RECEIVE_DELETE_ACCOUNT })
   }, 1000)
 }
-
-export const signInLink = async (e, msalConfig) => {
-  e.preventDefault()
-  await signIn(msalConfig)
-}
-
-export const registerLink = async (e, msalConfig) => {
-  e.preventDefault()
-  await register(msalConfig)
-}
-
-export const editProfileLink = async (e, msalConfig) => {
-  e.preventDefault()
-  await editProfile(msalConfig)
-}
-
-export const changePasswordLink = async (e, msalConfig) => {
-  e.preventDefault()
-  await changePassword(msalConfig)
-}
-
-export const signOutLink = async (e, msalConfig) => {
-  e.preventDefault()
-  await signOut(msalConfig)
-}

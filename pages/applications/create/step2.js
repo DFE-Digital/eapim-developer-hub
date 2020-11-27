@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react'
 import { connect } from 'react-redux'
 import Page from 'components/Page'
-import InputWithValidation from 'components/common/forms/input-with-validation'
-import ValidationMessages from 'components/common/forms/validation-messages'
+import InputWithValidation from 'components/forms/input-with-validation'
+import ValidationMessages from 'components/forms/validation-messages'
 import { saveAppData, cancelApplication } from '../../../src/actions/application'
 
 import { useFocusMain } from 'hooks'

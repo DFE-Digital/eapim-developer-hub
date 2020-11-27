@@ -1,8 +1,7 @@
 import React, { Fragment } from 'react'
 import Content from '../../content.json'
-import ReturnTo from 'components/common/ReturnTo'
 
-const ErrorPage = ({ statusCode, router }) => {
+const ErrorPage = ({ statusCode }) => {
   let title
   let caption
 
@@ -22,7 +21,6 @@ const ErrorPage = ({ statusCode, router }) => {
 
   return (
     <Fragment>
-      <ReturnTo parentPath={router.asPath} />
       <div className='govuk-width-container'>
         <div className='govuk-breadcrumbs'>
           <ol className='govuk-breadcrumbs__list'>

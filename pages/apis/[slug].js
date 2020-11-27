@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Content from '../../content.json'
-import SideBar from 'components/common/SideBar'
 import Page from 'components/Page'
 
 import ErrorPage from 'components/ErrorPage'
@@ -12,15 +11,11 @@ import getInitialPropsErrorHandler from '../../lib/getInitialPropsErrorHandler'
 
 const parent = 'APIs'
 
-const ApiDetails = ({ api, summary, router, user, errorCode }) => {
+const ApiDetails = ({ api, summary, router, errorCode }) => {
   if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
 
   return (
-    <Page
-      page={parent}
-      router={router}
-      sidebarComponent={<SideBar title={parent} nav={Content.Apis} />}
-    >
+    <Page title={parent} router={router} sidebarContent={Content.Apis}>
       <APISummary api={api} summary={summary} />
     </Page>
   )

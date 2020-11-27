@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactHtmlParser from 'react-html-parser'
-import Content from '../../../content.json'
+import Content from '../../content.json'
 
-const PhaseBanner = props => {
+const PhaseBanner = () => {
   return (
     <div className='govuk-width-container'>
       <div className='govuk-phase-banner'>

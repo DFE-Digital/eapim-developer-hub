@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactHtmlParser from 'react-html-parser'
 
-import APISummaryBuilder from 'components/APISummaryBuilder'
+import APISummaryBuilder from './APISummaryBuilder'
 
 const APISummary = ({ api, summary }) => {
   if (!summary) return null

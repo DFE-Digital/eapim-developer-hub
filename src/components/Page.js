@@ -1,13 +1,15 @@
 import React from 'react'
 import { useCookieBanner } from 'hooks'
-import Header from 'components/common/Header'
-import PhaseBanner from 'components/common/PhaseBanner'
-import Banner from 'components/common/Banner'
-import Footer from 'components/common/Footer'
-import CookieBanner from 'components/common/CookieBanner'
-import ReturnTo from 'components/common/ReturnTo'
+import Header from './Header'
+import PhaseBanner from './PhaseBanner'
+import Banner from './Banner'
+import Footer from './Footer'
+import CookieBanner from './CookieBanner'
+import ReturnTo from './ReturnTo'
+import Sidebar from './Sidebar'
+import ApplicationSidebar from './ApplicationSidebar'
 
-const Page = ({ children, router, sidebarComponent, layout = 'full', back = false }) => {
+const Page = ({ children, router, title, sidebarContent, sidebarData, layout = 'full', back = false }) => {
   const { siteLoaded, bannerCookie } = useCookieBanner()
 
   let template = (
@@ -20,7 +22,9 @@ const Page = ({ children, router, sidebarComponent, layout = 'full', back = fals
     </main>
   )
 
-  if (sidebarComponent) {
+  const sidebarComponent = (sidebarData) ? <ApplicationSidebar title={title} items={sidebarContent} data={sidebarData} /> : <Sidebar title={title} items={sidebarContent} />
+
+  if (sidebarContent) {
     template = (
       <section className='mainWrapper govuk-!-margin-top-7'>
         <aside className='sideBar'>

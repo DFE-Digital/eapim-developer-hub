@@ -11,15 +11,7 @@ const Logout = ({ msalConfig }) => {
   })
 
   return (
-    <div className='govuk-width-container'>
-      <main className='govuk-main-wrapper' id='main-content' role='main'>
-        <div className='govuk-grid-row'>
-          <div className='govuk-grid-column-full'>
-            <h3 className='govuk-heading-m govuk-!-margin-0'>Signing out...</h3>
-          </div>
-        </div>
-      </main>
-    </div>
+    <span className='govuk-visually-hidden'>Signing out...</span>
   )
 }
 

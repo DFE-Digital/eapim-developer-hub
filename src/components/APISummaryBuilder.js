@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactHtmlParser from 'react-html-parser'
 import Highlight from 'react-highlight.js'
-import Details from 'components/common/Details'
+import Details from './Details'
 
 const builder = (item) => {
   switch (item.type) {

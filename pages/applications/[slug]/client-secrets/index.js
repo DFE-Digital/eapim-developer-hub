@@ -5,8 +5,7 @@ import Content from '../../../../content.json'
 
 import Page from 'components/Page'
 import ErrorPage from 'components/ErrorPage'
-import ContentBuilder from 'components/common/ContentBuilder'
-import ApplicationSideBar from 'components/common/ApplicationSideBar'
+import ContentBuilder from 'components/ContentBuilder'
 
 import { getApplication } from '../../../../lib/applicationService'
 import getInitialPropsErrorHandler from '../../../../lib/getInitialPropsErrorHandler'
@@ -26,7 +25,7 @@ const ApplicationClientSecrets = ({ id, application, router, msalConfig, errorCo
   const secondary = application.passwordCredentials[1]
 
   return (
-    <Page router={router} sidebarComponent={<ApplicationSideBar nav={Content.ApplicationManagement} app={application} currentPage={page} />}>
+    <Page title={page} router={router} sidebarContent={Content.ApplicationManagement} sidebarData={{ type: 'application', application }}>
       <h1 className='govuk-heading-xl'>{page}</h1>
       <p className='govuk-body'>
         The client secret is a secret known only to the application and the authorisation server. You must add the client secret to the request header whenever you make a request to an API.

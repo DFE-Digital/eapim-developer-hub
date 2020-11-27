@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import APISubscriptionKeys from './APISubscriptionKeys'
 
-import { getSubscriptionKeys, postSubscription } from '../../../lib/subscriptionService'
+import { getSubscriptionKeys, postSubscription } from '../../lib/subscriptionService'
 
 const statusType = {
   default: { tag: 'green', button: 'subscribe' },

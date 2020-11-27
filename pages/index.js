@@ -2,18 +2,18 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import ReactHtmlParser from 'react-html-parser'
 import Link from 'next/link'
-import { signInLink, registerLink, signOut } from 'actions/authenticate'
+import { signOut } from 'actions/authenticate'
 import Content from '../content.json'
-import Header from 'components/common/Header'
-import PhaseBanner from 'components/common/PhaseBanner'
-import Banner from 'components/common/Banner'
-import Footer from 'components/common/Footer'
+import Header from 'components/Header'
+import PhaseBanner from 'components/PhaseBanner'
+import Banner from 'components/Banner'
+import Footer from 'components/Footer'
 
 import { ReactSVG } from 'react-svg'
 
 const page = 'Home'
 
-const Home = ({ user, accountDeleted, store, msalConfig, msalRegisterConfig }) => {
+const Home = ({ user, accountDeleted, store, msalConfig }) => {
   useEffect(() => {
     const handleSignOut = async () => {
       await store.__PERSISTOR.purge()
@@ -40,8 +40,8 @@ const Home = ({ user, accountDeleted, store, msalConfig, msalRegisterConfig }) =
             <div className='govuk-panel__body'>{Content[page].Content.Hero.Intro}</div>
             {!isLoggedIn && (
               <div className='registerLinks govuk-!-margin-top-9'>
-                <a href='/auth/register' onClick={(e) => registerLink(e, msalRegisterConfig)} className='btn white'>{Content[page].Content.Hero.Register}</a>
-                <p className='govuk-body'>or <a href='/auth/login' onClick={(e) => signInLink(e, msalConfig)} className='govuk-link govuk-!-margin-left-1'><strong>{ ReactHtmlParser(Content[page].Content.Hero.Signin) }</strong></a> to the {Content.PortalName}.</p>
+                <a href='/auth/register' className='btn white'>{Content[page].Content.Hero.Register}</a>
+                <p className='govuk-body'>or <a href='/auth/login' className='govuk-link govuk-!-margin-left-1'><strong>{ ReactHtmlParser(Content[page].Content.Hero.Signin) }</strong></a> to the {Content.PortalName}.</p>
               </div>
             )}
           </div>
@@ -107,9 +107,7 @@ const Home = ({ user, accountDeleted, store, msalConfig, msalRegisterConfig }) =
                       if (link.Page === 'Create an account') {
                         return (
                           <li className='govuk-body-s' key={x}>
-                            <Link href={link.Url} passHref>
-                              <a className='govuk-link' onClick={(e) => registerLink(e, msalRegisterConfig)}>{link.Page}</a>
-                            </Link>
+                            <a href='/auth/register' className='govuk-link'>{link.Page}</a>
                           </li>
                         )
                       }

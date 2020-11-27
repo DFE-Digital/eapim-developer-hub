@@ -2,9 +2,8 @@ import React, { useRef, useState, useEffect } from 'react'
 import ErrorPage from 'components/ErrorPage'
 import { connect } from 'react-redux'
 import Content from '../../../content.json'
-import ContentBuilder from 'components/common/ContentBuilder'
-import ApplicationSideBar from 'components/common/ApplicationSideBar'
-import APISubscriptions from 'components/common/APISubscriptions'
+import ContentBuilder from 'components/ContentBuilder'
+import APISubscriptions from 'components/APISubscriptions'
 import Page from 'components/Page'
 
 import getInitialPropsErrorHandler from '../../../lib/getInitialPropsErrorHandler'
@@ -32,7 +31,7 @@ const ApplicationApiSubscriptions = ({ apis, application, subscriptions, router,
   const onSubscriptionChange = (subscriptions) => setUpdateSubscriptions(subscriptions)
 
   return (
-    <Page router={router} sidebarComponent={<ApplicationSideBar nav={Content.ApplicationManagement} app={application} currentPage={page} />}>
+    <Page title={page} router={router} sidebarContent={Content.ApplicationManagement} sidebarData={{ type: 'application', application }}>
       <h1 className='govuk-heading-xl'>{page}</h1>
 
       <ContentBuilder sectionNav={false} data={Content.ApplicationManagement[page].Content} />

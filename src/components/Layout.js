@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import Header from 'components/common/Header'
-import PhaseBanner from 'components/common/PhaseBanner'
-import Footer from 'components/common/Footer'
-import CookieBanner from 'components/common/CookieBanner'
+import Header from './Header'
+import PhaseBanner from './PhaseBanner'
+import Footer from './Footer'
+import CookieBanner from './CookieBanner'
 
 const Layout = ({ children }) => {
   const [siteLoaded, setSiteLoaded] = useState(false)

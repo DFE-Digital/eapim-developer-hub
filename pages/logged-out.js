@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Page from 'components/Page'
 
-import ValidationMessages from 'components/common/forms/validation-messages'
-import Radio from 'components/common/form/radio'
-import Textarea from 'components/common/form/textarea'
+import ValidationMessages from 'components/forms/validation-messages'
+import Radio from 'components/form/radio'
+import Textarea from 'components/form/textarea'
 
 import { send } from '../lib/emailService'
 import { template } from '../emails/survey'

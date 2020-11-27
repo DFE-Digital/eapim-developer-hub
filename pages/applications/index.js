@@ -2,9 +2,8 @@ import React, { useState, useEffect, Fragment } from 'react'
 import { connect } from 'react-redux'
 import Router from 'next/router'
 import Content from '../../content.json'
-import SideBar from 'components/common/SideBar'
-import { Loading } from 'components/common/Loading'
-import AuthWarning from 'components/common/AuthWarning'
+import { Loading } from 'components/Loading'
+import AuthWarning from 'components/AuthWarning'
 import Page from 'components/Page'
 
 import { selectApplication } from '../../src/actions/application'
@@ -37,7 +36,7 @@ const Applications = ({ user, selectApplication, router, msalConfig, msalRegiste
   if (user.data && user.data.isAuthed) isLoggedIn = true
 
   return (
-    <Page router={router} sidebarComponent={<SideBar title={page} nav={Content.Applications} />}>
+    <Page title={page} router={router} sidebarContent={Content.Applications}>
       <h1 className='govuk-heading-xl'>{Content.Applications[page].Page}</h1>
 
       {!isLoggedIn && <AuthWarning msalConfig={msalConfig} msalRegisterConfig={msalRegisterConfig} warning={Content.Applications[page].Content.Auth.Warning} />}

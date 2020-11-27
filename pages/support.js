@@ -1,14 +1,14 @@
 import React, { useContext, useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
 import Content from '../content.json'
-import ContentBuilder from 'components/common/ContentBuilder'
+import ContentBuilder from 'components/ContentBuilder'
 import Page from 'components/Page'
 
-import ValidationMessages from 'components/common/forms/validation-messages'
-import Radio from 'components/common/form/radio'
-import Input from 'components/common/form/input'
-import Select from 'components/common/form/select'
-import Textarea from 'components/common/form/textarea'
+import ValidationMessages from 'components/forms/validation-messages'
+import Radio from 'components/form/radio'
+import Input from 'components/form/input'
+import Select from 'components/form/select'
+import Textarea from 'components/form/textarea'
 
 import { send } from '../lib/emailService'
 import { template } from '../emails/support'
@@ -48,7 +48,6 @@ const Support = ({ apis, router, user }) => {
   }, [errors])
 
   const handleInputChange = (e) => {
-    console.log(e.target.name, e.target.value)
     if (e.target.name === 'reason') {
       setReason(e.target.value)
     }

@@ -1,7 +1,7 @@
 import React from 'react'
 import Content from '../content.json'
-import ContentBuilder from 'components/common/ContentBuilder'
-import Breadcrumbs from 'components/common/Breadcrumbs'
+import ContentBuilder from 'components/ContentBuilder'
+import Breadcrumbs from 'components/Breadcrumbs'
 
 const page = 'Support'
 

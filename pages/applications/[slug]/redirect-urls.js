@@ -1,11 +1,10 @@
 import React, { useState, useRef } from 'react'
 import { connect } from 'react-redux'
 import Content from '../../../content.json'
-import ContentBuilder from 'components/common/ContentBuilder'
+import ContentBuilder from 'components/ContentBuilder'
 import { getApplications, updateApplication } from 'actions/application'
-import ApplicationSideBar from 'components/common/ApplicationSideBar'
-import ValidationMessages from 'components/common/forms/validation-messages'
-import Input from 'components/common/form/input'
+import ValidationMessages from 'components/forms/validation-messages'
+import Input from 'components/form/input'
 import ErrorPage from 'components/ErrorPage'
 import Page from 'components/Page'
 
@@ -180,7 +179,7 @@ const ApplicationRedirectUrls = ({ user, application, getApplications, updateApp
   if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
 
   return (
-    <Page router={router} sidebarComponent={<ApplicationSideBar nav={Content.ApplicationManagement} app={application} currentPage={page} />}>
+    <Page title={page} router={router} sidebarContent={Content.ApplicationManagement} sidebarData={{ type: 'application', application }}>
       <ValidationMessages errors={errors} />
       <div className='govuk-grid-row'>
         <div className='govuk-grid-column-full'>
@@ -194,7 +193,7 @@ const ApplicationRedirectUrls = ({ user, application, getApplications, updateApp
                 Application:
               </dt>
               <dd className='govuk-summary-list__value'>
-                {(application ? application.applicationName : '')}
+                {application.applicationName}
               </dd>
             </div>
           </dl>
@@ -202,7 +201,7 @@ const ApplicationRedirectUrls = ({ user, application, getApplications, updateApp
           <table className='govuk-table'>
             <caption className='govuk-table__caption govuk-heading-m'>{page}</caption>
             <tbody className='govuk-table__body'>
-              {application && application.web && application.web.redirectUris && application.web.redirectUris.map((redirectUri, i) => {
+              {application.web.redirectUris.map((redirectUri, i) => {
                 return (
                   <tr className='govuk-table__row' key={i}>
                     {redirectUrlToChange !== redirectUri && <th scope='row' className='govuk-table__header'>{redirectUri}</th>}

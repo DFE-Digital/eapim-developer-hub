@@ -1,6 +1,6 @@
 import React from 'react'
 import Content from '../content.json'
-import ContentBuilder from 'components/common/ContentBuilder'
+import ContentBuilder from 'components/ContentBuilder'
 import Page from 'components/Page'
 
 const page = 'Privacy'

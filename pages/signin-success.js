@@ -2,8 +2,8 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import * as Msal from 'msal'
 import Router from 'next/router'
-import { Loading } from 'components/common/Loading'
-import { signInLink, signInToken } from 'actions/authenticate'
+import { Loading } from 'components/Loading'
+import { signInToken } from 'actions/authenticate'
 import { b2cPolicies } from '../src/auth/config'
 
 class SignInSuccess extends Component {
@@ -109,7 +109,7 @@ class SignInSuccess extends Component {
                     <p className='govuk-body govuk-!-margin-bottom-0'>Please sign-in with your new password.</p>
                   </div>
 
-                  <p className='govuk-body'><a href='/auth/login' onClick={(e) => signInLink(e, this.props.msalConfig)} className='govuk-link'><strong>Sign in</strong></a> to the Developer Hub.</p>
+                  <p className='govuk-body'><a href='/auth/login' className='govuk-link'><strong>Sign in</strong></a> to the Developer Hub.</p>
                 </div>
               </div>
             </main>

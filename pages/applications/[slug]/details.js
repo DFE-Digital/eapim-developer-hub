@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import Link from 'next/link'
 import Content from '../../../content.json'
 import { clearApplication } from 'actions/application'
-import ApplicationSideBar from 'components/common/ApplicationSideBar'
 import ErrorPage from 'components/ErrorPage'
 import Page from 'components/Page'
 
@@ -19,7 +18,7 @@ const ApplicationDetails = ({ user, application, router, errorCode }) => {
   const { data } = user
 
   return (
-    <Page router={router} sidebarComponent={<ApplicationSideBar nav={Content.ApplicationManagement} app={application} currentPage={page} />}>
+    <Page title={page} router={router} sidebarContent={Content.ApplicationManagement} sidebarData={{ type: 'application', application }}>
       <h1 className='govuk-heading-xl'>{page}</h1>
 
       <dl className='govuk-summary-list'>

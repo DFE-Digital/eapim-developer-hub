@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Content from '../../../content.json'
+import Content from '../../content.json'
 import MenuLink from './MenuLink'
 
 const Header = () => {

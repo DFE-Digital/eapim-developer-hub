@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Content from '../../content.json'
-import SideBar from 'components/common/SideBar'
 import ErrorPage from 'components/ErrorPage'
 import Page from 'components/Page'
 
@@ -32,11 +31,7 @@ const Apis = ({ user, apis, router, errorCode }) => {
   })
 
   return (
-    <Page
-      page={page}
-      router={router}
-      sidebarComponent={<SideBar title={page} nav={Content.Apis} />}
-    >
+    <Page title={page} router={router} sidebarContent={Content.Apis}>
       <h1 className='govuk-heading-xl'>{Content.Apis[page].Page}</h1>
       <table className='govuk-table'>
         <tbody className='govuk-table__body'>

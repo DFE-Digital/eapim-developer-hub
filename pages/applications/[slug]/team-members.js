@@ -1,11 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import Content from '../../../content.json'
-import AccessChecker from 'components/common/AccessChecker'
-import ReturnTo from 'components/common/ReturnTo'
-import { Loading } from 'components/common/Loading'
-import { PrivateRoute } from 'components/common/PrivateRoute'
-import ApplicationSideBar from 'components/common/ApplicationSideBar'
+import { Loading } from 'components/Loading'
 
 const page = 'Team members'
 
@@ -71,9 +67,6 @@ class TeamMembers extends Component {
 
     return (
       <Fragment>
-        <AccessChecker msalConfig={this.props.msalConfig} />
-        <PrivateRoute redirect={'/applications'} />
-        <ReturnTo parentPath={this.props.router.asPath} />
         <div className='govuk-width-container'>
           <div className='govuk-breadcrumbs'>
             <ol className='govuk-breadcrumbs__list'>
@@ -91,9 +84,7 @@ class TeamMembers extends Component {
           </div>
           <section className='mainWrapper govuk-!-margin-top-7'>
             <aside className='sideBar'>
-              <div className='sideBar_content'>
-                <ApplicationSideBar nav={Content.ApplicationManagement} app={selectedApplication} currentPage={page} />
-              </div>
+              <div className='sideBar_content' />
             </aside>
 
             <main className='mainContent' id='main-content' role='main'>
