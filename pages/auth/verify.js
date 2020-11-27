@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
-import { signInRedeem } from '../../src/actions/authenticate'
+import { signInRedeem } from '../../lib/authService'
 
-const Verify = ({ idTokenHint, msalAuthVerfiyConfig }) => {
+const Verify = ({ idTokenHint }) => {
   useEffect(() => {
     async function handler () {
-      await signInRedeem(msalAuthVerfiyConfig, idTokenHint)
+      await signInRedeem(idTokenHint)
     }
 
     handler()

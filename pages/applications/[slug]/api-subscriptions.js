@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react'
 import ErrorPage from 'components/ErrorPage'
-import { connect } from 'react-redux'
 import Content from '../../../content.json'
 import ContentBuilder from 'components/ContentBuilder'
 import APISubscriptions from 'components/APISubscriptions'
@@ -67,8 +66,6 @@ ApplicationApiSubscriptions.getInitialProps = async ({ res, query }) => {
 
     const subscriptions = await getSubscriptions(application.applicationId)
 
-    console.log(subscriptions)
-
     await Promise.all(apis.map(async (api) => {
       api.tags = await getApiTags(api.name)
       return api
@@ -84,12 +81,6 @@ ApplicationApiSubscriptions.getInitialProps = async ({ res, query }) => {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user
-  }
-}
-
 ApplicationApiSubscriptions.displayName = 'Application Api Subscriptions'
 
-export default connect(mapStateToProps)(ApplicationApiSubscriptions)
+export default ApplicationApiSubscriptions

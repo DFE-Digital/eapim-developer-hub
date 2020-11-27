@@ -3,10 +3,12 @@ import { connect } from 'react-redux'
 import * as Msal from 'msal'
 import Router from 'next/router'
 import { Loading } from 'components/Loading'
-import { signInToken } from 'actions/authenticate'
-import { b2cPolicies } from '../src/auth/config'
+import { b2cPolicies, config } from '../lib/authService'
+import { AuthContext } from '../src/context'
 
 class SignInSuccess extends Component {
+  static contextType = AuthContext
+
   constructor (props) {
     super(props)
     this.state = {
@@ -17,10 +19,9 @@ class SignInSuccess extends Component {
   }
 
   componentDidUpdate = () => {
-    const myMSALObj = new Msal.UserAgentApplication(this.props.msalConfig)
+    const myMSALObj = new Msal.UserAgentApplication(config.login)
 
     myMSALObj.handleRedirectCallback((error, response) => {
-      console.log('props', this.props.msalConfig)
       console.log('MSAL Error Message: ', error && error.errorMessage)
       console.log('MSAL Response: ', response)
 
@@ -64,9 +65,9 @@ class SignInSuccess extends Component {
           this.setState({ passwordChanged: true })
         } else if (response.tokenType === 'id_token' && (response.idToken.claims['acr'] === b2cPolicies.names.signIn || response.idToken.claims['acr'] === b2cPolicies.names.signUp || response.idToken.claims['acr'] === b2cPolicies.names.verify)) {
           console.log('id_token acquired at: ' + new Date().toString())
-
+          console.log('authority', config.login.auth.authority)
           if (!myMSALObj.getAccount()) {
-            myMSALObj.loginRedirect({ authority: this.props.msalConfig.auth.authority })
+            myMSALObj.loginRedirect()
           } else {
             const account = myMSALObj.getAccount()
             const userName = myMSALObj.getAccount().name
@@ -75,8 +76,9 @@ class SignInSuccess extends Component {
                 name: userName,
                 user: account
               })
-              this.props.signInToken(account)
             }
+            console.log('signin-success', account)
+            this.context.setToken(account)
           }
         } else {
           console.log('Token type is: ' + response.tokenType)
@@ -86,16 +88,12 @@ class SignInSuccess extends Component {
   }
 
   render () {
-    const {
-      user: { data },
-      returnTo: { returnUrl }
-    } = this.props
-    if (
-      data &&
-      data.isAuthed &&
-      returnUrl &&
-      (this.state.name === data.User.name)
-    ) Router.push(returnUrl || '/')
+    const { returnTo: { returnUrl } } = this.props
+
+    console.log('returnTo', this.props.returnTo)
+
+    if (this.context.user.getToken()) Router.push(returnUrl || '/')
+
     return (
       <Fragment>
         {!this.state.passwordChanged && (<Loading />)}
@@ -122,12 +120,10 @@ class SignInSuccess extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user,
     returnTo: state.returnTo
   }
 }
 
 SignInSuccess.displayName = 'B2C page callback'
 
-export { SignInSuccess }
-export default connect(mapStateToProps, { signInToken })(SignInSuccess)
+export default connect(mapStateToProps)(SignInSuccess)

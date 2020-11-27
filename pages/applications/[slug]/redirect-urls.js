@@ -7,6 +7,7 @@ import ValidationMessages from 'components/forms/validation-messages'
 import Input from 'components/form/input'
 import ErrorPage from 'components/ErrorPage'
 import Page from 'components/Page'
+import { useAuth } from 'context'
 
 import { getApplication } from '../../../lib/applicationService'
 import getInitialPropsErrorHandler from '../../../lib/getInitialPropsErrorHandler'
@@ -19,7 +20,9 @@ const EMPTY_MESSAGE = 'Enter a redirect URL'
 const INVALID_MESSAGE = 'Invalid URL. Redirect URL must contain https:// and be a valid URL. Localhost domains are allowed.'
 const DUPLICATE_MESSAGE = 'Duplicate redirect URL'
 
-const ApplicationRedirectUrls = ({ user, application, getApplications, updateApplication, router, errorCode }) => {
+const ApplicationRedirectUrls = ({ application, getApplications, updateApplication, router, errorCode }) => {
+  const { user } = useAuth()
+
   const [newRedirectUrl, setNewRedirectUrl] = useState('')
   const [addingNewRedirectUrl, setAddingNewRedirectUrl] = useState(false)
   const [redirectUrlToChange, setRedirectUrlToChange] = useState('')
@@ -28,8 +31,6 @@ const ApplicationRedirectUrls = ({ user, application, getApplications, updateApp
 
   const appRedirectUrl = useRef()
   const changeAppRedirectUrl = useRef()
-
-  const { data } = user
 
   const changeRedirectUrl = (e, redirectUri) => {
     e.preventDefault()
@@ -69,9 +70,9 @@ const ApplicationRedirectUrls = ({ user, application, getApplications, updateApp
     application.web.redirectUris = modifiedArr
 
     const body = {
-      userName: `${data.User.idToken.given_name} ${data.User.idToken.family_name}`,
-      userEmail: data.User.idToken['email'],
-      userID: data.User.accountIdentifier,
+      userName: user.name(),
+      userEmail: user.email(),
+      userID: user.id(),
       applicationId: application.applicationId,
       description: application.description,
       web: {
@@ -85,7 +86,7 @@ const ApplicationRedirectUrls = ({ user, application, getApplications, updateApp
       console.log('Successfully Updated!')
       setRedirectUrlToChange('')
       setErrors([])
-      getApplications(data.User)
+      getApplications(user.getToken())
     }
   }
 
@@ -115,9 +116,9 @@ const ApplicationRedirectUrls = ({ user, application, getApplications, updateApp
     setUpdateRedirectUrlValue('')
 
     const body = {
-      userName: `${data.User.idToken.given_name} ${data.User.idToken.family_name}`,
-      userEmail: data.User.idToken['email'],
-      userID: data.User.accountIdentifier,
+      userName: user.name(),
+      userEmail: user.email(),
+      userID: user.id(),
       applicationId: application.applicationId,
       description: application.description,
       web: {
@@ -129,7 +130,7 @@ const ApplicationRedirectUrls = ({ user, application, getApplications, updateApp
 
     if (updateApp) {
       console.log('Successfully Removed!')
-      getApplications(data.User)
+      getApplications(user.getToken())
     }
   }
 
@@ -158,9 +159,9 @@ const ApplicationRedirectUrls = ({ user, application, getApplications, updateApp
     setErrors([])
 
     const body = {
-      userName: `${data.User.idToken.given_name} ${data.User.idToken.family_name}`,
-      userEmail: data.User.idToken['email'],
-      userID: data.User.accountIdentifier,
+      userName: user.name(),
+      userEmail: user.email(),
+      userID: user.id(),
       applicationId: application.applicationId,
       description: application.description,
       web: {
@@ -172,7 +173,7 @@ const ApplicationRedirectUrls = ({ user, application, getApplications, updateApp
 
     if (updateApp) {
       console.log('Successfully Added!')
-      getApplications(data.User)
+      getApplications(user.getToken())
     }
   }
 
@@ -288,12 +289,6 @@ ApplicationRedirectUrls.getInitialProps = async ({ res, query }) => {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user
-  }
-}
-
 ApplicationRedirectUrls.displayName = 'Application Redirect Urls'
 
-export default connect(mapStateToProps, { getApplications, updateApplication })(ApplicationRedirectUrls)
+export default connect(null, { getApplications, updateApplication })(ApplicationRedirectUrls)

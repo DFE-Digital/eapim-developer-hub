@@ -1,5 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import Content from '../../content.json'
 import Page from 'components/Page'
 
@@ -40,13 +39,6 @@ ApiDetails.getInitialProps = async ({ res, query }) => {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user
-  }
-}
-
 ApiDetails.displayName = 'API documentation'
 
-export { ApiDetails }
-export default connect(mapStateToProps, null)(ApiDetails)
+export default ApiDetails

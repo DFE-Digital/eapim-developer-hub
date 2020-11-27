@@ -1,5 +1,24 @@
 import { useState, useEffect } from 'react'
 
+export const useUser = () => {
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    let token = window.localStorage.getItem('token')
+
+    if (token) {
+      token = JSON.parse(token)
+      return setUser({ accountIdentifier: token.accountIdentifier, ...token.idTokenClaims })
+    } else {
+      console.log('here')
+    }
+
+    setUser(null)
+  })
+
+  return user
+}
+
 export const useIsIE11 = () => {
   const [isIe11, setIsIe11] = useState(false)
 

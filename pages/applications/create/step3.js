@@ -8,7 +8,7 @@ import { urlPattern } from '../../../src/utils/patterns'
 
 import { useFocusMain } from 'hooks'
 
-const ApplicationCreateStep3 = ({ application, saveAppData, cancelApplication, router, msalConfig }) => {
+const ApplicationCreateStep3 = ({ application, saveAppData, cancelApplication, router }) => {
   const [fields, setFields] = useState({})
   const [errors, setErrors] = useState([])
 

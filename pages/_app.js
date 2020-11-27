@@ -10,16 +10,13 @@ import { withApplicationInsights } from '../src/components/withApplicationInsigh
 import createStore from 'store/createStore'
 import theme from 'theme'
 import '../scss/main.scss'
-
-import { msalConfig } from '../src/auth/config'
-import AuthContext from '../src/auth/context'
-import { signIn, signOut } from '../src/actions/authenticate'
+import { AuthProvider } from 'context'
 
 const GlobalStyle = createGlobalStyle`
   ${styledNormalize}
 `
 
-class MyApp extends App {
+class DeveloperHub extends App {
   componentDidMount () {
     document.body.classList.add('js-enabled')
   }
@@ -27,57 +24,6 @@ class MyApp extends App {
   render () {
     const { Component, pageProps, router, store } = this.props
     const title = Content.PortalName
-
-    const msalAuthConfig = {
-      authority: process.env.NEXT_PUBLIC_B2C_SIGNIN_URL,
-      redirectUri: process.env.NEXT_PUBLIC_REDIRECT_URL,
-      postLogoutRedirectUri: `${process.env.NEXT_PUBLIC_ROOT_URL}/logged-out`,
-      clientId: process.env.NEXT_PUBLIC_CLIENT_ID
-    }
-
-    const msalAuthVerfiyConfig = {
-      authority: process.env.NEXT_PUBLIC_B2C_SIGNIN_VERIFY_URL,
-      redirectUri: process.env.NEXT_PUBLIC_REDIRECT_URL,
-      clientId: process.env.NEXT_PUBLIC_CLIENT_ID
-    }
-
-    const msalRegisterConfig = {
-      authority: process.env.NEXT_PUBLIC_B2C_SIGNUP_URL,
-      redirectUri: process.env.NEXT_PUBLIC_REDIRECT_URL,
-      clientId: process.env.NEXT_PUBLIC_CLIENT_ID
-    }
-
-    const msalEditProfileConfig = {
-      authority: process.env.NEXT_PUBLIC_B2C_PROFILE_EDIT_URL,
-      redirectUri: process.env.NEXT_PUBLIC_EDIT_PROFILE_REDIRECT_URL,
-      clientId: process.env.NEXT_PUBLIC_CLIENT_ID
-    }
-
-    const msalForgotPasswordConfig = {
-      authority: process.env.NEXT_PUBLIC_B2C_PASSWORD_RESET_URL,
-      redirectUri: process.env.NEXT_PUBLIC_REDIRECT_URL,
-      clientId: process.env.NEXT_PUBLIC_CLIENT_ID
-    }
-
-    const msalChangePasswordConfig = {
-      authority: process.env.NEXT_PUBLIC_B2C_PASSWORD_CHANGE_URL,
-      redirectUri: process.env.NEXT_PUBLIC_EDIT_PROFILE_REDIRECT_URL,
-      clientId: process.env.NEXT_PUBLIC_CLIENT_ID
-    }
-
-    const msal = {
-      login: msalConfig(msalAuthConfig),
-      logout: msalConfig(msalAuthConfig),
-      editProfile: msalConfig(msalEditProfileConfig)
-    }
-
-    const login = async () => {
-      await signIn(msal.login)
-    }
-
-    const logout = async () => {
-      await signOut(msal.login)
-    }
 
     return (
       <>
@@ -96,20 +42,10 @@ class MyApp extends App {
         </Helmet>
         <ThemeProvider theme={theme}>
           <Provider store={store}>
-            <AuthContext.Provider value={{ token: null, login, logout, msal }}>
+            <AuthProvider>
               <GlobalStyle />
-              <Component
-                {...pageProps}
-                store={store}
-                router={router}
-                msalConfig={msalConfig(msalAuthConfig)}
-                msalEditProfileConfig={msalConfig(msalEditProfileConfig)}
-                msalForgotPasswordConfig={msalConfig(msalForgotPasswordConfig)}
-                msalRegisterConfig={msalConfig(msalRegisterConfig)}
-                msalAuthVerfiyConfig={msalConfig(msalAuthVerfiyConfig)}
-                msalChangePasswordConfig={msalConfig(msalChangePasswordConfig)}
-              />
-            </AuthContext.Provider>
+              <Component {...pageProps} store={store} router={router} />
+            </AuthProvider>
           </Provider>
         </ThemeProvider>
       </>
@@ -121,4 +57,4 @@ export default withRedux(createStore)(
   withRouter(withApplicationInsights({
     instrumentationKey: process.env.NEXT_PUBLIC_INSTRUMENTATION_KEY,
     isEnabled: true
-  })(MyApp)))
+  })(DeveloperHub)))

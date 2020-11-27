@@ -3,12 +3,18 @@ import { connect } from 'react-redux'
 import Page from 'components/Page'
 import { registerApplication, cancelApplication } from '../../../src/actions/application'
 
-const ApplicationCreateSummary = ({ user, application, registerApplication, router }) => {
-  const createApplication = async (user, details) => {
+import { useAuth } from 'context'
+
+const ApplicationCreateSummary = ({ application, registerApplication, router }) => {
+  const { user } = useAuth()
+
+  const { details, registering } = application
+
+  const createApplication = async () => {
     const appData = {
-      userName: `${user.idToken.given_name} ${user.idToken.family_name}`,
-      userEmail: user.idToken['email'],
-      userID: user.accountIdentifier,
+      userName: user.name(),
+      userEmail: user.email(),
+      userID: user.id(),
       applicationName: details['app-name'],
       description: details['app-description'],
       redirectUri: details['app-redirect-url']
@@ -18,9 +24,6 @@ const ApplicationCreateSummary = ({ user, application, registerApplication, rout
     if (registration !== 'failed') router.push('/applications/[slug]/success', `/applications/${registration.applicationId}/success`)
   }
 
-  const { data } = user
-  const { details, registering } = application
-
   return (
     <Page router={router} back='to what is your applications redirect URL'>
       <h1 className='govuk-heading-xl'>Application summary</h1>
@@ -29,28 +32,28 @@ const ApplicationCreateSummary = ({ user, application, registerApplication, rout
         <tbody className='govuk-table__body'>
           <tr className='govuk-table__row'>
             <th scope='row' className='govuk-table__header'>Name:</th>
-            <td className='govuk-table__cell'>{details ? details['app-name'] : 'app-name'}</td>
+            <td className='govuk-table__cell'>{details['app-name']}</td>
           </tr>
           <tr className='govuk-table__row'>
             <th scope='row' className='govuk-table__header'>Description:</th>
-            <td className='govuk-table__cell'>{details ? details['app-description'] : 'app-description'}</td>
+            <td className='govuk-table__cell'>{details['app-description']}</td>
           </tr>
           <tr className='govuk-table__row'>
             <th scope='row' className='govuk-table__header'>Redirect url:</th>
-            <td className='govuk-table__cell'>{details ? details['app-redirect-url'] : 'app-redirect-url'}</td>
+            <td className='govuk-table__cell'>{details['app-redirect-url']}</td>
           </tr>
           <tr className='govuk-table__row'>
             <th scope='row' className='govuk-table__header'>Application owner:</th>
-            <td className='govuk-table__cell'>{(data && data.User) ? data.User.idToken.given_name : null} {(data && data.User) ? data.User.idToken.family_name : null}</td>
+            <td className='govuk-table__cell'>{user.name()}</td>
           </tr>
           <tr className='govuk-table__row'>
             <th scope='row' className='govuk-table__header'>Contact email:</th>
-            <td className='govuk-table__cell'>{(data && data.User) ? data.User.idToken['email'] : null}</td>
+            <td className='govuk-table__cell'>{user.email()}</td>
           </tr>
         </tbody>
       </table>
 
-      <button type='submit' disabled={registering} className='govuk-button govuk-!-margin-right-1' onClick={() => createApplication(data.User, details)}>
+      <button type='submit' disabled={registering} className='govuk-button govuk-!-margin-right-1' onClick={() => createApplication()}>
         {!registering && 'Register application'}
         {registering && 'Registering...'}
       </button>
@@ -70,7 +73,6 @@ const ApplicationCreateSummary = ({ user, application, registerApplication, rout
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user,
     application: state.application
   }
 }

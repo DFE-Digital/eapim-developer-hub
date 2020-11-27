@@ -1,44 +1,39 @@
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
 import ReactHtmlParser from 'react-html-parser'
 import Link from 'next/link'
-import { signOut } from 'actions/authenticate'
 import Content from '../content.json'
 import Header from 'components/Header'
 import PhaseBanner from 'components/PhaseBanner'
-import Banner from 'components/Banner'
+import AuthNavigation from 'components/AuthNavigation'
 import Footer from 'components/Footer'
+import { useAuth } from 'context'
 
 import { ReactSVG } from 'react-svg'
 
 const page = 'Home'
 
-const Home = ({ user, accountDeleted, store, msalConfig }) => {
-  useEffect(() => {
-    const handleSignOut = async () => {
-      await store.__PERSISTOR.purge()
-      await signOut(msalConfig)
-    }
+const Home = ({ accountDeleted }) => {
+  const { user, logout } = useAuth()
 
-    if (accountDeleted) handleSignOut()
+  useEffect(() => {
+    if (accountDeleted) logout()
   }, [])
 
   const columns = Content[page].Content.Columns
-
-  const { data } = user
-  const isLoggedIn = !!(data && data.isAuthed)
 
   return (
     <>
       <Header />
       <PhaseBanner />
-      <Banner />
+      <div className='govuk-width-container service-banner'>
+        <AuthNavigation />
+      </div>
       <main id='main-content' role='main'>
         <div className='govuk-panel govuk-panel--confirmation govuk-panel--welcome'>
           <div className='govuk-width-container'>
             <h1 className='govuk-panel__title'>{Content[page].Content.Hero.Heading}</h1>
             <div className='govuk-panel__body'>{Content[page].Content.Hero.Intro}</div>
-            {!isLoggedIn && (
+            {!user.getToken() && (
               <div className='registerLinks govuk-!-margin-top-9'>
                 <a href='/auth/register' className='btn white'>{Content[page].Content.Hero.Register}</a>
                 <p className='govuk-body'>or <a href='/auth/login' className='govuk-link govuk-!-margin-left-1'><strong>{ ReactHtmlParser(Content[page].Content.Hero.Signin) }</strong></a> to the {Content.PortalName}.</p>
@@ -144,12 +139,6 @@ Home.getInitialProps = async ({ req }) => {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user
-  }
-}
-
 Home.displayName = page
 
-export default connect(mapStateToProps)(Home)
+export default Home

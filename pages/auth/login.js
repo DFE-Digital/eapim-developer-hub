@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
-import { signIn } from '../../src/actions/authenticate'
+import { signIn } from '../../lib/authService'
 
-const Login = ({ msalConfig }) => {
+const Login = () => {
   useEffect(() => {
     async function handler () {
-      await signIn(msalConfig)
+      await signIn()
     }
 
     handler()

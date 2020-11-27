@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
-import { forgotPassword } from '../../src/actions/authenticate'
+import { forgotPassword } from '../../lib/authService'
 
-const ForgotPassword = ({ msalForgotPasswordConfig }) => {
+const ForgotPassword = () => {
   useEffect(() => {
     async function handler () {
-      await forgotPassword(msalForgotPasswordConfig)
+      await forgotPassword()
     }
 
     handler()

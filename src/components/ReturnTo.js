@@ -4,7 +4,8 @@ import { setReturnUrl } from 'actions/returnUrl'
 
 class ReturnTo extends Component {
   componentDidMount () {
-    const { setReturnUrl, parentPath } = this.props
+    let { setReturnUrl, parentPath } = this.props
+    if (parentPath === '/logged-out') parentPath = '/'
     setReturnUrl(parentPath)
   }
 
@@ -13,5 +14,4 @@ class ReturnTo extends Component {
   }
 };
 
-export { ReturnTo }
 export default connect(null, { setReturnUrl })(ReturnTo)

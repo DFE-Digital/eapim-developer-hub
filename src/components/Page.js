@@ -2,14 +2,15 @@ import React from 'react'
 import { useCookieBanner } from 'hooks'
 import Header from './Header'
 import PhaseBanner from './PhaseBanner'
-import Banner from './Banner'
+import AuthNavigation from './AuthNavigation'
+import Breadcrumbs from './Breadcrumbs'
 import Footer from './Footer'
 import CookieBanner from './CookieBanner'
 import ReturnTo from './ReturnTo'
 import Sidebar from './Sidebar'
 import ApplicationSidebar from './ApplicationSidebar'
 
-const Page = ({ children, router, title, sidebarContent, sidebarData, layout = 'full', back = false }) => {
+const Page = ({ children, router, title, sidebarContent, sidebarData, layout = 'full', back = false, error = false }) => {
   const { siteLoaded, bannerCookie } = useCookieBanner()
 
   let template = (
@@ -50,7 +51,10 @@ const Page = ({ children, router, title, sidebarContent, sidebarData, layout = '
       <PhaseBanner />
       <ReturnTo parentPath={router.asPath} />
       <div className='govuk-width-container'>
-        <Banner router={router} back={back} />
+        <div className='govuk-width-container service-banner'>
+          {!error && <Breadcrumbs router={router} back={back} />}
+          <AuthNavigation />
+        </div>
         {template}
       </div>
       <Footer />

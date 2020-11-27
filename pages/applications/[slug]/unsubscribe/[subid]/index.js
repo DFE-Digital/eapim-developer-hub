@@ -1,5 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import ErrorPage from 'components/ErrorPage'
 import Page from 'components/Page'
 
@@ -84,12 +83,6 @@ Unsubscribe.getInitialProps = async ({ req, res, query }) => {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user
-  }
-}
-
 Unsubscribe.displayName = 'Would you unsubscribe'
 
-export default connect(mapStateToProps)(Unsubscribe)
+export default Unsubscribe

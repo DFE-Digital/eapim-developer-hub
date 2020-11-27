@@ -1,14 +1,13 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { useAuth } from 'context'
 
-const AuthNavigation = ({ user }) => {
-  const userEmail = user.data && user.data.User && user.data.User.idToken['email']
-  const userName = user.data && user.data.User && `${user.data.User.idToken.given_name} ${user.data.User.idToken.family_name}`
+const AuthNavigation = () => {
+  const { user } = useAuth()
 
   return (
     <div className='govuk-width-container auth-navigation'>
       <ul className='govuk-list govuk-!-margin-top-3'>
-        {!userEmail && (
+        {!user.getToken() && (
           <>
             <li>
               <a href='/auth/register' className='govuk-link'>Create an account</a>
@@ -18,10 +17,10 @@ const AuthNavigation = ({ user }) => {
             </li>
           </>
         )}
-        {userEmail && (
+        {user.getToken() && (
           <>
             <li>
-              <a href='/profile' className='govuk-link'>{userName}</a>
+              <a href='/profile' className='govuk-link'>{user.name()}</a>
             </li>
             <li>
               <a href='/auth/logout'className='govuk-link'>Sign out</a>
@@ -33,10 +32,4 @@ const AuthNavigation = ({ user }) => {
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user
-  }
-}
-
-export default connect(mapStateToProps)(AuthNavigation)
+export default AuthNavigation

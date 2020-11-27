@@ -5,24 +5,24 @@ import Router from 'next/router'
 import { deleteApplication } from 'actions/application'
 import ErrorPage from 'components/ErrorPage'
 import Page from 'components/Page'
-
+import { useAuth } from 'context'
 import { getApplication } from '../../../lib/applicationService'
 import getInitialPropsErrorHandler from '../../../lib/getInitialPropsErrorHandler'
 
-const ApplicationDeleteConfirm = ({ user, application, router, errorCode, deleteApplication }) => {
+const ApplicationDeleteConfirm = ({ application, router, errorCode, deleteApplication }) => {
   if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
+
+  const { user } = useAuth()
 
   const [deleting, setDeleting] = useState(false)
 
   const deleteConfirm = async () => {
     setDeleting(true)
 
-    const { data } = user
-
     const body = {
-      userName: `${data.User.idToken.given_name} ${data.User.idToken.family_name}`,
-      userEmail: data.User.idToken['email'],
-      userID: data.User.accountIdentifier,
+      userName: user.name(),
+      userEmail: user.email(),
+      userID: user.getToken().accountIdentifier,
       applicationId: application.applicationId
     }
 
@@ -76,12 +76,6 @@ ApplicationDeleteConfirm.getInitialProps = async ({ res, query }) => {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user
-  }
-}
-
 ApplicationDeleteConfirm.displayName = 'Application Delete Confirm'
 
-export default connect(mapStateToProps, { deleteApplication })(ApplicationDeleteConfirm)
+export default connect(null, { deleteApplication })(ApplicationDeleteConfirm)

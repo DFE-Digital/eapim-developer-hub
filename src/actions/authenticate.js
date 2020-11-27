@@ -14,6 +14,11 @@ export const signIn = async (msalConfig) => {
   myMSALObj.loginRedirect(loginRequest)
 }
 
+export const signOut = async (msalConfig) => {
+  const myMSALObj = new Msal.UserAgentApplication(msalConfig)
+  myMSALObj.logout()
+}
+
 export const signInRedeem = async (msalConfig, idTokenHint) => {
   const myMSALObj = new Msal.UserAgentApplication(msalConfig)
   myMSALObj.loginRedirect({ ...loginRequest, extraQueryParameters: { id_token_hint: idTokenHint } })
@@ -50,12 +55,6 @@ export const signInToken = (user) => async dispatch => {
   } else {
     dispatch({ type: RECEIVE_SIGNIN, payload: { isAuthed: false } })
   }
-}
-
-export const signOut = async (msalConfig) => {
-  window.localStorage.removeItem('persist:root')
-  const myMSALObj = new Msal.UserAgentApplication(msalConfig)
-  myMSALObj.logout()
 }
 
 export const clearError = () => async dispatch => {

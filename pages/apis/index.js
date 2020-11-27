@@ -1,5 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import Content from '../../content.json'
 import ErrorPage from 'components/ErrorPage'
 import Page from 'components/Page'
@@ -9,16 +8,13 @@ import getInitialPropsErrorHandler from '../../lib/getInitialPropsErrorHandler'
 
 const page = 'APIs'
 
-const Apis = ({ user, apis, router, errorCode }) => {
+const Apis = ({ apis, router, errorCode }) => {
   if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
-
-  let isLoggedIn = false
-  if (user.data && user.data.isAuthed) isLoggedIn = true
 
   const apiList = apis.map((api, i) => {
     return (
       <tr className='govuk-table__row' key={i}>
-        <th scope='row' className={`govuk-table__header ${(api.requiresAuth && !isLoggedIn) ? ' lock' : ''}`}>
+        <th scope='row' className='govuk-table__header'>
           <a href={`/apis/${api.name}`}>{api.properties.displayName}</a>
         </th>
         <td className='govuk-table__cell govuk-table__cell--numeric'>
@@ -53,12 +49,6 @@ Apis.getInitialProps = async ({ res }) => {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user
-  }
-}
-
 Apis.displayName = 'APIs listing'
 
-export default connect(mapStateToProps)(Apis)
+export default Apis

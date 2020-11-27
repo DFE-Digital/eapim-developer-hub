@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
 import * as Msal from 'msal'
 import Content from '../content.json'
-import { signInToken } from '../src/actions/authenticate'
-import { b2cPolicies } from '../src/auth/config'
+import { b2cPolicies, config } from '../lib/authService'
 import Page from 'components/Page'
+import { useAuth } from 'context'
 
 const page = 'Profile'
 
-const Profile = ({ user, router, msalEditProfileConfig }) => {
+const Profile = ({ router }) => {
+  const { user, setToken } = useAuth()
+
   useEffect(() => {
-    const myMSALObj = new Msal.UserAgentApplication(msalEditProfileConfig)
+    const myMSALObj = new Msal.UserAgentApplication(config.editProfile)
 
     myMSALObj.handleRedirectCallback((error, response) => {
       // Error handling
@@ -19,7 +20,7 @@ const Profile = ({ user, router, msalEditProfileConfig }) => {
 
         // user cancelled action
         if (error.errorMessage.indexOf('AADB2C90091') > -1) {
-          return router.push('/profile')
+          return router.replace('/profile')
         }
 
         // Check for forgot password error
@@ -31,10 +32,7 @@ const Profile = ({ user, router, msalEditProfileConfig }) => {
         if (response.tokenType === 'id_token' && response.idToken.claims['acr'] === b2cPolicies.names.editProfile) {
           console.log('id_token acquired at: ' + new Date().toString())
           const account = myMSALObj.getAccount()
-          console.log(account)
-
-          this.props.signInToken(account)
-          // myMSALObj.loginRedirect(this.props.msalConfig)
+          setToken(account)
         } else {
           console.log('Token type is: ' + response.tokenType)
         }
@@ -42,32 +40,23 @@ const Profile = ({ user, router, msalEditProfileConfig }) => {
     })
   }, [])
 
-  const { data } = user
-
-  if (data && !data.User) return null
-
   return (
     <Page title={page} router={router}>
       <h1 className='govuk-heading-xl'>{Content[page].Page}</h1>
-
-      {data && data.User && (
-        <>
-          <table className='govuk-table'>
-            <caption className='govuk-table__caption govuk-heading-m'>{Content[page].Content.AccountDetails.Heading}</caption>
-            <tbody className='govuk-table__body'>
-              <tr className='govuk-table__row'>
-                <th scope='row' className='govuk-table__header'>Name</th>
-                <td className='govuk-table__cell'>{data.User.idToken.given_name} {data.User.idToken.family_name}</td>
-              </tr>
-              <tr className='govuk-table__row'>
-                <th scope='row' className='govuk-table__header'>Email address</th>
-                <td className='govuk-table__cell'>{data.User.idToken['email']}</td>
-              </tr>
-            </tbody>
-          </table>
-          <a href='/auth/edit-profile' className='govuk-button'>{Content[page].Content.AccountDetails.Button}</a>
-        </>
-      )}
+      <table className='govuk-table'>
+        <caption className='govuk-table__caption govuk-heading-m'>{Content[page].Content.AccountDetails.Heading}</caption>
+        <tbody className='govuk-table__body'>
+          <tr className='govuk-table__row'>
+            <th scope='row' className='govuk-table__header'>Name</th>
+            <td className='govuk-table__cell'>{user.name()}</td>
+          </tr>
+          <tr className='govuk-table__row'>
+            <th scope='row' className='govuk-table__header'>Email address</th>
+            <td className='govuk-table__cell'>{user.email()}</td>
+          </tr>
+        </tbody>
+      </table>
+      <a href='/auth/edit-profile' className='govuk-button'>{Content[page].Content.AccountDetails.Button}</a>
 
       {/* <h2 className='govuk-heading-l govuk-!-margin-top-9'>{Content[page].Content.ChangePassword.Heading}</h2>
       <a href="/auth/change-password" className='govuk-button govuk-button--default'>{Content[page].Content.ChangePassword.Button}</a> */}
@@ -79,12 +68,6 @@ const Profile = ({ user, router, msalEditProfileConfig }) => {
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user
-  }
-}
-
 Profile.displayName = page
 
-export default connect(mapStateToProps, { signInToken })(Profile)
+export default Profile

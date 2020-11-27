@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { editProfile } from '../../src/actions/authenticate'
+import { editProfile } from '../../lib/authService'
 
-const EditProfile = ({ msalEditProfileConfig }) => {
+const EditProfile = () => {
   useEffect(() => {
     async function handler () {
-      await editProfile(msalEditProfileConfig)
+      await editProfile()
     }
 
     handler()

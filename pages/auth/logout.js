@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react'
-import { signOut } from '../../src/actions/authenticate'
+import { useAuth } from 'context'
 
-const Logout = ({ msalConfig }) => {
+const Logout = () => {
+  const { logout } = useAuth()
+
   useEffect(() => {
-    async function handler () {
-      await signOut(msalConfig)
-    }
-
-    handler()
+    logout()
   })
 
   return (

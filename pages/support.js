@@ -1,8 +1,8 @@
-import React, { useContext, useState, useEffect, useRef } from 'react'
-import { connect } from 'react-redux'
+import React, { useState, useEffect, useRef } from 'react'
 import Content from '../content.json'
 import ContentBuilder from 'components/ContentBuilder'
 import Page from 'components/Page'
+import { useAuth } from 'context'
 
 import ValidationMessages from 'components/forms/validation-messages'
 import Radio from 'components/form/radio'
@@ -16,12 +16,11 @@ import { template } from '../emails/support'
 import * as validation from 'utils/validation'
 
 import { getApis } from '../lib/apiServices'
-import AuthContext from '../src/auth/context'
 
 const page = 'Support'
 
-const Support = ({ apis, router, user }) => {
-  const context = useContext(AuthContext)
+const Support = ({ apis, router }) => {
+  const { user } = useAuth()
 
   const formRef = useRef()
   const fullnameRef = useRef()
@@ -112,15 +111,10 @@ const Support = ({ apis, router, user }) => {
     }
   }
 
-  const userEmail = user.data && user.data.User && user.data.User.idToken['email']
-  const userName = user.data && user.data.User && `${user.data.User.idToken.given_name} ${user.data.User.idToken.family_name}`
-
   return (
     <Page router={router} layout='three-quarters'>
       <h1 className='govuk-heading-xl'>{Content[page].Page}</h1>
       <ContentBuilder sectionNav={false} data={Content[page].Content.Form.Body} />
-
-      <button onClick={() => context.login()}>login</button>
 
       <hr className='govuk-section-break govuk-section-break--l govuk-section-break--visible' />
 
@@ -133,7 +127,7 @@ const Support = ({ apis, router, user }) => {
           name='fullname'
           label='Full name'
           type='text'
-          value={userName}
+          value={user.name()}
           error={errors.fullname}
         />
         <Input
@@ -143,7 +137,7 @@ const Support = ({ apis, router, user }) => {
           type='email'
           label='Email address'
           hint='We only use your email to respond to you.'
-          value={userEmail}
+          value={user.email()}
           error={errors.email}
         />
         <Radio
@@ -222,12 +216,6 @@ Support.getInitialProps = async ({ req, res }) => {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user
-  }
-}
-
 Support.displayName = 'Support'
 
-export default connect(mapStateToProps)(Support)
+export default Support

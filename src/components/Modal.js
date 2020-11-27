@@ -1,7 +1,5 @@
 import { Component } from 'react'
-import { connect } from 'react-redux'
-import * as Msal from 'msal'
-import { signOut } from 'actions/authenticate'
+import { signOut } from '../../lib/authService'
 
 const timer = 60 // seconds
 
@@ -34,9 +32,7 @@ class Modal extends Component {
         if (seconds === 0) {
           clearInterval(this.countdown)
           this.setState({ seconds: timer })
-          await signOut(this.props.msalConfig)
-          const myMSALObj = new Msal.UserAgentApplication(this.props.msalConfig)
-          myMSALObj.logout()
+          await signOut()
           this.props.close()
         }
       }, 1000)
@@ -53,7 +49,7 @@ class Modal extends Component {
                     <span className='govuk-warning-text__icon' aria-hidden='true'>!</span>
                     <strong className='govuk-warning-text__text'>
                       <span className='govuk-warning-text__assistive'>Warning</span>
-                                        You're being timed out due to inactivity.
+                      You're being timed out due to inactivity.
                     </strong>
                   </div>
                 </div>
@@ -68,8 +64,7 @@ class Modal extends Component {
                   <button
                     className='govuk-button govuk-!-margin-bottom-2 govuk-!-margin-top-4'
                     onClick={() => this.closeModal()}
-                  >
-                                    Stay logged in
+                  > Stay logged in
                   </button>
                 </div>
               </div>
@@ -80,11 +75,4 @@ class Modal extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user
-  }
-}
-
-export { Modal }
-export default connect(mapStateToProps)(Modal)
+export default Modal

@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
-import { changePassword } from '../../src/actions/authenticate'
+import { changePassword } from '../../lib/authService'
 
-const ChangePassword = ({ msalChangePasswordConfig }) => {
+const ChangePassword = () => {
   useEffect(() => {
     async function handler () {
-      await changePassword(msalChangePasswordConfig)
+      await changePassword()
     }
 
     handler()

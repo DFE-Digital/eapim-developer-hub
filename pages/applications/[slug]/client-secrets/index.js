@@ -1,6 +1,5 @@
 import moment from 'moment'
 import React from 'react'
-import { connect } from 'react-redux'
 import Content from '../../../../content.json'
 
 import Page from 'components/Page'
@@ -12,7 +11,7 @@ import getInitialPropsErrorHandler from '../../../../lib/getInitialPropsErrorHan
 
 const page = 'Client secrets'
 
-const ApplicationClientSecrets = ({ id, application, router, msalConfig, errorCode }) => {
+const ApplicationClientSecrets = ({ id, application, router, errorCode }) => {
   if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
 
   application.passwordCredentials.sort((a, b) => {
@@ -99,12 +98,6 @@ const ApplicationClientSecrets = ({ id, application, router, msalConfig, errorCo
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user
-  }
-}
-
 ApplicationClientSecrets.getInitialProps = async ({ req, res, query }) => {
   if (req && req.method === 'GET') {
     try {
@@ -127,4 +120,4 @@ ApplicationClientSecrets.getInitialProps = async ({ req, res, query }) => {
 
 ApplicationClientSecrets.displayName = 'Application Client Secrets'
 
-export default connect(mapStateToProps, null)(ApplicationClientSecrets)
+export default ApplicationClientSecrets

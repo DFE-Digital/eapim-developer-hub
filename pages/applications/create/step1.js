@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import Router from 'next/router'
 import Page from 'components/Page'
 import InputWithValidation from 'components/forms/input-with-validation'
 import ValidationMessages from 'components/forms/validation-messages'
@@ -8,9 +7,12 @@ import { saveAppData, cancelApplication } from '../../../src/actions/application
 import { getApplications } from '../../../lib/applicationService'
 import { appNamePattern } from '../../../src/utils/patterns'
 
+import { useAuth } from 'context'
 import { useFocusMain } from 'hooks'
 
-const ApplicationCreateStep1 = ({ user, application, saveAppData, cancelApplication, router }) => {
+const ApplicationCreateStep1 = ({ application, saveAppData, cancelApplication, router }) => {
+  const { user } = useAuth()
+
   const [fields, setFields] = useState({})
   const [errors, setErrors] = useState([])
   // const [fetching, setFetching] = useState(false)
@@ -23,12 +25,12 @@ const ApplicationCreateStep1 = ({ user, application, saveAppData, cancelApplicat
   useEffect(() => {
     const fetchApplications = async () => {
       // setFetching(true)
-      const apps = await getApplications(user.data.User)
+      const apps = await getApplications(user.getToken())
       setApplications(apps)
       // setFetching(false)
     }
 
-    if (user.data && user.data.User) fetchApplications()
+    if (user.getToken()) fetchApplications()
   }, [user])
 
   const handleSubmit = (e) => {
@@ -112,7 +114,7 @@ const ApplicationCreateStep1 = ({ user, application, saveAppData, cancelApplicat
           className='govuk-button govuk-button--secondary'
           onClick={() => {
             cancelApplication()
-            Router.push('/applications')
+            router.push('/applications')
           }}
         >
           Cancel
@@ -122,13 +124,6 @@ const ApplicationCreateStep1 = ({ user, application, saveAppData, cancelApplicat
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-    application: state.application
-  }
-}
-
 ApplicationCreateStep1.displayName = 'Application create name'
 
-export default connect(mapStateToProps, { saveAppData, cancelApplication })(ApplicationCreateStep1)
+export default connect(null, { saveAppData, cancelApplication })(ApplicationCreateStep1)

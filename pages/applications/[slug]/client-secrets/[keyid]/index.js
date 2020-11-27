@@ -1,28 +1,26 @@
 import fetch from 'isomorphic-unfetch'
 import React, { useState } from 'react'
 import moment from 'moment'
-import { connect } from 'react-redux'
-
 import Page from 'components/Page'
 import ErrorPage from 'components/ErrorPage'
 
 import getInitialPropsErrorHandler from '../../../../../lib/getInitialPropsErrorHandler'
 import { getApplication } from '../../../../../lib/applicationService'
 import clipboard from '../../../../../src/utils/clipboard'
+import { useAuth } from 'context'
 
-const ApplicationClientSecretsConfirm = ({ user, id, secret, applicationName, router, errorCode, newClientKey, newClientKeyDisplayName, startDateTime, endDateTime }) => {
+const ApplicationClientSecretsConfirm = ({ id, secret, applicationName, router, errorCode, newClientKey, newClientKeyDisplayName, startDateTime, endDateTime }) => {
   if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
 
-  const [copied, setCopied] = useState(false)
+  const { user } = useAuth()
 
+  const [copied, setCopied] = useState(false)
   const copyToClipboard = (e, element) => {
     e.preventDefault()
 
     const res = clipboard(element)
     if (res) setCopied(true)
   }
-
-  const isLoggedIn = !!((user.data && user.data.isAuthed))
 
   return (
     <Page router={router} back='to application details'>
@@ -59,7 +57,7 @@ const ApplicationClientSecretsConfirm = ({ user, id, secret, applicationName, ro
         </div>
       }
 
-      {!newClientKey && isLoggedIn &&
+      {!newClientKey && user.getToken() &&
         <div className='govuk-grid-column-two-thirds'>
           <h1 className='govuk-heading-xl'>Are you sure you want to regenerate your key?</h1>
 
@@ -79,10 +77,9 @@ const ApplicationClientSecretsConfirm = ({ user, id, secret, applicationName, ro
           </dl>
 
           <form method='POST' action={`/applications/${id}/client-secrets/${secret.keyId}`}>
-            <input type='hidden' name='userName' value={`${user.data.User.idToken.given_name} ${user.data.User.idToken.family_name}`} />
-            <input type='hidden' name='userEmail' value={user.data.User.idToken['email']} />
-            <input type='hidden' name='userID' value={user.data.User.accountIdentifier} />
-            <input type='hidden' name='organization' value={user.data.User.idToken.extension_OrganizationName} />
+            <input type='hidden' name='userName' value={user.name()} />
+            <input type='hidden' name='userEmail' value={user.email()} />
+            <input type='hidden' name='userID' value={user.id()} />
             <input type='hidden' name='applicationId' value={id} />
             <input type='hidden' name='KeyDisplayName' value={secret.displayName} />
             <input type='hidden' name='KeyId' value={secret.keyId} />
@@ -156,12 +153,6 @@ ApplicationClientSecretsConfirm.getInitialProps = async ({ req, res, query }) =>
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user
-  }
-}
-
 ApplicationClientSecretsConfirm.displayName = 'Application client secrets confirm'
 
-export default connect(mapStateToProps)(ApplicationClientSecretsConfirm)
+export default ApplicationClientSecretsConfirm

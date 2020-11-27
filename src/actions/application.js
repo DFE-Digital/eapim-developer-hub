@@ -15,9 +15,10 @@ export const RECEIVED_DELETE_APPLICATION = Symbol('RECEIVED_DELETE_APPLICATION')
 export const getApplications = (user) => async dispatch => {
   const PLATFORM_API_URL = process.env.PLATFORM_API_URL
   const url = `${PLATFORM_API_URL}/GetApplications`
+
   const body = {
-    userName: `${user.idToken.given_name} ${user.idToken.family_name}`,
-    userEmail: user.idToken['email'],
+    userName: `${user.given_name} ${user.family_name}`,
+    userEmail: user.email,
     userID: user.accountIdentifier
   }
 
