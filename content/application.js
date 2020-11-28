@@ -173,8 +173,12 @@ const data = {
       hint: 'This will be the URL that you want to redirect users back to. It must begin with https://'
     },
     errors: {
-      empty: "'Enter your application redirect URL'",
-      invalid: "'URL must contain https://. If you are using localhost, prefix it with http://'"
+      empty: 'Enter your application redirect URL',
+      invalid: 'URL must contain https://. If you are using localhost, prefix it with http://',
+      name: 'Missing application name',
+      description: 'Missing application description',
+      redirectUrl: 'Missing application redirect URL',
+      server: 'Something went wrong with registering your application'
     },
     content: []
   }

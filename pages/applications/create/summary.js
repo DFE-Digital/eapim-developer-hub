@@ -17,9 +17,9 @@ const ApplicationCreateSummary = ({ router }) => {
   let errorSummary = []
 
   useEffect(() => {
-    if (application.name === '') errorSummary.push({ id: 'application-name', message: 'Missing application name' })
-    if (application.description === '') errorSummary.push({ id: 'application-description', message: 'Missing application description' })
-    if (application.redirectUrl === '') errorSummary.push({ id: 'application-redirectUrl', message: 'Missing application redirect URL' })
+    if (application.name === '') errorSummary.push({ id: 'application-name', message: content.errors.name })
+    if (application.description === '') errorSummary.push({ id: 'application-description', message: content.errors.description })
+    if (application.redirectUrl === '') errorSummary.push({ id: 'application-redirectUrl', message: content.errors.redirectUrl })
   }, [])
 
   const createApplication = async () => {
@@ -41,7 +41,7 @@ const ApplicationCreateSummary = ({ router }) => {
       setRegistering(false)
       window.location.href = `/applications/${registration.applicationId}/success`
     } catch (err) {
-      errorSummary = [{ id: 'registration-error', message: 'Something went wrong with registering your application' }]
+      errorSummary = [{ id: 'registration-error', message: content.errors.server }]
       setRegistering(false)
     }
   }
