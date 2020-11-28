@@ -1,18 +1,17 @@
 import React from 'react'
-import Page from 'components/Page'
+import ApplicationPage from 'components/pages/ApplicationPage'
+import { getContent } from '../../content/applicationManagement'
+
+const content = getContent('delete-application').pageSuccess
 
 const ApplicationDeleteSuccess = ({ router }) => {
   return (
-    <Page router={router} layout='two-thirds'>
-      <h1 className='govuk-heading-xl'>Application deleted</h1>
-      <button
-        type='button'
-        className='govuk-button govuk-!-margin-top-6'
-        onClick={() => router.push('/applications')}
-      >
-          Return to applications list
-      </button>
-    </Page>
+    <ApplicationPage title={content.title} router={router} layout='two-thirds'>
+      <h1 className='govuk-heading-xl'>{content.title}</h1>
+      <a role='button' href='/applications' className='govuk-button govuk-!-margin-top-6'>
+        {content.buttons.return}
+      </a>
+    </ApplicationPage>
   )
 }
 

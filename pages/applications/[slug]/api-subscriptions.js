@@ -1,9 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react'
 import ErrorPage from 'components/ErrorPage'
-import Content from '../../../content.json'
+import { getContent } from '../../../content/applicationManagement'
 import ContentBuilder from 'components/ContentBuilder'
 import APISubscriptions from 'components/APISubscriptions'
-import Page from 'components/Page'
+import ApplicationPage from 'components/pages/ApplicationPage'
 
 import getInitialPropsErrorHandler from '../../../lib/getInitialPropsErrorHandler'
 
@@ -11,7 +11,7 @@ import { getApis, getApiTags } from '../../../lib/apiServices'
 import { getApplication } from '../../../lib/applicationService'
 import { getSubscriptions } from '../../../lib/subscriptionService'
 
-const page = 'API subscriptions'
+const content = getContent('api-subscriptions')
 
 const ApplicationApiSubscriptions = ({ apis, application, subscriptions, router, errorCode }) => {
   if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
@@ -30,10 +30,10 @@ const ApplicationApiSubscriptions = ({ apis, application, subscriptions, router,
   const onSubscriptionChange = (subscriptions) => setUpdateSubscriptions(subscriptions)
 
   return (
-    <Page title={page} router={router} sidebarContent={Content.ApplicationManagement} sidebarData={{ type: 'application', application }}>
-      <h1 className='govuk-heading-xl'>{page}</h1>
+    <ApplicationPage title={content.title} router={router} application={application}>
+      <h1 className='govuk-heading-xl'>{content.title}</h1>
 
-      <ContentBuilder sectionNav={false} data={Content.ApplicationManagement[page].Content} />
+      <ContentBuilder sectionNav={false} data={content.content} />
 
       <dl className='govuk-summary-list'>
         <div className='govuk-summary-list__row'>
@@ -41,10 +41,11 @@ const ApplicationApiSubscriptions = ({ apis, application, subscriptions, router,
             Application:
           </dt>
           <dd className='govuk-summary-list__value'>
-            {(application ? application.applicationName : '')}
+            {application.applicationName}
           </dd>
         </div>
       </dl>
+
       <APISubscriptions
         apis={apis}
         applicationId={application.applicationId}
@@ -52,7 +53,7 @@ const ApplicationApiSubscriptions = ({ apis, application, subscriptions, router,
         subscriptions={updateSubscriptions}
         onSubscriptionChange={onSubscriptionChange}
       />
-    </Page>
+    </ApplicationPage>
   )
 }
 

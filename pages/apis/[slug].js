@@ -1,22 +1,18 @@
 import React from 'react'
-import Content from '../../content.json'
-import Page from 'components/Page'
-
+import APIPage from 'components/pages/APIPage'
 import ErrorPage from 'components/ErrorPage'
 import APISummary from 'components/APISummary'
 
 import { getApis, getApiTags, getSummary } from '../../lib/apiServices'
 import getInitialPropsErrorHandler from '../../lib/getInitialPropsErrorHandler'
 
-const parent = 'APIs'
-
 const ApiDetails = ({ api, summary, router, errorCode }) => {
   if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
 
   return (
-    <Page title={parent} router={router} sidebarContent={Content.Apis}>
+    <APIPage title={api.name} router={router} hideTitle>
       <APISummary api={api} summary={summary} />
-    </Page>
+    </APIPage>
   )
 }
 

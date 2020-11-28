@@ -1,14 +1,12 @@
 import React from 'react'
 import DocumentationPage from 'components/DocumentationPage'
 
-const page = 'Authorisation'
-
 const Documentation = ({ router }) => {
   return (
-    <DocumentationPage page={page} router={router} />
+    <DocumentationPage router={router} contentKey='authorisation' />
   )
 }
 
-Documentation.displayName = `${page} (doc)`
+Documentation.displayName = 'Authorisation (doc)'
 
 export default Documentation

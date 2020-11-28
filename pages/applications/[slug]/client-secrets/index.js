@@ -1,15 +1,14 @@
 import moment from 'moment'
 import React from 'react'
-import Content from '../../../../content.json'
-
-import Page from 'components/Page'
+import { getContent } from '../../../../content/applicationManagement'
+import ApplicationPage from 'components/pages/ApplicationPage'
 import ErrorPage from 'components/ErrorPage'
 import ContentBuilder from 'components/ContentBuilder'
 
 import { getApplication } from '../../../../lib/applicationService'
 import getInitialPropsErrorHandler from '../../../../lib/getInitialPropsErrorHandler'
 
-const page = 'Client secrets'
+const content = getContent('client-secrets')
 
 const ApplicationClientSecrets = ({ id, application, router, errorCode }) => {
   if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
@@ -24,14 +23,11 @@ const ApplicationClientSecrets = ({ id, application, router, errorCode }) => {
   const secondary = application.passwordCredentials[1]
 
   return (
-    <Page title={page} router={router} sidebarContent={Content.ApplicationManagement} sidebarData={{ type: 'application', application }}>
-      <h1 className='govuk-heading-xl'>{page}</h1>
-      <p className='govuk-body'>
-        The client secret is a secret known only to the application and the authorisation server. You must add the client secret to the request header whenever you make a request to an API.
-      </p>
-      <p className='govuk-body'>
-        Primary and secondary secrets are provided in case you need to switch between keys.
-      </p>
+    <ApplicationPage title={content.title} router={router} application={application}>
+      <h1 className='govuk-heading-xl'>{content.title}</h1>
+
+      <ContentBuilder sectionNav={false} data={content.intro} />
+
       <dl className='govuk-summary-list'>
         <div className='govuk-summary-list__row'>
           <dt className='govuk-summary-list__key'>
@@ -46,10 +42,10 @@ const ApplicationClientSecrets = ({ id, application, router, errorCode }) => {
       <table className='govuk-table'>
         <thead className='govuk-table__head'>
           <tr className='govuk-table__row'>
-            <th scope='col' className='govuk-table__header'>Primary Secret</th>
-            <th scope='col' className='govuk-table__header'>Created</th>
-            <th scope='col' className='govuk-table__header'>Expires</th>
-            <th scope='col' className='govuk-table__header govuk-table__header--numeric'>Action</th>
+            <th scope='col' className='govuk-table__header'>{content.tableHeadings.primarySecret}</th>
+            <th scope='col' className='govuk-table__header'>{content.tableHeadings.created}</th>
+            <th scope='col' className='govuk-table__header'>{content.tableHeadings.expires}</th>
+            <th scope='col' className='govuk-table__header govuk-table__header--numeric'>{content.tableHeadings.action}</th>
           </tr>
         </thead>
         <tbody className='govuk-table__body'>
@@ -61,7 +57,7 @@ const ApplicationClientSecrets = ({ id, application, router, errorCode }) => {
             <td className='govuk-table__cell middle'>{moment(primary.endDateTime).format('DD MMM YYYY')}</td>
             <td className='govuk-table__cell middle govuk-table__cell--numeric'>
               <a href={`/applications/${id}/client-secrets/${primary.keyId}`} className='govuk-button govuk-!-margin-bottom-0'>
-                Regenerate
+                {content.buttons.regenerate}
               </a>
             </td>
           </tr>
@@ -71,10 +67,10 @@ const ApplicationClientSecrets = ({ id, application, router, errorCode }) => {
       <table className='govuk-table'>
         <thead className='govuk-table__head'>
           <tr className='govuk-table__row'>
-            <th scope='col' className='govuk-table__header'>Secondary Secret</th>
-            <th scope='col' className='govuk-table__header'>Created</th>
-            <th scope='col' className='govuk-table__header'>Expires</th>
-            <th scope='col' className='govuk-table__header govuk-table__header--numeric'>Action</th>
+            <th scope='col' className='govuk-table__header'>{content.tableHeadings.secondarySecret}</th>
+            <th scope='col' className='govuk-table__header'>{content.tableHeadings.created}</th>
+            <th scope='col' className='govuk-table__header'>{content.tableHeadings.expires}</th>
+            <th scope='col' className='govuk-table__header govuk-table__header--numeric'>{content.tableHeadings.action}</th>
           </tr>
         </thead>
         <tbody className='govuk-table__body'>
@@ -86,15 +82,15 @@ const ApplicationClientSecrets = ({ id, application, router, errorCode }) => {
             <td className='govuk-table__cell middle'>{moment(secondary.endDateTime).format('DD MMM YYYY')}</td>
             <td className='govuk-table__cell middle govuk-table__cell--numeric'>
               <a href={`/applications/${id}/client-secrets/${secondary.keyId}`} className='govuk-button govuk-!-margin-bottom-0'>
-                Regenerate
+                {content.buttons.regenerate}
               </a>
             </td>
           </tr>
         </tbody>
       </table>
 
-      <ContentBuilder sectionNav={false} data={Content.ApplicationManagement[page].Content} />
-    </Page>
+      <ContentBuilder sectionNav={false} data={content.content} />
+    </ApplicationPage>
   )
 }
 

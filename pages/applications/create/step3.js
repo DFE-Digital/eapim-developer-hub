@@ -1,11 +1,13 @@
 import React, { useState, useRef } from 'react'
 import Page from 'components/Page'
 import { urlPattern } from '../../../src/utils/patterns'
-
-import ValidationMessages from 'components/form/validation-messages'
+import ErrorSummary from 'components/ErrorSummary'
 import Input from 'components/form/input'
 import * as validation from 'utils/validation'
 import { useApplication } from '../../../providers/ApplicationProvider'
+
+import { getContent } from '../../../content/application'
+const content = getContent('create-step-3')
 
 const ApplicationCreateStep3 = ({ router }) => {
   const context = useApplication()
@@ -29,11 +31,11 @@ const ApplicationCreateStep3 = ({ router }) => {
     const formErrors = {}
 
     if (validation.isEmpty(fields.appRedirectUrl)) {
-      formErrors.appRedirectUrl = 'Enter your application redirect URL'
+      formErrors.appRedirectUrl = content.errors.empty
     }
 
     if (!urlPattern.test(fields.appRedirectUrl)) {
-      formErrors.appRedirectUrl = 'URL must contain https://. If you are using localhost, prefix it with http://'
+      formErrors.appRedirectUrl = content.errors.invalid
     }
 
     return formErrors
@@ -61,33 +63,31 @@ const ApplicationCreateStep3 = ({ router }) => {
   }
 
   return (
-    <Page router={router} layout='two-thirds' back='to what is your applications description'>
-      <ValidationMessages errors={errorSummary} />
+    <Page title={content.title} router={router} layout='two-thirds' back='to what is your applications description'>
+      <ErrorSummary pageTitle={content.title} errors={errorSummary} />
       <form noValidate onSubmit={handleSubmit}>
         <div className='govuk-form-group'>
           <fieldset className='govuk-fieldset'>
             <legend className='govuk-fieldset__legend govuk-fieldset__legend--xl'>
               <h1 className='govuk-fieldset__heading govuk-!-margin-bottom-6'>
-                What is your redirect URL?
+                {content.title}
               </h1>
             </legend>
             <Input
               ref={appRedirectUrlRef}
               id='app-redirect-url'
               name='app-redirect-url'
-              label='Redirect URL'
               type='url'
+              label={content.inputs.label}
               value={context.application.redirectUrl}
               error={errors.appRedirectUrl}
-              hint='This will be the URL that you want to redirect users back to. It must begin with https://'
+              hint={content.inputs.hint}
             />
           </fieldset>
         </div>
 
-        <button type='submit' className='govuk-button govuk-!-margin-right-1'>Continue</button>
-        <button type='button' className='govuk-button govuk-button--secondary' onClick={() => cancel()}>
-          Cancel
-        </button>
+        <button type='submit' className='govuk-button govuk-!-margin-right-1'>{content.buttons.continue}</button>
+        <button type='button' className='govuk-button govuk-button--secondary' onClick={() => cancel()}>{content.buttons.cancel}</button>
       </form>
     </Page>
   )

@@ -1,17 +1,15 @@
 import timezone from 'moment-timezone'
 import React from 'react'
-import { connect } from 'react-redux'
 import Link from 'next/link'
-import Content from '../../../content.json'
-import { clearApplication } from 'actions/application'
+import { getContent } from '../../../content/applicationManagement'
 import ErrorPage from 'components/ErrorPage'
-import Page from 'components/Page'
+import ApplicationPage from 'components/pages/ApplicationPage'
 import { useAuth } from 'context'
 
 import { getApplication } from '../../../lib/applicationService'
 import getInitialPropsErrorHandler from '../../../lib/getInitialPropsErrorHandler'
 
-const page = 'Application details'
+const content = getContent('details')
 
 const ApplicationDetails = ({ application, router, errorCode }) => {
   if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
@@ -19,8 +17,8 @@ const ApplicationDetails = ({ application, router, errorCode }) => {
   const { user } = useAuth()
 
   return (
-    <Page title={page} router={router} sidebarContent={Content.ApplicationManagement} sidebarData={{ type: 'application', application }} requiresAuth>
-      <h1 className='govuk-heading-xl'>{page}</h1>
+    <ApplicationPage title={content.title} router={router} application={application}>
+      <h1 className='govuk-heading-xl'>{content.title}</h1>
 
       <dl className='govuk-summary-list'>
         <div className='govuk-summary-list__row'>
@@ -73,10 +71,10 @@ const ApplicationDetails = ({ application, router, errorCode }) => {
         </div>
       </dl>
 
-      <Link href='/applications/[slug]/api-subscriptions' as={`/applications/${application.applicationId}/api-subscriptions`}>
-        <a className={'govuk-button govuk-button--default govuk-!-margin-top-6'}>Subscribe to APIs</a>
+      <Link href='/applications/[slug]/api-subscriptions' as={`/applications/${application.applicationId}/api-subscriptions`} passHref>
+        <a role='button' className='govuk-button govuk-button--default govuk-!-margin-top-6'>{content.buttons.subscribe}</a>
       </Link>
-    </Page>
+    </ApplicationPage>
   )
 }
 
@@ -96,4 +94,4 @@ ApplicationDetails.getInitialProps = async ({ res, query }) => {
 
 ApplicationDetails.displayName = 'Application details (subscribe to APIs)'
 
-export default connect(null, { clearApplication })(ApplicationDetails)
+export default ApplicationDetails

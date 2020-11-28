@@ -23,7 +23,7 @@ const ErrorPage = ({ statusCode }) => {
   }
 
   return (
-    <Page router={router} error>
+    <Page title={title} router={router} error>
       <h1 className='govuk-heading-xl'>{title}</h1>
       <p className='govuk-body'>{caption}</p>
       <a href='/' className='govuk-body govuk-link govuk-!-margin-top- govuk-!-margin-bottom-0'>Go back to the homepage</a>

@@ -4,20 +4,26 @@ import { useRouter } from 'next/router'
 
 const Sidebar = ({ title, items }) => {
   const router = useRouter()
-  const navItems = Object.keys(items)
 
   return (
     <nav tabIndex='0'>
       {title && <h5 className='govuk-visually-hidden'>{title} navigation</h5>}
       <ul>
-        {navItems.map((item) => {
-          const href = items[item].Url
-          const isActive = router.asPath === href
+        {items.map((item) => {
+          const isActive = router.asPath === item.url
+
+          if (!item.href) {
+            return (
+              <li key={item.title}>
+                <a href={item.url} className={(isActive ? 'active' : '') + (item.className ? item.className : '')}>{item.title}</a>
+              </li>
+            )
+          }
 
           return (
-            <li key={item}>
-              <Link as={href} href={href}>
-                <a href={href} className={isActive ? 'active' : ''}>{items[item].Page}</a>
+            <li key={item.title}>
+              <Link as={item.url} href={item.href} passHref>
+                <a href={item.url} className={(isActive ? 'active' : '') + (item.className ? item.className : '')}>{item.title}</a>
               </Link>
             </li>
           )

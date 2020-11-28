@@ -1,19 +1,19 @@
 import React from 'react'
-import Content from '../../content.json'
+import { getContent, sidebar } from '../../content/application'
 import ContentBuilder from 'components/ContentBuilder'
 import Page from 'components/Page'
 
-const page = 'How to develop your application'
+const content = getContent('how-to-develop-your-application')
 
 const ApplicationsHowTo = ({ router }) => {
   return (
-    <Page title={page} router={router} sidebarContent={Content.Applications}>
-      <h1 className='govuk-heading-xl'>{Content.Applications[page].Page}</h1>
-      <ContentBuilder sectionNav={false} data={Content.Applications[page].Content.Body} />
+    <Page title={content.title} router={router} sidebarContent={sidebar()}>
+      <h1 className='govuk-heading-xl'>{content.title}</h1>
+      <ContentBuilder sectionNav={false} data={content.content} />
     </Page>
   )
 }
 
-ApplicationsHowTo.displayName = `Application ${page}`
+ApplicationsHowTo.displayName = `How to developer your application`
 
 export default ApplicationsHowTo

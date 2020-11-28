@@ -1,37 +1,38 @@
-import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
-import Page from 'components/Page'
+import React from 'react'
+import ContentBuilder from 'components/ContentBuilder'
+import ApplicationPage from 'components/pages/ApplicationPage'
+import ErrorPage from 'components/ErrorPage'
+import { getApplication } from '../../../lib/applicationService'
+import getInitialPropsErrorHandler from '../../../lib/getInitialPropsErrorHandler'
 
-import { cancelApplication } from '../../../src/actions/application'
+import { getContent } from '../../../content/applicationManagement'
+const content = getContent('create-success')
 
-const ApplicationCreateSuccess = ({ selectedApplication, cancelApplication, router }) => {
-  useEffect(() => {
-    async function cancel () {
-      await cancelApplication()
-    }
-    cancel()
-  }, [])
-
-  const viewCredentials = () => {
-    router.push('/applications/[slug]/credentials', `/applications/${selectedApplication.applicationId}/credentials`)
-  }
+const ApplicationCreateSuccess = ({ application, router, errorCode }) => {
+  if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
 
   return (
-    <Page router={router}>
-      <h1 className='govuk-heading-xl'>Application added</h1>
-      <h2 className='govuk-heading-l'>You added {selectedApplication.applicationName}</h2>
-      <p className='govuk-body'>You can now use its credentials to test with APIs.</p>
-      <button type='button' className='govuk-button' onClick={() => viewCredentials()}>View application credentials</button>
-    </Page>
+    <ApplicationPage title={content.title} router={router}>
+      <h1 className='govuk-heading-xl'>{content.title}</h1>
+      <h2 className='govuk-heading-l'>You added {application.applicationName}</h2>
+      <ContentBuilder sectionNav={false} data={content.content} />
+      <a role='button' className='govuk-button' href={`/applications/${application.applicationId}/credentials`}>{content.buttons.view}</a>
+    </ApplicationPage>
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    selectedApplication: state.application.selectedApplication
+ApplicationCreateSuccess.getInitialProps = async ({ res, query }) => {
+  try {
+    const application = await getApplication(query.slug)
+    if (!application) return getInitialPropsErrorHandler(res, 404)
+    return {
+      application
+    }
+  } catch (error) {
+    return getInitialPropsErrorHandler(res, 500, error)
   }
 }
 
 ApplicationCreateSuccess.displayName = 'Application added success'
 
-export default connect(mapStateToProps, { cancelApplication })(ApplicationCreateSuccess)
+export default ApplicationCreateSuccess

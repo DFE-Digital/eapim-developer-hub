@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
 import { useCookieBanner } from 'hooks'
 import Header from './Header'
 import PhaseBanner from './PhaseBanner'
@@ -8,9 +9,8 @@ import Footer from './Footer'
 import CookieBanner from './CookieBanner'
 import ReturnTo from './ReturnTo'
 import Sidebar from './Sidebar'
-import ApplicationSidebar from './ApplicationSidebar'
 
-const Page = ({ children, router, title, sidebarContent, sidebarData, layout = 'full', back = false, error = false }) => {
+const Page = ({ children, router, title, parentTitle, sidebarContent, layout = 'full', back = false, error = false }) => {
   const { siteLoaded, bannerCookie } = useCookieBanner()
 
   let template = (
@@ -23,14 +23,12 @@ const Page = ({ children, router, title, sidebarContent, sidebarData, layout = '
     </main>
   )
 
-  const sidebarComponent = (sidebarData) ? <ApplicationSidebar title={title} items={sidebarContent} data={sidebarData} /> : <Sidebar title={title} items={sidebarContent} />
-
   if (sidebarContent) {
     template = (
       <section className='mainWrapper govuk-!-margin-top-7'>
         <aside className='sideBar'>
           <div className='sideBar_content'>
-            {sidebarComponent}
+            <Sidebar title={parentTitle} items={sidebarContent} />
           </div>
         </aside>
         <main className='govuk-main-wrapper govuk-!-padding-top-0 mainContent' id='main-content' role='main'>
@@ -58,6 +56,9 @@ const Page = ({ children, router, title, sidebarContent, sidebarData, layout = '
         {template}
       </div>
       <Footer />
+      <Helmet>
+        <title>{title} | DfE Developer Hub</title>
+      </Helmet>
     </>
   )
 }

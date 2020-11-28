@@ -1,12 +1,9 @@
 import React from 'react'
-import Content from '../../content.json'
 import ErrorPage from 'components/ErrorPage'
-import Page from 'components/Page'
+import APIPage from 'components/pages/APIPage'
 
 import { getApis } from '../../lib/apiServices'
 import getInitialPropsErrorHandler from '../../lib/getInitialPropsErrorHandler'
-
-const page = 'APIs'
 
 const Apis = ({ apis, router, errorCode }) => {
   if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
@@ -27,14 +24,13 @@ const Apis = ({ apis, router, errorCode }) => {
   })
 
   return (
-    <Page title={page} router={router} sidebarContent={Content.Apis}>
-      <h1 className='govuk-heading-xl'>{Content.Apis[page].Page}</h1>
+    <APIPage router={router}>
       <table className='govuk-table'>
         <tbody className='govuk-table__body'>
           {apiList}
         </tbody>
       </table>
-    </Page>
+    </APIPage>
   )
 }
 

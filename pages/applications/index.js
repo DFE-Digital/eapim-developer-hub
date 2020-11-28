@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { connect } from 'react-redux'
-import Content from '../../content.json'
+import { getContent, sidebar } from '../../content/application'
 import { Loading } from 'components/Loading'
 import AuthWarning from 'components/AuthWarning'
 import Page from 'components/Page'
 import { useAuth } from 'context'
 
-import { selectApplication } from '../../src/actions/application'
 import { getApplications } from '../../lib/applicationService'
 
-const page = 'Applications'
+const content = getContent('applications')
 
-const Applications = ({ selectApplication, router, msalRegisterConfig }) => {
+const Applications = ({ router }) => {
   const { user } = useAuth()
 
   const [fetching, setFetching] = useState(false)
@@ -28,23 +26,17 @@ const Applications = ({ selectApplication, router, msalRegisterConfig }) => {
     if (user.getToken()) fetchApplications()
   }, [user])
 
-  const selectApp = (e, app) => {
-    e.preventDefault()
-    selectApplication(app)
-    router.push('/applications/[slug]/details', `/applications/${app.applicationId}/details`)
-  }
-
   return (
-    <Page title={page} router={router} sidebarContent={Content.Applications}>
-      <h1 className='govuk-heading-xl'>{Content.Applications[page].Page}</h1>
+    <Page title={content.title} router={router} sidebarContent={sidebar()}>
+      <h1 className='govuk-heading-xl'>{content.title}</h1>
 
-      {!user.getToken() && <AuthWarning warning={Content.Applications[page].Content.Auth.Warning} />}
       {fetching && <Loading />}
+      {!user.getToken() && <AuthWarning warning={content.authWarning} />}
 
       {applications.length === 0 && !fetching && user.getToken() && (
         <>
-          <p className='govuk-body'>{Content.Applications[page].Content.NoApplications.Copy}</p>
-          <button type='button' className='govuk-button govuk-!-margin-top-6' onClick={() => router.push('/applications/create/step1')}>{Content.Applications[page].Content.NoApplications.Button}</button>
+          <p className='govuk-body'>{content.empty}</p>
+          <button type='button' className='govuk-button govuk-!-margin-top-6' onClick={() => router.push('/applications/create/step1')}>{content.buttons.start}</button>
         </>
       )}
       {applications.length > 0 && !fetching && user.getToken() && (
@@ -52,9 +44,7 @@ const Applications = ({ selectApplication, router, msalRegisterConfig }) => {
           <table className='govuk-table'>
             <thead className='govuk-table__head'>
               <tr className='govuk-table__row'>
-                {Content.Applications[page].Content.tableHeadings.map((th, i) => {
-                  return <th key={i} scope='col' className='govuk-table__header'>{th.Heading}</th>
-                })}
+                <th scope='col' className='govuk-table__header'>{content.title}</th>
               </tr>
             </thead>
             <tbody className='govuk-table__body'>
@@ -62,7 +52,7 @@ const Applications = ({ selectApplication, router, msalRegisterConfig }) => {
                 return (
                   <tr className='govuk-table__row' key={i}>
                     <th scope='row' className={`govuk-table__header`}>
-                      <a href='#' onClick={(e) => selectApp(e, app)}>{app.applicationName}</a>
+                      <a href={`/applications/${app.applicationId}/details`}>{app.applicationName}</a>
                     </th>
                   </tr>
                 )
@@ -70,7 +60,9 @@ const Applications = ({ selectApplication, router, msalRegisterConfig }) => {
             </tbody>
           </table>
           {applications.length < 5 && (
-            <button type='button' className='govuk-button govuk-!-margin-top-6' onClick={() => router.push('/applications/create/step1')}>Add new application</button>
+            <button type='button' className='govuk-button govuk-!-margin-top-6' onClick={() => router.push('/applications/create/step1')}>
+              {content.buttons.addNew}
+            </button>
           )}
         </>
       )}
@@ -80,4 +72,4 @@ const Applications = ({ selectApplication, router, msalRegisterConfig }) => {
 
 Applications.displayName = 'Applications listing'
 
-export default connect(null, { selectApplication })(Applications)
+export default Applications

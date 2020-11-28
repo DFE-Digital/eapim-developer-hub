@@ -1,192 +1,160 @@
 import React, { useState, useRef } from 'react'
-import { connect } from 'react-redux'
-import Content from '../../../content.json'
+import { getContent } from '../../../content/applicationManagement'
 import ContentBuilder from 'components/ContentBuilder'
-import { getApplications, updateApplication } from 'actions/application'
-import ValidationMessages from 'components/form/validation-messages'
-import Input from 'components/form/input'
+import ErrorSummary from 'components/ErrorSummary'
 import ErrorPage from 'components/ErrorPage'
-import Page from 'components/Page'
-import { useAuth } from 'context'
+import ApplicationPage from 'components/pages/ApplicationPage'
 
-import { getApplication } from '../../../lib/applicationService'
+import { getApplication, updateApplication } from '../../../lib/applicationService'
 import getInitialPropsErrorHandler from '../../../lib/getInitialPropsErrorHandler'
 
-import { isEmpty, isValidURL } from 'utils/validation'
+import Loader from 'components/Loader'
+import RedirectURL from 'components/RedirectURL'
+import RedirectURLAdd from 'components/RedirectURLAdd'
+import { useAuth } from 'context'
 
-const page = 'Redirect URLs'
+import * as validation from '../../../src/utils/validation'
 
-const EMPTY_MESSAGE = 'Enter a redirect URL'
-const INVALID_MESSAGE = 'Invalid URL. Redirect URL must contain https:// and be a valid URL. Localhost domains are allowed.'
-const DUPLICATE_MESSAGE = 'Duplicate redirect URL'
+const content = getContent('redirect-urls')
 
-const ApplicationRedirectUrls = ({ application, getApplications, updateApplication, router, errorCode }) => {
-  const { user } = useAuth()
-
-  const [newRedirectUrl, setNewRedirectUrl] = useState('')
-  const [addingNewRedirectUrl, setAddingNewRedirectUrl] = useState(false)
-  const [redirectUrlToChange, setRedirectUrlToChange] = useState('')
-  const [updateRedirectUrlValue, setUpdateRedirectUrlValue] = useState('')
-  const [errors, setErrors] = useState([])
-
-  const appRedirectUrl = useRef()
-  const changeAppRedirectUrl = useRef()
-
-  const changeRedirectUrl = (e, redirectUri) => {
-    e.preventDefault()
-    setRedirectUrlToChange(redirectUri)
-    setUpdateRedirectUrlValue(redirectUri)
-  }
-
-  const updateRedirectUrl = (e) => {
-    setUpdateRedirectUrlValue(e.target.value)
-  }
-
-  const cancelRedirectUrl = (e) => {
-    e.preventDefault()
-    setRedirectUrlToChange('')
-    setErrors([])
-  }
-
-  const saveRedirectUrl = async (e) => {
-    e.preventDefault()
-
-    if (isEmpty(changeAppRedirectUrl.current.value)) {
-      setErrors([{ id: 'change-app-redirect-url', message: EMPTY_MESSAGE }])
-      return false
-    }
-
-    if (!isValidURL(changeAppRedirectUrl.current.value)) {
-      setErrors([{ id: 'change-app-redirect-url', message: INVALID_MESSAGE }])
-      return false
-    }
-
-    if (application.web.redirectUris.indexOf(updateRedirectUrlValue) > -1) {
-      setErrors([{ id: 'change-app-redirect-url', message: DUPLICATE_MESSAGE }])
-      return false
-    }
-
-    const modifiedArr = application.web.redirectUris.map(url => url === redirectUrlToChange ? updateRedirectUrlValue : url)
-    application.web.redirectUris = modifiedArr
-
-    const body = {
-      userName: user.name(),
-      userEmail: user.email(),
-      userID: user.id(),
-      applicationId: application.applicationId,
-      description: application.description,
-      web: {
-        redirectUris: application.web.redirectUris
-      }
-    }
-
-    const updateApp = await updateApplication(body)
-
-    if (updateApp) {
-      console.log('Successfully Updated!')
-      setRedirectUrlToChange('')
-      setErrors([])
-      getApplications(user.getToken())
-    }
-  }
-
-  const addNewRedirectUrl = () => {
-    setAddingNewRedirectUrl(true)
-  }
-
-  const changeNewRedirectUrl = (e) => {
-    setNewRedirectUrl(e.target.value)
-  }
-
-  const cancelNewRedirectUrl = (e) => {
-    e.preventDefault()
-    setAddingNewRedirectUrl(false)
-    setNewRedirectUrl('')
-    setErrors([])
-  }
-
-  const removeRedirectUrl = async (e, redirectUri) => {
-    e.preventDefault()
-    application.web.redirectUris = application.web.redirectUris.filter(e => e !== redirectUri)
-
-    setErrors([])
-    setAddingNewRedirectUrl('')
-    setNewRedirectUrl('')
-    setRedirectUrlToChange('')
-    setUpdateRedirectUrlValue('')
-
-    const body = {
-      userName: user.name(),
-      userEmail: user.email(),
-      userID: user.id(),
-      applicationId: application.applicationId,
-      description: application.description,
-      web: {
-        redirectUris: application.web.redirectUris
-      }
-    }
-
-    const updateApp = await updateApplication(body)
-
-    if (updateApp) {
-      console.log('Successfully Removed!')
-      getApplications(user.getToken())
-    }
-  }
-
-  const saveNewRedirectUrl = async (e) => {
-    e.preventDefault()
-
-    if (isEmpty(appRedirectUrl.current.value)) {
-      setErrors([{ id: 'app-redirect-url', message: EMPTY_MESSAGE }])
-      return false
-    }
-
-    if (!isValidURL(appRedirectUrl.current.value)) {
-      setErrors([{ id: 'app-redirect-url', message: INVALID_MESSAGE }])
-      return false
-    }
-
-    if (application.web.redirectUris.indexOf(newRedirectUrl) > -1) {
-      setErrors([{ id: 'app-redirect-url', message: DUPLICATE_MESSAGE }])
-      return false
-    }
-
-    application.web.redirectUris.push(newRedirectUrl)
-
-    setAddingNewRedirectUrl(false)
-    setNewRedirectUrl('')
-    setErrors([])
-
-    const body = {
-      userName: user.name(),
-      userEmail: user.email(),
-      userID: user.id(),
-      applicationId: application.applicationId,
-      description: application.description,
-      web: {
-        redirectUris: application.web.redirectUris
-      }
-    }
-
-    const updateApp = await updateApplication(body)
-
-    if (updateApp) {
-      console.log('Successfully Added!')
-      getApplications(user.getToken())
-    }
-  }
-
+const ApplicationRedirectUrls = ({ application, router, errorCode }) => {
   if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
 
+  const { user } = useAuth()
+
+  const addRef = useRef()
+  const changeRef = useRef()
+
+  const [errors, setErrors] = useState({})
+  const [errorSummary, setErrorSummary] = useState([])
+
+  const [adding, setAdding] = useState(false)
+  const [changing, setChanging] = useState(null)
+  const [saving, setSaving] = useState(false)
+
+  const validateForm = (value, type) => {
+    let formErrors = {}
+
+    if (validation.isEmpty(value)) {
+      formErrors = { id: 'add-redirect-url', message: content.errors.empty, type }
+    }
+
+    if (!validation.isValidURL(value)) {
+      formErrors = { id: 'add-redirect-url', message: content.errors.invalid, type }
+    }
+
+    if (application.web.redirectUris.indexOf(value) > -1) {
+      formErrors = { id: 'add-redirect-url', message: content.errors.duplicate, type }
+    }
+
+    return formErrors
+  }
+
+  const resetState = () => {
+    setErrors({})
+    setErrorSummary([])
+    setAdding(false)
+    setSaving(false)
+  }
+
+  const onChange = (e, url) => {
+    e.preventDefault()
+    setChanging(url)
+  }
+
+  const onCancel = (e) => {
+    e.preventDefault()
+    resetState()
+  }
+
+  const onSave = async (type, ref, oldUrl) => {
+    setErrors({})
+    setErrorSummary([])
+
+    const formErrors = validateForm(ref.current.value, type)
+
+    if (Object.keys(formErrors).length !== 0) {
+      setErrors(formErrors)
+      setErrorSummary([formErrors])
+      return false
+    }
+
+    setSaving(true)
+
+    const updatedUrls = [...application.web.redirectUris]
+
+    if (type === 'add') {
+      updatedUrls.push(ref.current.value)
+    } else {
+      const index = updatedUrls.indexOf(oldUrl)
+      if (index > -1) updatedUrls[index] = ref.current.value
+    }
+
+    const body = {
+      userName: user.name(),
+      userEmail: user.email(),
+      userID: user.id(),
+      applicationId: application.applicationId,
+      description: application.description,
+      web: {
+        redirectUris: updatedUrls
+      }
+    }
+
+    try {
+      const result = await updateApplication(body)
+
+      if (result) {
+        ref.current.value = ''
+        application.web.redirectUris = updatedUrls
+        resetState()
+      }
+    } catch (error) {
+      console.log(`Error updating application: ${error}`)
+      resetState()
+    }
+  }
+
+  const onRemove = async (url) => {
+    setSaving(true)
+
+    const urls = [...application.web.redirectUris]
+    const updatedUrls = urls.filter(e => e !== url)
+
+    const body = {
+      userName: user.name(),
+      userEmail: user.email(),
+      userID: user.id(),
+      applicationId: application.applicationId,
+      description: application.description,
+      web: {
+        redirectUris: updatedUrls
+      }
+    }
+
+    try {
+      const result = await updateApplication(body)
+
+      if (result) {
+        console.log('Successfully Removed!')
+        application.web.redirectUris = updatedUrls
+        resetState()
+      }
+    } catch (error) {
+      console.log(`Error removing redirect url: ${error}`)
+      resetState()
+    }
+  }
+
   return (
-    <Page title={page} router={router} sidebarContent={Content.ApplicationManagement} sidebarData={{ type: 'application', application }}>
-      <ValidationMessages errors={errors} />
+    <ApplicationPage title={content.title} router={router} application={application}>
+      <ErrorSummary pageTitle={content.title} errors={errorSummary} />
+
       <div className='govuk-grid-row'>
         <div className='govuk-grid-column-full'>
-          <h1 className='govuk-heading-xl'>{page}</h1>
+          <h1 className='govuk-heading-xl'>{content.title}</h1>
 
-          <ContentBuilder sectionNav={false} data={Content.ApplicationManagement[page].Content} />
+          <ContentBuilder sectionNav={false} data={content.content} />
 
           <dl className='govuk-summary-list'>
             <div className='govuk-summary-list__row'>
@@ -200,61 +168,37 @@ const ApplicationRedirectUrls = ({ application, getApplications, updateApplicati
           </dl>
 
           <table className='govuk-table'>
-            <caption className='govuk-table__caption govuk-heading-m'>{page}</caption>
+            <caption className='govuk-table__caption govuk-heading-m'>
+              {content.title}
+              {saving && <Loader style={{ position: 'absolute', right: 0 }} ariaText={content.a11y.saving} />}
+            </caption>
             <tbody className='govuk-table__body'>
-              {application.web.redirectUris.map((redirectUri, i) => {
+              {application.web.redirectUris.map((url, index) => {
                 return (
-                  <tr className='govuk-table__row' key={i}>
-                    {redirectUrlToChange !== redirectUri && <th scope='row' className='govuk-table__header'>{redirectUri}</th>}
-                    {redirectUrlToChange === redirectUri && (
-                      <th scope='row' className='govuk-table__header'>
-                        <Input
-                          inline
-                          required
-                          ref={changeAppRedirectUrl}
-                          name='change-app-redirect-url'
-                          id='change-app-redirect-url'
-                          placeholder='https://www.'
-                          value={updateRedirectUrlValue}
-                          onChange={updateRedirectUrl}
-                          error={errors[0] ? errors[0].message : null}
-                        />
-                      </th>
-                    )}
-                    {redirectUrlToChange !== redirectUri && (
-                      <td className='govuk-table__cell govuk-table__cell--numeric' style={{ minWidth: '145px' }}>
-                        <a role='button' href='#' className='govuk-link govuk-!-margin-right-2' onClick={(e) => changeRedirectUrl(e, redirectUri)}>Change</a>
-                        {application.web.redirectUris.length > 1 && <a role='button' href='#' className='govuk-link' onClick={(e) => removeRedirectUrl(e, redirectUri)}>Remove</a>}
-                      </td>
-                    )}
-                    {redirectUrlToChange === redirectUri && (
-                      <td className='govuk-table__cell govuk-table__cell--numeric' style={{ minWidth: '145px' }}>
-                        <a role='button' href='#' className='govuk-link govuk-!-margin-right-2' onClick={(e) => saveRedirectUrl(e, redirectUri)}>Save</a>
-                        <a role='button' href='#' className='govuk-link' onClick={(e) => cancelRedirectUrl(e)}>Cancel</a>
-                      </td>
-                    )}
+                  <tr className='govuk-table__row' key={url + index}>
+                    <RedirectURL
+                      ref={changeRef}
+                      url={url}
+                      urls={application.web.redirectUris}
+                      changing={changing === url}
+                      onChange={onChange}
+                      onSave={onSave}
+                      onRemove={onRemove}
+                      onCancel={onCancel}
+                      error={errors.type === 'change' ? errors.message : ''}
+                    />
                   </tr>
                 )
               })}
-              {addingNewRedirectUrl && (
+              {adding && (
                 <tr className='govuk-table__row'>
-                  <th scope='row' className='govuk-table__header'>
-                    <Input
-                      inline
-                      required
-                      ref={appRedirectUrl}
-                      name='app-redirect-url'
-                      id='app-redirect-url'
-                      placeholder='https://www.'
-                      value={newRedirectUrl}
-                      onChange={changeNewRedirectUrl}
-                      error={errors[0] ? errors[0].message : null}
-                    />
-                  </th>
-                  <td className='govuk-table__cell govuk-table__cell--numeric' style={{ minWidth: '145px' }}>
-                    <a role='button' href='#' onClick={(e) => saveNewRedirectUrl(e)} className='govuk-link govuk-!-margin-right-2'>Save</a>
-                    <a role='button' href='#' className='govuk-link' onClick={(e) => cancelNewRedirectUrl(e)}>Cancel</a>
-                  </td>
+                  <RedirectURLAdd
+                    ref={addRef}
+                    type='add'
+                    onSave={onSave}
+                    onCancel={onCancel}
+                    error={errors.type === 'add' ? errors.message : ''}
+                  />
                 </tr>
               )}
             </tbody>
@@ -262,16 +206,18 @@ const ApplicationRedirectUrls = ({ application, getApplications, updateApplicati
 
           {application.web.redirectUris.length === 5 && (
             <div className='govuk-inset-text'>
-              This is the maximum number of redirect URLs. To add another, delete one first.
+              {content.messages.maximum}
             </div>
           )}
 
           {application.web.redirectUris.length < 5 && (
-            <button type='button' className='govuk-button' disabled={addingNewRedirectUrl} onClick={() => addNewRedirectUrl()}>Add a redirect url</button>
+            <button type='button' className='govuk-button' disabled={adding} onClick={() => setAdding(!adding)}>
+              {content.buttons.add}
+            </button>
           )}
         </div>
       </div>
-    </Page>
+    </ApplicationPage>
   )
 }
 
@@ -291,4 +237,4 @@ ApplicationRedirectUrls.getInitialProps = async ({ res, query }) => {
 
 ApplicationRedirectUrls.displayName = 'Application Redirect Urls'
 
-export default connect(null, { getApplications, updateApplication })(ApplicationRedirectUrls)
+export default ApplicationRedirectUrls

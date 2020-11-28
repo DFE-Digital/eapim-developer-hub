@@ -1,23 +1,15 @@
 import React from 'react'
-import Content from '../content.json'
 import ContentBuilder from 'components/ContentBuilder'
-import Breadcrumbs from 'components/Breadcrumbs'
+import Page from 'components/Page'
+import { getContent } from '../content/site'
+const content = getContent('support-submitted')
 
-const page = 'Support'
-
-const SupportSubmitted = () => {
+const SupportSubmitted = ({ router }) => {
   return (
-    <div className='govuk-width-container'>
-      <Breadcrumbs items={[{ text: page }]} />
-      <main className='govuk-main-wrapper' id='main-content' role='main'>
-        <div className='govuk-grid-row'>
-          <div className='govuk-grid-column-three-quarters'>
-            <h1 className='govuk-heading-xl'>{Content[page].Content.Submitted.Title}</h1>
-            <ContentBuilder sectionNav={false} data={Content[page].Content.Submitted.Body} />
-          </div>
-        </div>
-      </main>
-    </div>
+    <Page title={content.title} router={router} layout='three-quarters'>
+      <h1 className='govuk-heading-xl'>{content.title}</h1>
+      <ContentBuilder sectionNav={false} data={content.content} />
+    </Page>
   )
 }
 

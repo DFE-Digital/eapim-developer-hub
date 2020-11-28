@@ -1,23 +1,20 @@
 import React, { useState, useEffect, useRef } from 'react'
-import Content from '../content.json'
+import { getContent } from '../content/site'
 import ContentBuilder from 'components/ContentBuilder'
 import Page from 'components/Page'
 import { useAuth } from 'context'
-
-import ValidationMessages from 'components/form/validation-messages'
+import ErrorSummary from 'components/ErrorSummary'
 import Radio from 'components/form/radio'
 import Input from 'components/form/input'
 import Select from 'components/form/select'
 import Textarea from 'components/form/textarea'
-
 import { send } from '../lib/emailService'
 import { template } from '../emails/support'
-
 import * as validation from 'utils/validation'
 
 import { getApis } from '../lib/apiServices'
 
-const page = 'Support'
+const content = getContent('support')
 
 const Support = ({ apis, router }) => {
   const { user } = useAuth()
@@ -64,23 +61,23 @@ const Support = ({ apis, router }) => {
     const formErrors = {}
 
     if (validation.isEmpty(fields.fullname)) {
-      formErrors.fullname = 'Enter your full name'
+      formErrors.fullname = content.errors.name
     }
 
     if (!validation.isEmail(fields.email)) {
-      formErrors.email = 'Enter a valid email address'
+      formErrors.email = content.errors.email
     }
 
     if (validation.isEmpty(fields.reason)) {
-      formErrors.reason = 'Choose an option for your enquiry'
+      formErrors.reason = content.errors.reason
     }
 
     if (fields.api !== undefined && fields.reason === 'issue-with-api' && validation.isEmpty(fields.api)) {
-      formErrors.api = 'Specify the API you are having an issue with'
+      formErrors.api = content.errors.api
     }
 
     if (validation.isEmpty(fields.description)) {
-      formErrors.description = 'Describe the problem you are having'
+      formErrors.description = content.errors.description
     }
 
     return formErrors
@@ -112,20 +109,19 @@ const Support = ({ apis, router }) => {
   }
 
   return (
-    <Page router={router} layout='three-quarters'>
-      <h1 className='govuk-heading-xl'>{Content[page].Page}</h1>
-      <ContentBuilder sectionNav={false} data={Content[page].Content.Form.Body} />
-
+    <Page title={content.title} router={router} layout='three-quarters'>
+      <h1 className='govuk-heading-xl'>{content.title}</h1>
+      <ContentBuilder sectionNav={false} data={content.content} />
       <hr className='govuk-section-break govuk-section-break--l govuk-section-break--visible' />
 
-      <ValidationMessages errors={errorSummary} />
+      <ErrorSummary pageTitle={content.title} errors={errorSummary} />
 
       <form noValidate method='POST' onSubmit={handleSubmit} ref={formRef}>
         <Input
           ref={fullnameRef}
           id='fullname'
           name='fullname'
-          label='Full name'
+          label={content.form.name.label}
           type='text'
           value={user.name()}
           error={errors.fullname}
@@ -135,30 +131,30 @@ const Support = ({ apis, router }) => {
           id='email'
           name='email'
           type='email'
-          label='Email address'
-          hint='We only use your email to respond to you.'
+          label={content.form.email.label}
+          hint={content.form.email.hint}
           value={user.email()}
           error={errors.email}
         />
         <Radio
           id='reason'
           name='reason'
-          legend='What specifically do you need help with?'
+          legend={content.form.reason.label}
           onChange={handleInputChange}
           value={reason}
           error={errors.reason}
           items={[
-            { label: 'General enquiry', value: 'general-enquiry' },
-            { label: 'Issue with website', value: 'issue-with-website' },
-            { label: 'Issue with API - Please specify what API you are having an issue with', value: 'issue-with-api' },
-            { label: 'Other', value: 'other' }
+            { label: content.form.reason.generalEnquiry, value: 'general-enquiry' },
+            { label: content.form.reason.issueWebsite, value: 'issue-with-website' },
+            { label: content.form.reason.issueApi, value: 'issue-with-api' },
+            { label: content.form.reason.other, value: 'other' }
           ]}
         />
         {reason && reason === 'issue-with-api' &&
           <Select
             id='api'
             name='api'
-            label='Which API are you having issues with'
+            label={content.form.reason.issueWebsiteSelect}
             error={errors.api}
             items={[{ label: 'Select an API', value: '' }, ...apis]}
             required={reason === 'issue-with-api'}
@@ -171,14 +167,16 @@ const Support = ({ apis, router }) => {
           ref={descriptionRef}
           id='description'
           name='description'
-          label='What do you need help with?'
-          hint='Please provide as much information as possible. Do not provide any personal information.'
+          label={content.form.description.label}
+          hint={content.form.description.hint}
           maxLength='3000'
           value={description}
           error={errors.description}
           onChange={handleInputChange}
         />
-        <button type='submit' className='govuk-button govuk-!-margin-right-1'>Submit</button>
+        <button type='submit' className='govuk-button govuk-!-margin-right-1'>
+          {content.buttons.submit}
+        </button>
       </form>
     </Page>
   )

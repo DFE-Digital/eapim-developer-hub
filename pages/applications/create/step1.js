@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Page from 'components/Page'
 import { getApplications } from '../../../lib/applicationService'
-
 import { useApplication } from '../../../providers/ApplicationProvider'
 import { useAuth } from 'context'
-
-import ValidationMessages from 'components/form/validation-messages'
+import { getContent } from '../../../content/application'
+import ErrorSummary from 'components/ErrorSummary'
 import Input from 'components/form/input'
 import * as validation from 'utils/validation'
+
+const content = getContent('create-step-1')
 
 const ApplicationCreateStep1 = ({ router }) => {
   const { user } = useAuth()
@@ -42,16 +43,16 @@ const ApplicationCreateStep1 = ({ router }) => {
     const formErrors = {}
 
     if (validation.isEmpty(fields.appName)) {
-      formErrors.appName = 'Enter your application name'
+      formErrors.appName = content.errors.empty
       return formErrors
     }
 
     if (!validation.isLength(fields.appName, { min: 3, max: 50 })) {
-      formErrors.appName = 'Application name must be between 2 and 50 characters and must not contain any special characters'
+      formErrors.appName = content.errors.invalid
     }
 
     if (applications.find(app => app.applicationName === fields.appName)) {
-      formErrors.appName = 'You have already have an application with this name'
+      formErrors.appName = content.errors.duplicate
     }
 
     return formErrors
@@ -79,33 +80,31 @@ const ApplicationCreateStep1 = ({ router }) => {
   }
 
   return (
-    <Page router={router} layout='two-thirds' back='to application listing page'>
-      <ValidationMessages errors={errorSummary} />
+    <Page title={content.title} router={router} layout='two-thirds' back='to application listing page'>
+      <ErrorSummary pageTitle={content.title} errors={errorSummary} />
       <form noValidate onSubmit={handleSubmit}>
         <div className='govuk-form-group'>
           <fieldset className='govuk-fieldset'>
             <legend className='govuk-fieldset__legend govuk-fieldset__legend--xl'>
               <h1 className='govuk-fieldset__heading govuk-!-margin-bottom-6'>
-                What's the name of your application?
+                {content.title}
               </h1>
             </legend>
             <Input
               ref={appNameRef}
               id='app-name'
               name='app-name'
-              label='Application name'
               type='text'
+              label={content.inputs.label}
               value={context.application.name}
               error={errors.appName}
-              hint='Your application name must be between 2 and 50 characters. It can contain alphanumeric characters and spaces. Special characters are not allowed'
+              hint={content.inputs.hint}
             />
           </fieldset>
         </div>
 
-        <button type='submit' className='govuk-button govuk-!-margin-right-1'>Continue</button>
-        <button type='button' className='govuk-button govuk-button--secondary' onClick={() => cancel()}>
-          Cancel
-        </button>
+        <button type='submit' className='govuk-button govuk-!-margin-right-1'>{content.buttons.continue}</button>
+        <button type='button' className='govuk-button govuk-button--secondary' onClick={() => cancel()}>{content.buttons.cancel}</button>
       </form>
     </Page>
   )

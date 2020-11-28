@@ -48,7 +48,7 @@ class DeveloperHub extends App {
             <AuthProvider>
               <ApplicationProvider>
                 <GlobalStyle />
-                <Component {...pageProps} store={store} router={router} />
+                <Component {...pageProps} store={store} router={router} appTitle={title} />
               </ApplicationProvider>
             </AuthProvider>
           </Provider>

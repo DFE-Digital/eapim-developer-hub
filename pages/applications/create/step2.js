@@ -1,9 +1,12 @@
 import React, { useState, useRef } from 'react'
+import { getContent } from '../../../content/application'
 import Page from 'components/Page'
-import ValidationMessages from 'components/form/validation-messages'
-import Textarea from 'components/form/Textarea'
+import ErrorSummary from 'components/ErrorSummary'
+import Textarea from 'components/form/textarea'
 import * as validation from 'utils/validation'
 import { useApplication } from '../../../providers/ApplicationProvider'
+
+const content = getContent('create-step-2')
 
 const ApplicationCreateStep2 = ({ router }) => {
   const context = useApplication()
@@ -27,7 +30,7 @@ const ApplicationCreateStep2 = ({ router }) => {
     const formErrors = {}
 
     if (validation.isEmpty(fields.appDescription)) {
-      formErrors.appDescription = 'Enter your application description'
+      formErrors.appDescription = content.errors.empty
     }
 
     return formErrors
@@ -55,14 +58,14 @@ const ApplicationCreateStep2 = ({ router }) => {
   }
 
   return (
-    <Page router={router} layout='two-thirds' back='to what is your applications name'>
-      <ValidationMessages errors={errorSummary} />
+    <Page title={content.title} router={router} layout='two-thirds' back='to what is your applications name'>
+      <ErrorSummary pageTitle={content.title} errors={errorSummary} />
       <form noValidate onSubmit={handleSubmit}>
         <div className='govuk-form-group'>
           <fieldset className='govuk-fieldset'>
             <legend className='govuk-fieldset__legend govuk-fieldset__legend--xl'>
               <h1 className='govuk-fieldset__heading govuk-!-margin-bottom-6'>
-                What is your application for?
+                {content.title}
               </h1>
             </legend>
             <Textarea
@@ -70,18 +73,16 @@ const ApplicationCreateStep2 = ({ router }) => {
               ref={appDescriptionRef}
               id='app-description'
               name='app-description'
-              label='Application description'
+              label={content.inputs.label}
               value={context.application.description}
               error={errors.appDescription}
-              hint='Please provide as much information as possible. Do not provide any personal information.'
+              hint={content.inputs.hint}
             />
           </fieldset>
         </div>
 
-        <button type='submit' className='govuk-button govuk-!-margin-right-1'>Continue</button>
-        <button type='button' className='govuk-button govuk-button--secondary' onClick={() => cancel()}>
-          Cancel
-        </button>
+        <button type='submit' className='govuk-button govuk-!-margin-right-1'>{content.buttons.continue}</button>
+        <button type='button' className='govuk-button govuk-button--secondary' onClick={() => cancel()}>{content.buttons.cancel}</button>
       </form>
     </Page>
   )

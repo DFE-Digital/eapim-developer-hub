@@ -1,19 +1,19 @@
 import React from 'react'
-import Content from '../../content.json'
+import { getContent, sidebar } from '../../content/application'
 import ContentBuilder from 'components/ContentBuilder'
 import Page from 'components/Page'
 
-const parent = 'Applications'
+const content = getContent('registering-your-application')
 const page = 'Registering your application'
 
 const RegisteringApplications = ({ router }) => {
   return (
-    <Page title={parent} router={router} sidebarContent={Content.Applications}>
-      <h1 className='govuk-heading-xl'>{Content.Applications[page].Page}</h1>
+    <Page title={content.title} router={router} sidebarContent={sidebar()}>
+      <h1 className='govuk-heading-xl'>{content.title}</h1>
 
-      <ContentBuilder sectionNav={false} data={Content.Applications[page].Content.Body} />
+      <ContentBuilder sectionNav={false} data={content.content} />
       <p className='govuk-body'>
-        Go to <a href='/applications' className='govuk-link govuk-!-margin-top-7'>{Content.Applications[page].Content.Button}</a>.
+        Go to <a href='/applications' className='govuk-link govuk-!-margin-top-7'>{content.buttons.register}</a>.
       </p>
     </Page>
   )

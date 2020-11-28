@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Helmet } from 'react-helmet'
 import ReactHtmlParser from 'react-html-parser'
 import Link from 'next/link'
 import Content from '../content.json'
@@ -123,6 +124,9 @@ const Home = ({ accountDeleted }) => {
         </div>
       </main>
       <Footer />
+      <Helmet>
+        <title>Home | DfE Developer Hub</title>
+      </Helmet>
     </>
   )
 }
