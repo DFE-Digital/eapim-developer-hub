@@ -1,85 +1,86 @@
-import React, { useState, useEffect } from 'react'
-import { connect } from 'react-redux'
+import React, { useState, useEffect, useRef } from 'react'
 import Page from 'components/Page'
-import InputWithValidation from 'components/forms/input-with-validation'
-import ValidationMessages from 'components/forms/validation-messages'
-import { saveAppData, cancelApplication } from '../../../src/actions/application'
 import { getApplications } from '../../../lib/applicationService'
-import { appNamePattern } from '../../../src/utils/patterns'
 
+import { useApplication } from '../../../providers/ApplicationProvider'
 import { useAuth } from 'context'
-import { useFocusMain } from 'hooks'
 
-const ApplicationCreateStep1 = ({ application, saveAppData, cancelApplication, router }) => {
+import ValidationMessages from 'components/form/validation-messages'
+import Input from 'components/form/input'
+import * as validation from 'utils/validation'
+
+const ApplicationCreateStep1 = ({ router }) => {
   const { user } = useAuth()
+  const context = useApplication()
 
-  const [fields, setFields] = useState({})
-  const [errors, setErrors] = useState([])
-  // const [fetching, setFetching] = useState(false)
   const [applications, setApplications] = useState([])
+  const [errors, setErrors] = useState({})
+  const [errorSummary, setErrorSummary] = useState([])
 
-  const appName = React.createRef()
-
-  useFocusMain()
+  const appNameRef = useRef('')
 
   useEffect(() => {
     const fetchApplications = async () => {
-      // setFetching(true)
       const apps = await getApplications(user.getToken())
       setApplications(apps)
-      // setFetching(false)
     }
 
     if (user.getToken()) fetchApplications()
   }, [user])
 
+  const cancel = () => {
+    context.clear()
+    router.push('/applications')
+  }
+
+  const createErrorSummary = (formErrors) => {
+    const keys = Object.keys(formErrors)
+    return keys.map(key => ({ id: key, message: formErrors[key] }))
+  }
+
+  const validateForm = (fields) => {
+    const formErrors = {}
+
+    if (validation.isEmpty(fields.appName)) {
+      formErrors.appName = 'Enter your application name'
+      return formErrors
+    }
+
+    if (!validation.isLength(fields.appName, { min: 3, max: 50 })) {
+      formErrors.appName = 'Application name must be between 2 and 50 characters and must not contain any special characters'
+    }
+
+    if (applications.find(app => app.applicationName === fields.appName)) {
+      formErrors.appName = 'You have already have an application with this name'
+    }
+
+    return formErrors
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
+    setErrors({})
+    setErrorSummary([])
 
-    if (!appName.current.validateInput(e)) {
-      appName.current.validateInput(e)
+    const formErrors = validateForm({
+      appName: appNameRef.current.value
+    })
+
+    if (Object.keys(formErrors).length !== 0) {
+      setErrors(formErrors)
+      setErrorSummary(createErrorSummary(formErrors))
       return false
     }
 
-    if (applications.find(app => app.applicationName === appName.current.state.inputValue)) {
-      appName.current.setErrors('You have already have an application with this name', false)
-      return false
-    }
+    context.update({ name: appNameRef.current.value })
 
-    saveAppData(fields)
     window.location.href = '/applications/create/step2'
     return true
   }
 
-  const handleInputChange = (event) => {
-    const target = event.target
-    const value = target.value.trim()
-    const name = target.name
-    const _fields = { ...fields }
-    _fields[name] = value
-    setFields(_fields)
-  }
-
-  const showError = () => {
-    const validationErrors = []
-    setTimeout(() => {
-      Array.from(document.querySelectorAll(`[id^="error-msg-for__"]`)).forEach(element => {
-        if (element.textContent.length) {
-          validationErrors.push({
-            id: element.id,
-            message: element.textContent.split('Error: ').pop()
-          })
-        }
-      })
-      setErrors(validationErrors)
-    }, 0)
-  }
-
-  const { details } = application
-
   return (
     <Page router={router} layout='two-thirds' back='to application listing page'>
-      <ValidationMessages errors={errors} />
+      <ValidationMessages errors={errorSummary} />
       <form noValidate onSubmit={handleSubmit}>
         <div className='govuk-form-group'>
           <fieldset className='govuk-fieldset'>
@@ -88,35 +89,21 @@ const ApplicationCreateStep1 = ({ application, saveAppData, cancelApplication, r
                 What's the name of your application?
               </h1>
             </legend>
-            <InputWithValidation
-              ref={appName}
-              friendlyName={'application name'}
-              name={'app-name'}
-              inputId={'app-name'}
-              inputErrorId={'error-msg-for__app-name'}
-              label={`Application name`}
+            <Input
+              ref={appNameRef}
+              id='app-name'
+              name='app-name'
+              label='Application name'
+              type='text'
+              value={context.application.name}
+              error={errors.appName}
               hint='Your application name must be between 2 and 50 characters. It can contain alphanumeric characters and spaces. Special characters are not allowed'
-              customErrorMessage='Enter the name of your application'
-              customValidationMessage='Application name must be between 2 and 50 characters and must not contain any special characters'
-              isRequired
-              pattern={appNamePattern}
-              onChange={handleInputChange}
-              onFocus={() => showError()}
-              inputValue={details ? details['app-name'] : fields['app-name']}
-              setErrors={() => showError()}
             />
           </fieldset>
         </div>
 
         <button type='submit' className='govuk-button govuk-!-margin-right-1'>Continue</button>
-        <button
-          type='button'
-          className='govuk-button govuk-button--secondary'
-          onClick={() => {
-            cancelApplication()
-            router.push('/applications')
-          }}
-        >
+        <button type='button' className='govuk-button govuk-button--secondary' onClick={() => cancel()}>
           Cancel
         </button>
       </form>
@@ -126,4 +113,4 @@ const ApplicationCreateStep1 = ({ application, saveAppData, cancelApplication, r
 
 ApplicationCreateStep1.displayName = 'Application create name'
 
-export default connect(null, { saveAppData, cancelApplication })(ApplicationCreateStep1)
+export default ApplicationCreateStep1

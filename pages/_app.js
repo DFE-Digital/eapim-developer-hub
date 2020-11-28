@@ -9,8 +9,11 @@ import App from 'next/app'
 import { withApplicationInsights } from '../src/components/withApplicationInsights'
 import createStore from 'store/createStore'
 import theme from 'theme'
-import '../scss/main.scss'
+
 import { AuthProvider } from 'context'
+import { ApplicationProvider } from '../providers/ApplicationProvider'
+
+import '../scss/main.scss'
 
 const GlobalStyle = createGlobalStyle`
   ${styledNormalize}
@@ -43,8 +46,10 @@ class DeveloperHub extends App {
         <ThemeProvider theme={theme}>
           <Provider store={store}>
             <AuthProvider>
-              <GlobalStyle />
-              <Component {...pageProps} store={store} router={router} />
+              <ApplicationProvider>
+                <GlobalStyle />
+                <Component {...pageProps} store={store} router={router} />
+              </ApplicationProvider>
             </AuthProvider>
           </Provider>
         </ThemeProvider>

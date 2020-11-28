@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Page from 'components/Page'
 
-import ValidationMessages from 'components/forms/validation-messages'
+import ValidationMessages from 'components/form/validation-messages'
 import Radio from 'components/form/radio'
 import Textarea from 'components/form/textarea'
 

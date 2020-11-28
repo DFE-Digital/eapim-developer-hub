@@ -1,4 +1,4 @@
-import { isEmpty, isEmail, isURL } from 'validator'
+import { isEmpty, isEmail, isURL, isLength } from 'validator'
 
 const isValidURL = (url) => {
   const protocols = ['https']
@@ -8,4 +8,4 @@ const isValidURL = (url) => {
   return isURL(url, { protocols, require_tld: false, require_protocol: true, require_valid_protocol: true })
 }
 
-export { isEmpty, isEmail, isValidURL }
+export { isEmpty, isEmail, isValidURL, isLength }

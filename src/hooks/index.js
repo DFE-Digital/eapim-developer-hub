@@ -30,12 +30,6 @@ export const useIsIE11 = () => {
   return isIe11
 }
 
-export const useFocusMain = () => {
-  useEffect(() => {
-    return document.querySelector('#main-content').focus()
-  }, [])
-}
-
 export const useCookieBanner = () => {
   const [siteLoaded, setSiteLoaded] = useState(false)
   const [bannerCookie, setBannerCookie] = useState(null)

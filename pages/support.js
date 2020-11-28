@@ -4,7 +4,7 @@ import ContentBuilder from 'components/ContentBuilder'
 import Page from 'components/Page'
 import { useAuth } from 'context'
 
-import ValidationMessages from 'components/forms/validation-messages'
+import ValidationMessages from 'components/form/validation-messages'
 import Radio from 'components/form/radio'
 import Input from 'components/form/input'
 import Select from 'components/form/select'

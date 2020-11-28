@@ -1,61 +1,68 @@
 import React, { useState, useRef } from 'react'
-import { connect } from 'react-redux'
 import Page from 'components/Page'
-import InputWithValidation from 'components/forms/input-with-validation'
-import ValidationMessages from 'components/forms/validation-messages'
-import { saveAppData, cancelApplication } from '../../../src/actions/application'
 import { urlPattern } from '../../../src/utils/patterns'
 
-import { useFocusMain } from 'hooks'
+import ValidationMessages from 'components/form/validation-messages'
+import Input from 'components/form/input'
+import * as validation from 'utils/validation'
+import { useApplication } from '../../../providers/ApplicationProvider'
 
-const ApplicationCreateStep3 = ({ application, saveAppData, cancelApplication, router }) => {
-  const [fields, setFields] = useState({})
-  const [errors, setErrors] = useState([])
+const ApplicationCreateStep3 = ({ router }) => {
+  const context = useApplication()
+
+  const [errors, setErrors] = useState({})
+  const [errorSummary, setErrorSummary] = useState([])
 
   const appRedirectUrlRef = useRef()
 
-  useFocusMain()
+  const cancel = () => {
+    context.clear()
+    router.push('/applications')
+  }
+
+  const createErrorSummary = (formErrors) => {
+    const keys = Object.keys(formErrors)
+    return keys.map(key => ({ id: key, message: formErrors[key] }))
+  }
+
+  const validateForm = (fields) => {
+    const formErrors = {}
+
+    if (validation.isEmpty(fields.appRedirectUrl)) {
+      formErrors.appRedirectUrl = 'Enter your application redirect URL'
+    }
+
+    if (!urlPattern.test(fields.appRedirectUrl)) {
+      formErrors.appRedirectUrl = 'URL must contain https://. If you are using localhost, prefix it with http://'
+    }
+
+    return formErrors
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (!appRedirectUrlRef.current.validateInput(e)) {
-      appRedirectUrlRef.current.validateInput(e)
+    setErrors({})
+    setErrorSummary([])
+
+    const formErrors = validateForm({
+      appRedirectUrl: appRedirectUrlRef.current.value
+    })
+
+    if (Object.keys(formErrors).length !== 0) {
+      setErrors(formErrors)
+      setErrorSummary(createErrorSummary(formErrors))
       return false
     }
-    saveAppData(fields)
+
+    context.update({ redirectUrl: appRedirectUrlRef.current.value })
+
     window.location.href = '/applications/create/summary'
     return true
   }
 
-  const handleInputChange = (e) => {
-    const target = e.target
-    const value = target.value.trim()
-    const name = target.name
-    const updatedFields = { ...fields }
-    updatedFields[name] = value
-    setFields(updatedFields)
-  }
-
-  const showError = () => {
-    const validationErrors = []
-    setTimeout(() => {
-      Array.from(document.querySelectorAll(`[id^="error-msg-for__"]`)).forEach(element => {
-        if (element.textContent.length) {
-          validationErrors.push({
-            id: element.id,
-            message: element.textContent.split('Error: ').pop()
-          })
-        }
-      })
-      setErrors(validationErrors)
-    }, 0)
-  }
-
-  const { details } = application
-
   return (
     <Page router={router} layout='two-thirds' back='to what is your applications description'>
-      <ValidationMessages errors={errors} />
+      <ValidationMessages errors={errorSummary} />
       <form noValidate onSubmit={handleSubmit}>
         <div className='govuk-form-group'>
           <fieldset className='govuk-fieldset'>
@@ -64,35 +71,21 @@ const ApplicationCreateStep3 = ({ application, saveAppData, cancelApplication, r
                 What is your redirect URL?
               </h1>
             </legend>
-            <InputWithValidation
+            <Input
               ref={appRedirectUrlRef}
-              friendlyName={'redirect url'}
-              name={'app-redirect-url'}
-              inputId={'app-redirect-url'}
-              inputErrorId={'error-msg-for__app-redirect-url'}
-              label={`Redirect URL`}
-              hint={`This will be the URL that you want to redirect users back to. It must begin with https://`}
-              customErrorMessage='Enter a redirect URL, like https://www.gov.uk'
-              customValidationMessage='URL must contain https://. If you are using localhost, prefix it with http://'
-              isRequired
-              pattern={urlPattern}
-              onChange={handleInputChange}
-              onFocus={() => showError()}
-              inputValue={details ? details['app-redirect-url'] : fields['app-redirect-url']}
-              setErrors={() => showError()}
+              id='app-redirect-url'
+              name='app-redirect-url'
+              label='Redirect URL'
+              type='url'
+              value={context.application.redirectUrl}
+              error={errors.appRedirectUrl}
+              hint='This will be the URL that you want to redirect users back to. It must begin with https://'
             />
           </fieldset>
         </div>
 
         <button type='submit' className='govuk-button govuk-!-margin-right-1'>Continue</button>
-        <button
-          type='button'
-          className='govuk-button govuk-button--secondary'
-          onClick={() => {
-            cancelApplication()
-            router.push('/applications')
-          }}
-        >
+        <button type='button' className='govuk-button govuk-button--secondary' onClick={() => cancel()}>
           Cancel
         </button>
       </form>
@@ -100,12 +93,6 @@ const ApplicationCreateStep3 = ({ application, saveAppData, cancelApplication, r
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    application: state.application
-  }
-}
-
 ApplicationCreateStep3.displayName = 'Application create redirect-url'
 
-export default connect(mapStateToProps, { saveAppData, cancelApplication })(ApplicationCreateStep3)
+export default ApplicationCreateStep3

@@ -1,62 +1,62 @@
 import React, { useState, useRef } from 'react'
-import { connect } from 'react-redux'
 import Page from 'components/Page'
-import InputWithValidation from 'components/forms/input-with-validation'
-import ValidationMessages from 'components/forms/validation-messages'
-import { saveAppData, cancelApplication } from '../../../src/actions/application'
+import ValidationMessages from 'components/form/validation-messages'
+import Textarea from 'components/form/Textarea'
+import * as validation from 'utils/validation'
+import { useApplication } from '../../../providers/ApplicationProvider'
 
-import { useFocusMain } from 'hooks'
+const ApplicationCreateStep2 = ({ router }) => {
+  const context = useApplication()
 
-const ApplicationCreateStep2 = ({ application, saveAppData, cancelApplication, router }) => {
-  const [fields, setFields] = useState({})
-  const [errors, setErrors] = useState([])
+  const [errors, setErrors] = useState({})
+  const [errorSummary, setErrorSummary] = useState([])
 
   const appDescriptionRef = useRef()
 
-  useFocusMain()
+  const cancel = () => {
+    context.clear()
+    router.push('/applications')
+  }
+
+  const createErrorSummary = (formErrors) => {
+    const keys = Object.keys(formErrors)
+    return keys.map(key => ({ id: key, message: formErrors[key] }))
+  }
+
+  const validateForm = (fields) => {
+    const formErrors = {}
+
+    if (validation.isEmpty(fields.appDescription)) {
+      formErrors.appDescription = 'Enter your application description'
+    }
+
+    return formErrors
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (!appDescriptionRef.current.validateInput(e)) {
-      appDescriptionRef.current.validateInput(e)
+    setErrors({})
+    setErrorSummary([])
+
+    const formErrors = validateForm({
+      appDescription: appDescriptionRef.current.value
+    })
+
+    if (Object.keys(formErrors).length !== 0) {
+      setErrors(formErrors)
+      setErrorSummary(createErrorSummary(formErrors))
       return false
     }
 
-    saveAppData(fields)
-    window.location.href = '/applications/create/step3'
+    context.update({ description: appDescriptionRef.current.value })
 
+    window.location.href = '/applications/create/step3'
     return true
   }
 
-  const handleInputChange = (e) => {
-    const target = e.target
-    const value = target.value.trim()
-    const name = target.name
-    const updatedFields = { ...fields }
-    updatedFields[name] = value
-    setFields(updatedFields)
-  }
-
-  const showError = () => {
-    const validationErrors = []
-    setTimeout(() => {
-      Array.from(document.querySelectorAll(`[id^="error-msg-for__"]`)).forEach(element => {
-        if (element.textContent.length) {
-          validationErrors.push({
-            id: element.id,
-            message: element.textContent.split('Error: ').pop()
-          })
-        }
-      })
-      setErrors(validationErrors)
-    }, 0)
-  }
-
-  const { details } = application
-
   return (
     <Page router={router} layout='two-thirds' back='to what is your applications name'>
-      <ValidationMessages errors={errors} />
+      <ValidationMessages errors={errorSummary} />
       <form noValidate onSubmit={handleSubmit}>
         <div className='govuk-form-group'>
           <fieldset className='govuk-fieldset'>
@@ -65,34 +65,21 @@ const ApplicationCreateStep2 = ({ application, saveAppData, cancelApplication, r
                 What is your application for?
               </h1>
             </legend>
-            <InputWithValidation
+            <Textarea
+              inline
               ref={appDescriptionRef}
-              friendlyName={'application description'}
-              name={'app-description'}
-              inputId={'app-description'}
-              inputErrorId={'error-msg-for__app-description'}
-              label={`Application description`}
-              hint={`Please describe in as much detail what your application is for and how it will be used.`}
-              customErrorMessage='Describe your application'
-              isRequired
-              textArea
-              onChange={handleInputChange}
-              onFocus={() => showError()}
-              inputValue={details ? details['app-description'] : fields['app-description']}
-              setErrors={() => showError()}
+              id='app-description'
+              name='app-description'
+              label='Application description'
+              value={context.application.description}
+              error={errors.appDescription}
+              hint='Please provide as much information as possible. Do not provide any personal information.'
             />
           </fieldset>
         </div>
 
         <button type='submit' className='govuk-button govuk-!-margin-right-1'>Continue</button>
-        <button
-          type='button'
-          className='govuk-button govuk-button--secondary'
-          onClick={() => {
-            cancelApplication()
-            router.push('/applications')
-          }}
-        >
+        <button type='button' className='govuk-button govuk-button--secondary' onClick={() => cancel()}>
           Cancel
         </button>
       </form>
@@ -100,12 +87,6 @@ const ApplicationCreateStep2 = ({ application, saveAppData, cancelApplication, r
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    application: state.application
-  }
-}
-
 ApplicationCreateStep2.displayName = 'Application create description'
 
-export default connect(mapStateToProps, { saveAppData, cancelApplication })(ApplicationCreateStep2)
+export default ApplicationCreateStep2
