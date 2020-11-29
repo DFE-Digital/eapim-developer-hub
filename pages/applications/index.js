@@ -3,7 +3,7 @@ import { getContent, sidebar } from '../../content/application'
 import { Loading } from 'components/Loading'
 import AuthWarning from 'components/AuthWarning'
 import Page from 'components/Page'
-import { useAuth } from 'context'
+import { useAuth } from '../../providers/AuthProvider'
 
 import { getApplications } from '../../lib/applicationService'
 

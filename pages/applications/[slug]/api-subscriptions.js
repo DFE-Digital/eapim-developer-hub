@@ -1,11 +1,11 @@
 import React, { useRef, useState, useEffect } from 'react'
-import ErrorPage from 'components/ErrorPage'
+import ErrorPage from 'components/pages/ErrorPage'
 import { getContent } from '../../../content/applicationManagement'
 import ContentBuilder from 'components/ContentBuilder'
 import APISubscriptions from 'components/APISubscriptions'
 import ApplicationPage from 'components/pages/ApplicationPage'
 
-import getInitialPropsErrorHandler from '../../../lib/getInitialPropsErrorHandler'
+import errorHandler from '../../../lib/errorHandler'
 
 import { getApis, getApiTags } from '../../../lib/apiServices'
 import { getApplication } from '../../../lib/applicationService'
@@ -60,10 +60,10 @@ const ApplicationApiSubscriptions = ({ apis, application, subscriptions, router,
 ApplicationApiSubscriptions.getInitialProps = async ({ res, query }) => {
   try {
     const application = await getApplication(query.slug)
-    if (!application) return getInitialPropsErrorHandler(res, 404)
+    if (!application) return errorHandler(res)
 
     const apis = await getApis()
-    if (!apis) return getInitialPropsErrorHandler(res, 404)
+    if (!apis) return errorHandler(res)
 
     const subscriptions = await getSubscriptions(application.applicationId)
 
@@ -78,7 +78,7 @@ ApplicationApiSubscriptions.getInitialProps = async ({ res, query }) => {
       subscriptions
     }
   } catch (error) {
-    return getInitialPropsErrorHandler(res, 500, error)
+    return errorHandler(error, res, 500)
   }
 }
 

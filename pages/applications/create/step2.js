@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react'
 import { getContent } from '../../../content/application'
 import Page from 'components/Page'
-import ErrorSummary from 'components/ErrorSummary'
 import Textarea from 'components/form/textarea'
 import * as validation from 'utils/validation'
 import { useApplication } from '../../../providers/ApplicationProvider'
@@ -12,18 +11,12 @@ const ApplicationCreateStep2 = ({ router }) => {
   const context = useApplication()
 
   const [errors, setErrors] = useState({})
-  const [errorSummary, setErrorSummary] = useState([])
 
   const appDescriptionRef = useRef()
 
   const cancel = () => {
     context.clear()
     router.push('/applications')
-  }
-
-  const createErrorSummary = (formErrors) => {
-    const keys = Object.keys(formErrors)
-    return keys.map(key => ({ id: key, message: formErrors[key] }))
   }
 
   const validateForm = (fields) => {
@@ -39,7 +32,6 @@ const ApplicationCreateStep2 = ({ router }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     setErrors({})
-    setErrorSummary([])
 
     const formErrors = validateForm({
       appDescription: appDescriptionRef.current.value
@@ -47,7 +39,6 @@ const ApplicationCreateStep2 = ({ router }) => {
 
     if (Object.keys(formErrors).length !== 0) {
       setErrors(formErrors)
-      setErrorSummary(createErrorSummary(formErrors))
       return false
     }
 
@@ -58,8 +49,7 @@ const ApplicationCreateStep2 = ({ router }) => {
   }
 
   return (
-    <Page title={content.title} router={router} layout='two-thirds' back='to what is your applications name'>
-      <ErrorSummary pageTitle={content.title} errors={errorSummary} />
+    <Page title={content.title} router={router} errors={errors} layout='two-thirds'>
       <form noValidate onSubmit={handleSubmit}>
         <div className='govuk-form-group'>
           <fieldset className='govuk-fieldset'>

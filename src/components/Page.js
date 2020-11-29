@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import { useCookieBanner } from 'hooks'
 import Header from './Header'
@@ -7,16 +7,23 @@ import AuthNavigation from './AuthNavigation'
 import Breadcrumbs from './Breadcrumbs'
 import Footer from './Footer'
 import CookieBanner from './CookieBanner'
-import ReturnTo from './ReturnTo'
 import Sidebar from './Sidebar'
+import ErrorSummary from './ErrorSummary'
+import { useApp } from '../../providers/AppProvider'
 
-const Page = ({ children, router, title, parentTitle, sidebarContent, layout = 'full', back = false, error = false }) => {
+const Page = ({ children, router, title, parentTitle, sidebarContent, layout = 'full', errors = {} }) => {
   const { siteLoaded, bannerCookie } = useCookieBanner()
+  const { setReturnUrl } = useApp()
+
+  useEffect(() => {
+    setReturnUrl(router.asPath)
+  }, [])
 
   let template = (
     <main className='govuk-main-wrapper' id='main-content' role='main'>
       <div className='govuk-grid-row'>
         <div className={`govuk-grid-column-${layout}`}>
+          <ErrorSummary pageTitle={title} errors={errors} />
           {children}
         </div>
       </div>
@@ -34,6 +41,7 @@ const Page = ({ children, router, title, parentTitle, sidebarContent, layout = '
         <main className='govuk-main-wrapper govuk-!-padding-top-0 mainContent' id='main-content' role='main'>
           <div className='govuk-grid-row'>
             <div className={`govuk-grid-column-${layout}`}>
+              <ErrorSummary pageTitle={title} errors={errors} />
               {children}
             </div>
           </div>
@@ -47,10 +55,9 @@ const Page = ({ children, router, title, parentTitle, sidebarContent, layout = '
       {siteLoaded && !bannerCookie && <CookieBanner cookie={bannerCookie} />}
       <Header />
       <PhaseBanner />
-      <ReturnTo parentPath={router.asPath} />
       <div className='govuk-width-container'>
         <div className='govuk-width-container service-banner'>
-          {!error && <Breadcrumbs router={router} back={back} />}
+          <Breadcrumbs router={router} />
           <AuthNavigation />
         </div>
         {template}

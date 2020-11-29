@@ -206,5 +206,61 @@ const data = {
         Body: "Read more on <a href='/documentation/authorisation#credentials' class='govuk-link' target='_blank'>credentials</a> for further details."
       }
     ]
+  },
+  'client-secrets-confirm': {
+    nosidebar: 'true',
+    titles: {
+      default: 'Confirm regeneration of client secret',
+      confirm: 'Are you sure you want to regenerate your key?',
+      confirmed: 'Your secret key has been regenerated successfully'
+    },
+    buttons: {
+      back: 'Back to client secrets',
+      continue: 'Continue',
+      cancel: 'Cancel'
+    },
+    tableHeadings: {
+      created: 'Created',
+      expires: 'Expires',
+      action: 'Action'
+    },
+    summaryListHeadings: {
+      application: 'Application',
+      secretName: 'Secret name',
+      secretHint: 'Secret hint'
+    },
+    intro: [
+      {
+        Type: 'P',
+        Body: 'Make sure to copy your new secret as we only show it to you once.'
+      }
+    ]
+  },
+  'api-subscriptions-unsubscribe': {
+    nosidebar: 'true',
+    title: 'Are you sure you want unsubscribe from',
+    url: '/api-subscriptions',
+    buttons: {
+      confirm: 'Confirm unsubscription',
+      cancel: 'Cancel'
+    },
+    summaryListHeadings: {
+      application: 'Application',
+      api: 'API',
+      environment: 'Environment'
+    },
+    intro: [
+      {
+        Type: 'H1',
+        Body: 'Are you sure you want unsubscribe from'
+      }
+    ]
+  },
+  'api-subscriptions-unsubscribe-confirmed': {
+    nosidebar: 'true',
+    title: 'You have successfully unsubscribed',
+    buttons: {
+      back: 'Back to subscriptions'
+    }
   }
 }

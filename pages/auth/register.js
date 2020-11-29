@@ -1,19 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { register } from '../../lib/authService'
+import B2CHandler from 'components/B2CHandler'
 
-const Register = () => {
-  useEffect(() => {
-    async function handler () {
-      await register()
-    }
-
-    handler()
-  })
-
-  return (
-    <span className='govuk-visually-hidden'>Redirecting you to create account...</span>
-  )
-}
+const Register = () => <B2CHandler func={register} text='Redirecting you to create account...' />
 
 Register.displayName = 'Register'
 

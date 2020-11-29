@@ -2,9 +2,8 @@ import React, { useState, useEffect, useRef } from 'react'
 import Page from 'components/Page'
 import { getApplications } from '../../../lib/applicationService'
 import { useApplication } from '../../../providers/ApplicationProvider'
-import { useAuth } from 'context'
+import { useAuth } from '../../../providers/AuthProvider'
 import { getContent } from '../../../content/application'
-import ErrorSummary from 'components/ErrorSummary'
 import Input from 'components/form/input'
 import * as validation from 'utils/validation'
 
@@ -16,7 +15,6 @@ const ApplicationCreateStep1 = ({ router }) => {
 
   const [applications, setApplications] = useState([])
   const [errors, setErrors] = useState({})
-  const [errorSummary, setErrorSummary] = useState([])
 
   const appNameRef = useRef('')
 
@@ -32,11 +30,6 @@ const ApplicationCreateStep1 = ({ router }) => {
   const cancel = () => {
     context.clear()
     router.push('/applications')
-  }
-
-  const createErrorSummary = (formErrors) => {
-    const keys = Object.keys(formErrors)
-    return keys.map(key => ({ id: key, message: formErrors[key] }))
   }
 
   const validateForm = (fields) => {
@@ -61,7 +54,6 @@ const ApplicationCreateStep1 = ({ router }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     setErrors({})
-    setErrorSummary([])
 
     const formErrors = validateForm({
       appName: appNameRef.current.value
@@ -69,7 +61,6 @@ const ApplicationCreateStep1 = ({ router }) => {
 
     if (Object.keys(formErrors).length !== 0) {
       setErrors(formErrors)
-      setErrorSummary(createErrorSummary(formErrors))
       return false
     }
 
@@ -80,8 +71,7 @@ const ApplicationCreateStep1 = ({ router }) => {
   }
 
   return (
-    <Page title={content.title} router={router} layout='two-thirds' back='to application listing page'>
-      <ErrorSummary pageTitle={content.title} errors={errorSummary} />
+    <Page title={content.title} router={router} errors={errors} layout='two-thirds'>
       <form noValidate onSubmit={handleSubmit}>
         <div className='govuk-form-group'>
           <fieldset className='govuk-fieldset'>

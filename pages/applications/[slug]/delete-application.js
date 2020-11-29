@@ -1,10 +1,10 @@
 import React from 'react'
-import ErrorPage from 'components/ErrorPage'
+import ErrorPage from 'components/pages/ErrorPage'
 import ApplicationPage from 'components/pages/ApplicationPage'
 import { getContent } from '../../../content/applicationManagement'
 
 import { getApplication } from '../../../lib/applicationService'
-import getInitialPropsErrorHandler from '../../../lib/getInitialPropsErrorHandler'
+import errorHandler from '../../../lib/errorHandler'
 
 const content = getContent('delete-application')
 
@@ -12,7 +12,7 @@ const DeleteApplication = ({ application, router, errorCode }) => {
   if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
 
   return (
-    <ApplicationPage title={content.title} router={router} layout='two-thirds' back='to application details page'>
+    <ApplicationPage title={content.title} router={router} layout='two-thirds'>
       <h1 className='govuk-heading-xl'>{content.title}</h1>
 
       <dl className='govuk-summary-list'>
@@ -31,14 +31,14 @@ const DeleteApplication = ({ application, router, errorCode }) => {
 DeleteApplication.getInitialProps = async ({ res, query }) => {
   try {
     const application = await getApplication(query.slug)
-    if (!application) return getInitialPropsErrorHandler(res, 404)
+    if (!application) return errorHandler(res)
 
     return {
       id: query.slug,
       application
     }
   } catch (error) {
-    return getInitialPropsErrorHandler(res, 500, error)
+    return errorHandler(error, res, 500)
   }
 }
 

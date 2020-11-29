@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { getContent } from '../../../content/applicationManagement'
 import ContentBuilder from 'components/ContentBuilder'
-import ErrorPage from 'components/ErrorPage'
+import ErrorPage from 'components/pages/ErrorPage'
 import ApplicationPage from 'components/pages/ApplicationPage'
-import { useAuth } from 'context'
+import { useAuth } from '../../../providers/AuthProvider'
 import { getApplication, deleteApplication } from '../../../lib/applicationService'
-import getInitialPropsErrorHandler from '../../../lib/getInitialPropsErrorHandler'
+import errorHandler from '../../../lib/errorHandler'
 
 const content = getContent('delete-application').pageConfirm
 
@@ -35,7 +35,7 @@ const ApplicationDeleteConfirm = ({ application, router, errorCode }) => {
   }
 
   return (
-    <ApplicationPage title={content.title} router={router} layout='two-thirds' back='to application details page'>
+    <ApplicationPage title={content.title} router={router} layout='two-thirds'>
       <h1 className='govuk-heading-xl'>{content.title}</h1>
 
       <dl className='govuk-summary-list'>
@@ -65,14 +65,14 @@ const ApplicationDeleteConfirm = ({ application, router, errorCode }) => {
 ApplicationDeleteConfirm.getInitialProps = async ({ res, query }) => {
   try {
     const application = await getApplication(query.slug)
-    if (!application) return getInitialPropsErrorHandler(res, 404)
+    if (!application) return errorHandler(res)
 
     return {
       id: query.slug,
       application
     }
   } catch (error) {
-    return getInitialPropsErrorHandler(res, 500, error)
+    return errorHandler(error, res, 500)
   }
 }
 

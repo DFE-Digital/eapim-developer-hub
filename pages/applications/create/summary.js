@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Page from 'components/Page'
-import { useAuth } from 'context'
+import { useAuth } from '../../../providers/AuthProvider'
 import { useApplication } from '../../../providers/ApplicationProvider'
 import { registerApplication } from '../../../lib/applicationService'
-import ErrorSummary from 'components/ErrorSummary'
+
+import { isEmpty } from '../../../src/utils/validation'
 
 import { getContent } from '../../../content/application'
 const content = getContent('create-summary')
@@ -14,13 +15,10 @@ const ApplicationCreateSummary = ({ router }) => {
 
   const [registering, setRegistering] = useState(false)
 
-  let errorSummary = []
-
-  useEffect(() => {
-    if (application.name === '') errorSummary.push({ id: 'application-name', message: content.errors.name })
-    if (application.description === '') errorSummary.push({ id: 'application-description', message: content.errors.description })
-    if (application.redirectUrl === '') errorSummary.push({ id: 'application-redirectUrl', message: content.errors.redirectUrl })
-  }, [])
+  const isValid = () => {
+    const { name, description, redirectUrl } = application
+    return !isEmpty(name) && !isEmpty(description) && !isEmpty(redirectUrl)
+  }
 
   const createApplication = async () => {
     setRegistering(true)
@@ -41,15 +39,12 @@ const ApplicationCreateSummary = ({ router }) => {
       setRegistering(false)
       window.location.href = `/applications/${registration.applicationId}/success`
     } catch (err) {
-      errorSummary = [{ id: 'registration-error', message: content.errors.server }]
       setRegistering(false)
     }
   }
 
   return (
-    <Page title={content.title} router={router} back='to what is your applications redirect URL'>
-      <ErrorSummary pageTitle={content.title} errors={errorSummary} />
-
+    <Page title={content.title} router={router}>
       <h1 className='govuk-heading-xl'>{content.title}</h1>
 
       <table className='govuk-table'>
@@ -77,7 +72,7 @@ const ApplicationCreateSummary = ({ router }) => {
         </tbody>
       </table>
 
-      <button type='submit' disabled={registering || errorSummary.length} className='govuk-button govuk-!-margin-right-1' onClick={() => createApplication()}>
+      <button type='submit' disabled={registering || !isValid()} className='govuk-button govuk-!-margin-right-1' onClick={() => createApplication()}>
         {!registering && content.buttons.register}
         {registering && content.buttons.registering}
       </button>

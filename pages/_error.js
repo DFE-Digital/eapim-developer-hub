@@ -1,5 +1,5 @@
 import React from 'react'
-import ErrorPage from 'components/ErrorPage'
+import ErrorPage from 'components/pages/ErrorPage'
 
 const Error = ({ statusCode = 404, router }) => <ErrorPage statusCode={statusCode} router={router} />
 

@@ -2,11 +2,11 @@ import moment from 'moment'
 import React from 'react'
 import { getContent } from '../../../../content/applicationManagement'
 import ApplicationPage from 'components/pages/ApplicationPage'
-import ErrorPage from 'components/ErrorPage'
+import ErrorPage from 'components/pages/ErrorPage'
 import ContentBuilder from 'components/ContentBuilder'
 
 import { getApplication } from '../../../../lib/applicationService'
-import getInitialPropsErrorHandler from '../../../../lib/getInitialPropsErrorHandler'
+import errorHandler from '../../../../lib/errorHandler'
 
 const content = getContent('client-secrets')
 
@@ -98,14 +98,14 @@ ApplicationClientSecrets.getInitialProps = async ({ req, res, query }) => {
   if (req && req.method === 'GET') {
     try {
       const application = await getApplication(query.slug)
-      if (!application) return getInitialPropsErrorHandler(res, 404)
+      if (!application) return errorHandler(res)
 
       return {
         id: query.slug,
         application
       }
     } catch (error) {
-      return getInitialPropsErrorHandler(res, 500, error)
+      return errorHandler(error, res, 500)
     }
   }
 

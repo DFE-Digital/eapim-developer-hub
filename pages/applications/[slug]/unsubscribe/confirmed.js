@@ -1,17 +1,19 @@
 import React from 'react'
 import Page from 'components/Page'
-import ErrorPage from 'components/ErrorPage'
+import ErrorPage from 'components/pages/ErrorPage'
+import errorHandler from '../../../../lib/errorHandler'
+import { getContent } from '../../../../content/applicationManagement'
 
-import getInitialPropsErrorHandler from '../../../../lib/getInitialPropsErrorHandler'
+const content = getContent('api-subscriptions-unsubscribe-confirmed')
 
 const UnsubscribeConfirmed = ({ applicationId, router, errorCode }) => {
   if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
 
   return (
-    <Page router={router} back='to the API subscription page'>
-      <h1 className='govuk-heading-xl'>You have successfully unsubscribed</h1>
+    <Page title={content.title} router={router}>
+      <h1 className='govuk-heading-xl'>{content.title}</h1>
       <a href={`/applications/${applicationId}/api-subscriptions`} className='govuk-button govuk-button--default govuk-!-margin-top-6'>
-        Back to subscriptions
+        {content.buttons.back}
       </a>
     </Page>
   )
@@ -20,7 +22,7 @@ const UnsubscribeConfirmed = ({ applicationId, router, errorCode }) => {
 UnsubscribeConfirmed.getInitialProps = ({ res, query }) => {
   const { slug } = query
 
-  if (!slug) return getInitialPropsErrorHandler(res, 404)
+  if (!slug) return errorHandler(res)
 
   return { applicationId: slug }
 }

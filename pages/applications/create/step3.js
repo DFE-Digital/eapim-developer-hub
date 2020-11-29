@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react'
 import Page from 'components/Page'
 import { urlPattern } from '../../../src/utils/patterns'
-import ErrorSummary from 'components/ErrorSummary'
 import Input from 'components/form/input'
 import * as validation from 'utils/validation'
 import { useApplication } from '../../../providers/ApplicationProvider'
@@ -13,18 +12,12 @@ const ApplicationCreateStep3 = ({ router }) => {
   const context = useApplication()
 
   const [errors, setErrors] = useState({})
-  const [errorSummary, setErrorSummary] = useState([])
 
   const appRedirectUrlRef = useRef()
 
   const cancel = () => {
     context.clear()
     router.push('/applications')
-  }
-
-  const createErrorSummary = (formErrors) => {
-    const keys = Object.keys(formErrors)
-    return keys.map(key => ({ id: key, message: formErrors[key] }))
   }
 
   const validateForm = (fields) => {
@@ -44,7 +37,6 @@ const ApplicationCreateStep3 = ({ router }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     setErrors({})
-    setErrorSummary([])
 
     const formErrors = validateForm({
       appRedirectUrl: appRedirectUrlRef.current.value
@@ -52,7 +44,6 @@ const ApplicationCreateStep3 = ({ router }) => {
 
     if (Object.keys(formErrors).length !== 0) {
       setErrors(formErrors)
-      setErrorSummary(createErrorSummary(formErrors))
       return false
     }
 
@@ -63,8 +54,7 @@ const ApplicationCreateStep3 = ({ router }) => {
   }
 
   return (
-    <Page title={content.title} router={router} layout='two-thirds' back='to what is your applications description'>
-      <ErrorSummary pageTitle={content.title} errors={errorSummary} />
+    <Page title={content.title} router={router} layout='two-thirds'>
       <form noValidate onSubmit={handleSubmit}>
         <div className='govuk-form-group'>
           <fieldset className='govuk-fieldset'>
@@ -77,7 +67,7 @@ const ApplicationCreateStep3 = ({ router }) => {
               ref={appRedirectUrlRef}
               id='app-redirect-url'
               name='app-redirect-url'
-              type='url'
+              type='text'
               label={content.inputs.label}
               value={context.application.redirectUrl}
               error={errors.appRedirectUrl}

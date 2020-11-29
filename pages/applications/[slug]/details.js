@@ -2,12 +2,12 @@ import timezone from 'moment-timezone'
 import React from 'react'
 import Link from 'next/link'
 import { getContent } from '../../../content/applicationManagement'
-import ErrorPage from 'components/ErrorPage'
+import ErrorPage from 'components/pages/ErrorPage'
 import ApplicationPage from 'components/pages/ApplicationPage'
-import { useAuth } from 'context'
+import { useAuth } from '../../../providers/AuthProvider'
 
 import { getApplication } from '../../../lib/applicationService'
-import getInitialPropsErrorHandler from '../../../lib/getInitialPropsErrorHandler'
+import errorHandler from '../../../lib/errorHandler'
 
 const content = getContent('details')
 
@@ -81,14 +81,14 @@ const ApplicationDetails = ({ application, router, errorCode }) => {
 ApplicationDetails.getInitialProps = async ({ res, query }) => {
   try {
     const application = await getApplication(query.slug)
-    if (!application) return getInitialPropsErrorHandler(res, 404)
+    if (!application) return errorHandler(res)
 
     return {
       id: query.slug,
       application
     }
   } catch (error) {
-    return getInitialPropsErrorHandler(res, 500, error)
+    return errorHandler(error, res, 500)
   }
 }
 

@@ -1,17 +1,16 @@
 import React, { useState, useRef } from 'react'
 import { getContent } from '../../../content/applicationManagement'
 import ContentBuilder from 'components/ContentBuilder'
-import ErrorSummary from 'components/ErrorSummary'
-import ErrorPage from 'components/ErrorPage'
+import ErrorPage from 'components/pages/ErrorPage'
 import ApplicationPage from 'components/pages/ApplicationPage'
 
 import { getApplication, updateApplication } from '../../../lib/applicationService'
-import getInitialPropsErrorHandler from '../../../lib/getInitialPropsErrorHandler'
+import errorHandler from '../../../lib/errorHandler'
 
 import Loader from 'components/Loader'
 import RedirectURL from 'components/RedirectURL'
 import RedirectURLAdd from 'components/RedirectURLAdd'
-import { useAuth } from 'context'
+import { useAuth } from '../../../providers/AuthProvider'
 
 import * as validation from '../../../src/utils/validation'
 
@@ -26,25 +25,24 @@ const ApplicationRedirectUrls = ({ application, router, errorCode }) => {
   const changeRef = useRef()
 
   const [errors, setErrors] = useState({})
-  const [errorSummary, setErrorSummary] = useState([])
 
   const [adding, setAdding] = useState(false)
   const [changing, setChanging] = useState(null)
   const [saving, setSaving] = useState(false)
 
   const validateForm = (value, type) => {
-    let formErrors = {}
+    const formErrors = {}
 
     if (validation.isEmpty(value)) {
-      formErrors = { id: 'add-redirect-url', message: content.errors.empty, type }
+      formErrors[type] = content.errors.empty
     }
 
     if (!validation.isValidURL(value)) {
-      formErrors = { id: 'add-redirect-url', message: content.errors.invalid, type }
+      formErrors[type] = content.errors.invalid
     }
 
     if (application.web.redirectUris.indexOf(value) > -1) {
-      formErrors = { id: 'add-redirect-url', message: content.errors.duplicate, type }
+      formErrors[type] = content.errors.duplicate
     }
 
     return formErrors
@@ -52,8 +50,8 @@ const ApplicationRedirectUrls = ({ application, router, errorCode }) => {
 
   const resetState = () => {
     setErrors({})
-    setErrorSummary([])
     setAdding(false)
+    setChanging(null)
     setSaving(false)
   }
 
@@ -69,13 +67,11 @@ const ApplicationRedirectUrls = ({ application, router, errorCode }) => {
 
   const onSave = async (type, ref, oldUrl) => {
     setErrors({})
-    setErrorSummary([])
 
     const formErrors = validateForm(ref.current.value, type)
 
     if (Object.keys(formErrors).length !== 0) {
       setErrors(formErrors)
-      setErrorSummary([formErrors])
       return false
     }
 
@@ -147,9 +143,7 @@ const ApplicationRedirectUrls = ({ application, router, errorCode }) => {
   }
 
   return (
-    <ApplicationPage title={content.title} router={router} application={application}>
-      <ErrorSummary pageTitle={content.title} errors={errorSummary} />
-
+    <ApplicationPage title={content.title} router={router} application={application} errors={errors}>
       <div className='govuk-grid-row'>
         <div className='govuk-grid-column-full'>
           <h1 className='govuk-heading-xl'>{content.title}</h1>
@@ -185,7 +179,7 @@ const ApplicationRedirectUrls = ({ application, router, errorCode }) => {
                       onSave={onSave}
                       onRemove={onRemove}
                       onCancel={onCancel}
-                      error={errors.type === 'change' ? errors.message : ''}
+                      error={errors.change}
                     />
                   </tr>
                 )
@@ -197,7 +191,7 @@ const ApplicationRedirectUrls = ({ application, router, errorCode }) => {
                     type='add'
                     onSave={onSave}
                     onCancel={onCancel}
-                    error={errors.type === 'add' ? errors.message : ''}
+                    error={errors.add}
                   />
                 </tr>
               )}
@@ -224,14 +218,14 @@ const ApplicationRedirectUrls = ({ application, router, errorCode }) => {
 ApplicationRedirectUrls.getInitialProps = async ({ res, query }) => {
   try {
     const application = await getApplication(query.slug)
-    if (!application) return getInitialPropsErrorHandler(res, 404)
+    if (!application) return errorHandler(res)
 
     return {
       id: query.slug,
       application
     }
   } catch (error) {
-    return getInitialPropsErrorHandler(res, 500, error)
+    return errorHandler(error, res, 500)
   }
 }
 

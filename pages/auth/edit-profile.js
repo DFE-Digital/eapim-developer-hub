@@ -1,21 +1,9 @@
-import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
+import React from 'react'
 import { editProfile } from '../../lib/authService'
+import B2CHandler from 'components/B2CHandler'
 
-const EditProfile = () => {
-  useEffect(() => {
-    async function handler () {
-      await editProfile()
-    }
-
-    handler()
-  })
-
-  return (
-    <span className='govuk-visually-hidden'>Redirecting you to edit your profile...</span>
-  )
-}
+const EditProfile = () => <B2CHandler func={editProfile} text='Redirecting you to edit your profile...' />
 
 EditProfile.displayName = 'Edit Profile'
 
-export default connect(null, { editProfile })(EditProfile)
+export default EditProfile

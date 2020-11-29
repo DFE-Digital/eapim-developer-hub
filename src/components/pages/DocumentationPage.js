@@ -1,7 +1,7 @@
 import React from 'react'
-import { getContent, sidebar } from '../../content/overview'
-import ContentBuilder from './ContentBuilder'
-import Page from './Page'
+import { getContent, sidebar } from '../../../content/overview'
+import ContentBuilder from '../ContentBuilder'
+import Page from '../Page'
 
 const DocumentationPage = ({ router, contentKey, hasNav = true }) => {
   const content = getContent(contentKey)

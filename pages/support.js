@@ -2,8 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { getContent } from '../content/site'
 import ContentBuilder from 'components/ContentBuilder'
 import Page from 'components/Page'
-import { useAuth } from 'context'
-import ErrorSummary from 'components/ErrorSummary'
+import { useAuth } from '../providers/AuthProvider'
 import Radio from 'components/form/radio'
 import Input from 'components/form/input'
 import Select from 'components/form/select'
@@ -29,7 +28,6 @@ const Support = ({ apis, router }) => {
   const [description, setDescription] = useState('')
 
   const [errors, setErrors] = useState({})
-  const [errorSummary, setErrorSummary] = useState([])
 
   useEffect(() => {
     const summary = document.querySelector('.govuk-error-summary')
@@ -83,14 +81,8 @@ const Support = ({ apis, router }) => {
     return formErrors
   }
 
-  const createErrorSummary = (formErrors) => {
-    const keys = Object.keys(formErrors)
-    return keys.map(key => ({ id: key, message: formErrors[key] }))
-  }
-
   const handleSubmit = (e) => {
     setErrors({})
-    setErrorSummary([])
 
     const formErrors = validateForm({
       fullname: fullnameRef.current.value,
@@ -102,19 +94,16 @@ const Support = ({ apis, router }) => {
 
     if (Object.keys(formErrors).length !== 0) {
       setErrors(formErrors)
-      setErrorSummary(createErrorSummary(formErrors))
       e.preventDefault()
       return false
     }
   }
 
   return (
-    <Page title={content.title} router={router} layout='three-quarters'>
+    <Page title={content.title} router={router} layout='three-quarters' errors={errors}>
       <h1 className='govuk-heading-xl'>{content.title}</h1>
       <ContentBuilder sectionNav={false} data={content.content} />
       <hr className='govuk-section-break govuk-section-break--l govuk-section-break--visible' />
-
-      <ErrorSummary pageTitle={content.title} errors={errorSummary} />
 
       <form noValidate method='POST' onSubmit={handleSubmit} ref={formRef}>
         <Input

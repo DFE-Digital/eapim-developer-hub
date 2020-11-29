@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Textarea = React.forwardRef(({ error, inline, id, name, value, label, hint, placeholder, maxLength, ariaDescribedBy, ariaInvalid, ariaRequired = false, readOnly = false, required = false, onFocus, onChange }, ref) => {
+const Textarea = React.forwardRef(({ error, inline, id, name, value, label, hint, placeholder, maxLength, ariaDescribedBy, ariaInvalid, ariaRequired = false, readOnly = false, onFocus, onChange }, ref) => {
   return (
     <div className={`govuk-form-group ${error ? `govuk-form-group--error` : ''} ${inline === true ? `govuk-!-margin-bottom-0` : ''}`}>
       {label && <label className='govuk-label' htmlFor={id}>{label}</label>}
@@ -24,7 +24,6 @@ const Textarea = React.forwardRef(({ error, inline, id, name, value, label, hint
         onFocus={onFocus}
         onChange={onChange}
         readOnly={readOnly}
-        required={required}
         aria-describedby={ariaDescribedBy}
         aria-invalid={ariaInvalid}
         aria-required={ariaRequired}

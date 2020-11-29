@@ -1,44 +1,48 @@
 import React from 'react'
-import ErrorPage from 'components/ErrorPage'
+import ErrorPage from 'components/pages/ErrorPage'
 import Page from 'components/Page'
 
 import { getApplication } from '../../../../../lib/applicationService'
 import { getSubscriptions, deleteSubscription } from '../../../../../lib/subscriptionService'
-import getInitialPropsErrorHandler from '../../../../../lib/getInitialPropsErrorHandler'
+import errorHandler from '../../../../../lib/errorHandler'
+
+import { getContent } from '../../../../../content/applicationManagement'
+
+const content = getContent('api-subscriptions-unsubscribe')
 
 const Unsubscribe = ({ application, subscription, router, errorCode }) => {
   if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
 
+  const title = `${content.title} ${subscription.apiName}`
+
   return (
-    <Page router={router} back='to the API subscription page'>
-      <h1 className='govuk-heading-xl'>
-        Are you sure you want unsubscribe from {subscription.apiName}?
-      </h1>
+    <Page title={title} router={router}>
+      <h1 className='govuk-heading-xl'>{title}</h1>
 
       <dl className='govuk-summary-list'>
         <div className='govuk-summary-list__row'>
-          <dt className='govuk-summary-list__key'>Application:</dt>
+          <dt className='govuk-summary-list__key'>{content.summaryListHeadings.application}:</dt>
           <dd className='govuk-summary-list__value'>{application.applicationName}</dd>
         </div>
         <div className='govuk-summary-list__row'>
-          <dt className='govuk-summary-list__key'>API:</dt>
+          <dt className='govuk-summary-list__key'>{content.summaryListHeadings.api}:</dt>
           <dd className='govuk-summary-list__value'>{subscription.apiName}</dd>
         </div>
         <div className='govuk-summary-list__row'>
-          <dt className='govuk-summary-list__key'>Environment:</dt>
+          <dt className='govuk-summary-list__key'>{content.summaryListHeadings.environment}:</dt>
           <dd className='govuk-summary-list__value'>{subscription.environment}</dd>
         </div>
       </dl>
 
-      <form method='POST' action={`/applications/${application.applicationId}/unsubscribe/${subscription.id}`}>
+      <form method='POST' action={`/applications/${application.applicationId}/unsubscribe/${subscription.id}`} noValidate>
         <input type='hidden' name='subscriptionId' value={subscription.id} />
         <input type='hidden' name='environment' value={subscription.environment} />
         <input type='hidden' name='applicationId' value={application.applicationId} />
         <button type='submit' className='govuk-button govuk-button--warning govuk-!-margin-top-6 govuk-!-margin-right-1'>
-          Confirm unsubscription
+          {content.buttons.confirm}
         </button>
         <a href={`/applications/${application.applicationId}/api-subscriptions`} className='govuk-button govuk-button--secondary govuk-!-margin-top-6'>
-          Cancel
+          {content.buttons.cancel}
         </a>
       </form>
     </Page>
@@ -54,7 +58,7 @@ Unsubscribe.getInitialProps = async ({ req, res, query }) => {
       res.writeHead(301, { Location: `/applications/${applicationId}/unsubscribe/confirmed` })
       res.end()
     } catch (error) {
-      return getInitialPropsErrorHandler(res, 500, error)
+      return errorHandler(error, res, 500)
     }
   }
 
@@ -63,15 +67,15 @@ Unsubscribe.getInitialProps = async ({ req, res, query }) => {
     const environment = query.subid.split('-').pop()
 
     const application = await getApplication(query.slug)
-    if (!application) return getInitialPropsErrorHandler(res, 404)
+    if (!application) return errorHandler(res)
 
     const subscriptions = await getSubscriptions(application.applicationId)
-    if (!subscriptions) return getInitialPropsErrorHandler(res, 404)
+    if (!subscriptions) return errorHandler(res)
 
     application.subscriptions = subscriptions
 
     const subscription = subscriptions.find(sub => sub.id === subid && sub.environment === environment)
-    if (!subscription) return getInitialPropsErrorHandler(res, 404)
+    if (!subscription) return errorHandler(res)
 
     return {
       id: query.slug,
@@ -79,7 +83,7 @@ Unsubscribe.getInitialProps = async ({ req, res, query }) => {
       subscription
     }
   } catch (error) {
-    return getInitialPropsErrorHandler(res, 500, error)
+    return errorHandler(error, res, 500)
   }
 }
 

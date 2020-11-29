@@ -7,7 +7,7 @@ import Header from 'components/Header'
 import PhaseBanner from 'components/PhaseBanner'
 import AuthNavigation from 'components/AuthNavigation'
 import Footer from 'components/Footer'
-import { useAuth } from 'context'
+import { useAuth } from '../providers/AuthProvider'
 
 import { ReactSVG } from 'react-svg'
 

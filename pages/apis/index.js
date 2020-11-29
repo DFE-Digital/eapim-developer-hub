@@ -1,9 +1,9 @@
 import React from 'react'
-import ErrorPage from 'components/ErrorPage'
+import ErrorPage from 'components/pages/ErrorPage'
 import APIPage from 'components/pages/APIPage'
 
 import { getApis } from '../../lib/apiServices'
-import getInitialPropsErrorHandler from '../../lib/getInitialPropsErrorHandler'
+import errorHandler from '../../lib/errorHandler'
 
 const Apis = ({ apis, router, errorCode }) => {
   if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
@@ -37,11 +37,11 @@ const Apis = ({ apis, router, errorCode }) => {
 Apis.getInitialProps = async ({ res }) => {
   try {
     const apis = await getApis()
-    if (!apis) return getInitialPropsErrorHandler(res, 404)
+    if (!apis) return errorHandler(res)
 
     return { apis }
   } catch (error) {
-    return getInitialPropsErrorHandler(res, 500, error)
+    return errorHandler(error, res, 500)
   }
 }
 

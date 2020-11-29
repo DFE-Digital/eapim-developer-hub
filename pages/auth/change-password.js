@@ -1,19 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { changePassword } from '../../lib/authService'
+import B2CHandler from 'components/B2CHandler'
 
-const ChangePassword = () => {
-  useEffect(() => {
-    async function handler () {
-      await changePassword()
-    }
-
-    handler()
-  })
-
-  return (
-    <span className='govuk-visually-hidden'>Redirecting you to change password...</span>
-  )
-}
+const ChangePassword = () => <B2CHandler func={changePassword} text='Redirecting you to change password...' />
 
 ChangePassword.displayName = 'Change Password'
 

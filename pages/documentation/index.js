@@ -1,5 +1,5 @@
 import React from 'react'
-import DocumentationPage from 'components/DocumentationPage'
+import DocumentationPage from 'components/pages/DocumentationPage'
 
 const Documentation = ({ router }) => {
   return (

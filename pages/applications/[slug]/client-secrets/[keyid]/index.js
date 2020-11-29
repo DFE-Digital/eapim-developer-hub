@@ -2,12 +2,16 @@ import fetch from 'isomorphic-unfetch'
 import React, { useState } from 'react'
 import moment from 'moment'
 import Page from 'components/Page'
-import ErrorPage from 'components/ErrorPage'
+import ErrorPage from 'components/pages/ErrorPage'
+import ContentBuilder from 'components/ContentBuilder'
 
-import getInitialPropsErrorHandler from '../../../../../lib/getInitialPropsErrorHandler'
+import errorHandler from '../../../../../lib/errorHandler'
 import { getApplication } from '../../../../../lib/applicationService'
 import clipboard from '../../../../../src/utils/clipboard'
-import { useAuth } from 'context'
+import { useAuth } from '../../../../../providers/AuthProvider'
+import { getContent } from '../../../../../content/applicationManagement'
+
+const content = getContent('client-secrets-confirm')
 
 const ApplicationClientSecretsConfirm = ({ id, secret, applicationName, router, errorCode, newClientKey, newClientKeyDisplayName, startDateTime, endDateTime }) => {
   if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
@@ -22,21 +26,26 @@ const ApplicationClientSecretsConfirm = ({ id, secret, applicationName, router, 
     if (res) setCopied(true)
   }
 
+  let title = content.titles.default
+
+  if (newClientKey) title = `Your ${newClientKeyDisplayName} key has been regenerated successfully`
+  if (!newClientKey && user.getToken()) title = content.titles.confirm
+
   return (
-    <Page router={router} back='to application details'>
+    <Page title={title} router={router}>
       {newClientKey &&
         <div className='govuk-grid-column'>
-          <h1 className='govuk-heading-xl'>Your {newClientKeyDisplayName} key has been regenerated successfully</h1>
+          <h1 className='govuk-heading-xl'>{title}</h1>
 
-          <p className='govuk-body'>Make sure to copy your new secret as we only show it to you once.</p>
+          <ContentBuilder sectionNav={false} data={content.intro} />
 
           <table className='govuk-table'>
             <thead className='govuk-table__head'>
               <tr className='govuk-table__row'>
                 <th scope='col' className='govuk-table__header'>{newClientKeyDisplayName} secret</th>
-                <th scope='col' className='govuk-table__header'>Created</th>
-                <th scope='col' className='govuk-table__header'>Expires</th>
-                <th scope='col' className='govuk-table__header govuk-table__header--numeric'>Action</th>
+                <th scope='col' className='govuk-table__header'>{content.tableHeadings.created}</th>
+                <th scope='col' className='govuk-table__header'>Expire{content.tableHeadings.expires}s</th>
+                <th scope='col' className='govuk-table__header govuk-table__header--numeric'>{content.tableHeadings.action}</th>
               </tr>
             </thead>
             <tbody className='govuk-table__body'>
@@ -53,38 +62,38 @@ const ApplicationClientSecretsConfirm = ({ id, secret, applicationName, router, 
             </tbody>
           </table>
 
-          <a href={`/applications/${id}/client-secrets`} className='govuk-button govuk-button--default' role='button'>Back to client secrets</a>
+          <a href={`/applications/${id}/client-secrets`} className='govuk-button govuk-button--default' role='button'>{content.buttons.back}</a>
         </div>
       }
 
       {!newClientKey && user.getToken() &&
         <div className='govuk-grid-column-two-thirds'>
-          <h1 className='govuk-heading-xl'>Are you sure you want to regenerate your key?</h1>
+          <h1 className='govuk-heading-xl'>{title}</h1>
 
           <dl className='govuk-summary-list'>
             <div className='govuk-summary-list__row'>
-              <dt className='govuk-summary-list__key'>Application:</dt>
+              <dt className='govuk-summary-list__key'>{content.summaryListHeadings.application}:</dt>
               <dd className='govuk-summary-list__value'>{applicationName}</dd>
             </div>
             <div className='govuk-summary-list__row'>
-              <dt className='govuk-summary-list__key'>Secret name:</dt>
+              <dt className='govuk-summary-list__key'>{content.summaryListHeadings.secretName}:</dt>
               <dd className='govuk-summary-list__value'>{secret.displayName}</dd>
             </div>
             <div className='govuk-summary-list__row'>
-              <dt className='govuk-summary-list__key'>Secret hint:</dt>
+              <dt className='govuk-summary-list__key'>{content.summaryListHeadings.secretHint}:</dt>
               <dd className='govuk-summary-list__value'>{secret.hint}••••••••••••••••••••••••••••••••</dd>
             </div>
           </dl>
 
-          <form method='POST' action={`/applications/${id}/client-secrets/${secret.keyId}`}>
+          <form method='POST' action={`/applications/${id}/client-secrets/${secret.keyId}`} noValidate>
             <input type='hidden' name='userName' value={user.name()} />
             <input type='hidden' name='userEmail' value={user.email()} />
             <input type='hidden' name='userID' value={user.id()} />
             <input type='hidden' name='applicationId' value={id} />
             <input type='hidden' name='KeyDisplayName' value={secret.displayName} />
             <input type='hidden' name='KeyId' value={secret.keyId} />
-            <button type='submit' className='govuk-button govuk-button--default govuk-!-margin-top-6 govuk-!-margin-right-1'>Continue</button>
-            <a href={`/applications/${id}/client-secrets`} className='govuk-button govuk-button--secondary govuk-!-margin-top-6'>Cancel</a>
+            <button type='submit' className='govuk-button govuk-button--default govuk-!-margin-top-6 govuk-!-margin-right-1'>{content.buttons.continue}</button>
+            <a href={`/applications/${id}/client-secrets`} className='govuk-button govuk-button--secondary govuk-!-margin-top-6'>{content.buttons.cancel}</a>
           </form>
         </div>
       }
@@ -96,10 +105,10 @@ ApplicationClientSecretsConfirm.getInitialProps = async ({ req, res, query }) =>
   if (req && req.method === 'GET') {
     try {
       const application = await getApplication(query.slug)
-      if (!application) return getInitialPropsErrorHandler(res, 404)
+      if (!application) return errorHandler(res)
 
       const secret = application.passwordCredentials.find(item => item.keyId === query.keyid)
-      if (!secret) return getInitialPropsErrorHandler(res, 404)
+      if (!secret) return errorHandler(res)
 
       return {
         secret,
@@ -107,7 +116,7 @@ ApplicationClientSecretsConfirm.getInitialProps = async ({ req, res, query }) =>
         applicationName: application.applicationName
       }
     } catch (error) {
-      return getInitialPropsErrorHandler(res, 500, error)
+      return errorHandler(error, res, 500)
     }
   }
 

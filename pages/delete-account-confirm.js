@@ -1,19 +1,19 @@
 import fetch from 'isomorphic-unfetch'
-import React, { useContext } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import Content from '../content.json'
-import ErrorPage from 'components/ErrorPage'
+import ErrorPage from 'components/pages/ErrorPage'
 import Page from 'components/Page'
-import AuthContext from 'context'
+import { useAuth } from '../providers/AuthProvider'
 
-import getInitialPropsErrorHandler from '../lib/getInitialPropsErrorHandler'
+import errorHandler from '../lib/errorHandler'
 
 const page = 'Profile'
 
 const DeleteAcountConfirm = ({ router, errorCode }) => {
   if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
 
-  const { user } = useContext(AuthContext)
+  const { user } = useAuth()
 
   return (
     <Page router={router} layout='two-thirds'>
@@ -37,7 +37,7 @@ const DeleteAcountConfirm = ({ router, errorCode }) => {
 
       <p className='govuk-body'>This will be deleted immediately. We cannot restore accounts once they have been deleted.</p>
 
-      <form method='POST' action='/delete-account-confirm'>
+      <form method='POST' action='/delete-account-confirm' noValidate>
         <input type='hidden' name='userName' value={`${user.given_name} ${user.family_name}`} />
         <input type='hidden' name='userEmail' value={user.email} />
         <input type='hidden' name='userID' value={user.accountIdentifier} />
@@ -63,7 +63,7 @@ DeleteAcountConfirm.getInitialProps = async ({ req, res }) => {
       })
 
       if (response.status !== 204) {
-        return getInitialPropsErrorHandler(res, response.status)
+        throw new Error(response.status)
       }
 
       res.setHeader('x-deleted-account', 'true')
@@ -72,7 +72,7 @@ DeleteAcountConfirm.getInitialProps = async ({ req, res }) => {
 
       return {}
     } catch (error) {
-      return getInitialPropsErrorHandler(res, 500, error)
+      return errorHandler(error, res, 500)
     }
   } else {
     return { status: 200 }

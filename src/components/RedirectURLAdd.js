@@ -16,8 +16,8 @@ const RedirectURLAdd = React.forwardRef(({ type, value = '', error, onSave, onCa
       <th scope='row' className='govuk-table__header'>
         <Input
           inline
-          type='url'
-          id='add-redirect-url'
+          type='text'
+          id={type}
           name='add-redirect-url'
           placeholder='https://www.'
           ref={ref}

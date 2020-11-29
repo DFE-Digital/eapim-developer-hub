@@ -1,12 +1,21 @@
 import React, { useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 
+const createErrorSummary = (errors) => {
+  const keys = Object.keys(errors)
+  return keys.map(key => ({ id: key, message: errors[key] }))
+}
+
+const hasLength = (errors) => Object.keys(errors).length !== 0
+
 const ErrorSummary = ({ errors, pageTitle }) => {
-  if (!errors.length) return null
+  if (!hasLength(errors)) return null
 
   useEffect(() => {
-    if (errors.length) document.querySelector('.govuk-error-summary').focus()
-  }, [])
+    if (hasLength(errors)) document.querySelector('.govuk-error-summary').focus()
+  }, [errors])
+
+  const summary = createErrorSummary(errors)
 
   return (
     <>
@@ -14,7 +23,7 @@ const ErrorSummary = ({ errors, pageTitle }) => {
         <h2 className='govuk-error-summary__title' id='error-summary-title'>There is a problem</h2>
         <div className='govuk-error-summary__body'>
           <ul className='govuk-list govuk-error-summary__list'>
-            {errors.map((error, i) => {
+            {summary.map((error, i) => {
               const href = error.href || `#${error.id}`
               return (
                 <li key={i}>

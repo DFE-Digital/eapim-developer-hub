@@ -557,7 +557,46 @@ const data = {
       },
       {
         Type: 'P',
-        Body: "Leave your feedback <a target='_blank' href='https://forms.office.com/Pages/ResponsePage.aspx?id=yXfS-grGoU2187O4s0qC-YA4Qd_fewBHv2fn-gXg0b9UQU8yT1JaWU1GVFo1M0RXNlZDREJUWjZXRS4u' class='govuk-link'>here</a>"
+        Body: "Leave your feedback <a target='_blank' href='https://forms.office.com/Pages/ResponsePage.aspx?id=yXfS-grGoU2187O4s0qC-YA4Qd_fewBHv2fn-gXg0b9UQU8yT1JaWU1GVFo1M0RXNlZDREJUWjZXRS4u' class='govuk-link'>here</a>."
+      }
+    ]
+  },
+  'password-changed': {
+    title: 'Password has been updated successfully.',
+    content: [
+      {
+        Type: 'P',
+        Body: `<a href='/auth/login' class='govuk-link'>Sign in</a> to the Developer Hub with your new password.`
+      }
+    ]
+  },
+  404: {
+    title: 'Page not found',
+    content: [
+      {
+        Type: 'P',
+        Body: 'If you entered a web address please check it was correct.'
+      },
+      {
+        Type: 'P',
+        Body: 'If you pasted the web address, check you copied the entire address.'
+      },
+      {
+        Type: 'P',
+        Body: `<a href='/' class='govuk-link'>Go back to the homepage</a>`
+      }
+    ]
+  },
+  500: {
+    title: 'Sorry, there is a problem with the service',
+    content: [
+      {
+        Type: 'P',
+        Body: 'Try again later.'
+      },
+      {
+        Type: 'P',
+        Body: `<a href='/support' class='govuk-link'>Contact us</a> if you are having issues with the Developer Hub.`
       }
     ]
   }

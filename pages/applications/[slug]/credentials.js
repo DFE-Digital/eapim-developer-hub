@@ -3,7 +3,7 @@ import ApplicationPage from 'components/pages/ApplicationPage'
 import ContentBuilder from 'components/ContentBuilder'
 import clipboard from '../../../src/utils/clipboard'
 import { getApplication } from '../../../lib/applicationService'
-import getInitialPropsErrorHandler from '../../../lib/getInitialPropsErrorHandler'
+import errorHandler from '../../../lib/errorHandler'
 
 import { getContent } from '../../../content/applicationManagement'
 const content = getContent('credentials')
@@ -121,12 +121,12 @@ const ApplicationCredentials = ({ application, router }) => {
 ApplicationCredentials.getInitialProps = async ({ res, query }) => {
   try {
     const application = await getApplication(query.slug)
-    if (!application) return getInitialPropsErrorHandler(res, 404)
+    if (!application) return errorHandler(res)
     return {
       application
     }
   } catch (error) {
-    return getInitialPropsErrorHandler(res, 500, error)
+    return errorHandler(error, res, 500)
   }
 }
 
