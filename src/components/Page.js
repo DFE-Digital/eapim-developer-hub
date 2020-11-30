@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import { useRouter } from 'next/router'
 import Header from './Header'
@@ -9,11 +9,27 @@ import Footer from './Footer'
 import CookieBanner from './CookieBanner'
 import Sidebar from './Sidebar'
 import ErrorSummary from './ErrorSummary'
-import { useInsights } from 'hooks'
+import { useInsights, useCookie } from 'hooks'
 
 const Page = ({ children, title, parentTitle, sidebarContent, breadcrumbs, layout = 'full', errors = {} }) => {
   const router = useRouter()
+
   const [pageView] = useInsights()
+  const [bannerCookie, updateCookie] = useState(null)
+  const [pageLoaded, setPageLoaded] = useState(false)
+  const { hasCookie, setCookie } = useCookie()
+
+  useEffect(() => {
+    const item = hasCookie('set_banner_message')
+
+    if (!item) {
+      setCookie('set_banner_message', 'true')
+    } else {
+      updateCookie(true)
+    }
+
+    setPageLoaded(true)
+  }, [])
 
   useEffect(() => {
     pageView({ name: title, url: router.asPath })
@@ -52,7 +68,7 @@ const Page = ({ children, title, parentTitle, sidebarContent, breadcrumbs, layou
 
   return (
     <>
-      <CookieBanner />
+      {pageLoaded && !bannerCookie && <CookieBanner />}
       <Header />
       <PhaseBanner />
       <div className='govuk-width-container'>

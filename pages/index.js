@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import Link from 'next/link'
 import ContentBuilder from 'components/ContentBuilder'
@@ -9,7 +9,7 @@ import AuthNavigation from 'components/AuthNavigation'
 import Footer from 'components/Footer'
 import { useAuth } from '../providers/AuthProvider'
 import { ReactSVG } from 'react-svg'
-import { useInsights } from 'hooks'
+import { useInsights, useCookie } from 'hooks'
 
 import { getContent } from '../content/home'
 
@@ -18,6 +18,21 @@ const content = getContent('home')
 const Home = ({ accountDeleted }) => {
   const { user, logout } = useAuth()
   const [pageView] = useInsights()
+  const [bannerCookie, updateCookie] = useState(null)
+  const [pageLoaded, setPageLoaded] = useState(false)
+  const { hasCookie, setCookie } = useCookie()
+
+  useEffect(() => {
+    const item = hasCookie('set_banner_message')
+
+    if (!item) {
+      setCookie('set_banner_message', 'true')
+    } else {
+      updateCookie(true)
+    }
+
+    setPageLoaded(true)
+  }, [])
 
   useEffect(() => {
     pageView({ name: 'Homepage', url: window.location.href })
@@ -26,7 +41,7 @@ const Home = ({ accountDeleted }) => {
 
   return (
     <>
-      <CookieBanner />
+      {pageLoaded && !bannerCookie && <CookieBanner />}
       <Header />
       <PhaseBanner />
       <div className='govuk-width-container service-banner'>
