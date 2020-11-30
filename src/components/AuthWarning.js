@@ -1,5 +1,8 @@
 import React from 'react'
-import Content from '../../content.json'
+import ContentBuilder from 'components/ContentBuilder'
+import { getContent } from '../../content/site'
+
+const content = getContent('authWarning')
 
 const AuthWarning = ({ warning }) => {
   return (
@@ -7,13 +10,12 @@ const AuthWarning = ({ warning }) => {
       <div className='govuk-warning-text'>
         <span className='govuk-warning-text__icon' aria-hidden='true'>!</span>
         <strong className='govuk-warning-text__text'>
-          <span className='govuk-warning-text__assistive'>Warning</span> {warning}
+          <span className='govuk-warning-text__assistive'>{content.title}</span> {warning}
         </strong>
       </div>
 
       <div className='flex'>
-        <a href='/auth/register' className='govuk-button'>Create an account</a>
-        <p className='govuk-body'>or <a href='/auth/login' className='govuk-link govuk-!-margin-left-1'><strong>sign in</strong></a> to the {Content.PortalName}.</p>
+        <ContentBuilder sectionNav={false} data={content.content} />
       </div>
     </>
   )

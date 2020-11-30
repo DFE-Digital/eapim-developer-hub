@@ -2,6 +2,7 @@ import { createContext, useState, useEffect, useContext } from 'react'
 
 import User from '../lib/userService'
 import { signOut } from '../lib/authService'
+import { useCookie } from 'hooks'
 
 export const AuthContext = createContext({
   user: null,
@@ -11,6 +12,7 @@ export const AuthContext = createContext({
 
 export const AuthProvider = ({ children }) => {
   const [token, updateToken] = useState(null)
+  const { deleteCookie } = useCookie()
 
   useEffect(() => {
     let token = window.localStorage.getItem('token')
@@ -29,6 +31,7 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     window.localStorage.removeItem('token')
     updateToken(null)
+    deleteCookie('msal.idtoken')
     await signOut()
   }
 

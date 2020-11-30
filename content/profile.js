@@ -25,5 +25,22 @@ const data = {
         Body: 'You can ask us to delete your account and we will respond within 2 working days.'
       }
     ]
+  },
+  'delete-account-confirm': {
+    title: 'Are you sure you want us to delete your account?',
+    tableCaption: 'Account details',
+    buttons: {
+      cancel: 'Cancel'
+    },
+    tableHeadings: {
+      name: 'Name',
+      email: 'Email address'
+    },
+    content: [
+      {
+        Type: 'P',
+        Body: 'This will be deleted immediately. We cannot restore accounts once they have been deleted.'
+      }
+    ]
   }
 }

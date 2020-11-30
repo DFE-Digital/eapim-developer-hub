@@ -15,6 +15,4 @@ const ApplicationDeleteSuccess = () => {
   )
 }
 
-ApplicationDeleteSuccess.displayName = 'Application Delete Success'
-
 export default ApplicationDeleteSuccess

@@ -13,6 +13,4 @@ const SupportSubmitted = ({ router }) => {
   )
 }
 
-SupportSubmitted.displayName = 'Support Submitted'
-
 export default SupportSubmitted

@@ -7,6 +7,4 @@ const Documentation = () => {
   )
 }
 
-Documentation.displayName = 'Tutorials (doc)'
-
 export default Documentation

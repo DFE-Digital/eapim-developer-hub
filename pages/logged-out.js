@@ -44,6 +44,4 @@ LoggedOut.getInitialProps = async ({ req, res }) => {
   }
 }
 
-LoggedOut.displayName = 'Logged out survey'
-
 export default LoggedOut

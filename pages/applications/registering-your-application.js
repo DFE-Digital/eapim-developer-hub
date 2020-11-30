@@ -4,7 +4,6 @@ import ContentBuilder from 'components/ContentBuilder'
 import ApplicationPage from 'components/pages/ApplicationPage'
 
 const content = getContent('registering-your-application')
-const page = 'Registering your application'
 
 const RegisteringApplications = () => {
   return (
@@ -18,7 +17,5 @@ const RegisteringApplications = () => {
     </ApplicationPage>
   )
 }
-
-RegisteringApplications.displayName = page
 
 export default RegisteringApplications

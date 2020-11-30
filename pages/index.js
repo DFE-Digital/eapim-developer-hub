@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react'
 import { Helmet } from 'react-helmet'
-import ReactHtmlParser from 'react-html-parser'
 import Link from 'next/link'
-import Content from '../content.json'
+import ContentBuilder from 'components/ContentBuilder'
 import Header from 'components/Header'
 import CookieBanner from 'components/CookieBanner'
 import PhaseBanner from 'components/PhaseBanner'
 import AuthNavigation from 'components/AuthNavigation'
 import Footer from 'components/Footer'
 import { useAuth } from '../providers/AuthProvider'
-
 import { ReactSVG } from 'react-svg'
 
-const page = 'Home'
+import { getContent } from '../content/home'
+
+const content = getContent('home')
 
 const Home = ({ accountDeleted }) => {
   const { user, logout } = useAuth()
@@ -20,8 +20,6 @@ const Home = ({ accountDeleted }) => {
   useEffect(() => {
     if (accountDeleted) logout()
   }, [])
-
-  const columns = Content[page].Content.Columns
 
   return (
     <>
@@ -34,12 +32,12 @@ const Home = ({ accountDeleted }) => {
       <main id='main-content' role='main'>
         <div className='govuk-panel govuk-panel--confirmation govuk-panel--welcome'>
           <div className='govuk-width-container'>
-            <h1 className='govuk-panel__title'>{Content[page].Content.Hero.Heading}</h1>
-            <div className='govuk-panel__body'>{Content[page].Content.Hero.Intro}</div>
+            <h1 className='govuk-panel__title'>{content.title}</h1>
+            <div className='govuk-panel__body'>{content.intro}</div>
             {!user.getToken() && (
               <div className='registerLinks govuk-!-margin-top-9'>
-                <a href='/auth/register' className='btn white'>{Content[page].Content.Hero.Register}</a>
-                <p className='govuk-body'>or <a href='/auth/login' className='govuk-link govuk-!-margin-left-1'><strong>{ ReactHtmlParser(Content[page].Content.Hero.Signin) }</strong></a> to the {Content.PortalName}.</p>
+                <a href='/auth/register' className='btn white'>{content.buttons.register}</a>
+                <p className='govuk-body'>or <a href='/auth/login' className='govuk-link govuk-!-margin-left-1'><strong>{content.buttons.signin}</strong></a> to the {content.title}.</p>
               </div>
             )}
           </div>
@@ -48,46 +46,39 @@ const Home = ({ accountDeleted }) => {
         <div className='govuk-width-container homepage-services-container'>
           <div className='homepage-services-section'>
             <div className='homepage-services-text'>
-              <h2 className='govuk-heading-m'>Browse DfE APIs</h2>
-              <p className='govuk-body'>
-              You can browse <a href='/apis' className='govuk-link'>public APIs</a> from different sectors including schools, finance and corporate entities.
-              </p>
+              <h2 className='govuk-heading-m'>{content.sections[0].title}</h2>
+              <ContentBuilder sectionNav={false} data={content.sections[0].body} />
             </div>
             <div className='homepage-services-image'>
               <ReactSVG
-                src='/assets/images/hp-apis.svg'
                 role='img'
-                aria-label='A user-facing page showing a list of public APIs.'
+                src={content.sections[0].svg}
+                aria-label={content.sections[0].a11y}
                 beforeInjection={(svg) => {
                   const title = document.createElementNS('http://www.w3.org/2000/svg', 'title')
-                  title.innerHTML = 'A user-facing page showing a list of public APIs.'
+                  title.innerHTML = content.sections[0].a11y
                   svg.prepend(title)
                 }}
-                fallback={() => <img src='/assets/images/hp-apis.jpg' alt='Browse Department for Education APIs' />}
+                fallback={() => <img src={content.sections[0].img} alt={content.sections[0].imgAlt} />}
               />
             </div>
           </div>
           <div className='homepage-services-section'>
             <div className='homepage-services-text'>
-              <h2 className='govuk-heading-m'>Integrate your application</h2>
-              <p className='govuk-body'>
-              Connect your application to an API sandbox environment to begin building your software. When you're ready to go live, ask for production access.
-              </p>
-              <p className='govuk-body'>
-              To get started, read <a href='/documentation' className='govuk-link'>using the Developer Hub</a>.
-              </p>
+              <h2 className='govuk-heading-m'>{content.sections[1].title}</h2>
+              <ContentBuilder sectionNav={false} data={content.sections[1].body} />
             </div>
             <div className='homepage-services-image'>
               <ReactSVG
-                src='/assets/images/hp-int.svg'
                 role='img'
-                aria-label='A user-facing page showing an application that has subscribed to an API.'
+                src={content.sections[1].svg}
+                aria-label={content.sections[1].a11y}
                 beforeInjection={(svg) => {
                   const title = document.createElementNS('http://www.w3.org/2000/svg', 'title')
-                  title.innerHTML = 'A user-facing page showing an application that has subscribed to an API.'
+                  title.innerHTML = content.sections[1].a11y
                   svg.prepend(title)
                 }}
-                fallback={() => <img src='/assets/images/hp-int.jpg' alt='Integrate your application' />}
+                fallback={() => <img src={content.sections[1].img} alt={content.sections[1].imgAlt} />}
               />
             </div>
           </div>
@@ -95,25 +86,17 @@ const Home = ({ accountDeleted }) => {
 
         <div className='govuk-width-container'>
           <div className='govuk-grid-row flex-wrap govuk-!-padding-bottom-9 govuk-!-padding-top-9'>
-            {columns.map((column, i) => {
+            {content.columns.map((column) => {
               return (
-                <div className='govuk-grid-column-one-third' key={i}>
-                  <h3 className='govuk-heading-m govuk-!-margin-bottom-2'>{column.Heading}</h3>
+                <div className='govuk-grid-column-one-third' key={column.heading}>
+                  <h3 className='govuk-heading-m govuk-!-margin-bottom-2'>{column.heading}</h3>
                   <hr className='govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-4' />
                   <ul className='govuk-list'>
-                    {column.Links.map((link, x) => {
-                      if (link.Page === 'Create an account') {
-                        return (
-                          <li className='govuk-body-s' key={x}>
-                            <a href='/auth/register' className='govuk-link'>{link.Page}</a>
-                          </li>
-                        )
-                      }
-
+                    {column.links.map((link, index) => {
                       return (
-                        <li className='govuk-body-s' key={x}>
-                          <Link href={link.Url} passHref>
-                            <a className='govuk-link'>{link.Page}</a>
+                        <li className='govuk-body-s' key={link.url + index}>
+                          <Link href={link.url} passHref>
+                            <a className='govuk-link'>{link.title}</a>
                           </Link>
                         </li>
                       )
@@ -127,7 +110,7 @@ const Home = ({ accountDeleted }) => {
       </main>
       <Footer />
       <Helmet>
-        <title>Home | DfE Developer Hub</title>
+        <title>Home | {content.title}</title>
       </Helmet>
     </>
   )
@@ -144,7 +127,5 @@ Home.getInitialProps = async ({ req }) => {
     status: 200
   }
 }
-
-Home.displayName = page
 
 export default Home

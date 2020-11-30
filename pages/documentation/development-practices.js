@@ -7,6 +7,4 @@ const Documentation = () => {
   )
 }
 
-Documentation.displayName = 'Best practices (doc)'
-
 export default Documentation

@@ -4,8 +4,7 @@ import * as Msal from 'msal'
 import { Loading } from 'components/Loading'
 import { b2cPolicies, config } from '../lib/authService'
 import { useAuth } from '../providers/AuthProvider'
-
-import { getItem } from '../src/utils/localstorage'
+import { useCookie } from 'hooks'
 
 const goTo = (url) => {
   window.location.href = url
@@ -42,14 +41,14 @@ const SignInSuccess = () => {
 
   useEffect(() => {
     const myMSALObj = new Msal.UserAgentApplication(config.login)
-    const returnUrl = getItem('app', 'returnUrl') || '/'
+    const { setCookie, deleteCookie } = useCookie()
 
     if (myMSALObj.getAccount()) goTo('/')
 
     myMSALObj.handleRedirectCallback((error, response) => {
       console.log(`MSAL Response: ${response}`)
 
-      if (error) errorHandling(error)
+      if (error) return errorHandling(error)
 
       const acr = response.idToken.claims['acr']
       const isIdToken = response.tokenType === 'id_token'
@@ -61,11 +60,15 @@ const SignInSuccess = () => {
       if (isIdToken && isAuth(acr)) {
         console.log(`id_token acquired at: ${new Date().toString()}`)
 
-        if (!myMSALObj.getAccount()) return myMSALObj.loginRedirect()
+        if (!myMSALObj.getAccount()) {
+          deleteCookie('msal.idtoken', null)
+          return myMSALObj.loginRedirect()
+        }
 
         const account = myMSALObj.getAccount()
         setToken(account)
-        goTo(returnUrl)
+        setCookie('msal.idtoken', 'true')
+        goTo('/')
       } else {
         console.log(`Token type is: ${response.tokenType}`)
         goTo('/')
@@ -82,7 +85,5 @@ const SignInSuccess = () => {
     </>
   )
 }
-
-SignInSuccess.displayName = 'B2C page callback'
 
 export default SignInSuccess

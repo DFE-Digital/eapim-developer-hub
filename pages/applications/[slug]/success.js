@@ -2,6 +2,7 @@ import React from 'react'
 import ContentBuilder from 'components/ContentBuilder'
 import ApplicationManagementPage from 'components/pages/ApplicationManagementPage'
 import ErrorPage from 'components/pages/ErrorPage'
+import { checkAuth } from '../../../lib/authService'
 import { getApplication } from '../../../lib/applicationService'
 import errorHandler from '../../../lib/errorHandler'
 
@@ -21,7 +22,9 @@ const ApplicationCreateSuccess = ({ application, serverError }) => {
   )
 }
 
-ApplicationCreateSuccess.getInitialProps = async ({ res, query }) => {
+ApplicationCreateSuccess.getInitialProps = async ({ req, res, query }) => {
+  checkAuth(req, res)
+
   try {
     const application = await getApplication(query.slug)
     if (!application) return errorHandler(res)
@@ -32,7 +35,5 @@ ApplicationCreateSuccess.getInitialProps = async ({ res, query }) => {
     return errorHandler(res, error, 500)
   }
 }
-
-ApplicationCreateSuccess.displayName = 'Application added success'
 
 export default ApplicationCreateSuccess

@@ -6,6 +6,7 @@ import ErrorPage from 'components/pages/ErrorPage'
 import ContentBuilder from 'components/ContentBuilder'
 
 import errorHandler from '../../../../../lib/errorHandler'
+import { checkAuth } from '../../../../../lib/authService'
 import { getApplication } from '../../../../../lib/applicationService'
 import clipboard from '../../../../../src/utils/clipboard'
 import { useAuth } from '../../../../../providers/AuthProvider'
@@ -104,6 +105,8 @@ const ApplicationClientSecretsConfirm = ({ id, secret, application, newClientKey
 }
 
 ApplicationClientSecretsConfirm.getInitialProps = async ({ req, res, query }) => {
+  checkAuth(req, res)
+
   if (req && req.method === 'POST') {
     const { userName, userEmail, userID, applicationId, KeyId, KeyDisplayName } = req.body
 
@@ -157,7 +160,5 @@ ApplicationClientSecretsConfirm.getInitialProps = async ({ req, res, query }) =>
     return errorHandler(res, error, 500)
   }
 }
-
-ApplicationClientSecretsConfirm.displayName = 'Application client secrets confirm'
 
 export default ApplicationClientSecretsConfirm

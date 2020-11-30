@@ -14,6 +14,4 @@ const ApplicationsHowTo = () => {
   )
 }
 
-ApplicationsHowTo.displayName = `How to developer your application`
-
 export default ApplicationsHowTo

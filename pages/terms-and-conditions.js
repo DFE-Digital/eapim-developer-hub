@@ -14,6 +14,4 @@ const TermsAndConditions = ({ router }) => {
   )
 }
 
-TermsAndConditions.displayName = 'Terms and conditions'
-
 export default TermsAndConditions

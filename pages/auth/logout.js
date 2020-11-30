@@ -7,6 +7,4 @@ const Logout = () => {
   return <B2CHandler func={logout} text='Signing out...' />
 }
 
-Logout.displayName = 'Logout'
-
 export default Logout

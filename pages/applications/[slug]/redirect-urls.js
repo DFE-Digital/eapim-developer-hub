@@ -4,6 +4,7 @@ import ContentBuilder from 'components/ContentBuilder'
 import ErrorPage from 'components/pages/ErrorPage'
 import ApplicationManagementPage from 'components/pages/ApplicationManagementPage'
 
+import { checkAuth } from '../../../lib/authService'
 import { getApplication, updateApplication } from '../../../lib/applicationService'
 import errorHandler from '../../../lib/errorHandler'
 
@@ -16,10 +17,12 @@ import * as validation from '../../../src/utils/validation'
 
 const content = getContent('redirect-urls')
 
-const ApplicationRedirectUrls = ({ application, router, serverError }) => {
+const ApplicationRedirectUrls = ({ application, serverError }) => {
   if (serverError) return <ErrorPage {...serverError} />
 
   const { user } = useAuth()
+
+  console.log('client', user.getToken())
 
   const addRef = useRef()
   const changeRef = useRef()
@@ -142,8 +145,6 @@ const ApplicationRedirectUrls = ({ application, router, serverError }) => {
     }
   }
 
-  console.log(errors)
-
   return (
     <ApplicationManagementPage title={content.title} application={application} errors={errors}>
       <div className='govuk-grid-row'>
@@ -217,7 +218,9 @@ const ApplicationRedirectUrls = ({ application, router, serverError }) => {
   )
 }
 
-ApplicationRedirectUrls.getInitialProps = async ({ res, query }) => {
+ApplicationRedirectUrls.getInitialProps = async ({ req, res, query }) => {
+  checkAuth(req, res)
+
   try {
     const application = await getApplication(query.slug)
     if (!application) return errorHandler(res)
@@ -230,7 +233,5 @@ ApplicationRedirectUrls.getInitialProps = async ({ res, query }) => {
     return errorHandler(res, error, 500)
   }
 }
-
-ApplicationRedirectUrls.displayName = 'Application Redirect Urls'
 
 export default ApplicationRedirectUrls

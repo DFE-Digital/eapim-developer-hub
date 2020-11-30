@@ -83,6 +83,4 @@ const ApplicationCreateStep3 = ({ router }) => {
   )
 }
 
-ApplicationCreateStep3.displayName = 'Application create redirect-url'
-
 export default ApplicationCreateStep3

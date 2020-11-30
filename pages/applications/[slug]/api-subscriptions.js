@@ -7,6 +7,7 @@ import ApplicationManagementPage from 'components/pages/ApplicationManagementPag
 
 import errorHandler from '../../../lib/errorHandler'
 
+import { checkAuth } from '../../../lib/authService'
 import { getApis, getApiTags } from '../../../lib/apiServices'
 import { getApplication } from '../../../lib/applicationService'
 import { getSubscriptions } from '../../../lib/subscriptionService'
@@ -57,7 +58,9 @@ const ApplicationApiSubscriptions = ({ apis, application, subscriptions, router,
   )
 }
 
-ApplicationApiSubscriptions.getInitialProps = async ({ res, query }) => {
+ApplicationApiSubscriptions.getInitialProps = async ({ req, res, query }) => {
+  checkAuth(req, res)
+
   try {
     const application = await getApplication(query.slug)
     if (!application) return errorHandler(res)
@@ -81,7 +84,5 @@ ApplicationApiSubscriptions.getInitialProps = async ({ res, query }) => {
     return errorHandler(res, error, 500)
   }
 }
-
-ApplicationApiSubscriptions.displayName = 'Application Api Subscriptions'
 
 export default ApplicationApiSubscriptions

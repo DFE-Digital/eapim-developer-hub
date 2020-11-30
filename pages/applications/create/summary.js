@@ -86,6 +86,4 @@ const ApplicationCreateSummary = ({ router }) => {
   )
 }
 
-ApplicationCreateSummary.displayName = 'Application added summary'
-
 export default ApplicationCreateSummary

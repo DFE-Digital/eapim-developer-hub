@@ -3,6 +3,7 @@ import ErrorPage from 'components/pages/ErrorPage'
 import ApplicationManagementPage from 'components/pages/ApplicationManagementPage'
 import { getContent } from '../../../content/applicationManagement'
 
+import { checkAuth } from '../../../lib/authService'
 import { getApplication } from '../../../lib/applicationService'
 import errorHandler from '../../../lib/errorHandler'
 
@@ -28,7 +29,9 @@ const DeleteApplication = ({ application, serverError }) => {
   )
 }
 
-DeleteApplication.getInitialProps = async ({ res, query }) => {
+DeleteApplication.getInitialProps = async ({ req, res, query }) => {
+  checkAuth(req, res)
+
   try {
     const application = await getApplication(query.slug)
     if (!application) return errorHandler(res)
@@ -41,7 +44,5 @@ DeleteApplication.getInitialProps = async ({ res, query }) => {
     return errorHandler(res, error, 500)
   }
 }
-
-DeleteApplication.displayName = 'Application Delete'
 
 export default DeleteApplication

@@ -25,6 +25,7 @@ const ContentBuilder = ({ data, sectionNav }) => {
         </Fragment>
       )}
       {data.map((item, i) => {
+        if (item.Type === 'DIV') return <div className='flex' key={i}>{ReactHtmlParser(item.Body)}</div>
         if (item.Type === 'H2') {
           const anchor = item.Body.replace(/\s+/g, '-').toLowerCase()
           return <h2 className='govuk-heading-l' key={i} id={anchor}>{ ReactHtmlParser(item.Body) }</h2>

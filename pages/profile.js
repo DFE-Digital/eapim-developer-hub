@@ -21,14 +21,16 @@ const errorHandling = (error) => {
   if (error.errorMessage.indexOf('AADB2C90091') > -1) goTo('/profile')
 }
 
-const Profile = ({ router }) => {
+const Profile = () => {
   const { user, setToken } = useAuth()
 
   useEffect(() => {
     const myMSALObj = new Msal.UserAgentApplication(config.editProfile)
 
     myMSALObj.handleRedirectCallback((error, response) => {
-      if (error) errorHandling(error)
+      if (error) return errorHandling(error)
+
+      console.log('response', response)
 
       const acr = response.idToken.claims['acr']
       const isIdToken = response.tokenType === 'id_token'
@@ -79,7 +81,5 @@ const Profile = ({ router }) => {
     </Page>
   )
 }
-
-Profile.displayName = 'Profile'
 
 export default Profile

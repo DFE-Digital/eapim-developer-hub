@@ -3,6 +3,7 @@ import ApplicationManagementPage from 'components/pages/ApplicationManagementPag
 import ErrorPage from 'components/ErrorPage'
 import ContentBuilder from 'components/ContentBuilder'
 import clipboard from '../../../src/utils/clipboard'
+import { checkAuth } from '../../../lib/authService'
 import { getApplication } from '../../../lib/applicationService'
 import errorHandler from '../../../lib/errorHandler'
 
@@ -121,7 +122,9 @@ const ApplicationCredentials = ({ application, router, serverError }) => {
   )
 }
 
-ApplicationCredentials.getInitialProps = async ({ res, query }) => {
+ApplicationCredentials.getInitialProps = async ({ req, res, query }) => {
+  checkAuth(req, res)
+
   try {
     const application = await getApplication(query.slug)
     if (!application) return errorHandler(res)
@@ -132,7 +135,5 @@ ApplicationCredentials.getInitialProps = async ({ res, query }) => {
     return errorHandler(res, error, 500)
   }
 }
-
-ApplicationCredentials.displayName = 'Application Credentials'
 
 export default ApplicationCredentials

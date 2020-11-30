@@ -7,6 +7,4 @@ const Documentation = () => {
   )
 }
 
-Documentation.displayName = 'Authorisation (doc)'
-
 export default Documentation

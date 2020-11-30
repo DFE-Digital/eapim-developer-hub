@@ -45,6 +45,4 @@ Apis.getInitialProps = async ({ res }) => {
   }
 }
 
-Apis.displayName = 'APIs listing'
-
 export default Apis

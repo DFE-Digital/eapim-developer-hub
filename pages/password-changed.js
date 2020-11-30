@@ -14,6 +14,4 @@ const PasswordChanged = ({ router }) => {
   )
 }
 
-PasswordChanged.displayName = 'Password changed'
-
 export default PasswordChanged

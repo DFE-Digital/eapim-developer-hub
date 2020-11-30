@@ -78,6 +78,4 @@ const ApplicationCreateStep2 = ({ router }) => {
   )
 }
 
-ApplicationCreateStep2.displayName = 'Application create description'
-
 export default ApplicationCreateStep2

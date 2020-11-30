@@ -70,8 +70,6 @@ const ApplicationCreateStep1 = ({ router }) => {
     return true
   }
 
-  console.log(errors)
-
   return (
     <ApplicationPage title={content.title} errors={errors} layout='two-thirds' hideSidebar backLink>
       <form noValidate onSubmit={handleSubmit}>
@@ -101,7 +99,5 @@ const ApplicationCreateStep1 = ({ router }) => {
     </ApplicationPage>
   )
 }
-
-ApplicationCreateStep1.displayName = 'Application create name'
 
 export default ApplicationCreateStep1

@@ -70,6 +70,4 @@ const Applications = ({ router }) => {
   )
 }
 
-Applications.displayName = 'Applications listing'
-
 export default Applications

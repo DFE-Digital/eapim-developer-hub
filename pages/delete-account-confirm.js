@@ -1,49 +1,48 @@
 import fetch from 'isomorphic-unfetch'
 import React from 'react'
 import Link from 'next/link'
-import Content from '../content.json'
 import ErrorPage from 'components/pages/ErrorPage'
 import Page from 'components/Page'
+import ContentBuilder from 'components/ContentBuilder'
 import { useAuth } from '../providers/AuthProvider'
-
+import { checkAuth } from '../lib/authService'
 import errorHandler from '../lib/errorHandler'
+import { getContent } from '../content/profile'
 
-const page = 'Profile'
+const content = getContent('delete-account-confirm')
 
-const DeleteAcountConfirm = ({ router, serverError }) => {
+const DeleteAcountConfirm = ({ serverError }) => {
   if (serverError) return <ErrorPage {...serverError} />
 
   const { user } = useAuth()
 
   return (
-    <Page layout='two-thirds'>
-      {!user.getToken() && null}
-
-      <h1 className='govuk-heading-xl'>Are you sure you want us to delete your account?</h1>
+    <Page title={content.title} layout='two-thirds'>
+      <h1 className='govuk-heading-xl'>{content.title}</h1>
 
       <table className='govuk-table'>
-        <caption className='govuk-table__caption govuk-heading-m'>{Content[page].Content.AccountDetails.Heading}</caption>
+        <caption className='govuk-table__caption govuk-heading-m'>{content.tableCaption}</caption>
         <tbody className='govuk-table__body'>
           <tr className='govuk-table__row'>
-            <th scope='row' className='govuk-table__header'>Name</th>
-            <td className='govuk-table__cell'>{user.given_name} {user.family_name}</td>
+            <th scope='row' className='govuk-table__header'>{content.tableHeadings.name}</th>
+            <td className='govuk-table__cell'>{user.name()}</td>
           </tr>
           <tr className='govuk-table__row'>
-            <th scope='row' className='govuk-table__header'>Email address</th>
-            <td className='govuk-table__cell'>{user.email}</td>
+            <th scope='row' className='govuk-table__header'>{content.tableHeadings.email}</th>
+            <td className='govuk-table__cell'>{user.email()}</td>
           </tr>
         </tbody>
       </table>
 
-      <p className='govuk-body'>This will be deleted immediately. We cannot restore accounts once they have been deleted.</p>
+      <ContentBuilder sectionNav={false} data={content.content} />
 
       <form method='POST' action='/delete-account-confirm' noValidate>
-        <input type='hidden' name='userName' value={`${user.given_name} ${user.family_name}`} />
-        <input type='hidden' name='userEmail' value={user.email} />
-        <input type='hidden' name='userID' value={user.accountIdentifier} />
+        <input type='hidden' name='userName' value={user.name()} />
+        <input type='hidden' name='userEmail' value={user.email()} />
+        <input type='hidden' name='userID' value={user.id()} />
         <button type='submit' className='govuk-button govuk-button--warning govuk-!-margin-top-6 govuk-!-margin-right-1'>Delete account</button>
         <Link href='/profile'>
-          <a className={'govuk-button govuk-button--secondary govuk-!-margin-top-6'}>Cancel</a>
+          <a className={'govuk-button govuk-button--secondary govuk-!-margin-top-6'}>{content.buttons.cancel}</a>
         </Link>
       </form>
     </Page>
@@ -51,6 +50,8 @@ const DeleteAcountConfirm = ({ router, serverError }) => {
 }
 
 DeleteAcountConfirm.getInitialProps = async ({ req, res }) => {
+  checkAuth(req, res)
+
   if (req && req.method === 'POST') {
     try {
       const { userName, userEmail, userID } = req.body
@@ -69,16 +70,12 @@ DeleteAcountConfirm.getInitialProps = async ({ req, res }) => {
       res.setHeader('x-deleted-account', 'true')
       res.redirect('/?account=deleted')
       res.end()
-
-      return {}
     } catch (error) {
       return errorHandler(res, error, 500)
     }
-  } else {
-    return { status: 200 }
   }
-}
 
-DeleteAcountConfirm.displayName = 'DeleteAcountConfirm'
+  return { status: 200 }
+}
 
 export default DeleteAcountConfirm

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-gb" dir="ltr">
 <head>
-  <title>DfE Developer Hub</title>
+  <title>Resend verification code | DfE Developer Hub</title>
   <meta charset="UTF-8">
 
   <link rel="shortcut icon" sizes="16x16 32x32 48x48" href="#{ROOT_URL}#/assets/images/favicon.ico" type="image/x-icon" />
@@ -13,12 +13,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta property="og:title" content="DfE Developer Hub" />
   
-  <link rel="stylesheet" href="#{ROOT_URL}#/assets/css/gds-main.css?v=0.0.3" type="text/css" media="all">
-  <link rel="stylesheet" href="#{ROOT_URL}#/assets/css/b2c-overrides.css" type="text/css" media="all">
+  <link rel="stylesheet" href="#{ROOT_URL}#/assets/css/gds-main.css?v=0.0.3" type="text/css" media="all" data-preload="true">
+  <link rel="stylesheet" href="#{ROOT_URL}#/assets/css/b2c-overrides.css" type="text/css" media="all" data-preload="true">
 </head>
 <body>
-  <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
-
   <header class="govuk-header" role="banner" data-module="govuk-header">
     <div class="govuk-header__container govuk-width-container">
       <div class="govuk-header__logo">
@@ -30,7 +28,9 @@
             <span class="govuk-header__logotype-text">GOV.UK</span>
           </span>
         </a>
-      </div>      <div class="govuk-header__content">
+      </div>
+      <a href="#main-content" class="govuk-skip-link">Skip to main content</a>
+      <div class="govuk-header__content">
         <a class="govuk-header__link govuk-header__link--service-name" href="#{ROOT_URL}#">DfE Developer Hub</a><button type="button" class="govuk-header__menu-button" aria-controls="navigation" aria-label="Show or hide Top Level Navigation" aria-expanded="false">Menu</button>
         <nav>
           <ul id="navigation" class="govuk-header__navigation" aria-label="Top Level Navigation" aria-hidden="true">
@@ -69,7 +69,7 @@
     <div class="govuk-width-container">
       <div class="govuk-footer__meta">
         <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
-          <h2 class='govuk-visually-hidden'>Support links</h2>
+          <h4 className='govuk-visually-hidden'>Footer links</h4>
           <ul class='govuk-footer__inline-list'>
             <li class='govuk-footer__inline-list-item'>
               <a class='govuk-footer__link' href='#{ROOT_URL}#/cookies'>Cookies</a>

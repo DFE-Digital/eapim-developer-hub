@@ -5,7 +5,7 @@ import { getContent } from '../content/site'
 
 const content = getContent('privacy')
 
-const PrivacyPolicy = ({ router }) => {
+const PrivacyPolicy = () => {
   return (
     <Page title={content.title}>
       <h1 className='govuk-heading-xl'>{content.title}</h1>
@@ -13,7 +13,5 @@ const PrivacyPolicy = ({ router }) => {
     </Page>
   )
 }
-
-PrivacyPolicy.displayName = 'Privacy Policy'
 
 export default PrivacyPolicy

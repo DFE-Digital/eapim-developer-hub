@@ -7,6 +7,4 @@ const Documentation = () => {
   )
 }
 
-Documentation.displayName = 'Terms of use (doc)'
-
 export default Documentation

@@ -7,6 +7,4 @@ const Documentation = () => {
   )
 }
 
-Documentation.displayName = 'Using the Developer Hub (doc)'
-
 export default Documentation

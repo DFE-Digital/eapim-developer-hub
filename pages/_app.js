@@ -1,17 +1,19 @@
 import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import { Helmet } from 'react-helmet'
-import Content from '../content.json'
 import styledNormalize from 'styled-normalize'
 import App from 'next/app'
 import theme from 'theme'
 import { AuthProvider } from '../providers/AuthProvider'
 import { ApplicationProvider } from '../providers/ApplicationProvider'
+import { getContent } from '../content/site'
 
 import '../scss/main.scss'
 
 const GlobalStyle = createGlobalStyle`
   ${styledNormalize}
 `
+
+const content = getContent('app')
 
 class DeveloperHub extends App {
   componentDidMount () {
@@ -20,7 +22,7 @@ class DeveloperHub extends App {
 
   render () {
     const { Component, pageProps } = this.props
-    const title = Content.PortalName
+    const title = content.portalName
 
     return (
       <>

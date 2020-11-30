@@ -1,8 +1,8 @@
 import React from 'react'
 import ApplicationManagementPage from 'components/pages/ApplicationManagementPage'
 import ErrorPage from 'components/pages/ErrorPage'
+import { checkAuth } from '../../../../lib/authService'
 import { getApplication } from '../../../../lib/applicationService'
-
 import errorHandler from '../../../../lib/errorHandler'
 import { getContent } from '../../../../content/applicationManagement'
 
@@ -21,7 +21,9 @@ const UnsubscribeConfirmed = ({ application, serverError }) => {
   )
 }
 
-UnsubscribeConfirmed.getInitialProps = async ({ res, query }) => {
+UnsubscribeConfirmed.getInitialProps = async ({ req, res, query }) => {
+  checkAuth(req, res)
+
   try {
     const application = await getApplication(query.slug)
     if (!application) return errorHandler(res)
@@ -30,7 +32,5 @@ UnsubscribeConfirmed.getInitialProps = async ({ res, query }) => {
     return errorHandler(res, error, 500)
   }
 }
-
-UnsubscribeConfirmed.displayName = 'Unsubscribe confirmed'
 
 export default UnsubscribeConfirmed

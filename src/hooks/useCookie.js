@@ -8,6 +8,10 @@ const hasCookie = (key) => {
   return !!cookies.find(item => item.indexOf(key) > -1)
 }
 
+const deleteCookie = (key) => {
+  document.cookie = key + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;'
+}
+
 const setCookie = (key, value) => {
   const date = new Date()
   date.setTime(date.getTime() + (28 * 24 * 60 * 60 * 1000))
@@ -16,5 +20,5 @@ const setCookie = (key, value) => {
 }
 
 export default function useCookie () {
-  return { getCookie, setCookie, hasCookie }
+  return { getCookie, setCookie, hasCookie, deleteCookie }
 }

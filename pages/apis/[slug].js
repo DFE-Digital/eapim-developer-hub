@@ -35,6 +35,4 @@ ApiDetails.getInitialProps = async ({ res, query }) => {
   }
 }
 
-ApiDetails.displayName = 'API documentation'
-
 export default ApiDetails

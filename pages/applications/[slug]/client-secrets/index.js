@@ -5,6 +5,7 @@ import ApplicationManagementPage from 'components/pages/ApplicationManagementPag
 import ErrorPage from 'components/pages/ErrorPage'
 import ContentBuilder from 'components/ContentBuilder'
 
+import { checkAuth } from '../../../../lib/authService'
 import { getApplication } from '../../../../lib/applicationService'
 import errorHandler from '../../../../lib/errorHandler'
 
@@ -94,7 +95,9 @@ const ApplicationClientSecrets = ({ id, application, serverError }) => {
   )
 }
 
-ApplicationClientSecrets.getInitialProps = async ({ res, query }) => {
+ApplicationClientSecrets.getInitialProps = async ({ req, res, query }) => {
+  checkAuth(req, res)
+
   try {
     const application = await getApplication(query.slug)
     if (!application) return errorHandler(res)
@@ -107,7 +110,5 @@ ApplicationClientSecrets.getInitialProps = async ({ res, query }) => {
     return errorHandler(res, error, 500)
   }
 }
-
-ApplicationClientSecrets.displayName = 'Application Client Secrets'
 
 export default ApplicationClientSecrets

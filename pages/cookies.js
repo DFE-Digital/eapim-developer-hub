@@ -5,7 +5,7 @@ import { getContent } from '../content/site'
 
 const content = getContent('cookies')
 
-const Cookies = ({ router }) => {
+const Cookies = () => {
   return (
     <Page title={content.title}>
       <h1 className='govuk-heading-xl'>{content.title}</h1>
@@ -13,7 +13,5 @@ const Cookies = ({ router }) => {
     </Page>
   )
 }
-
-Cookies.displayName = 'Cookies'
 
 export default Cookies

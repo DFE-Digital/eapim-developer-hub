@@ -5,6 +5,7 @@ import ContentBuilder from 'components/ContentBuilder'
 import ErrorPage from 'components/pages/ErrorPage'
 import ApplicationManagementPage from 'components/pages/ApplicationManagementPage'
 import { useAuth } from '../../../providers/AuthProvider'
+import { checkAuth } from '../../../lib/authService'
 import { getApplication, deleteApplication } from '../../../lib/applicationService'
 import errorHandler from '../../../lib/errorHandler'
 
@@ -64,7 +65,9 @@ const ApplicationDeleteConfirm = ({ application, serverError }) => {
   )
 }
 
-ApplicationDeleteConfirm.getInitialProps = async ({ res, query }) => {
+ApplicationDeleteConfirm.getInitialProps = async ({ req, res, query }) => {
+  checkAuth(req, res)
+
   try {
     const application = await getApplication(query.slug)
     if (!application) return errorHandler(res)
@@ -77,7 +80,5 @@ ApplicationDeleteConfirm.getInitialProps = async ({ res, query }) => {
     return errorHandler(res, error, 500)
   }
 }
-
-ApplicationDeleteConfirm.displayName = 'Application Delete Confirm'
 
 export default ApplicationDeleteConfirm
