@@ -4,6 +4,7 @@ import ReactHtmlParser from 'react-html-parser'
 import Link from 'next/link'
 import Content from '../content.json'
 import Header from 'components/Header'
+import CookieBanner from 'components/CookieBanner'
 import PhaseBanner from 'components/PhaseBanner'
 import AuthNavigation from 'components/AuthNavigation'
 import Footer from 'components/Footer'
@@ -24,6 +25,7 @@ const Home = ({ accountDeleted }) => {
 
   return (
     <>
+      <CookieBanner />
       <Header />
       <PhaseBanner />
       <div className='govuk-width-container service-banner'>

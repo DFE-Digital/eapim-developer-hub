@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react'
 import { getContent } from '../../../content/applicationManagement'
 import ContentBuilder from 'components/ContentBuilder'
 import ErrorPage from 'components/pages/ErrorPage'
-import ApplicationPage from 'components/pages/ApplicationPage'
+import ApplicationManagementPage from 'components/pages/ApplicationManagementPage'
 
 import { getApplication, updateApplication } from '../../../lib/applicationService'
 import errorHandler from '../../../lib/errorHandler'
@@ -16,8 +16,8 @@ import * as validation from '../../../src/utils/validation'
 
 const content = getContent('redirect-urls')
 
-const ApplicationRedirectUrls = ({ application, router, errorCode }) => {
-  if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
+const ApplicationRedirectUrls = ({ application, router, serverError }) => {
+  if (serverError) return <ErrorPage {...serverError} />
 
   const { user } = useAuth()
 
@@ -142,8 +142,10 @@ const ApplicationRedirectUrls = ({ application, router, errorCode }) => {
     }
   }
 
+  console.log(errors)
+
   return (
-    <ApplicationPage title={content.title} router={router} application={application} errors={errors}>
+    <ApplicationManagementPage title={content.title} application={application} errors={errors}>
       <div className='govuk-grid-row'>
         <div className='govuk-grid-column-full'>
           <h1 className='govuk-heading-xl'>{content.title}</h1>
@@ -211,7 +213,7 @@ const ApplicationRedirectUrls = ({ application, router, errorCode }) => {
           )}
         </div>
       </div>
-    </ApplicationPage>
+    </ApplicationManagementPage>
   )
 }
 
@@ -225,7 +227,7 @@ ApplicationRedirectUrls.getInitialProps = async ({ res, query }) => {
       application
     }
   } catch (error) {
-    return errorHandler(error, res, 500)
+    return errorHandler(res, error, 500)
   }
 }
 

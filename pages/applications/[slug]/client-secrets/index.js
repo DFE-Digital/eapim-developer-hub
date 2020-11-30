@@ -1,7 +1,7 @@
 import moment from 'moment'
 import React from 'react'
 import { getContent } from '../../../../content/applicationManagement'
-import ApplicationPage from 'components/pages/ApplicationPage'
+import ApplicationManagementPage from 'components/pages/ApplicationManagementPage'
 import ErrorPage from 'components/pages/ErrorPage'
 import ContentBuilder from 'components/ContentBuilder'
 
@@ -10,8 +10,8 @@ import errorHandler from '../../../../lib/errorHandler'
 
 const content = getContent('client-secrets')
 
-const ApplicationClientSecrets = ({ id, application, router, errorCode }) => {
-  if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
+const ApplicationClientSecrets = ({ id, application, serverError }) => {
+  if (serverError) return <ErrorPage {...serverError} />
 
   application.passwordCredentials.sort((a, b) => {
     if (a.displayName < b.displayName) { return -1 }
@@ -23,7 +23,7 @@ const ApplicationClientSecrets = ({ id, application, router, errorCode }) => {
   const secondary = application.passwordCredentials[1]
 
   return (
-    <ApplicationPage title={content.title} router={router} application={application}>
+    <ApplicationManagementPage title={content.title} application={application}>
       <h1 className='govuk-heading-xl'>{content.title}</h1>
 
       <ContentBuilder sectionNav={false} data={content.intro} />
@@ -90,27 +90,21 @@ const ApplicationClientSecrets = ({ id, application, router, errorCode }) => {
       </table>
 
       <ContentBuilder sectionNav={false} data={content.content} />
-    </ApplicationPage>
+    </ApplicationManagementPage>
   )
 }
 
-ApplicationClientSecrets.getInitialProps = async ({ req, res, query }) => {
-  if (req && req.method === 'GET') {
-    try {
-      const application = await getApplication(query.slug)
-      if (!application) return errorHandler(res)
+ApplicationClientSecrets.getInitialProps = async ({ res, query }) => {
+  try {
+    const application = await getApplication(query.slug)
+    if (!application) return errorHandler(res)
 
-      return {
-        id: query.slug,
-        application
-      }
-    } catch (error) {
-      return errorHandler(error, res, 500)
+    return {
+      id: query.slug,
+      application
     }
-  }
-
-  return {
-    id: query.slug
+  } catch (error) {
+    return errorHandler(res, error, 500)
   }
 }
 

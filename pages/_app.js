@@ -2,12 +2,8 @@ import { ThemeProvider, createGlobalStyle } from 'styled-components'
 import { Helmet } from 'react-helmet'
 import Content from '../content.json'
 import styledNormalize from 'styled-normalize'
-import { withRouter } from 'next/router'
 import App from 'next/app'
-import { withApplicationInsights } from '../src/components/withApplicationInsights'
 import theme from 'theme'
-
-import { AppProvider } from '../providers/AppProvider'
 import { AuthProvider } from '../providers/AuthProvider'
 import { ApplicationProvider } from '../providers/ApplicationProvider'
 
@@ -23,7 +19,7 @@ class DeveloperHub extends App {
   }
 
   render () {
-    const { Component, pageProps, router } = this.props
+    const { Component, pageProps } = this.props
     const title = Content.PortalName
 
     return (
@@ -43,12 +39,10 @@ class DeveloperHub extends App {
         </Helmet>
         <ThemeProvider theme={theme}>
           <AuthProvider>
-            <AppProvider>
-              <ApplicationProvider>
-                <GlobalStyle />
-                <Component {...pageProps} router={router} />
-              </ApplicationProvider>
-            </AppProvider>
+            <ApplicationProvider>
+              <GlobalStyle />
+              <Component {...pageProps} />
+            </ApplicationProvider>
           </AuthProvider>
         </ThemeProvider>
       </>
@@ -56,7 +50,4 @@ class DeveloperHub extends App {
   }
 }
 
-export default withRouter(withApplicationInsights({
-  instrumentationKey: process.env.NEXT_PUBLIC_INSTRUMENTATION_KEY,
-  isEnabled: true
-})(DeveloperHub))
+export default DeveloperHub

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Page from 'components/Page'
+import ApplicationPage from 'components/pages/ApplicationPage'
 import { useAuth } from '../../../providers/AuthProvider'
 import { useApplication } from '../../../providers/ApplicationProvider'
 import { registerApplication } from '../../../lib/applicationService'
@@ -44,7 +44,7 @@ const ApplicationCreateSummary = ({ router }) => {
   }
 
   return (
-    <Page title={content.title} router={router}>
+    <ApplicationPage title={content.title} breadcrumbs={[{ text: 'to application redirect url ', href: '/applications/create/step3', back: true }]} hideSidebar>
       <h1 className='govuk-heading-xl'>{content.title}</h1>
 
       <table className='govuk-table'>
@@ -82,7 +82,7 @@ const ApplicationCreateSummary = ({ router }) => {
         onClick={() => { router.push('/applications'); clear() }}>
         {content.buttons.cancel}
       </button>
-    </Page>
+    </ApplicationPage>
   )
 }
 

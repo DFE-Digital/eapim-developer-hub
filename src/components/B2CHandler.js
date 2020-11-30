@@ -6,7 +6,7 @@ const B2CHandler = ({ func, text }) => {
       await func()
     }
     handler()
-  })
+  }, [])
 
   return (
     <span className='govuk-visually-hidden'>{text}</span>

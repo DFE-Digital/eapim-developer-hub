@@ -6,11 +6,11 @@ import APISummary from 'components/APISummary'
 import { getApis, getApiTags, getSummary } from '../../lib/apiServices'
 import errorHandler from '../../lib/errorHandler'
 
-const ApiDetails = ({ api, summary, router, errorCode }) => {
-  if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
+const ApiDetails = ({ api, summary, serverError }) => {
+  if (serverError) return <ErrorPage {...serverError} />
 
   return (
-    <APIPage title={api.name} router={router} hideTitle>
+    <APIPage title={api.name} hideTitle>
       <APISummary api={api} summary={summary} />
     </APIPage>
   )
@@ -31,7 +31,7 @@ ApiDetails.getInitialProps = async ({ res, query }) => {
 
     return { api, summary }
   } catch (error) {
-    return errorHandler(error, res, 500)
+    return errorHandler(res, error, 500)
   }
 }
 

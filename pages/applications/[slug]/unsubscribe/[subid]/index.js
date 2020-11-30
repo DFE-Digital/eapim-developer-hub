@@ -1,6 +1,6 @@
 import React from 'react'
 import ErrorPage from 'components/pages/ErrorPage'
-import Page from 'components/Page'
+import ApplicationManagementPage from 'components/pages/ApplicationManagementPage'
 
 import { getApplication } from '../../../../../lib/applicationService'
 import { getSubscriptions, deleteSubscription } from '../../../../../lib/subscriptionService'
@@ -10,13 +10,13 @@ import { getContent } from '../../../../../content/applicationManagement'
 
 const content = getContent('api-subscriptions-unsubscribe')
 
-const Unsubscribe = ({ application, subscription, router, errorCode }) => {
-  if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
+const Unsubscribe = ({ application, subscription, serverError }) => {
+  if (serverError) return <ErrorPage {...serverError} />
 
   const title = `${content.title} ${subscription.apiName}`
 
   return (
-    <Page title={title} router={router}>
+    <ApplicationManagementPage title={title} application={application} hideSidebar backLink>
       <h1 className='govuk-heading-xl'>{title}</h1>
 
       <dl className='govuk-summary-list'>
@@ -45,7 +45,7 @@ const Unsubscribe = ({ application, subscription, router, errorCode }) => {
           {content.buttons.cancel}
         </a>
       </form>
-    </Page>
+    </ApplicationManagementPage>
   )
 }
 
@@ -58,7 +58,7 @@ Unsubscribe.getInitialProps = async ({ req, res, query }) => {
       res.writeHead(301, { Location: `/applications/${applicationId}/unsubscribe/confirmed` })
       res.end()
     } catch (error) {
-      return errorHandler(error, res, 500)
+      return errorHandler(res, error, 500)
     }
   }
 
@@ -83,7 +83,7 @@ Unsubscribe.getInitialProps = async ({ req, res, query }) => {
       subscription
     }
   } catch (error) {
-    return errorHandler(error, res, 500)
+    return errorHandler(res, error, 500)
   }
 }
 

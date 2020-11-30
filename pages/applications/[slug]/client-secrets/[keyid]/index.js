@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-unfetch'
 import React, { useState } from 'react'
 import moment from 'moment'
-import Page from 'components/Page'
+import ApplicationManagementPage from 'components/pages/ApplicationManagementPage'
 import ErrorPage from 'components/pages/ErrorPage'
 import ContentBuilder from 'components/ContentBuilder'
 
@@ -13,8 +13,8 @@ import { getContent } from '../../../../../content/applicationManagement'
 
 const content = getContent('client-secrets-confirm')
 
-const ApplicationClientSecretsConfirm = ({ id, secret, applicationName, router, errorCode, newClientKey, newClientKeyDisplayName, startDateTime, endDateTime }) => {
-  if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
+const ApplicationClientSecretsConfirm = ({ id, secret, application, newClientKey, newClientKeyDisplayName, startDateTime, endDateTime, serverError }) => {
+  if (serverError) return <ErrorPage {...serverError} />
 
   const { user } = useAuth()
 
@@ -31,8 +31,10 @@ const ApplicationClientSecretsConfirm = ({ id, secret, applicationName, router, 
   if (newClientKey) title = `Your ${newClientKeyDisplayName} key has been regenerated successfully`
   if (!newClientKey && user.getToken()) title = content.titles.confirm
 
+  const { applicationName } = application
+
   return (
-    <Page title={title} router={router}>
+    <ApplicationManagementPage title={title} application={application} hideSidebar backLink>
       {newClientKey &&
         <div className='govuk-grid-column'>
           <h1 className='govuk-heading-xl'>{title}</h1>
@@ -97,29 +99,11 @@ const ApplicationClientSecretsConfirm = ({ id, secret, applicationName, router, 
           </form>
         </div>
       }
-    </Page>
+    </ApplicationManagementPage>
   )
 }
 
 ApplicationClientSecretsConfirm.getInitialProps = async ({ req, res, query }) => {
-  if (req && req.method === 'GET') {
-    try {
-      const application = await getApplication(query.slug)
-      if (!application) return errorHandler(res)
-
-      const secret = application.passwordCredentials.find(item => item.keyId === query.keyid)
-      if (!secret) return errorHandler(res)
-
-      return {
-        secret,
-        id: query.slug,
-        applicationName: application.applicationName
-      }
-    } catch (error) {
-      return errorHandler(error, res, 500)
-    }
-  }
-
   if (req && req.method === 'POST') {
     const { userName, userEmail, userID, applicationId, KeyId, KeyDisplayName } = req.body
 
@@ -144,21 +128,33 @@ ApplicationClientSecretsConfirm.getInitialProps = async ({ req, res, query }) =>
         const { startDateTime, endDateTime } = keyObject
 
         return {
+          application,
           newClientKey,
           startDateTime,
           endDateTime,
           newClientKeyDisplayName: KeyDisplayName,
-          id: data.applicationId,
-          applicationName: application.applicationName
+          id: data.applicationId
         }
       }
     } catch (error) {
-      console.log(error)
+      return errorHandler(res, error, 500)
     }
   }
 
-  return {
-    id: query.slug
+  try {
+    const application = await getApplication(query.slug)
+    if (!application) return errorHandler(res)
+
+    const secret = application.passwordCredentials.find(item => item.keyId === query.keyid)
+    if (!secret) return errorHandler(res)
+
+    return {
+      secret,
+      application,
+      id: query.slug
+    }
+  } catch (error) {
+    return errorHandler(res, error, 500)
   }
 }
 

@@ -1,16 +1,16 @@
 import React from 'react'
-import { getContent, sidebar } from '../../content/application'
+import { getContent } from '../../content/application'
 import ContentBuilder from 'components/ContentBuilder'
-import Page from 'components/Page'
+import ApplicationPage from 'components/pages/ApplicationPage'
 
 const content = getContent('how-to-develop-your-application')
 
-const ApplicationsHowTo = ({ router }) => {
+const ApplicationsHowTo = () => {
   return (
-    <Page title={content.title} router={router} sidebarContent={sidebar()}>
+    <ApplicationPage title={content.title}>
       <h1 className='govuk-heading-xl'>{content.title}</h1>
       <ContentBuilder sectionNav={false} data={content.content} />
-    </Page>
+    </ApplicationPage>
   )
 }
 

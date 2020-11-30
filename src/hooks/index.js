@@ -1,9 +1,9 @@
-import useUser from './useUser'
 import useIsIE11 from './useIsIE11'
-import useCookieBanner from './useCookieBanner'
+import useCookie from './useCookie'
+import useInsights from './useInsights'
 
 export {
-  useUser,
   useIsIE11,
-  useCookieBanner
+  useCookie,
+  useInsights
 }

@@ -9,7 +9,7 @@ const content = getContent('logged-out')
 
 const LoggedOut = ({ router }) => {
   return (
-    <Page title={content.title} router={router} layout='three-quarters'>
+    <Page title={content.title} layout='three-quarters'>
       <h1 className='govuk-heading-l'>{content.title}</h1>
       <a href='/' className='govuk-button govuk-button--default' role='button'>
         {content.buttons.home}

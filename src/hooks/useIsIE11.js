@@ -6,7 +6,7 @@ export default function useIsIE11 () {
   useEffect(() => {
     const ie11 = !!(window.MSInputMethodContext && document.documentMode)
     setIsIe11(ie11)
-  })
+  }, [])
 
-  return isIe11
+  return [isIe11]
 }

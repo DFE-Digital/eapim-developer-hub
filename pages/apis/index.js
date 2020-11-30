@@ -5,8 +5,8 @@ import APIPage from 'components/pages/APIPage'
 import { getApis } from '../../lib/apiServices'
 import errorHandler from '../../lib/errorHandler'
 
-const Apis = ({ apis, router, errorCode }) => {
-  if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
+const Apis = ({ apis, router, serverError }) => {
+  if (serverError) return <ErrorPage {...serverError} />
 
   const apiList = apis.map((api, i) => {
     return (
@@ -24,7 +24,7 @@ const Apis = ({ apis, router, errorCode }) => {
   })
 
   return (
-    <APIPage router={router}>
+    <APIPage>
       <table className='govuk-table'>
         <tbody className='govuk-table__body'>
           {apiList}
@@ -41,7 +41,7 @@ Apis.getInitialProps = async ({ res }) => {
 
     return { apis }
   } catch (error) {
-    return errorHandler(error, res, 500)
+    return errorHandler(res, error, 500)
   }
 }
 

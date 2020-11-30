@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import Page from 'components/Page'
+import ApplicationPage from 'components/pages/ApplicationPage'
 import { getApplications } from '../../../lib/applicationService'
 import { useApplication } from '../../../providers/ApplicationProvider'
 import { useAuth } from '../../../providers/AuthProvider'
@@ -70,8 +70,10 @@ const ApplicationCreateStep1 = ({ router }) => {
     return true
   }
 
+  console.log(errors)
+
   return (
-    <Page title={content.title} router={router} errors={errors} layout='two-thirds'>
+    <ApplicationPage title={content.title} errors={errors} layout='two-thirds' hideSidebar backLink>
       <form noValidate onSubmit={handleSubmit}>
         <div className='govuk-form-group'>
           <fieldset className='govuk-fieldset'>
@@ -82,8 +84,8 @@ const ApplicationCreateStep1 = ({ router }) => {
             </legend>
             <Input
               ref={appNameRef}
-              id='app-name'
-              name='app-name'
+              id='appName'
+              name='appName'
               type='text'
               label={content.inputs.label}
               value={context.application.name}
@@ -96,7 +98,7 @@ const ApplicationCreateStep1 = ({ router }) => {
         <button type='submit' className='govuk-button govuk-!-margin-right-1'>{content.buttons.continue}</button>
         <button type='button' className='govuk-button govuk-button--secondary' onClick={() => cancel()}>{content.buttons.cancel}</button>
       </form>
-    </Page>
+    </ApplicationPage>
   )
 }
 

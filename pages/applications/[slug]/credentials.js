@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import ApplicationPage from 'components/pages/ApplicationPage'
+import ApplicationManagementPage from 'components/pages/ApplicationManagementPage'
+import ErrorPage from 'components/ErrorPage'
 import ContentBuilder from 'components/ContentBuilder'
 import clipboard from '../../../src/utils/clipboard'
 import { getApplication } from '../../../lib/applicationService'
@@ -8,7 +9,9 @@ import errorHandler from '../../../lib/errorHandler'
 import { getContent } from '../../../content/applicationManagement'
 const content = getContent('credentials')
 
-const ApplicationCredentials = ({ application, router }) => {
+const ApplicationCredentials = ({ application, router, serverError }) => {
+  if (serverError) return <ErrorPage {...serverError} />
+
   const [confirm, setConfirm] = useState(false)
   const [clientIdCopied, setClientIdCopied] = useState(false)
   const [primaryCopied, setPrimaryCopied] = useState(false)
@@ -49,7 +52,7 @@ const ApplicationCredentials = ({ application, router }) => {
   }
 
   return (
-    <ApplicationPage title={content.title} router={router}>
+    <ApplicationManagementPage title={content.title} hideSidebar backLink>
       <h1 className='govuk-heading-xl'>{content.title}</h1>
 
       <ContentBuilder sectionNav={false} data={content.content} />
@@ -114,7 +117,7 @@ const ApplicationCredentials = ({ application, router }) => {
       <button type='button' disabled={!confirm} className='govuk-button' onClick={onConfirm}>
         {content.buttons.view}
       </button>
-    </ApplicationPage>
+    </ApplicationManagementPage>
   )
 }
 
@@ -126,7 +129,7 @@ ApplicationCredentials.getInitialProps = async ({ res, query }) => {
       application
     }
   } catch (error) {
-    return errorHandler(error, res, 500)
+    return errorHandler(res, error, 500)
   }
 }
 

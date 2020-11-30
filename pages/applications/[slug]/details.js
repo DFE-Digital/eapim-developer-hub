@@ -3,7 +3,7 @@ import React from 'react'
 import Link from 'next/link'
 import { getContent } from '../../../content/applicationManagement'
 import ErrorPage from 'components/pages/ErrorPage'
-import ApplicationPage from 'components/pages/ApplicationPage'
+import ApplicationManagementPage from 'components/pages/ApplicationManagementPage'
 import { useAuth } from '../../../providers/AuthProvider'
 
 import { getApplication } from '../../../lib/applicationService'
@@ -11,13 +11,13 @@ import errorHandler from '../../../lib/errorHandler'
 
 const content = getContent('details')
 
-const ApplicationDetails = ({ application, router, errorCode }) => {
-  if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
+const ApplicationDetails = ({ application, router, serverError }) => {
+  if (serverError) return <ErrorPage {...serverError} />
 
   const { user } = useAuth()
 
   return (
-    <ApplicationPage title={content.title} router={router} application={application}>
+    <ApplicationManagementPage title={content.title} application={application}>
       <h1 className='govuk-heading-xl'>{content.title}</h1>
 
       <dl className='govuk-summary-list'>
@@ -74,7 +74,7 @@ const ApplicationDetails = ({ application, router, errorCode }) => {
       <Link href='/applications/[slug]/api-subscriptions' as={`/applications/${application.applicationId}/api-subscriptions`} passHref>
         <a role='button' className='govuk-button govuk-button--default govuk-!-margin-top-6'>{content.buttons.subscribe}</a>
       </Link>
-    </ApplicationPage>
+    </ApplicationManagementPage>
   )
 }
 
@@ -88,7 +88,7 @@ ApplicationDetails.getInitialProps = async ({ res, query }) => {
       application
     }
   } catch (error) {
-    return errorHandler(error, res, 500)
+    return errorHandler(res, error, 500)
   }
 }
 

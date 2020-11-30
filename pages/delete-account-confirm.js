@@ -10,13 +10,13 @@ import errorHandler from '../lib/errorHandler'
 
 const page = 'Profile'
 
-const DeleteAcountConfirm = ({ router, errorCode }) => {
-  if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
+const DeleteAcountConfirm = ({ router, serverError }) => {
+  if (serverError) return <ErrorPage {...serverError} />
 
   const { user } = useAuth()
 
   return (
-    <Page router={router} layout='two-thirds'>
+    <Page layout='two-thirds'>
       {!user.getToken() && null}
 
       <h1 className='govuk-heading-xl'>Are you sure you want us to delete your account?</h1>
@@ -72,7 +72,7 @@ DeleteAcountConfirm.getInitialProps = async ({ req, res }) => {
 
       return {}
     } catch (error) {
-      return errorHandler(error, res, 500)
+      return errorHandler(res, error, 500)
     }
   } else {
     return { status: 200 }

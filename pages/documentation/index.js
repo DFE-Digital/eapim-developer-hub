@@ -1,9 +1,9 @@
 import React from 'react'
 import DocumentationPage from 'components/pages/DocumentationPage'
 
-const Documentation = ({ router }) => {
+const Documentation = () => {
   return (
-    <DocumentationPage router={router} contentKey='documentation' />
+    <DocumentationPage contentKey='documentation' />
   )
 }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import ContentBuilder from 'components/ContentBuilder'
-import ApplicationPage from 'components/pages/ApplicationPage'
+import ApplicationManagementPage from 'components/pages/ApplicationManagementPage'
 import ErrorPage from 'components/pages/ErrorPage'
 import { getApplication } from '../../../lib/applicationService'
 import errorHandler from '../../../lib/errorHandler'
@@ -8,16 +8,16 @@ import errorHandler from '../../../lib/errorHandler'
 import { getContent } from '../../../content/applicationManagement'
 const content = getContent('create-success')
 
-const ApplicationCreateSuccess = ({ application, router, errorCode }) => {
-  if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
+const ApplicationCreateSuccess = ({ application, serverError }) => {
+  if (serverError) return <ErrorPage {...serverError} />
 
   return (
-    <ApplicationPage title={content.title} router={router}>
+    <ApplicationManagementPage title={content.title} application={application} hideSidebar backLink>
       <h1 className='govuk-heading-xl'>{content.title}</h1>
       <h2 className='govuk-heading-l'>You added {application.applicationName}</h2>
       <ContentBuilder sectionNav={false} data={content.content} />
       <a role='button' className='govuk-button' href={`/applications/${application.applicationId}/credentials`}>{content.buttons.view}</a>
-    </ApplicationPage>
+    </ApplicationManagementPage>
   )
 }
 
@@ -29,7 +29,7 @@ ApplicationCreateSuccess.getInitialProps = async ({ res, query }) => {
       application
     }
   } catch (error) {
-    return errorHandler(error, res, 500)
+    return errorHandler(res, error, 500)
   }
 }
 

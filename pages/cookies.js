@@ -7,7 +7,7 @@ const content = getContent('cookies')
 
 const Cookies = ({ router }) => {
   return (
-    <Page title={content.title} router={router}>
+    <Page title={content.title}>
       <h1 className='govuk-heading-xl'>{content.title}</h1>
       <ContentBuilder sectionNav={false} data={content.content} />
     </Page>

@@ -8,7 +8,7 @@ const Verify = ({ idTokenHint }) => {
     }
 
     handler()
-  })
+  }, [])
 
   return (
     <span className='govuk-visually-hidden'>Redirecting you to login...</span>

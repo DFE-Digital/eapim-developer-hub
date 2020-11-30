@@ -1,13 +1,13 @@
 import React from 'react'
 import ErrorPage from 'components/pages/ErrorPage'
 
-const Error = ({ statusCode = 404, router }) => <ErrorPage statusCode={statusCode} router={router} />
+const Error = ({ code = 404, error = 'Page not found' }) => <ErrorPage code={code} error={error} />
 
 Error.displayName = 'Error page'
 
-Error.getInitialProps = async props => {
+Error.getInitialProps = async ({ query }) => {
   return {
-    statusCode: props.query.statusCode
+    statusCode: query.statusCode
   }
 }
 

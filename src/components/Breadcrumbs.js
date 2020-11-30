@@ -1,29 +1,14 @@
 import React from 'react'
 
-const builder = (router) => {
-  const urlParts = router.asPath.split('/')
-  const parent = urlParts[1]
-  const childs = urlParts.slice(2)
+const Breadcrumbs = ({ items }) => {
+  if (!items) return null
 
-  const items = [{ text: urlParts[1], href: `/${urlParts[1]}` }]
+  const backLink = items.find(item => item.back ? item : false)
 
-  if (childs.length) {
-    childs.map(item => {
-      items.push({ text: item.replace(/-/g, ' '), href: `/${parent}/${item}` })
-    })
+  if (backLink) {
+    return <a className='govuk-back-link' href={backLink.href}>Back<span className='govuk-visually-hidden'> {backLink.back}</span></a>
   }
 
-  return items
-}
-
-const Breadcrumbs = ({ router, back }) => {
-  if (!router) return null
-
-  if (back) {
-    return <a className='govuk-back-link' href={`/${router.asPath.split('/')[1]}`}>Back<span className='govuk-visually-hidden'> {back}</span></a>
-  }
-
-  const items = builder(router)
   const lastIndex = items.length - 1
 
   return (
@@ -34,12 +19,12 @@ const Breadcrumbs = ({ router, back }) => {
         </li>
         {items.map((item, index) => {
           if (lastIndex === index) {
-            return <li className='govuk-breadcrumbs__list-item capitalize' aria-current='page' key={item.text + index}>{item.text}</li>
+            return <li className='govuk-breadcrumbs__list-item capitalize' aria-current='page' key={item.title + index}>{item.title}</li>
           }
 
           return (
-            <li className='govuk-breadcrumbs__list-item capitalize' key={item.text + index}>
-              <a className='govuk-breadcrumbs__link' href={item.href}>{item.text}</a>
+            <li className='govuk-breadcrumbs__list-item capitalize' key={item.title + index}>
+              <a className='govuk-breadcrumbs__link' href={item.href}>{item.title}</a>
             </li>
           )
         })}

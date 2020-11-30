@@ -1,13 +1,17 @@
 import React from 'react'
 import { getContent, sidebar } from '../../../content/overview'
 import ContentBuilder from '../ContentBuilder'
-import Page from '../Page'
+import Page from 'components/Page'
 
-const DocumentationPage = ({ router, contentKey, hasNav = true }) => {
+const parentTitle = 'documentation'
+
+const DocumentationPage = ({ contentKey, hasNav = true }) => {
   const content = getContent(contentKey)
 
+  const breadcrumbs = [{ title: content.title }]
+
   return (
-    <Page title={content.title} parentTitle='Documentation' router={router} sidebarContent={sidebar()}>
+    <Page title={content.title} parentTitle={parentTitle} sidebarContent={sidebar()} breadcrumbs={breadcrumbs}>
       <h1 className='govuk-heading-xl'>{content.title}</h1>
       <ContentBuilder data={content.content} sectionNav={hasNav} />
     </Page>

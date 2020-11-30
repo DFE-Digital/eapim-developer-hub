@@ -49,7 +49,7 @@ const Profile = ({ router }) => {
   }, [])
 
   return (
-    <Page title={content.title} router={router}>
+    <Page title={content.title}>
       <h1 className='govuk-heading-xl'>{content.title}</h1>
 
       <table className='govuk-table'>

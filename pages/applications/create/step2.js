@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import { getContent } from '../../../content/application'
-import Page from 'components/Page'
+import ApplicationPage from 'components/pages/ApplicationPage'
 import Textarea from 'components/form/textarea'
 import * as validation from 'utils/validation'
 import { useApplication } from '../../../providers/ApplicationProvider'
@@ -49,7 +49,7 @@ const ApplicationCreateStep2 = ({ router }) => {
   }
 
   return (
-    <Page title={content.title} router={router} errors={errors} layout='two-thirds'>
+    <ApplicationPage title={content.title} errors={errors} layout='two-thirds' breadcrumbs={[{ text: 'to application name ', href: '/applications/create/step1', back: true }]} hideSidebar>
       <form noValidate onSubmit={handleSubmit}>
         <div className='govuk-form-group'>
           <fieldset className='govuk-fieldset'>
@@ -61,8 +61,8 @@ const ApplicationCreateStep2 = ({ router }) => {
             <Textarea
               inline
               ref={appDescriptionRef}
-              id='app-description'
-              name='app-description'
+              id='appDescription'
+              name='appDescription'
               label={content.inputs.label}
               value={context.application.description}
               error={errors.appDescription}
@@ -74,7 +74,7 @@ const ApplicationCreateStep2 = ({ router }) => {
         <button type='submit' className='govuk-button govuk-!-margin-right-1'>{content.buttons.continue}</button>
         <button type='button' className='govuk-button govuk-button--secondary' onClick={() => cancel()}>{content.buttons.cancel}</button>
       </form>
-    </Page>
+    </ApplicationPage>
   )
 }
 

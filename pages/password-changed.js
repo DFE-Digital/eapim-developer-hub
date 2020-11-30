@@ -7,7 +7,7 @@ const content = getContent('password-changed')
 
 const PasswordChanged = ({ router }) => {
   return (
-    <Page title={content.title} router={router} layout='three-quarters'>
+    <Page title={content.title} layout='three-quarters'>
       <h1 role='alert' className='govuk-heading-xl'>{content.title}</h1>
       <ContentBuilder sectionNav={false} data={content.content} />
     </Page>

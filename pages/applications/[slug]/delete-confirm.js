@@ -1,17 +1,19 @@
 import React, { useState } from 'react'
+import { useRouter } from 'next/router'
 import { getContent } from '../../../content/applicationManagement'
 import ContentBuilder from 'components/ContentBuilder'
 import ErrorPage from 'components/pages/ErrorPage'
-import ApplicationPage from 'components/pages/ApplicationPage'
+import ApplicationManagementPage from 'components/pages/ApplicationManagementPage'
 import { useAuth } from '../../../providers/AuthProvider'
 import { getApplication, deleteApplication } from '../../../lib/applicationService'
 import errorHandler from '../../../lib/errorHandler'
 
 const content = getContent('delete-application').pageConfirm
 
-const ApplicationDeleteConfirm = ({ application, router, errorCode }) => {
-  if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
+const ApplicationDeleteConfirm = ({ application, serverError }) => {
+  if (serverError) return <ErrorPage {...serverError} />
 
+  const router = useRouter()
   const { user } = useAuth()
 
   const [deleting, setDeleting] = useState(false)
@@ -35,7 +37,7 @@ const ApplicationDeleteConfirm = ({ application, router, errorCode }) => {
   }
 
   return (
-    <ApplicationPage title={content.title} router={router} layout='two-thirds'>
+    <ApplicationManagementPage title={content.title} application={application} layout='two-thirds' hideSidebar backLink>
       <h1 className='govuk-heading-xl'>{content.title}</h1>
 
       <dl className='govuk-summary-list'>
@@ -58,7 +60,7 @@ const ApplicationDeleteConfirm = ({ application, router, errorCode }) => {
       <a href={`/applications/${application.applicationId}/details`} className={'govuk-button govuk-button--secondary govuk-!-margin-top-6'}>
         {content.buttons.cancel}
       </a>
-    </ApplicationPage>
+    </ApplicationManagementPage>
   )
 }
 
@@ -72,7 +74,7 @@ ApplicationDeleteConfirm.getInitialProps = async ({ res, query }) => {
       application
     }
   } catch (error) {
-    return errorHandler(error, res, 500)
+    return errorHandler(res, error, 500)
   }
 }
 

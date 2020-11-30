@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { getContent, sidebar } from '../../content/application'
+import { getContent } from '../../content/application'
 import { Loading } from 'components/Loading'
 import AuthWarning from 'components/AuthWarning'
-import Page from 'components/Page'
+import ApplicationPage from 'components/pages/ApplicationPage'
 import { useAuth } from '../../providers/AuthProvider'
 
 import { getApplications } from '../../lib/applicationService'
@@ -27,7 +27,7 @@ const Applications = ({ router }) => {
   }, [user])
 
   return (
-    <Page title={content.title} router={router} sidebarContent={sidebar()}>
+    <ApplicationPage title={content.title}>
       <h1 className='govuk-heading-xl'>{content.title}</h1>
 
       {fetching && <Loading />}
@@ -60,13 +60,13 @@ const Applications = ({ router }) => {
             </tbody>
           </table>
           {applications.length < 5 && (
-            <button type='button' className='govuk-button govuk-!-margin-top-6' onClick={() => router.push('/applications/create/step1')}>
+            <a role='button' className='govuk-button govuk-!-margin-top-6' href='/applications/create/step1'>
               {content.buttons.addNew}
-            </button>
+            </a>
           )}
         </>
       )}
-    </Page>
+    </ApplicationPage>
   )
 }
 

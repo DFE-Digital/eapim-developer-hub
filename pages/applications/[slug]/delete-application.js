@@ -1,6 +1,6 @@
 import React from 'react'
 import ErrorPage from 'components/pages/ErrorPage'
-import ApplicationPage from 'components/pages/ApplicationPage'
+import ApplicationManagementPage from 'components/pages/ApplicationManagementPage'
 import { getContent } from '../../../content/applicationManagement'
 
 import { getApplication } from '../../../lib/applicationService'
@@ -8,11 +8,11 @@ import errorHandler from '../../../lib/errorHandler'
 
 const content = getContent('delete-application')
 
-const DeleteApplication = ({ application, router, errorCode }) => {
-  if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
+const DeleteApplication = ({ application, serverError }) => {
+  if (serverError) return <ErrorPage {...serverError} />
 
   return (
-    <ApplicationPage title={content.title} router={router} layout='two-thirds'>
+    <ApplicationManagementPage title={content.title} application={application} layout='two-thirds' hideSidebar backLink>
       <h1 className='govuk-heading-xl'>{content.title}</h1>
 
       <dl className='govuk-summary-list'>
@@ -24,7 +24,7 @@ const DeleteApplication = ({ application, router, errorCode }) => {
 
       <a href={`/applications/${application.applicationId}/delete-confirm`} className='govuk-button govuk-!-margin-top-6 govuk-!-margin-right-1' role='button'>{content.buttons.continue}</a>
       <a href={`/applications/${application.applicationId}/details`} className='govuk-button govuk-button--secondary govuk-!-margin-top-6' role='button'>{content.buttons.cancel}</a>
-    </ApplicationPage>
+    </ApplicationManagementPage>
   )
 }
 
@@ -38,7 +38,7 @@ DeleteApplication.getInitialProps = async ({ res, query }) => {
       application
     }
   } catch (error) {
-    return errorHandler(error, res, 500)
+    return errorHandler(res, error, 500)
   }
 }
 

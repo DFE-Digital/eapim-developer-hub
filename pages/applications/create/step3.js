@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import Page from 'components/Page'
+import ApplicationPage from 'components/pages/ApplicationPage'
 import { urlPattern } from '../../../src/utils/patterns'
 import Input from 'components/form/input'
 import * as validation from 'utils/validation'
@@ -54,7 +54,7 @@ const ApplicationCreateStep3 = ({ router }) => {
   }
 
   return (
-    <Page title={content.title} router={router} layout='two-thirds'>
+    <ApplicationPage title={content.title} layout='two-thirds' breadcrumbs={[{ text: 'to application description ', href: '/applications/create/step2', back: true }]} hideSidebar>
       <form noValidate onSubmit={handleSubmit}>
         <div className='govuk-form-group'>
           <fieldset className='govuk-fieldset'>
@@ -65,8 +65,8 @@ const ApplicationCreateStep3 = ({ router }) => {
             </legend>
             <Input
               ref={appRedirectUrlRef}
-              id='app-redirect-url'
-              name='app-redirect-url'
+              id='appRedirectUrl'
+              name='appRedirectUrl'
               type='text'
               label={content.inputs.label}
               value={context.application.redirectUrl}
@@ -79,7 +79,7 @@ const ApplicationCreateStep3 = ({ router }) => {
         <button type='submit' className='govuk-button govuk-!-margin-right-1'>{content.buttons.continue}</button>
         <button type='button' className='govuk-button govuk-button--secondary' onClick={() => cancel()}>{content.buttons.cancel}</button>
       </form>
-    </Page>
+    </ApplicationPage>
   )
 }
 

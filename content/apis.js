@@ -4,7 +4,7 @@ export const getContent = (key) => {
 
 export const sidebar = () => {
   const pages = Object.keys(data)
-  return pages.map(page => ({ title: data[page].title, url: data[page].url }))
+  return pages.map(page => ({ title: data[page].title, url: data[page].url, href: data[page].url }))
 }
 
 const data = {

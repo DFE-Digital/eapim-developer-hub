@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useIsIE11 } from 'hooks'
 
 const Details = ({ title, content, tag }) => {
-  const isIE = useIsIE11()
+  const [isIE] = useIsIE11()
   const [open, setOpen] = useState(false)
 
   const props = {}

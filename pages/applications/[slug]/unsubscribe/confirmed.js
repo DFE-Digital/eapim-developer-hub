@@ -1,30 +1,34 @@
 import React from 'react'
-import Page from 'components/Page'
+import ApplicationManagementPage from 'components/pages/ApplicationManagementPage'
 import ErrorPage from 'components/pages/ErrorPage'
+import { getApplication } from '../../../../lib/applicationService'
+
 import errorHandler from '../../../../lib/errorHandler'
 import { getContent } from '../../../../content/applicationManagement'
 
 const content = getContent('api-subscriptions-unsubscribe-confirmed')
 
-const UnsubscribeConfirmed = ({ applicationId, router, errorCode }) => {
-  if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
+const UnsubscribeConfirmed = ({ application, serverError }) => {
+  if (serverError) return <ErrorPage {...serverError} />
 
   return (
-    <Page title={content.title} router={router}>
+    <ApplicationManagementPage title={content.title} application={application} hideSidebar backLink>
       <h1 className='govuk-heading-xl'>{content.title}</h1>
-      <a href={`/applications/${applicationId}/api-subscriptions`} className='govuk-button govuk-button--default govuk-!-margin-top-6'>
+      <a href={`/applications/${application.applicationId}/api-subscriptions`} className='govuk-button govuk-button--default govuk-!-margin-top-6'>
         {content.buttons.back}
       </a>
-    </Page>
+    </ApplicationManagementPage>
   )
 }
 
-UnsubscribeConfirmed.getInitialProps = ({ res, query }) => {
-  const { slug } = query
-
-  if (!slug) return errorHandler(res)
-
-  return { applicationId: slug }
+UnsubscribeConfirmed.getInitialProps = async ({ res, query }) => {
+  try {
+    const application = await getApplication(query.slug)
+    if (!application) return errorHandler(res)
+    return { application }
+  } catch (error) {
+    return errorHandler(res, error, 500)
+  }
 }
 
 UnsubscribeConfirmed.displayName = 'Unsubscribe confirmed'

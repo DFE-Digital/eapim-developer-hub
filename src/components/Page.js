@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Helmet } from 'react-helmet'
-import { useCookieBanner } from 'hooks'
+import { useRouter } from 'next/router'
 import Header from './Header'
 import PhaseBanner from './PhaseBanner'
 import AuthNavigation from './AuthNavigation'
@@ -9,14 +9,16 @@ import Footer from './Footer'
 import CookieBanner from './CookieBanner'
 import Sidebar from './Sidebar'
 import ErrorSummary from './ErrorSummary'
-import { useApp } from '../../providers/AppProvider'
+import { useInsights } from 'hooks'
 
-const Page = ({ children, router, title, parentTitle, sidebarContent, layout = 'full', errors = {} }) => {
-  const { siteLoaded, bannerCookie } = useCookieBanner()
-  const { setReturnUrl } = useApp()
+const Page = ({ children, title, parentTitle, sidebarContent, breadcrumbs, layout = 'full', errors = {} }) => {
+  const router = useRouter()
+  const [pageView] = useInsights()
+
+  console.log('render')
 
   useEffect(() => {
-    setReturnUrl(router.asPath)
+    pageView({ name: title, url: router.asPath })
   }, [])
 
   let template = (
@@ -52,12 +54,12 @@ const Page = ({ children, router, title, parentTitle, sidebarContent, layout = '
 
   return (
     <>
-      {siteLoaded && !bannerCookie && <CookieBanner cookie={bannerCookie} />}
+      <CookieBanner />
       <Header />
       <PhaseBanner />
       <div className='govuk-width-container'>
         <div className='govuk-width-container service-banner'>
-          <Breadcrumbs router={router} />
+          <Breadcrumbs items={breadcrumbs} />
           <AuthNavigation />
         </div>
         {template}

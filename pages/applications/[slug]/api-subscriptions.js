@@ -3,7 +3,7 @@ import ErrorPage from 'components/pages/ErrorPage'
 import { getContent } from '../../../content/applicationManagement'
 import ContentBuilder from 'components/ContentBuilder'
 import APISubscriptions from 'components/APISubscriptions'
-import ApplicationPage from 'components/pages/ApplicationPage'
+import ApplicationManagementPage from 'components/pages/ApplicationManagementPage'
 
 import errorHandler from '../../../lib/errorHandler'
 
@@ -13,8 +13,8 @@ import { getSubscriptions } from '../../../lib/subscriptionService'
 
 const content = getContent('api-subscriptions')
 
-const ApplicationApiSubscriptions = ({ apis, application, subscriptions, router, errorCode }) => {
-  if (errorCode) return <ErrorPage statusCode={errorCode} router={router} />
+const ApplicationApiSubscriptions = ({ apis, application, subscriptions, router, serverError }) => {
+  if (serverError) return <ErrorPage {...serverError} />
 
   const [updateSubscriptions, setUpdateSubscriptions] = useState(subscriptions)
   const [refLoaded, setRefLoaded] = useState(null)
@@ -25,12 +25,12 @@ const ApplicationApiSubscriptions = ({ apis, application, subscriptions, router,
       window.GOVUKFrontend.initAll()
       setRefLoaded(loadedRef.current)
     }
-  })
+  }, [])
 
   const onSubscriptionChange = (subscriptions) => setUpdateSubscriptions(subscriptions)
 
   return (
-    <ApplicationPage title={content.title} router={router} application={application}>
+    <ApplicationManagementPage title={content.title} application={application}>
       <h1 className='govuk-heading-xl'>{content.title}</h1>
 
       <ContentBuilder sectionNav={false} data={content.content} />
@@ -53,7 +53,7 @@ const ApplicationApiSubscriptions = ({ apis, application, subscriptions, router,
         subscriptions={updateSubscriptions}
         onSubscriptionChange={onSubscriptionChange}
       />
-    </ApplicationPage>
+    </ApplicationManagementPage>
   )
 }
 
@@ -78,7 +78,7 @@ ApplicationApiSubscriptions.getInitialProps = async ({ res, query }) => {
       subscriptions
     }
   } catch (error) {
-    return errorHandler(error, res, 500)
+    return errorHandler(res, error, 500)
   }
 }
 

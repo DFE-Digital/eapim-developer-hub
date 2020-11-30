@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { getContent } from '../content/site'
 import ContentBuilder from 'components/ContentBuilder'
 import Page from 'components/Page'
+import ErrorPage from 'components/pages/ErrorPage'
 import { useAuth } from '../providers/AuthProvider'
 import Radio from 'components/form/radio'
 import Input from 'components/form/input'
@@ -10,12 +11,14 @@ import Textarea from 'components/form/textarea'
 import { send } from '../lib/emailService'
 import { template } from '../emails/support'
 import * as validation from 'utils/validation'
-
+import errorHandler from '../lib/errorHandler'
 import { getApis } from '../lib/apiServices'
 
 const content = getContent('support')
 
-const Support = ({ apis, router }) => {
+const Support = ({ apis, serverError }) => {
+  if (serverError) return <ErrorPage {...serverError} />
+
   const { user } = useAuth()
 
   const formRef = useRef()
@@ -100,7 +103,7 @@ const Support = ({ apis, router }) => {
   }
 
   return (
-    <Page title={content.title} router={router} layout='three-quarters' errors={errors}>
+    <Page title={content.title} layout='three-quarters' errors={errors}>
       <h1 className='govuk-heading-xl'>{content.title}</h1>
       <ContentBuilder sectionNav={false} data={content.content} />
       <hr className='govuk-section-break govuk-section-break--l govuk-section-break--visible' />
@@ -185,21 +188,18 @@ Support.getInitialProps = async ({ req, res }) => {
       res.writeHead(301, { Location: '/support-submitted' })
       res.end()
     } catch (error) {
-      console.log(`Error sending support email: ${error}`)
+      return errorHandler(res, error, 500)
     }
   }
 
   try {
     const apis = await getApis()
-    const data = apis.map(api => { return { label: api.properties.displayName, value: api.properties.displayName } })
+    const data = apis.map(api => {
+      return { label: api.properties.displayName, value: api.properties.displayName }
+    })
     return { apis: data }
   } catch (error) {
-    console.log(`Error fetching APIs: ${error}`)
-  }
-
-  return {
-    status: 200,
-    apis: []
+    return errorHandler(res, error, 500)
   }
 }
 

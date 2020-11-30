@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 import Content from '../../content.json'
-import MenuLink from './MenuLink'
 
 const Header = () => {
+  const router = useRouter()
   const [jsEnabled, setJsEnabled] = useState(false)
   const [navToggled, setNavToggled] = useState(false)
 
@@ -53,9 +55,11 @@ const Header = () => {
             >
               {Content.Navigation.map((nav, i) => {
                 return (
-                  <MenuLink href={nav.Url} parentClass={'govuk-header__navigation-item'} key={i}>
-                    <a className='govuk-header__link'>{nav.Page}</a>
-                  </MenuLink>
+                  <li className={`govuk-header__navigation-item ${router.pathname.includes(nav.Url) ? 'govuk-header__navigation-item--active' : ''}`} key={i}>
+                    <Link href={nav.Url} passHref>
+                      <a href={nav.Url} className='govuk-header__link'>{nav.Page}</a>
+                    </Link>
+                  </li>
                 )
               })}
             </ul>
