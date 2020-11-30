@@ -9,6 +9,7 @@ import AuthNavigation from 'components/AuthNavigation'
 import Footer from 'components/Footer'
 import { useAuth } from '../providers/AuthProvider'
 import { ReactSVG } from 'react-svg'
+import { useInsights } from 'hooks'
 
 import { getContent } from '../content/home'
 
@@ -16,8 +17,10 @@ const content = getContent('home')
 
 const Home = ({ accountDeleted }) => {
   const { user, logout } = useAuth()
+  const [pageView] = useInsights()
 
   useEffect(() => {
+    pageView({ name: 'Homepage', url: window.location.href })
     if (accountDeleted) logout()
   }, [])
 

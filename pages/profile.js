@@ -5,6 +5,7 @@ import Page from 'components/Page'
 import ContentBuilder from 'components/ContentBuilder'
 import { useAuth } from '../providers/AuthProvider'
 import { getContent } from '../content/profile'
+import { useInsights } from 'hooks'
 
 const content = getContent('profile')
 
@@ -23,14 +24,16 @@ const errorHandling = (error) => {
 
 const Profile = () => {
   const { user, setToken } = useAuth()
+  const [trackException] = useInsights()
 
   useEffect(() => {
     const myMSALObj = new Msal.UserAgentApplication(config.editProfile)
 
     myMSALObj.handleRedirectCallback((error, response) => {
-      if (error) return errorHandling(error)
-
-      console.log('response', response)
+      if (error) {
+        trackException(error)
+        return errorHandling(error)
+      }
 
       const acr = response.idToken.claims['acr']
       const isIdToken = response.tokenType === 'id_token'

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useRouter } from 'next/router'
 import ApplicationPage from 'components/pages/ApplicationPage'
 import { useAuth } from '../../../providers/AuthProvider'
 import { useApplication } from '../../../providers/ApplicationProvider'
@@ -9,9 +10,10 @@ import { isEmpty } from '../../../src/utils/validation'
 import { getContent } from '../../../content/application'
 const content = getContent('create-summary')
 
-const ApplicationCreateSummary = ({ router }) => {
+const ApplicationCreateSummary = () => {
   const { user } = useAuth()
   const { application, clear } = useApplication()
+  const router = useRouter()
 
   const [registering, setRegistering] = useState(false)
 

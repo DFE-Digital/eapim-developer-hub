@@ -22,8 +22,6 @@ const ApplicationRedirectUrls = ({ application, serverError }) => {
 
   const { user } = useAuth()
 
-  console.log('client', user.getToken())
-
   const addRef = useRef()
   const changeRef = useRef()
 

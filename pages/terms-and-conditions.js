@@ -5,7 +5,7 @@ import { getContent } from '../content/site'
 
 const content = getContent('terms-and-conditions')
 
-const TermsAndConditions = ({ router }) => {
+const TermsAndConditions = () => {
   return (
     <Page title={content.title}>
       <h1 className='govuk-heading-xl'>{content.title}</h1>

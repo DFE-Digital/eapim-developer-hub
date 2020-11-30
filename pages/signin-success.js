@@ -4,7 +4,7 @@ import * as Msal from 'msal'
 import { Loading } from 'components/Loading'
 import { b2cPolicies, config } from '../lib/authService'
 import { useAuth } from '../providers/AuthProvider'
-import { useCookie } from 'hooks'
+import { useCookie, useInsights } from 'hooks'
 
 const goTo = (url) => {
   window.location.href = url
@@ -42,13 +42,17 @@ const SignInSuccess = () => {
   useEffect(() => {
     const myMSALObj = new Msal.UserAgentApplication(config.login)
     const { setCookie, deleteCookie } = useCookie()
+    const [trackException] = useInsights()
 
     if (myMSALObj.getAccount()) goTo('/')
 
     myMSALObj.handleRedirectCallback((error, response) => {
       console.log(`MSAL Response: ${response}`)
 
-      if (error) return errorHandling(error)
+      if (error) {
+        trackException(error)
+        return errorHandling(error)
+      }
 
       const acr = response.idToken.claims['acr']
       const isIdToken = response.tokenType === 'id_token'

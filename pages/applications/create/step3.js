@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react'
+import { useRouter } from 'next/router'
 import ApplicationPage from 'components/pages/ApplicationPage'
 import { urlPattern } from '../../../src/utils/patterns'
 import Input from 'components/form/input'
@@ -8,8 +9,9 @@ import { useApplication } from '../../../providers/ApplicationProvider'
 import { getContent } from '../../../content/application'
 const content = getContent('create-step-3')
 
-const ApplicationCreateStep3 = ({ router }) => {
+const ApplicationCreateStep3 = () => {
   const context = useApplication()
+  const router = useRouter()
 
   const [errors, setErrors] = useState({})
 

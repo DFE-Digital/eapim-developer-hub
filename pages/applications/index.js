@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { getContent } from '../../content/application'
 import { Loading } from 'components/Loading'
 import AuthWarning from 'components/AuthWarning'
@@ -9,7 +10,8 @@ import { getApplications } from '../../lib/applicationService'
 
 const content = getContent('applications')
 
-const Applications = ({ router }) => {
+const Applications = () => {
+  const router = useRouter()
   const { user } = useAuth()
 
   const [fetching, setFetching] = useState(false)

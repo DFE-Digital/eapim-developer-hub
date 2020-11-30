@@ -5,7 +5,7 @@ import ContentBuilder from 'components/ContentBuilder'
 import { getContent } from '../content/site'
 const content = getContent('password-changed')
 
-const PasswordChanged = ({ router }) => {
+const PasswordChanged = () => {
   return (
     <Page title={content.title} layout='three-quarters'>
       <h1 role='alert' className='govuk-heading-xl'>{content.title}</h1>

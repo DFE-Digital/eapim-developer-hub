@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useRouter } from 'next/router'
 import ApplicationPage from 'components/pages/ApplicationPage'
 import { getApplications } from '../../../lib/applicationService'
 import { useApplication } from '../../../providers/ApplicationProvider'
@@ -9,9 +10,10 @@ import * as validation from 'utils/validation'
 
 const content = getContent('create-step-1')
 
-const ApplicationCreateStep1 = ({ router }) => {
+const ApplicationCreateStep1 = () => {
   const { user } = useAuth()
   const context = useApplication()
+  const router = useRouter()
 
   const [applications, setApplications] = useState([])
   const [errors, setErrors] = useState({})

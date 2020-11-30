@@ -30,7 +30,6 @@ const APISubscription = ({ applicationId, tag, subscription, onSubscriptionChang
       const newSubscriptions = await postSubscription(applicationId, apiName, environment)
       onSubscriptionChange(newSubscriptions)
       setSubscribing(false)
-      // document.querySelector(`#status-${applicationId}-${environment}`).focus()
     } catch (error) {
       console.log(`Error posting subscrition: ${error}`)
       setSubscribing(false)

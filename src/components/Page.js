@@ -15,8 +15,6 @@ const Page = ({ children, title, parentTitle, sidebarContent, breadcrumbs, layou
   const router = useRouter()
   const [pageView] = useInsights()
 
-  console.log('render')
-
   useEffect(() => {
     pageView({ name: title, url: router.asPath })
   }, [])

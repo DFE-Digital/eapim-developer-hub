@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import ApplicationManagementPage from 'components/pages/ApplicationManagementPage'
-import ErrorPage from 'components/ErrorPage'
+import ErrorPage from 'components/pages/ErrorPage'
 import ContentBuilder from 'components/ContentBuilder'
 import clipboard from '../../../src/utils/clipboard'
 import { checkAuth } from '../../../lib/authService'
@@ -10,7 +10,7 @@ import errorHandler from '../../../lib/errorHandler'
 import { getContent } from '../../../content/applicationManagement'
 const content = getContent('credentials')
 
-const ApplicationCredentials = ({ application, router, serverError }) => {
+const ApplicationCredentials = ({ application, serverError }) => {
   if (serverError) return <ErrorPage {...serverError} />
 
   const [confirm, setConfirm] = useState(false)
