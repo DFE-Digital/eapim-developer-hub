@@ -5,6 +5,7 @@ import { Loading } from 'components/Loading'
 import AuthWarning from 'components/AuthWarning'
 import ApplicationPage from 'components/pages/ApplicationPage'
 import { useAuth } from '../../providers/AuthProvider'
+import { useApplication } from '../../providers/ApplicationProvider'
 
 import { getApplications } from '../../lib/applicationService'
 
@@ -13,9 +14,16 @@ const content = getContent('applications')
 const Applications = () => {
   const router = useRouter()
   const { user } = useAuth()
+  const { clear } = useApplication()
 
   const [fetching, setFetching] = useState(false)
   const [applications, setApplications] = useState([])
+
+  const onStart = (e) => {
+    e.preventDefault(e)
+    clear()
+    router.replace('/applications/create/step1')
+  }
 
   useEffect(() => {
     const fetchApplications = async () => {
@@ -38,7 +46,7 @@ const Applications = () => {
       {applications.length === 0 && !fetching && user.getToken() && (
         <>
           <p className='govuk-body'>{content.empty}</p>
-          <button type='button' className='govuk-button govuk-!-margin-top-6' onClick={() => router.push('/applications/create/step1')}>{content.buttons.start}</button>
+          <a role='button' className='govuk-button govuk-!-margin-top-6' onClick={onStart} href='/applications/create/step1'>{content.buttons.start}</a>
         </>
       )}
       {applications.length > 0 && !fetching && user.getToken() && (
@@ -62,7 +70,7 @@ const Applications = () => {
             </tbody>
           </table>
           {applications.length < 5 && (
-            <a role='button' className='govuk-button govuk-!-margin-top-6' href='/applications/create/step1'>
+            <a role='button' className='govuk-button govuk-!-margin-top-6' onClick={onStart} href='/applications/create/step1'>
               {content.buttons.addNew}
             </a>
           )}
