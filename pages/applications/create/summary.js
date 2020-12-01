@@ -4,7 +4,6 @@ import ApplicationPage from 'components/pages/ApplicationPage'
 import { useAuth } from '../../../providers/AuthProvider'
 import { useApplication } from '../../../providers/ApplicationProvider'
 import { registerApplication } from '../../../lib/applicationService'
-
 import { isEmpty } from '../../../src/utils/validation'
 
 import { getContent } from '../../../content/application'
@@ -49,30 +48,28 @@ const ApplicationCreateSummary = () => {
     <ApplicationPage title={content.title} breadcrumbs={[{ text: 'to application redirect url ', href: '/applications/create/step3', back: true }]} hideSidebar>
       <h1 className='govuk-heading-xl'>{content.title}</h1>
 
-      <table className='govuk-table'>
-        <tbody className='govuk-table__body'>
-          <tr className='govuk-table__row'>
-            <th scope='row' className='govuk-table__header'>{content.headings.name}:</th>
-            <td className='govuk-table__cell'>{application.name}</td>
-          </tr>
-          <tr className='govuk-table__row'>
-            <th scope='row' className='govuk-table__header'>{content.headings.description}:</th>
-            <td className='govuk-table__cell'>{application.description}</td>
-          </tr>
-          <tr className='govuk-table__row'>
-            <th scope='row' className='govuk-table__header'>{content.headings.redirectUrl}:</th>
-            <td className='govuk-table__cell'>{application.redirectUrl}</td>
-          </tr>
-          <tr className='govuk-table__row'>
-            <th scope='row' className='govuk-table__header'>{content.headings.owner}:</th>
-            <td className='govuk-table__cell'>{user.name()}</td>
-          </tr>
-          <tr className='govuk-table__row'>
-            <th scope='row' className='govuk-table__header'>{content.headings.email}:</th>
-            <td className='govuk-table__cell'>{user.email()}</td>
-          </tr>
-        </tbody>
-      </table>
+      <dl className='govuk-summary-list'>
+        <div className='govuk-summary-list__row'>
+          <dt className='govuk-summary-list__key'>{content.headings.name}</dt>
+          <dd className='govuk-summary-list__value'>{application.name}</dd>
+        </div>
+        <div className='govuk-summary-list__row'>
+          <dt className='govuk-summary-list__key'>{content.headings.description}</dt>
+          <dd className='govuk-summary-list__value'>{application.description}</dd>
+        </div>
+        <div className='govuk-summary-list__row'>
+          <dt className='govuk-summary-list__key'>{content.headings.redirectUrl}</dt>
+          <dd className='govuk-summary-list__value'>{application.redirectUrl}</dd>
+        </div>
+        <div className='govuk-summary-list__row'>
+          <dt className='govuk-summary-list__key'>{content.headings.owner}</dt>
+          <dd className='govuk-summary-list__value'>{user.name()}</dd>
+        </div>
+        <div className='govuk-summary-list__row'>
+          <dt className='govuk-summary-list__key'>{content.headings.email}</dt>
+          <dd className='govuk-summary-list__value'>{user.email()}</dd>
+        </div>
+      </dl>
 
       <button type='submit' disabled={registering || !isValid()} className='govuk-button govuk-!-margin-right-1' onClick={() => createApplication()}>
         {!registering && content.buttons.register}

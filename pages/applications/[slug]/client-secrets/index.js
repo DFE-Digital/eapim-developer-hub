@@ -31,12 +31,8 @@ const ApplicationClientSecrets = ({ id, application, serverError }) => {
 
       <dl className='govuk-summary-list'>
         <div className='govuk-summary-list__row'>
-          <dt className='govuk-summary-list__key'>
-            Application:
-          </dt>
-          <dd className='govuk-summary-list__value'>
-            {application.applicationName}
-          </dd>
+          <dt className='govuk-summary-list__key'>Application:</dt>
+          <dd className='govuk-summary-list__value'>{application.applicationName}</dd>
         </div>
       </dl>
 

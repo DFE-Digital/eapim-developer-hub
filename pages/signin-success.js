@@ -33,8 +33,8 @@ const policy = (acr, key) => acr === b2cPolicies[key]
 
 const isSignIn = (acr) => policy(acr, 'signIn')
 const isSignUp = (acr) => policy(acr, 'signUp')
-const isForgotPassword = (acr) => policy(acr, 'forgotPassword')
 const isVerify = (acr) => policy(acr, 'verify')
+const isForgotPassword = (acr) => policy(acr, 'forgotPassword')
 
 const isAuth = (acr) => isSignIn(acr) || isSignUp(acr) || isVerify(acr)
 

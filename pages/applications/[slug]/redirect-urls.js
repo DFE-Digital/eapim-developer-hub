@@ -153,19 +153,15 @@ const ApplicationRedirectUrls = ({ application, serverError }) => {
 
           <dl className='govuk-summary-list'>
             <div className='govuk-summary-list__row'>
-              <dt className='govuk-summary-list__key'>
-                Application:
-              </dt>
-              <dd className='govuk-summary-list__value'>
-                {application.applicationName}
-              </dd>
+              <dt className='govuk-summary-list__key'>Application:</dt>
+              <dd className='govuk-summary-list__value'>{application.applicationName}</dd>
             </div>
           </dl>
 
-          <table className='govuk-table'>
+          <table className='govuk-table relative'>
             <caption className='govuk-table__caption govuk-heading-m'>
               {content.title}
-              {saving && <Loader style={{ position: 'absolute', right: 0 }} ariaText={content.a11y.saving} />}
+              {saving && <Loader size='s' styles={{ right: 0 }} ariaText={content.a11y.saving} />}
             </caption>
             <tbody className='govuk-table__body'>
               {application.web.redirectUris.map((url, index) => {

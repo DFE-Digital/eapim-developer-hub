@@ -156,6 +156,9 @@ const data = {
     nosidebar: 'true',
     title: 'Application summary',
     url: '/applications/create/summary',
+    a11y: {
+      registering: 'registering your application...'
+    },
     headings: {
       name: 'Name',
       description: 'Description',
