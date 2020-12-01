@@ -19,7 +19,7 @@ const ErrorSummary = ({ errors, pageTitle }) => {
 
   return (
     <>
-      <div className='govuk-error-summary' aria-labelledby='error-summary-title' role='alert' tabIndex='-1' data-module='govuk-error-summary'>
+      <div className='govuk-error-summary' aria-labelledby='error-summary-title' role='alert' aria-live='assertive' tabIndex='-1' data-module='govuk-error-summary'>
         <h2 className='govuk-error-summary__title' id='error-summary-title'>There is a problem</h2>
         <div className='govuk-error-summary__body'>
           <ul className='govuk-list govuk-error-summary__list'>

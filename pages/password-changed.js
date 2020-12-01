@@ -8,7 +8,7 @@ const content = getContent('password-changed')
 const PasswordChanged = () => {
   return (
     <Page title={content.title} layout='three-quarters'>
-      <h1 role='alert' className='govuk-heading-xl'>{content.title}</h1>
+      <h1 role='alert' aria-live='assertive' className='govuk-heading-xl'>{content.title}</h1>
       <ContentBuilder sectionNav={false} data={content.content} />
     </Page>
   )

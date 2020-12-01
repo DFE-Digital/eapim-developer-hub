@@ -49,7 +49,7 @@ const Home = ({ loggedin, accountDeleted }) => {
       <PhaseBanner />
       <div className='govuk-width-container'>
         <div className='service-banner'>
-          {loggedin && <span className='govuk-visually-hidden' role='alert'>you are now signed in</span>}
+          {loggedin && <span className='govuk-visually-hidden' role='alert' aria-live='assertive'>you are now signed in</span>}
           <AuthNavigation />
         </div>
       </div>
