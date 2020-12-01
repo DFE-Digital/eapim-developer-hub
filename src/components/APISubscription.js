@@ -132,7 +132,7 @@ const APISubscription = ({ applicationId, tag, subscription, onSubscriptionChang
         )}
       </table>
 
-      {subscription && (
+      {subscription && subscription.state === 'active' && (
         <APISubscriptionKeys
           subscription={subscription}
           fetching={fetching}

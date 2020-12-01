@@ -58,7 +58,7 @@ Unsubscribe.getInitialProps = async ({ req, res, query }) => {
       await deleteSubscription(subscriptionId, environment)
 
       res.writeHead(301, { Location: `/applications/${applicationId}/unsubscribe/confirmed` })
-      res.end()
+      return res.end()
     } catch (error) {
       return errorHandler(res, error, 500)
     }
@@ -72,8 +72,6 @@ Unsubscribe.getInitialProps = async ({ req, res, query }) => {
     if (!application) return errorHandler(res)
 
     const subscriptions = await getSubscriptions(application.applicationId)
-    if (!subscriptions) return errorHandler(res)
-
     application.subscriptions = subscriptions
 
     const subscription = subscriptions.find(sub => sub.id === subid && sub.environment === environment)
