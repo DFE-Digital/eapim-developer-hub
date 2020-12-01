@@ -9,10 +9,12 @@ const clipboard = (element) => {
     const selection = window.getSelection()
     const range = document.createRange()
     range.selectNodeContents(el)
+    window.getSelection().removeAllRanges()
     selection.addRange(range)
   } else {
     const range = document.createRange()
     range.selectNode(el)
+    window.getSelection().removeAllRanges()
     window.getSelection().addRange(range)
   }
 
