@@ -2,7 +2,9 @@ import React from 'react'
 import { useAuth } from '../../providers/AuthProvider'
 
 const AuthNavigation = () => {
-  const { user } = useAuth()
+  const { user, pageLoaded } = useAuth()
+
+  if (!pageLoaded) return null
 
   return (
     <div className='govuk-width-container auth-navigation'>

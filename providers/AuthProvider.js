@@ -11,6 +11,7 @@ export const AuthContext = createContext({
 })
 
 export const AuthProvider = ({ children }) => {
+  const [pageLoaded, setPageLoaded] = useState(false)
   const [token, updateToken] = useState(null)
   const { deleteCookie } = useCookie()
 
@@ -21,6 +22,8 @@ export const AuthProvider = ({ children }) => {
       token = JSON.parse(token)
       updateToken(token)
     }
+
+    setPageLoaded(true)
   }, [])
 
   const setToken = (token) => {
@@ -36,7 +39,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ user: new User(token), setToken, logout }}>
+    <AuthContext.Provider value={{ user: new User(token), setToken, logout, pageLoaded }}>
       {children}
     </AuthContext.Provider>
   )

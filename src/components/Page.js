@@ -10,13 +10,13 @@ import CookieBanner from './CookieBanner'
 import Sidebar from './Sidebar'
 import ErrorSummary from './ErrorSummary'
 import { useInsights, useCookie } from 'hooks'
+import { useAuth } from '../../providers/AuthProvider'
 
 const Page = ({ children, title, parentTitle, sidebarContent, breadcrumbs, layout = 'full', errors = {} }) => {
   const router = useRouter()
-
+  const { pageLoaded } = useAuth()
   const [pageView] = useInsights()
   const [bannerCookie, updateCookie] = useState(null)
-  const [pageLoaded, setPageLoaded] = useState(false)
   const { hasCookie, setCookie } = useCookie()
 
   useEffect(() => {
@@ -27,8 +27,6 @@ const Page = ({ children, title, parentTitle, sidebarContent, breadcrumbs, layou
     } else {
       updateCookie(true)
     }
-
-    setPageLoaded(true)
   }, [])
 
   useEffect(() => {

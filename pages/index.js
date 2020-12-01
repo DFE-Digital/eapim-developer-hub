@@ -16,10 +16,9 @@ import { getContent } from '../content/home'
 const content = getContent('home')
 
 const Home = ({ accountDeleted }) => {
-  const { user, logout } = useAuth()
+  const { user, logout, pageLoaded } = useAuth()
   const [pageView] = useInsights()
   const [bannerCookie, updateCookie] = useState(null)
-  const [pageLoaded, setPageLoaded] = useState(false)
   const { hasCookie, setCookie } = useCookie()
 
   useEffect(() => {
@@ -30,8 +29,6 @@ const Home = ({ accountDeleted }) => {
     } else {
       updateCookie(true)
     }
-
-    setPageLoaded(true)
   }, [])
 
   useEffect(() => {
