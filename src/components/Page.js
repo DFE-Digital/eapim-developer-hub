@@ -70,7 +70,7 @@ const Page = ({ children, title, parentTitle, sidebarContent, breadcrumbs, layou
       <Header />
       <PhaseBanner />
       <div className='govuk-width-container'>
-        <div className='govuk-width-container service-banner'>
+        <div className='service-banner'>
           <Breadcrumbs items={breadcrumbs} />
           <AuthNavigation />
         </div>

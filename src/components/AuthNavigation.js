@@ -7,7 +7,7 @@ const AuthNavigation = () => {
   if (!pageLoaded) return null
 
   return (
-    <div className='govuk-width-container auth-navigation'>
+    <div className='auth-navigation'>
       <ul className='govuk-list govuk-!-margin-top-3'>
         {!user.getToken() && (
           <>

@@ -25,6 +25,8 @@ const errorHandling = (error) => {
   if (error.errorMessage.indexOf('AADB2C90037') > -1) goTo('/auth/register')
   // check for forgot password error
   if (error.errorMessage.indexOf('AADB2C90118') > -1) goTo('/auth/forgot-password')
+
+  goTo('/')
 }
 
 const policy = (acr, key) => acr === b2cPolicies[key]
@@ -72,7 +74,7 @@ const SignInSuccess = () => {
         const account = myMSALObj.getAccount()
         setToken(account)
         setCookie('msal.idtoken', 'true')
-        goTo('/')
+        goTo('/?loggedin=true')
       } else {
         console.log(`Token type is: ${response.tokenType}`)
         goTo('/')

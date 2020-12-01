@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { Helmet } from 'react-helmet'
 import Link from 'next/link'
 import ContentBuilder from 'components/ContentBuilder'
@@ -15,11 +16,16 @@ import { getContent } from '../content/home'
 
 const content = getContent('home')
 
-const Home = ({ accountDeleted }) => {
+const Home = ({ loggedin, accountDeleted }) => {
+  const router = useRouter()
   const { user, logout, pageLoaded } = useAuth()
   const [pageView] = useInsights()
   const [bannerCookie, updateCookie] = useState(null)
   const { hasCookie, setCookie } = useCookie()
+
+  useEffect(() => {
+    if (router.query.loggedin) router.push('/', '/', { shallow: true })
+  }, [])
 
   useEffect(() => {
     const item = hasCookie('set_banner_message')
@@ -41,8 +47,11 @@ const Home = ({ accountDeleted }) => {
       {pageLoaded && !bannerCookie && <CookieBanner />}
       <Header />
       <PhaseBanner />
-      <div className='govuk-width-container service-banner'>
-        <AuthNavigation />
+      <div className='govuk-width-container'>
+        <div className='service-banner'>
+          {loggedin && <span className='govuk-visually-hidden' role='alert'>you are now signed in</span>}
+          <AuthNavigation />
+        </div>
       </div>
       <main id='main-content' role='main'>
         <div className='govuk-panel govuk-panel--confirmation govuk-panel--welcome'>
@@ -132,15 +141,10 @@ const Home = ({ accountDeleted }) => {
 }
 
 Home.getInitialProps = async ({ req }) => {
-  if (req && req.query.account) {
-    return {
-      accountDeleted: true
-    }
-  }
+  if (req && req.query.loggedin) return { loggedin: true }
+  if (req && req.query.account) return { accountDeleted: true }
 
-  return {
-    status: 200
-  }
+  return { status: 200 }
 }
 
 export default Home
