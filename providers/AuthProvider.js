@@ -6,40 +6,36 @@ import { useCookie } from 'hooks'
 
 export const AuthContext = createContext({
   user: null,
-  setToken: () => {},
+  setUser: () => {},
   logout: () => {}
 })
 
 export const AuthProvider = ({ children }) => {
   const [pageLoaded, setPageLoaded] = useState(false)
-  const [token, updateToken] = useState(null)
+  const [account, setAccount] = useState(null)
   const { deleteCookie } = useCookie()
 
   useEffect(() => {
-    let token = window.localStorage.getItem('token')
-
-    if (token) {
-      token = JSON.parse(token)
-      updateToken(token)
-    }
+    const item = window.localStorage.getItem('account')
+    if (item) setAccount(JSON.parse(item))
 
     setPageLoaded(true)
   }, [])
 
-  const setToken = (token) => {
-    window.localStorage.setItem('token', JSON.stringify(token))
-    updateToken(token)
+  const setUser = (data) => {
+    window.localStorage.setItem('account', JSON.stringify(data))
+    setAccount(data)
   }
 
   const logout = async () => {
-    window.localStorage.removeItem('token')
-    updateToken(null)
+    window.localStorage.removeItem('account')
+    setAccount(null)
     deleteCookie('msal.idtoken')
     await signOut()
   }
 
   return (
-    <AuthContext.Provider value={{ user: new User(token), setToken, logout, pageLoaded }}>
+    <AuthContext.Provider value={{ user: new User(account), setUser, logout, pageLoaded }}>
       {children}
     </AuthContext.Provider>
   )

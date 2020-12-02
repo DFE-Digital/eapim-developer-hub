@@ -3,6 +3,8 @@ const ready = function (callback) {
   else document.addEventListener('DOMContentLoaded', callback)
 }
 
+const VERIFY_ACCOUNT_TEXT = 'Verify your account using the email we sent. Or get us to resend the verification email'
+
 const wrapForgotPassword = function (toWrap) {
   const wrapper = document.createElement('p')
   wrapper.classList.add('govuk-body')
@@ -43,16 +45,44 @@ const hidePageLevel = function () {
   document.querySelector('.pageLevel').style.display = 'none'
 }
 
+const generateCopyWithLink = function (copy) {
+  const parts = copy.split(': ')
+  if (parts.length === 1) return copy
+
+  const link = parts[1]
+
+  const p = document.createElement('p')
+  p.classList.add('govuk-error-message')
+  p.innerText = VERIFY_ACCOUNT_TEXT
+
+  const a = document.createElement('a')
+  a.setAttribute('href', link)
+  a.setAttribute('role', 'alert')
+  a.setAttribute('aria-live', 'assertive')
+  a.append(p)
+  return a
+}
+
 const summaryErrorMessageCallback = function (mutations) {
   mutations.forEach(function (mutation) {
     const entry = mutation.target
 
     if (entry.style.display === 'block') {
-      if (document.querySelector('.error-summary-email').innerHTML === '' && document.querySelector('.error-summary-password').innerHTML === '') {
-        showFormGroupError('#signInName')
-        showFieldError('#signInName', 'email')
-        showFormGroupError('#password')
-        showFieldError('#password', 'password')
+      const p = entry.querySelector('p')
+
+      if (p.innerText.indexOf('https://') > -1) {
+        const copy = p.innerText
+        p.innerHTML = ''
+        p.append(generateCopyWithLink(copy))
+      }
+
+      if (p.innerText.indexOf(VERIFY_ACCOUNT_TEXT) === -1) {
+        if (document.querySelector('.error-summary-email').innerHTML === '' && document.querySelector('.error-summary-password').innerHTML === '') {
+          showFormGroupError('#signInName')
+          showFieldError('#signInName', 'email')
+          showFormGroupError('#password')
+          showFieldError('#password', 'password')
+        }
       }
     }
   })
@@ -135,7 +165,7 @@ ready(function () {
   const passwordObserver = new window.MutationObserver(passwordErrorMessageCallback)
 
   if (container) {
-    summaryObserver.observe(container.querySelector('.pageLevel'), { attributes: true })
+    summaryObserver.observe(container.querySelector('.pageLevel'), { attributes: true, childList: false, subtree: false })
     emailObserver.observe(container.querySelector('#signInName').closest('.entry-item').querySelector('.itemLevel'), options)
     passwordObserver.observe(container.querySelector('#password').closest('.entry-item').querySelector('.itemLevel'), options)
 

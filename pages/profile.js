@@ -23,7 +23,7 @@ const errorHandling = (error) => {
 }
 
 const Profile = () => {
-  const { user, setToken } = useAuth()
+  const { user, setUser } = useAuth()
   const [trackException] = useInsights()
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const Profile = () => {
         if (!myMSALObj.getAccount()) return myMSALObj.loginRedirect()
 
         const account = myMSALObj.getAccount()
-        setToken(account)
+        setUser(account)
         goTo('/profile')
       } else {
         console.log(`Token type is: ${response.tokenType}`)

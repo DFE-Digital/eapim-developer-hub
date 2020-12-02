@@ -39,17 +39,15 @@ const isForgotPassword = (acr) => policy(acr, 'forgotPassword')
 const isAuth = (acr) => isSignIn(acr) || isSignUp(acr) || isVerify(acr)
 
 const SignInSuccess = () => {
-  const { setToken } = useAuth()
+  const { setUser } = useAuth()
 
   useEffect(() => {
     const myMSALObj = new Msal.UserAgentApplication(config.login)
     const { setCookie, deleteCookie } = useCookie()
     const [trackException] = useInsights()
 
-    if (myMSALObj.getAccount()) goTo('/')
-
     myMSALObj.handleRedirectCallback((error, response) => {
-      console.log(`MSAL Response: ${response}`)
+      console.log('MSAL Response:', response)
 
       if (error) {
         trackException(error)
@@ -72,8 +70,8 @@ const SignInSuccess = () => {
         }
 
         const account = myMSALObj.getAccount()
-        setToken(account)
-        setCookie('msal.idtoken', 'true')
+        setUser(account)
+        setCookie('msal.idtoken', response.idToken.rawIdToken)
         goTo('/?loggedin=true')
       } else {
         console.log(`Token type is: ${response.tokenType}`)
