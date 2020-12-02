@@ -16,6 +16,7 @@ import { useAuth } from '../../../providers/AuthProvider'
 import * as validation from '../../../src/utils/validation'
 
 const content = getContent('redirect-urls')
+const URLS_LIMIT = 15
 
 const ApplicationRedirectUrls = ({ application, serverError }) => {
   if (serverError) return <ErrorPage {...serverError} />
@@ -195,13 +196,13 @@ const ApplicationRedirectUrls = ({ application, serverError }) => {
             </tbody>
           </table>
 
-          {application.web.redirectUris.length === 5 && (
+          {application.web.redirectUris.length === URLS_LIMIT && (
             <div className='govuk-inset-text'>
               {content.messages.maximum}
             </div>
           )}
 
-          {application.web.redirectUris.length < 5 && (
+          {application.web.redirectUris.length < URLS_LIMIT && (
             <button type='button' className='govuk-button' disabled={adding} onClick={() => setAdding(!adding)}>
               {content.buttons.add}
             </button>
