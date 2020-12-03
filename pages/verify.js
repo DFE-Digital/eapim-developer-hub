@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { signInRedeem } from '../../lib/authService'
+import { signInRedeem } from '../lib/authService'
 
 const Verify = ({ idTokenHint }) => {
   useEffect(() => {
