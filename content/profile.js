@@ -42,5 +42,11 @@ const data = {
         Body: 'This will be deleted immediately. We cannot restore accounts once they have been deleted.'
       }
     ]
+  },
+  'delete-account-success': {
+    title: 'Your account has been deleted',
+    buttons: {
+      back: 'Back to homepage'
+    }
   }
 }

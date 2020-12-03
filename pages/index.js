@@ -16,9 +16,9 @@ import { getContent } from '../content/home'
 
 const content = getContent('home')
 
-const Home = ({ loggedin, accountDeleted }) => {
+const Home = ({ loggedin }) => {
   const router = useRouter()
-  const { user, logout, pageLoaded } = useAuth()
+  const { user, pageLoaded } = useAuth()
   const [pageView] = useInsights()
   const [bannerCookie, updateCookie] = useState(null)
   const { hasCookie, setCookie } = useCookie()
@@ -39,7 +39,6 @@ const Home = ({ loggedin, accountDeleted }) => {
 
   useEffect(() => {
     pageView({ name: 'Homepage', url: window.location.href })
-    if (accountDeleted) logout()
   }, [])
 
   return (
@@ -142,7 +141,6 @@ const Home = ({ loggedin, accountDeleted }) => {
 
 Home.getInitialProps = async ({ req }) => {
   if (req && req.query.loggedin) return { loggedin: true }
-  if (req && req.query.account) return { accountDeleted: true }
 
   return { status: 200 }
 }
