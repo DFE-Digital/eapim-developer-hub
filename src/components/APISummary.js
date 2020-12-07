@@ -22,9 +22,9 @@ const APISummary = ({ api, summary }) => {
           </tr>
           {api.tags.swaggerFile && (
             <tr className='govuk-table__row'>
-              <th scope='row' className='govuk-table__header govuk-!-width-one-half'>Swagger file</th>
+              <th scope='row' className='govuk-table__header govuk-!-width-one-half'>Open API file</th>
               <td className='govuk-table__cell govuk-!-width-one-half'>
-                <a className='govuk-link' href={api.tags.swaggerFile} download={api.tags.swaggerFile} target='_blank'>View Swagger file</a>
+                <a className='govuk-link' href={api.tags.swaggerFile} download={api.tags.swaggerFile} target='_blank'>View Open API file</a>
               </td>
             </tr>
           )}
@@ -33,6 +33,18 @@ const APISummary = ({ api, summary }) => {
               <th scope='row' className='govuk-table__header govuk-!-width-one-half'>Guideline</th>
               <td className='govuk-table__cell govuk-!-width-one-half'>
                 <a className='govuk-link' href={api.tags.guideline} download='dfe-information-api-guideline'>Download guideline</a>
+              </td>
+            </tr>
+          )}
+          {api.tags.authType && (
+            <tr className='govuk-table__row'>
+              <th scope='row' className='govuk-table__header govuk-!-width-one-half'>Supported Authorisation types</th>
+              <td className='govuk-table__cell govuk-!-width-one-half'>
+                <ul className='govuk-list govuk-!-margin-bottom-0'>
+                  {api.tags.authType.map(item => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
               </td>
             </tr>
           )}

@@ -15,8 +15,11 @@ const data = {
       addNew: 'Add new application',
       start: 'Register your first application'
     },
-    authWarning: 'You need an account to view applications.',
-    empty: "You don't have any applications"
+    messages: {
+      maximum: 'There is a limit of 10 applications. It is best practice to register a different application for production and non-production subscriptions.',
+      authWarning: 'You need an account to view applications.',
+      empty: "You don't have any applications"
+    }
   },
   'registering-your-application': {
     title: 'Before you register your application',

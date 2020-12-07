@@ -10,6 +10,7 @@ import { useApplication } from '../../providers/ApplicationProvider'
 import { getApplications } from '../../lib/applicationService'
 
 const content = getContent('applications')
+const APPLICATIONS_LIMIT = 10
 
 const Applications = () => {
   const router = useRouter()
@@ -41,11 +42,17 @@ const Applications = () => {
       <h1 className='govuk-heading-xl'>{content.title}</h1>
 
       {fetching && <Loading />}
-      {!user.getToken() && <AuthWarning warning={content.authWarning} />}
+      {!user.getToken() && <AuthWarning warning={content.messages.authWarning} />}
+
+      {user.getToken() && (
+        <div className='govuk-inset-text'>
+          {content.messages.maximum}
+        </div>
+      )}
 
       {applications.length === 0 && !fetching && user.getToken() && (
         <>
-          <p className='govuk-body'>{content.empty}</p>
+          <p className='govuk-body'>{content.messages.empty}</p>
           <a role='button' className='govuk-button govuk-!-margin-top-6' onClick={onStart} href='/applications/create/step1'>{content.buttons.start}</a>
         </>
       )}
@@ -69,7 +76,8 @@ const Applications = () => {
               })}
             </tbody>
           </table>
-          {applications.length < 5 && (
+
+          {applications.length < APPLICATIONS_LIMIT && (
             <a role='button' className='govuk-button govuk-!-margin-top-6' onClick={onStart} href='/applications/create/step1'>
               {content.buttons.addNew}
             </a>

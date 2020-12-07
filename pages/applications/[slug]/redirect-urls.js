@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react'
+import ReactHtmlParser from 'react-html-parser'
 import { getContent } from '../../../content/applicationManagement'
 import ContentBuilder from 'components/ContentBuilder'
 import ErrorPage from 'components/pages/ErrorPage'
@@ -198,7 +199,7 @@ const ApplicationRedirectUrls = ({ application, serverError }) => {
 
           {application.web.redirectUris.length === URLS_LIMIT && (
             <div className='govuk-inset-text'>
-              {content.messages.maximum}
+              {ReactHtmlParser(content.messages.maximum)}
             </div>
           )}
 

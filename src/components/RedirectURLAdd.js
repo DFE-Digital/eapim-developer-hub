@@ -25,12 +25,12 @@ const RedirectURLAdd = React.forwardRef(({ type, value = '', error, onSave, onCa
           error={error}
         />
       </th>
-      <td className='govuk-table__cell govuk-table__cell--numeric govuk-!-padding-right-1 middle'>
+      <td className='govuk-table__cell govuk-table__cell--numeric govuk-!-padding-right-1 middle' style={{ width: '5em' }}>
         <a role='button' href='#' className='govuk-link' onClick={onSaveHandler}>
           {content.buttons.save}
         </a>
       </td>
-      <td className='govuk-table__cell govuk-table__cell--numeric middle'>
+      <td className='govuk-table__cell govuk-table__cell--numeric middle' style={{ width: '5em' }}>
         <a role='button' href='#' className='govuk-link' onClick={onCancel}>
           {content.buttons.cancel}
         </a>

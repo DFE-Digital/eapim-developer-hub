@@ -18,18 +18,21 @@ const RedirectURL = React.forwardRef(({ url, urls, error, changing, onChange, on
       {!changing && (
         <>
           <th scope='row' className='govuk-table__header'>{url}</th>
+          {!showRemove && (
+            <td className='govuk-table__cell govuk-table__cell--numeric' style={{ width: '5em' }} />
+          )}
           <td className='govuk-table__cell govuk-table__cell--numeric govuk-!-padding-right-1' style={{ paddingRight: 0 }}>
             <a role='button' href='#' className='govuk-link' onClick={(e) => onChange(e, url)}>
               {content.buttons.change} <span className='govuk-visually-hidden'>{url}</span>
             </a>
           </td>
-          <td className='govuk-table__cell govuk-table__cell--numeric' style={{ width: '5em' }}>
-            {showRemove && (
+          {showRemove && (
+            <td className='govuk-table__cell govuk-table__cell--numeric' style={{ width: '5em' }}>
               <a role='button' href='#' className='govuk-link' onClick={(e) => onRemoveHandler(e, url)}>
                 {content.buttons.remove} <span className='govuk-visually-hidden'>{url}</span>
               </a>
-            )}
-          </td>
+            </td>
+          )}
         </>
       )}
       {changing && (

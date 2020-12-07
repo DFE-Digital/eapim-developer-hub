@@ -115,7 +115,7 @@ const data = {
       change: 'Change'
     },
     messages: {
-      maximum: 'This is the maximum number of redirect URLs. To add another, delete one first.'
+      maximum: 'You have reached the maximum number of redirect URLs. If you require further redirect URLs, please <a class="govuk-link" href="/support" target="_blank">raise a support request on our support page</a>.'
     },
     errors: {
       empty: 'Enter a redirect URL',
