@@ -49,7 +49,7 @@ const generateCopyWithLink = function (copy) {
   const parts = copy.split(': ')
   if (parts.length === 1) return copy
 
-  const link = parts[1]
+  const link = parts[1].replace(/"/g, '')
 
   const p = document.createElement('p')
   p.classList.add('govuk-error-message')
