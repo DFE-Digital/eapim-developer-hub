@@ -1,3 +1,15 @@
+.govuk-link,
+.govuk-header__link,
+.govuk-footer__link {
+  &:focus {
+    outline: 3px solid transparent !important;
+    color: govuk-colour('black') !important;
+    background-color: govuk-colour('yellow') !important;
+    box-shadow: 0 -2px govuk-colour('yellow'), 0 4px govuk-colour('black') !important;
+    text-decoration: none !important;
+  }
+}
+
 .govuk-skip-link {
   display: inline-block;
   top: 0;

@@ -69,7 +69,7 @@ const Applications = () => {
                 return (
                   <tr className='govuk-table__row' key={i}>
                     <th scope='row' className={`govuk-table__header`}>
-                      <a href={`/applications/${app.applicationId}/details`}>{app.applicationName}</a>
+                      <a className='govuk-link' href={`/applications/${app.applicationId}/details`}>{app.applicationName}</a>
                     </th>
                   </tr>
                 )

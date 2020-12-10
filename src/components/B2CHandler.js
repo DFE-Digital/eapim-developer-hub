@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Helmet } from 'react-helmet'
 
 const B2CHandler = ({ func, text }) => {
   useEffect(() => {
@@ -9,7 +10,12 @@ const B2CHandler = ({ func, text }) => {
   }, [])
 
   return (
-    <span className='govuk-visually-hidden'>{text}</span>
+    <>
+      <span className='govuk-visually-hidden'>{text}</span>
+      <Helmet>
+        <title>{text} | DfE Developer Hub</title>
+      </Helmet>
+    </>
   )
 }
 

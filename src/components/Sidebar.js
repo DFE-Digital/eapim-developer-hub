@@ -15,7 +15,7 @@ const Sidebar = ({ title, items }) => {
           if (!item.href) {
             return (
               <li key={item.title}>
-                <a href={item.url} className={(isActive ? 'active' : '') + (item.className ? item.className : '')}>{item.title}</a>
+                <a href={item.url} className={'govuk-link ' + (isActive ? 'active' : '') + (item.className ? item.className : '')}>{item.title}</a>
               </li>
             )
           }
@@ -23,7 +23,7 @@ const Sidebar = ({ title, items }) => {
           return (
             <li key={item.title}>
               <Link as={item.url} href={item.href} passHref>
-                <a href={item.url} className={(isActive ? 'active' : '') + (item.className ? item.className : '')}>{item.title}</a>
+                <a href={item.url} className={'govuk-link ' + (isActive ? 'active' : '') + (item.className ? item.className : '')}>{item.title}</a>
               </Link>
             </li>
           )

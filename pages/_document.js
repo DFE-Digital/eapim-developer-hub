@@ -45,12 +45,12 @@ export default class extends Document {
 
   render () {
     return (
-      <Html {...this.helmetHtmlAttrComponents}>
+      <Html lang='en-GB' {...this.helmetHtmlAttrComponents}>
         <Head>
           { this.helmetJsx }
           { this.helmetHeadComponents }
         </Head>
-        <body {...this.helmetBodyAttrComponents}>
+        <body bgColor='white' {...this.helmetBodyAttrComponents}>
           <Main />
           <NextScript />
         </body>

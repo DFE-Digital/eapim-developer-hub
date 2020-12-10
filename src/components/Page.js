@@ -46,7 +46,7 @@ const Page = ({ children, title, parentTitle, sidebarContent, breadcrumbs, layou
 
   if (sidebarContent) {
     template = (
-      <section className='mainWrapper govuk-!-margin-top-7'>
+      <div className='mainWrapper govuk-!-margin-top-7'>
         <aside className='sideBar'>
           <div className='sideBar_content'>
             <Sidebar title={parentTitle} items={sidebarContent} />
@@ -60,7 +60,7 @@ const Page = ({ children, title, parentTitle, sidebarContent, breadcrumbs, layou
             </div>
           </div>
         </main>
-      </section>
+      </div>
     )
   }
 

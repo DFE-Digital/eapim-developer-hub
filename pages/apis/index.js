@@ -12,7 +12,7 @@ const Apis = ({ apis, router, serverError }) => {
     return (
       <tr className='govuk-table__row' key={i}>
         <th scope='row' className='govuk-table__header'>
-          <a href={`/apis/${api.name}`}>{api.properties.displayName}</a>
+          <a className='govuk-link' href={`/apis/${api.name}`}>{api.properties.displayName}</a>
         </th>
         <td className='govuk-table__cell govuk-table__cell--numeric'>
           <strong className={'govuk-tag govuk-tag-round' + (api.flag ? ` ${api.flag}` : '')}>
