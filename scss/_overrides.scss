@@ -1,6 +1,7 @@
 .govuk-link,
 .govuk-header__link,
-.govuk-footer__link {
+.govuk-footer__link,
+.breadcrumbs__link {
   &:focus {
     outline: 3px solid transparent !important;
     color: govuk-colour('black') !important;

@@ -103,7 +103,7 @@ const Support = ({ apis, serverError }) => {
   }
 
   return (
-    <Page title={content.title} layout='three-quarters' errors={errors}>
+    <Page title={content.title} layout='three-quarters' errors={errors} breadcrumbs={[{ title: content.title }]}>
       <h1 className='govuk-heading-xl'>{content.title}</h1>
       <ContentBuilder sectionNav={false} data={content.content} />
       <hr className='govuk-section-break govuk-section-break--l govuk-section-break--visible' />

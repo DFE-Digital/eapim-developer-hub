@@ -897,7 +897,7 @@ const data = {
           "<a href='https://ico.org.uk/about-the-ico/what-we-do/legislation-we-cover/privacy-and-electronic-communications-regulations/' class='govuk-link' target='_blank'>Privacy and Electronic Communications (EC Directive) Regulations 2003 - as amended</a>",
           "<a href='https://www.legislation.gov.uk/ukpga/2010/15/contents' class='govuk-link' target='_blank'>Equality Act 2010</a>",
           "<a href='https://ico.org.uk/for-organisations/' class='govuk-link' target='_blank'>Information Commissioner's Office</a>",
-          "<a href='https://ico.org.uk/for-organisations/data-protection-act-2018/' class='govuk-link' target='_blank'>Data Protection Act 2018</a>"
+          "<a href='https://ico.org.uk/for-organisations/guide-to-data-protection/introduction-to-data-protection/about-the-dpa-2018/' class='govuk-link' target='_blank'>Data Protection Act 2018</a>"
         ]
       },
       {

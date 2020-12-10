@@ -34,7 +34,7 @@ const Page = ({ children, title, parentTitle, sidebarContent, breadcrumbs, layou
   }, [])
 
   let template = (
-    <main className='govuk-main-wrapper' id='main-content' role='main'>
+    <main className='govuk-main-wrapper' id='main-content'>
       <div className='govuk-grid-row'>
         <div className={`govuk-grid-column-${layout}`}>
           <ErrorSummary pageTitle={title} errors={errors} />
@@ -52,7 +52,7 @@ const Page = ({ children, title, parentTitle, sidebarContent, breadcrumbs, layou
             <Sidebar title={parentTitle} items={sidebarContent} />
           </div>
         </aside>
-        <main className='govuk-main-wrapper govuk-!-padding-top-0 mainContent' id='main-content' role='main'>
+        <main className='govuk-main-wrapper govuk-!-padding-top-0 mainContent' id='main-content'>
           <div className='govuk-grid-row'>
             <div className={`govuk-grid-column-${layout}`}>
               <ErrorSummary pageTitle={title} errors={errors} />

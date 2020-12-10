@@ -2,7 +2,7 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <footer className='govuk-footer' role='contentinfo'>
+    <footer className='govuk-footer'>
       <div className='govuk-width-container '>
         <div className='govuk-footer__meta'>
           <div className='govuk-footer__meta-item govuk-footer__meta-item--grow'>

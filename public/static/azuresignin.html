@@ -17,7 +17,7 @@
   <link rel="stylesheet" href="#{ROOT_URL}#/assets/css/b2c-overrides.css" type="text/css" media="all" data-preload="true">
 </head>
 <body>
-  <header class="govuk-header" role="banner" data-module="govuk-header">
+  <header class="govuk-header" data-module="govuk-header">
     <div class="govuk-header__container govuk-width-container">
       <div class="govuk-header__logo">
         <a class="govuk-header__link govuk-header__link--homepage" href="//www.gov.uk">
@@ -49,9 +49,19 @@
       <p class="govuk-phase-banner__content"><strong class="govuk-tag govuk-phase-banner__content__tag">Alpha</strong><span class="govuk-phase-banner__text">This is a new service - your <a class="govuk-link" href="https://forms.office.com/Pages/ResponsePage.aspx?id=yXfS-grGoU2187O4s0qC-YA4Qd_fewBHv2fn-gXg0b9UQU8yT1JaWU1GVFo1M0RXNlZDREJUWjZXRS4u">feedback</a> will help us to improve it.</span></p>
     </div>
   </div>
+  
+  <div class="govuk-width-container">
+    <div class='govuk-breadcrumbs'>
+      <ol class='govuk-breadcrumbs__list'>
+        <li class='govuk-breadcrumbs__list-item'>
+          <a class='govuk-breadcrumbs__link' href="#{ROOT_URL}#">Home</a>
+        </li>
+      </ol>
+    </div>
+  </div>
 
   <div class="govuk-width-container">
-    <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content" role="main">
+    <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content">
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-full">
           <h1 class="govuk-heading-xl govuk-!-margin-bottom-4">Sign in</h1>
@@ -66,7 +76,7 @@
     </main>
   </div>
 
-  <footer class="govuk-footer" role="contentinfo">
+  <footer class="govuk-footer">
     <div class="govuk-width-container">
       <div class="govuk-footer__meta">
         <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">

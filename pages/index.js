@@ -52,7 +52,7 @@ const Home = ({ loggedin }) => {
           <AuthNavigation />
         </div>
       </div>
-      <main id='main-content' role='main'>
+      <main id='main-content'>
         <div className='govuk-panel govuk-panel--confirmation govuk-panel--welcome'>
           <div className='govuk-width-container'>
             <h1 className='govuk-panel__title'>{content.title}</h1>

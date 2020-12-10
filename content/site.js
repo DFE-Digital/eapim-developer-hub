@@ -132,7 +132,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: 'We use Microsoft Azure Application Insights analytics to help us understand how the Developer Hub is being used and how it is performing. Any details that could personally identify you are removedfrom this information.'
+        Body: 'We use Microsoft Azure Application Insights analytics to help us understand how the Developer Hub is being used and how it is performing. Any details that could personally identify you are removed from this information.'
       },
       {
         Type: 'P',
@@ -443,7 +443,7 @@ const data = {
         Body: [
           'the functions contained in the material on this website will be uninterrupted or free of errors',
           'defects will be corrected',
-          'this site or the servers that make it available are free of viruse',
+          'this site or the servers that make it available are free of viruses',
           'this site represents the full functionality, accuracy or reliability of the materials'
         ]
       },
