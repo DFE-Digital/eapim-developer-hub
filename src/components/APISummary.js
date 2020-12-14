@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ReactHtmlParser from 'react-html-parser'
 
 import APISummaryBuilder from './APISummaryBuilder'
@@ -7,6 +7,15 @@ const APISummary = ({ api, summary }) => {
   if (!summary) return null
 
   const sectionTitles = summary.sections.map(section => section.title)
+
+  useEffect(() => {
+    const link = document.querySelector('[data-swagger-editor]')
+
+    if (link) {
+      const href = `${link.getAttribute('href')}?url=${api.tags.swaggerFile}`
+      link.setAttribute('href', href)
+    }
+  }, [])
 
   return (
     <div className='api-information-page'>
@@ -79,7 +88,7 @@ const APISummary = ({ api, summary }) => {
 
       <hr className='govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-9' />
 
-      <APISummaryBuilder summary={summary} />
+      <APISummaryBuilder swaggerFile={api.tags.swaggerFile} summary={summary} />
     </div>
   )
 }
