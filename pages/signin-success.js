@@ -14,20 +14,20 @@ const errorHandling = (error) => {
   console.log(`MSAL Error Message: ${error.errorMessage}`)
 
   // user has no account
-  if (error.errorMessage.indexOf('AADB2C99002') > -1) goTo('/')
+  if (error.errorMessage.indexOf('AADB2C99002') > -1) return goTo('/')
   // user cancelled creating an account
   // user cancelled forgot password
   // user cancelled updating profile
-  if (error.errorMessage.indexOf('AADB2C90091') > -1) goTo('/')
+  if (error.errorMessage.indexOf('AADB2C90091') > -1) return goTo('/')
   // user went from signin to create account
-  if (error.errorMessage.indexOf('AADB2C90037') > -1) goTo('/auth/register')
+  if (error.errorMessage.indexOf('AADB2C90037') > -1) return goTo('/auth/register')
   // check for forgot password error
-  if (error.errorMessage.indexOf('AADB2C90118') > -1) goTo('/auth/forgot-password')
+  if (error.errorMessage.indexOf('AADB2C90118') > -1) return goTo('/auth/forgot-password')
 
   // Learn more about AAD error codes at https://docs.microsoft.com/en-us/azure/active-directory/develop/reference-aadsts-error-codes
-  if (error.errorMessage.indexOf('Invalid state') > -1) goTo('/')
+  if (error.errorMessage.indexOf('Invalid state') > -1) return goTo('/')
 
-  goTo('/')
+  return goTo('/')
 }
 
 const policy = (acr, key) => acr === b2cPolicies[key]
@@ -76,7 +76,7 @@ const SignInSuccess = () => {
         goTo('/?loggedin=true')
       } else {
         console.log(`Token type is: ${response.tokenType}`)
-        goTo('/')
+        return goTo('/')
       }
     })
   }, [])
