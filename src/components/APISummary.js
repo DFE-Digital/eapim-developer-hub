@@ -9,11 +9,13 @@ const APISummary = ({ api, summary }) => {
   const sectionTitles = summary.sections.map(section => section.title)
 
   useEffect(() => {
-    const link = document.querySelector('[data-swagger-editor]')
+    const links = document.querySelectorAll('a[href^="https://editor.swagger.io"]')
 
-    if (link) {
-      const href = `${link.getAttribute('href')}?url=${api.tags.swaggerFile}`
-      link.setAttribute('href', href)
+    if (links) {
+      for (let i = 0; i < links.length; i++) {
+        const href = `${links[i].getAttribute('href')}?url=${api.tags.swaggerFile}`
+        links[i].setAttribute('href', href)
+      }
     }
   }, [])
 
