@@ -125,7 +125,7 @@ const data = {
     content: [
       {
         Type: 'P',
-        Body: 'You can add and edit up to five redirect URLs using the link below.'
+        Body: 'You can add and edit up to fifteen redirect URLs using the link below.'
       },
       {
         Type: 'P',
