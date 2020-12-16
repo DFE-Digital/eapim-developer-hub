@@ -97,7 +97,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: 'When you first register an application, you must provide a redirect URL. You can add and edit up to 5 redirect URLs.'
+        Body: 'When you first register an application, you must provide a redirect URL. You can add and edit up to 15 redirect URLs.'
       },
       {
         Type: 'P',
