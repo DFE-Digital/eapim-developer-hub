@@ -13,8 +13,6 @@ const goTo = (url) => {
 const errorHandling = (error) => {
   console.log(`MSAL Error Message: ${error.errorMessage}`)
 
-  // Learn more about AAD error codes at https://docs.microsoft.com/en-us/azure/active-directory/develop/reference-aadsts-error-codes
-  if (error.errorMessage.indexOf('Invalid state') > -1) goTo('/')
   // user has no account
   if (error.errorMessage.indexOf('AADB2C99002') > -1) goTo('/')
   // user cancelled creating an account
@@ -25,6 +23,9 @@ const errorHandling = (error) => {
   if (error.errorMessage.indexOf('AADB2C90037') > -1) goTo('/auth/register')
   // check for forgot password error
   if (error.errorMessage.indexOf('AADB2C90118') > -1) goTo('/auth/forgot-password')
+
+  // Learn more about AAD error codes at https://docs.microsoft.com/en-us/azure/active-directory/develop/reference-aadsts-error-codes
+  if (error.errorMessage.indexOf('Invalid state') > -1) goTo('/')
 
   goTo('/')
 }
