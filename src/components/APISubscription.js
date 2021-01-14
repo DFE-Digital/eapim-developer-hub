@@ -73,7 +73,7 @@ const APISubscription = ({ applicationId, tag, subscription, onSubscriptionChang
     }
 
     return (
-      <a href={href} onClick={onClick} role='button' className={`govuk-button govuk-!-margin-0 ${subscription ? 'govuk-button--warning' : ''}`}>
+      <a href={href} onClick={onClick} role='button' aria-live='polite' className={`govuk-button govuk-!-margin-0 ${subscription ? 'govuk-button--warning' : ''}`}>
         {text}
       </a>
     )

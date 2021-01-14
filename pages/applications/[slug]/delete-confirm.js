@@ -55,6 +55,7 @@ const ApplicationDeleteConfirm = ({ application, serverError }) => {
         disabled={deleting}
         className='govuk-button govuk-button--warning govuk-!-margin-top-6 govuk-!-margin-right-1'
         onClick={deleteConfirm}
+        aria-live='polite'
       >
         {!deleting ? content.buttons.delete : content.buttons.deleting}
       </button>

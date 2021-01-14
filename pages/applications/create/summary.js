@@ -71,7 +71,13 @@ const ApplicationCreateSummary = () => {
         </div>
       </dl>
 
-      <button type='submit' disabled={registering || !isValid()} className='govuk-button govuk-!-margin-right-1' onClick={() => createApplication()}>
+      <button
+        type='submit'
+        disabled={registering || !isValid()}
+        className='govuk-button govuk-!-margin-right-1'
+        onClick={() => createApplication()}
+        aria-live='polite'
+      >
         {!registering && content.buttons.register}
         {registering && content.buttons.registering}
       </button>

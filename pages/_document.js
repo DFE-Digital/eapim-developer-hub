@@ -50,7 +50,7 @@ export default class extends Document {
           { this.helmetJsx }
           { this.helmetHeadComponents }
         </Head>
-        <body bgColor='white' {...this.helmetBodyAttrComponents}>
+        <body {...this.helmetBodyAttrComponents}>
           <Main />
           <NextScript />
         </body>
