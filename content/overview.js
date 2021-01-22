@@ -890,7 +890,7 @@ const data = {
       {
         Type: 'UL',
         Body: [
-          "<a href='https://www.ncsc.gov.uk/collection/digital-service-security' class='govuk-link' target='_blank'>National Cyber Security Centre's Digital Service Security (opensin a new tab)</a>",
+          "<a href='https://www.ncsc.gov.uk/collection/digital-service-security' class='govuk-link' target='_blank'>National Cyber Security Centre's Digital Service Security (opens in a new tab)</a>",
           "<a href='https://www.ncsc.gov.uk/blog-post/secure-development-and-deployment' class='govuk-link' target='_blank'>National Cyber Security Centre's Guidance for secure development and deployment</a>",
           "<a href='https://www.ncsc.gov.uk/guidance/tls-external-facing-services' class='govuk-link' target='_blank'>Transport Layer Security principles for protecting data</a>",
           "<a href='https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr' class='govuk-link' target='_blank'>General Data Protection Regulation - GDPR</a>",
