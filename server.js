@@ -10,9 +10,11 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handler = app.getRequestHandler()
 
+const getCredentials = require('./getCredentials')
+
 app
   .prepare()
-  .then(() => {
+  .then(async () => {
     const server = express()
 
     server.use(helmet())
@@ -25,13 +27,14 @@ app
       maxAge: '30d',
       immutable: true
     }))
+
     const assetsPath = path.join(__dirname, '../assets')
     server.use('/assets', express.static(assetsPath, {
       maxAge: '30d',
       immutable: true
     }))
 
-    server.all('*', (req, res) => {
+    server.all('*', getCredentials, (req, res) => {
       return handler(req, res)
     })
 

@@ -5,6 +5,7 @@ import App from 'next/app'
 import theme from 'theme'
 import { AuthProvider } from '../providers/AuthProvider'
 import { ApplicationProvider } from '../providers/ApplicationProvider'
+import { ClientCredentialsProvider } from '../providers/ClientCredentialsProvider'
 import { getContent } from '../content/site'
 
 import '../scss/main.scss'
@@ -40,12 +41,14 @@ class DeveloperHub extends App {
           <script src='/assets/js/govuk-frontend.js' />
         </Helmet>
         <ThemeProvider theme={theme}>
-          <AuthProvider>
-            <ApplicationProvider>
-              <GlobalStyle />
-              <Component {...pageProps} />
-            </ApplicationProvider>
-          </AuthProvider>
+          <ClientCredentialsProvider>
+            <AuthProvider>
+              <ApplicationProvider>
+                <GlobalStyle />
+                <Component {...pageProps} />
+              </ApplicationProvider>
+            </AuthProvider>
+          </ClientCredentialsProvider>
         </ThemeProvider>
       </>
     )

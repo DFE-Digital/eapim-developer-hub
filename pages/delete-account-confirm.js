@@ -1,11 +1,12 @@
 import fetch from 'isomorphic-unfetch'
+import { getCredentials, checkAuth } from '../lib/authService'
 import React from 'react'
 import Link from 'next/link'
 import ErrorPage from 'components/pages/ErrorPage'
 import Page from 'components/Page'
 import ContentBuilder from 'components/ContentBuilder'
 import { useAuth } from '../providers/AuthProvider'
-import { checkAuth } from '../lib/authService'
+
 import errorHandler from '../lib/errorHandler'
 import { getContent } from '../content/profile'
 
@@ -52,6 +53,8 @@ const DeleteAcountConfirm = ({ serverError }) => {
 DeleteAcountConfirm.getInitialProps = async ({ req, res }) => {
   checkAuth(req, res)
 
+  const token = getCredentials(res)
+
   if (req && req.method === 'POST') {
     try {
       const { userName, userEmail, userID } = req.body
@@ -59,7 +62,10 @@ DeleteAcountConfirm.getInitialProps = async ({ req, res }) => {
 
       const response = await fetch(url, {
         method: 'DELETE',
-        headers: { 'Ocp-Apim-Subscription-Key': process.env.OCP_APIM_SUBSCRIPTION_KEY },
+        headers: {
+          'Ocp-Apim-Subscription-Key': process.env.OCP_APIM_SUBSCRIPTION_KEY,
+          Authorization: `Bearer ${token}`
+        },
         body: JSON.stringify({ userName, userEmail, userID })
       })
 

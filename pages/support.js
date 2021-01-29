@@ -183,7 +183,7 @@ Support.getInitialProps = async ({ req, res }) => {
         subject: 'Developer Hub Support Request',
         'content-type': 'text/html',
         'email-content': template(req.body)
-      })
+      }, res)
 
       res.writeHead(301, { Location: '/support-submitted' })
       res.end()
@@ -193,7 +193,7 @@ Support.getInitialProps = async ({ req, res }) => {
   }
 
   try {
-    const apis = await getApis()
+    const apis = await getApis(res)
     const data = apis.map(api => {
       return { label: api.properties.displayName, value: api.properties.displayName }
     })

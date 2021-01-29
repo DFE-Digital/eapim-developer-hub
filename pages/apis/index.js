@@ -5,7 +5,7 @@ import APIPage from 'components/pages/APIPage'
 import { getApis } from '../../lib/apiServices'
 import errorHandler from '../../lib/errorHandler'
 
-const Apis = ({ apis, router, serverError }) => {
+const Apis = ({ apis, serverError }) => {
   if (serverError) return <ErrorPage {...serverError} />
 
   const apiList = apis.map((api, i) => {
@@ -36,7 +36,7 @@ const Apis = ({ apis, router, serverError }) => {
 
 Apis.getInitialProps = async ({ res }) => {
   try {
-    const apis = await getApis()
+    const apis = await getApis(res)
     if (!apis) return errorHandler(res)
 
     return { apis }

@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-unfetch'
+import { getOAuthToken, checkAuth } from '../../../../../lib/authService'
 import React, { useState } from 'react'
 import moment from 'moment'
 import ApplicationManagementPage from 'components/pages/ApplicationManagementPage'
@@ -6,7 +7,7 @@ import ErrorPage from 'components/pages/ErrorPage'
 import ContentBuilder from 'components/ContentBuilder'
 
 import errorHandler from '../../../../../lib/errorHandler'
-import { checkAuth } from '../../../../../lib/authService'
+
 import { getApplication } from '../../../../../lib/applicationService'
 import clipboard from '../../../../../src/utils/clipboard'
 import { useAuth } from '../../../../../providers/AuthProvider'
@@ -107,6 +108,8 @@ const ApplicationClientSecretsConfirm = ({ id, secret, application, newClientKey
 ApplicationClientSecretsConfirm.getInitialProps = async ({ req, res, query }) => {
   checkAuth(req, res)
 
+  const token = getOAuthToken(res)
+
   if (req && req.method === 'POST') {
     const { userName, userEmail, userID, applicationId, KeyId, KeyDisplayName } = req.body
 
@@ -115,7 +118,10 @@ ApplicationClientSecretsConfirm.getInitialProps = async ({ req, res, query }) =>
 
       const response = await fetch(url, {
         method: 'POST',
-        headers: { 'Ocp-Apim-Subscription-Key': process.env.OCP_APIM_SUBSCRIPTION_KEY },
+        headers: {
+          'Ocp-Apim-Subscription-Key': process.env.OCP_APIM_SUBSCRIPTION_KEY,
+          Authorization: `Bearer ${token}`
+        },
         body: JSON.stringify({ userName, userEmail, userID, applicationId, KeyId, KeyDisplayName })
       })
 
@@ -124,7 +130,7 @@ ApplicationClientSecretsConfirm.getInitialProps = async ({ req, res, query }) =>
       const data = await response.json()
 
       if (response.ok) {
-        const application = await getApplication(query.slug)
+        const application = await getApplication(query.slug, res)
         const newClientKey = data[`${KeyDisplayName}Secret`]
 
         const keyObject = data.passwordCredentials.find(item => item.displayName === KeyDisplayName)
@@ -145,7 +151,7 @@ ApplicationClientSecretsConfirm.getInitialProps = async ({ req, res, query }) =>
   }
 
   try {
-    const application = await getApplication(query.slug)
+    const application = await getApplication(query.slug, res)
     if (!application) return errorHandler(res)
 
     const secret = application.passwordCredentials.find(item => item.keyId === query.keyid)

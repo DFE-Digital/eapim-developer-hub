@@ -58,16 +58,16 @@ ApplicationApiSubscriptions.getInitialProps = async ({ req, res, query }) => {
   checkAuth(req, res)
 
   try {
-    const application = await getApplication(query.slug)
+    const application = await getApplication(query.slug, res)
     if (!application) return errorHandler(res)
 
-    const apis = await getApis()
+    const apis = await getApis(res)
     if (!apis) return errorHandler(res)
 
-    const subscriptions = await getSubscriptions(application.applicationId)
+    const subscriptions = await getSubscriptions(application.applicationId, res)
 
     await Promise.all(apis.map(async (api) => {
-      api.tags = await getApiTags(api.name)
+      api.tags = await getApiTags(api.name, res)
       return api
     }))
 

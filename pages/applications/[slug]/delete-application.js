@@ -33,7 +33,7 @@ DeleteApplication.getInitialProps = async ({ req, res, query }) => {
   checkAuth(req, res)
 
   try {
-    const application = await getApplication(query.slug)
+    const application = await getApplication(query.slug, res)
     if (!application) return errorHandler(res)
 
     return {
