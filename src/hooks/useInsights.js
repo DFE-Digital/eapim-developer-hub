@@ -2,12 +2,12 @@ import { ApplicationInsights } from '@microsoft/applicationinsights-web'
 
 const config = {
   instrumentationKey: process.env.NEXT_PUBLIC_INSTRUMENTATION_KEY,
-  isEnabled: true
+  disableTelemetry: false
 }
 
 export default function useInsights (enabled = true) {
   const initialize = () => {
-    config.isEnabled = !!enabled
+    config.disableTelemetry = !enabled
     const instance = new ApplicationInsights({ config })
     instance.loadAppInsights()
     return instance
