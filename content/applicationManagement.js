@@ -97,7 +97,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: "Read more on <a href='/documentation/authorisation#credentials' class='govuk-link' target='_blank'>client secrets</a> for further details."
+        Body: "Read more on <a href='/documentation/authorisation#credentials' class='govuk-link' target='_blank'>client secrets (opens in a new tab)</a> for further details."
       }
     ]
   },
@@ -115,7 +115,7 @@ const data = {
       change: 'Change'
     },
     messages: {
-      maximum: 'You have reached the maximum number of redirect URLs. If you require further redirect URLs, please <a class="govuk-link" href="/support" target="_blank">raise a support request on our support page</a>.'
+      maximum: 'You have reached the maximum number of redirect URLs. If you require further redirect URLs, please <a class="govuk-link" href="/support" target="_blank">raise a support request on our support page (opens in a new tab)</a>.'
     },
     errors: {
       empty: 'Enter a redirect URL',
@@ -133,7 +133,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: "Read more on <a href='/documentation/reference-guide#redirect-urls' class='govuk-link' target='_blank'>redirect URLs</a> for further details."
+        Body: "Read more on <a href='/documentation/reference-guide#redirect-urls' class='govuk-link' target='_blank'>redirect URLs (opens in a new tab)</a> for further details."
       }
     ]
   },
@@ -203,7 +203,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: "Read more on <a href='/documentation/authorisation#credentials' class='govuk-link' target='_blank'>credentials</a> for further details."
+        Body: "Read more on <a href='/documentation/authorisation#credentials' class='govuk-link' target='_blank'>credentials (opens in a new tab)</a> for further details."
       }
     ]
   },

@@ -208,7 +208,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: "We use the open standard <a href='https://oauth.net/2/' target='_blank' class='govuk-link'>OAuth 2.0</a> with the <a href='https://oauth.net/2/grant-types/client-credentials' target='_blank' class=''>client credentials grant</a> to generate an access token. If the endpoint requires a <a href='https://oauth.net/2/scope/' target='_blank' class='govuk-link'>scope</a>, your application must include this scope when creating the access token."
+        Body: "We use the open standard <a href='https://oauth.net/2/' target='_blank' class='govuk-link'>OAuth 2.0</a> with the <a href='https://oauth.net/2/grant-types/client-credentials' target='_blank' class=''>client credentials grant (opens in a new tab)</a> to generate an access token. If the endpoint requires a <a href='https://oauth.net/2/scope/' target='_blank' class='govuk-link'>scope (opens in a new tab)</a>, your application must include this scope when creating the access token."
       },
       {
         Type: 'P',
@@ -243,7 +243,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: "We use the open standard <a href='https://oauth.net/2/' target='_blank' class='govuk-link'>OAuth 2.0</a> with the <a href='https://oauth.net/2/grant-types/client-credentials' target='_blank' class=''>client credentials grant</a> to generate an access token. This allows the end users to authorise your application to interact with DfE on their behalf without sharing their access credentials."
+        Body: "We use the open standard <a href='https://oauth.net/2/' target='_blank' class='govuk-link'>OAuth 2.0 (opens in a new tab)</a> with the <a href='https://oauth.net/2/grant-types/client-credentials' target='_blank' class='govuk-link'>client credentials grant (opens in a new tab)</a> to generate an access token. This allows the end users to authorise your application to interact with DfE on their behalf without sharing their access credentials."
       },
       {
         Type: 'P',
@@ -255,7 +255,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: "Following the latest <a href='https://tools.ietf.org/html/draft-ietf-oauth-security-topics-13#section-3.4' class='govuk-link' target='_blank'>OAuth 2.0 security best current practice</a>, DfE APIs do not support implicit and password OAuth grant types."
+        Body: "Following the latest <a href='https://tools.ietf.org/html/draft-ietf-oauth-security-topics-13#section-3.4' class='govuk-link' target='_blank'>OAuth 2.0 security best current practice (opens in a new tab)</a>, DfE APIs do not support implicit and password OAuth grant types."
       },
       {
         Type: 'H2',
@@ -338,7 +338,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: "All code snippets in these tutorials are in CSharp (C#). They use the <a class='govuk-link' href='https://restsharp.dev/' rel='noreferrer noopener' target='_blank'>RestSharp</a> library to access HTTP resources."
+        Body: "All code snippets in these tutorials are in CSharp (C#). They use the <a class='govuk-link' href='https://restsharp.dev/' rel='noreferrer noopener' target='_blank'>RestSharp (opens in a new tab)</a> library to access HTTP resources."
       },
       {
         Type: 'P',
@@ -347,9 +347,9 @@ const data = {
       {
         Type: 'BL',
         Body: [
-          "<a class='govuk-link' href='https://github.com/DFE-Digital/api-example-csharp-client' rel='noreferrer noopener' target='_blank'>CSharp</a>",
-          "<a class='govuk-link' href='https://github.com/DFE-Digital/api-example-java-client' rel='noreferrer noopener' target='_blank'>Java</a>",
-          "<a class='govuk-link' href='https://github.com/DFE-Digital/api-example-nodejs-client' rel='noreferrer noopener' target='_blank'>Node.js</a>"
+          "<a class='govuk-link' href='https://github.com/DFE-Digital/api-example-csharp-client' rel='noreferrer noopener' target='_blank'>CSharp (opens in a new tab)</a>",
+          "<a class='govuk-link' href='https://github.com/DFE-Digital/api-example-java-client' rel='noreferrer noopener' target='_blank'>Java (opens in a new tab)</a>",
+          "<a class='govuk-link' href='https://github.com/DFE-Digital/api-example-nodejs-client' rel='noreferrer noopener' target='_blank'>Node.js (opens in a new tab)</a>"
         ]
       },
       {
@@ -638,11 +638,11 @@ const data = {
       },
       {
         Type: 'P',
-        Body: "The DfE Developer Hub, the underlying API Platform and some of the APIs are coded in the open, as per the <a href='https://www.gov.uk/service-manual/service-standard/make-all-new-source-code-open' class='govuk-link' target='_blank'>GOV.UK Digital Service Standard</a>."
+        Body: "The DfE Developer Hub, the underlying API Platform and some of the APIs are coded in the open, as per the <a href='https://www.gov.uk/service-manual/service-standard/make-all-new-source-code-open' class='govuk-link' target='_blank'>GOV.UK Digital Service Standard (opens in a new tab)</a>."
       },
       {
         Type: 'P',
-        Body: "The source code is available at <a href='https://github.com/DFE-Digital' class='govuk-link' target='_blank'>https://github.com/DFE-Digital</a>. For more details, <a href='/support' class='govuk-link'>contact us</a>."
+        Body: "The source code is available at <a href='https://github.com/DFE-Digital' class='govuk-link' target='_blank'>https://github.com/DFE-Digital (opens in a new tab)</a>. For more details, <a href='/support' class='govuk-link'>contact us</a>."
       },
       {
         Type: 'H2',
@@ -784,7 +784,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: "The DfE Developer Hub does not support <a href='https://fetch.spec.whatwg.org/#http-cors-protocol' class='govuk-link' target='_blank'>CORS</a>. It is not possible to call our APIs from client-side code within a web browser, for example using Ajax."
+        Body: "The DfE Developer Hub does not support <a href='https://fetch.spec.whatwg.org/#http-cors-protocol' class='govuk-link' target='_blank'>CORS (opens in a new tab)</a>. It is not possible to call our APIs from client-side code within a web browser, for example using Ajax."
       },
       {
         Type: 'H2',
@@ -877,7 +877,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: "Your software must take into account the <a href='https://www.gov.uk/service-manual/service-standard' class='govuk-link' target='_blank'>Digital Service Standard</a>."
+        Body: "Your software must take into account the <a href='https://www.gov.uk/service-manual/service-standard' class='govuk-link' target='_blank'>Digital Service Standard (opens in a new tab)</a>."
       },
       {
         Type: 'P',
@@ -891,13 +891,13 @@ const data = {
         Type: 'UL',
         Body: [
           "<a href='https://www.ncsc.gov.uk/collection/digital-service-security' class='govuk-link' target='_blank'>National Cyber Security Centre's Digital Service Security (opens in a new tab)</a>",
-          "<a href='https://www.ncsc.gov.uk/blog-post/secure-development-and-deployment' class='govuk-link' target='_blank'>National Cyber Security Centre's Guidance for secure development and deployment</a>",
-          "<a href='https://www.ncsc.gov.uk/guidance/tls-external-facing-services' class='govuk-link' target='_blank'>Transport Layer Security principles for protecting data</a>",
-          "<a href='https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr' class='govuk-link' target='_blank'>General Data Protection Regulation - GDPR</a>",
-          "<a href='https://ico.org.uk/about-the-ico/what-we-do/legislation-we-cover/privacy-and-electronic-communications-regulations/' class='govuk-link' target='_blank'>Privacy and Electronic Communications (EC Directive) Regulations 2003 - as amended</a>",
-          "<a href='https://www.legislation.gov.uk/ukpga/2010/15/contents' class='govuk-link' target='_blank'>Equality Act 2010</a>",
-          "<a href='https://ico.org.uk/for-organisations/' class='govuk-link' target='_blank'>Information Commissioner's Office</a>",
-          "<a href='https://ico.org.uk/for-organisations/guide-to-data-protection/introduction-to-data-protection/about-the-dpa-2018/' class='govuk-link' target='_blank'>Data Protection Act 2018</a>"
+          "<a href='https://www.ncsc.gov.uk/blog-post/secure-development-and-deployment' class='govuk-link' target='_blank'>National Cyber Security Centre's Guidance for secure development and deployment (opens in a new tab)</a>",
+          "<a href='https://www.ncsc.gov.uk/guidance/tls-external-facing-services' class='govuk-link' target='_blank'>Transport Layer Security principles for protecting data (opens in a new tab)</a>",
+          "<a href='https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr' class='govuk-link' target='_blank'>General Data Protection Regulation - GDPR (opens in a new tab)</a>",
+          "<a href='https://ico.org.uk/about-the-ico/what-we-do/legislation-we-cover/privacy-and-electronic-communications-regulations/' class='govuk-link' target='_blank'>Privacy and Electronic Communications (EC Directive) Regulations 2003 - as amended (opens in a new tab)</a>",
+          "<a href='https://www.legislation.gov.uk/ukpga/2010/15/contents' class='govuk-link' target='_blank'>Equality Act 2010 (opens in a new tab)</a>",
+          "<a href='https://ico.org.uk/for-organisations/' class='govuk-link' target='_blank'>Information Commissioner's Office (opens in a new tab)</a>",
+          "<a href='https://ico.org.uk/for-organisations/guide-to-data-protection/introduction-to-data-protection/about-the-dpa-2018/' class='govuk-link' target='_blank'>Data Protection Act 2018 (opens in a new tab)</a>"
         ]
       },
       {
@@ -926,7 +926,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: "If your software processes personal data, you may need to pay a <a href='https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/accountability-and-governance/guide-to-the-data-protection-fee/' class='govuk-link' target='_blank'>data protection fee</a>."
+        Body: "If your software processes personal data, you may need to pay a <a href='https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/accountability-and-governance/guide-to-the-data-protection-fee/' class='govuk-link' target='_blank'>data protection fee (opens in a new tab)</a>."
       },
       {
         Type: 'P',
@@ -950,16 +950,16 @@ const data = {
           'what personal data you’ll be processing and what you’ll use it for',
           'that you’re responsible for protecting their data',
           'if you intend to store their data outside the European Economic Area (EEA)',
-          "your <a href='https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/lawful-basis-for-processing/' class='govuk-link' target='_blank'>lawful basis</a> for processing their personal data"
+          "your <a href='https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/lawful-basis-for-processing/' class='govuk-link' target='_blank'>lawful basis (opens in a new tab)</a> for processing their personal data"
         ]
       },
       {
         Type: 'P',
-        Body: "Follow <a href='https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/lawful-basis-for-processing/consent/' class='govuk-link' target='_blank'>GDPR rules on obtaining consent</a>, if you need users' consent to store and process their personal data."
+        Body: "Follow <a href='https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/lawful-basis-for-processing/consent/' class='govuk-link' target='_blank'>GDPR rules on obtaining consent (opens in a new tab)</a>, if you need users' consent to store and process their personal data."
       },
       {
         Type: 'P',
-        Body: "If you store or process data outside the EEA, you must follow GDPR guidance on <a href='https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/international-transfers/' class='govuk-link' target='_blank'>international transfers</a>."
+        Body: "If you store or process data outside the EEA, you must follow GDPR guidance on <a href='https://ico.org.uk/for-organisations/guide-to-the-general-data-protection-regulation-gdpr/international-transfers/' class='govuk-link' target='_blank'>international transfers (opens in a new tab)</a>."
       },
       {
         Type: 'H3',
@@ -972,9 +972,9 @@ const data = {
       {
         Type: 'UL',
         Body: [
-          "meet <a href='https://www.w3.org/TR/WCAG21/' class='govuk-link' target='_blank'>W3C's Web Content Accessibility Guidelines</a> at a minimum level of AA if your software's web-based, or <a href='https://www.w3.org/TR/mobile-accessibility-mapping/' class='govuk-link' target='_blank'>W3C's guidelines for mobile software</a>",
+          "meet <a href='https://www.w3.org/TR/WCAG21/' class='govuk-link' target='_blank'>W3C's Web Content Accessibility Guidelines (opens in a new tab)</a> at a minimum level of AA if your software's web-based, or <a href='https://www.w3.org/TR/mobile-accessibility-mapping/' class='govuk-link' target='_blank'>W3C's guidelines for mobile software (opens in a new tab)</a>",
           'give us evidence that your software meets the guidelines if we ask for it',
-          "<a href='/support' class='govuk-link' target='_blank'>contact us</a> if you have any concerns meeting these guidelines"
+          "<a href='/support' class='govuk-link'>contact us</a> if you have any concerns meeting these guidelines"
         ]
       },
       {
@@ -988,8 +988,8 @@ const data = {
       {
         Type: 'UL',
         Body: [
-          "<a href='https://www.asa.org.uk/codes-and-rulings/advertising-codes.html' class='govuk-link' target='_blank'>Advertising Standards Authority Codes</a>",
-          "<a href='https://www.gov.uk/marketing-advertising-law/regulations-that-affect-advertising' class='govuk-link' target='_blank'>UK marketing and advertising laws</a>"
+          "<a href='https://www.asa.org.uk/codes-and-rulings/advertising-codes.html' class='govuk-link' target='_blank'>Advertising Standards Authority Codes (opens in a new tab)</a>",
+          "<a href='https://www.gov.uk/marketing-advertising-law/regulations-that-affect-advertising' class='govuk-link' target='_blank'>UK marketing and advertising laws (opens in a new tab)</a>"
         ]
       },
       {
@@ -1006,7 +1006,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: "You cannot share personal data for marketing without users' consent, as defined in the <a href='https://ico.org.uk/media/1555/direct-marketing-guidance.pdf' class='govuk-link' target='_blank'>Information Commissioner's Office</a>."
+        Body: "You cannot share personal data for marketing without users' consent, as defined in the <a href='https://ico.org.uk/media/1555/direct-marketing-guidance.pdf' class='govuk-link' target='_blank'>Information Commissioner's Office (opens in a new tab)</a>."
       },
       {
         Type: 'H3',
@@ -1028,7 +1028,7 @@ const data = {
         Type: 'UL',
         Body: [
           'check software for vulnerabilities through secure development and pre-release testing',
-          "check open source or reused proprietary code using resources like the <a href='https://cve.mitre.org/' class='govuk-link' target='_blank'>Common Vulnerabilities and Exposures</a> database",
+          "check open source or reused proprietary code using resources like the <a href='https://cve.mitre.org/' class='govuk-link' target='_blank'>Common Vulnerabilities and Exposures (opens in a new tab)</a> database",
           'react quickly if you find vulnerabilities in your code',
           'have a patching policy in place'
         ]
@@ -1044,10 +1044,10 @@ const data = {
       {
         Type: 'UL',
         Body: [
-          "the <a href='https://www.ncsc.gov.uk/' class='govuk-link' target='_blank'>National Cyber Security Centre</a>",
-          "<a href='https://www.ncsc.gov.uk/blog-post/secure-development-and-deployment' class='govuk-link' target='_blank'>National Cyber Security Centre's Guidance for secure development and deployment</a>",
-          "the <a href='https://www.owasp.org/index.php/Main_Page' class='govuk-link' target='_blank'>Open Web Application Security Project</a>",
-          "<a href='https://www.cyberessentials.ncsc.gov.uk/' class='govuk-link' target='_blank'>Cyber Essentials or Cyber Essentials Plus certification</a>"
+          "the <a href='https://www.ncsc.gov.uk/' class='govuk-link' target='_blank'>National Cyber Security Centre (opens in a new tab)</a>",
+          "<a href='https://www.ncsc.gov.uk/blog-post/secure-development-and-deployment' class='govuk-link' target='_blank'>National Cyber Security Centre's Guidance for secure development and deployment (opens in a new tab)</a>",
+          "the <a href='https://www.owasp.org/index.php/Main_Page' class='govuk-link' target='_blank'>Open Web Application Security Project (opens in a new tab)</a>",
+          "<a href='https://www.cyberessentials.ncsc.gov.uk/' class='govuk-link' target='_blank'>Cyber Essentials or Cyber Essentials Plus certification (opens in a new tab)</a>"
         ]
       },
       {

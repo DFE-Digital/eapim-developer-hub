@@ -53,7 +53,7 @@ const data = {
         Body: [
           "see which <a class='govuk-link' href='/apis'>public APIs</a> you can use",
           "read up on <a href='/documentation/authorisation' class='govuk-link'>authorisation</a>",
-          "read the <a class='govuk-link' href='https://oauth.net/2/' rel='noreferrer noopener' target='_blank'>OAuth 2.0 specification</a>"
+          "read the <a class='govuk-link' href='https://oauth.net/2/' rel='noreferrer noopener' target='_blank'>OAuth 2.0 specification (opens in a new tab)</a>"
         ]
       }
     ]

@@ -83,7 +83,7 @@ const APISummary = ({ api, summary }) => {
       <ol className='govuk-list govuk-list--number'>
         {sectionTitles.map(title => (
           <li key={title}>
-            <a className='govuk-link' href={`#${title.replace(/ /gi, '-')}`}>{title}</a>
+            <a className='govuk-link' href={`#${title.replace(/ /gi, '-')}`} aria-label={`${api.properties.displayName} ${title}`}>{title}</a>
           </li>
         ))}
       </ol>

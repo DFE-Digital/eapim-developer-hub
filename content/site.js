@@ -9,7 +9,7 @@ const data = {
   },
   heading: {
     menu: 'Menu',
-    menuA11y: 'Show or hide Top Level Navigation',
+    menuA11y: 'Show or hide main menu',
     skipToMain: 'Skip to main content',
     navigationA11y: 'Top Level Navigation',
     navigation: [
@@ -33,7 +33,7 @@ const data = {
   },
   phasebanner: {
     phase: 'Alpha',
-    body: `This is a new service - your <a class='govuk-link' href='https://forms.office.com/Pages/ResponsePage.aspx?id=yXfS-grGoU2187O4s0qC-YA4Qd_fewBHv2fn-gXg0b9UQU8yT1JaWU1GVFo1M0RXNlZDREJUWjZXRS4u' rel='noreferrer noopener' target='_blank'>feedback</a> will help us to improve it.`
+    body: `This is a new service - your <a class='govuk-link' href='https://forms.office.com/Pages/ResponsePage.aspx?id=yXfS-grGoU2187O4s0qC-YA4Qd_fewBHv2fn-gXg0b9UQU8yT1JaWU1GVFo1M0RXNlZDREJUWjZXRS4u' rel='noreferrer noopener' target='_blank'>feedback <span class='govuk-visually-hidden'>(opens in a new tab)</span></a> will help us to improve it.`
   },
   authWarning: {
     title: 'Warning',
@@ -506,7 +506,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: "The material featured on this site is subject to crown copyright, third party copyright or both. For more details, read our <a href='https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/' class='govuk-link' target='_blank'>copyright notice</a>."
+        Body: "The material featured on this site is subject to crown copyright, third party copyright or both. For more details, read our <a href='https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/' class='govuk-link' target='_blank'>copyright notice (opens in a new tab)</a>."
       },
       {
         Type: 'P',
@@ -581,6 +581,151 @@ const data = {
       }
     ]
   },
+  'accessibility-statement': {
+    title: 'Accessibility statement for DfE Developer Hub',
+    url: '/accessibility-statement',
+    content: [
+      {
+        Type: 'P',
+        Body: 'This service is part of the wider GOV.UK website. There is a separate accessibility <a class="govuk-link" href="https://www.gov.uk/help/accessibility">statement for the main GOV.UK website</a>.'
+      },
+      {
+        Type: 'P',
+        Body: 'This page only contains information about the DfE Developer Hub service, available at https://dfe-developerhub.education.gov.uk/.'
+      },
+      {
+        Type: 'H3',
+        Body: 'Using this service'
+      },
+      {
+        Type: 'P',
+        Body: 'This website is run by the DfE Developer Hub. We want as many people as possible to be able to use this website. For example, that means you should be able to:'
+      },
+      {
+        Type: 'UL',
+        Body: [
+          'zoom in up to 300% without the text spilling off the screen',
+          'get from the start of the service to the end using just a keyboard',
+          'get from the start of the service to the end using speech recognition software',
+          'listen to the service using a screen reader (including the most recent versions of JAWS, NVDA and VoiceOver)'
+        ]
+      },
+      {
+        Type: 'P',
+        Body: "We've also made the website text as simple as possible to understand."
+      },
+      {
+        Type: 'P',
+        Body: '<a class="govuk-link" href="https://mcmw.abilitynet.org.uk/">AbilityNet</a> has advice on making your device easier to use if you have a disability.'
+      },
+      {
+        Type: 'H3',
+        Body: 'How accessible this website is'
+      },
+      {
+        Type: 'P',
+        Body: 'Some people may find parts of this service difficult to use.'
+      },
+      {
+        Type: 'UL',
+        Body: [
+          'some documents are in PDF or Word format and are not accessible',
+          'some documents are in JSON or YAML format and are not accessible'
+        ]
+      },
+      {
+        Type: 'H3',
+        Body: 'Feedback and contact information'
+      },
+      {
+        Type: 'P',
+        Body: 'If you have difficulty using this service, contact us by using our <a class="govuk-link" href="/support">support page</a>.'
+      },
+      {
+        Type: 'P',
+        Body: 'If you need any part of this service in a different format like large print, audio recording or braille, contact us by using our <a class="govuk-link" href="/support">support page</a>.'
+      },
+      {
+        Type: 'P',
+        Body: 'We’ll consider your request and get back to you within two working days.'
+      },
+      {
+        Type: 'H3',
+        Body: 'Reporting accessibility problems with this website'
+      },
+      {
+        Type: 'P',
+        Body: 'We’re always looking to improve the accessibility of this website. If you find any problems not listed on this page or think we’re not meeting accessibility requirements, contact us via our <a class="govuk-link" href="/support">support page</a>.'
+      },
+      {
+        Type: 'H3',
+        Body: 'Enforcement procedure'
+      },
+      {
+        Type: 'P',
+        Body: 'The Equality and Human Rights Commission (EHRC) is responsible for enforcing the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018 (the ‘accessibility regulations’). If you’re not happy with how we respond to your complaint, <a class="govuk-link" href="https://www.equalityadvisoryservice.com">contact the Equality Advisory and Support Service (EASS)</a>.'
+      },
+      {
+        Type: 'H3',
+        Body: 'Technical information about this website’s accessibility'
+      },
+      {
+        Type: 'P',
+        Body: 'Department for Education is committed to making its website accessible, in accordance with the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations 2018.'
+      },
+      {
+        Type: 'H3',
+        Body: 'Compliance status'
+      },
+      {
+        Type: 'P',
+        Body: 'This website is partially compliant with the <a class="govuk-link" href="https://www.w3.org/TR/WCAG21/">Web Content Accessibility Guidelines version 2.1</a> AA standard.'
+      },
+      {
+        Type: 'H3',
+        Body: 'Non-accessible content'
+      },
+      {
+        Type: 'P',
+        Body: 'The content listed below is non-accessible for the following reasons.'
+      },
+      {
+        Type: 'H4',
+        Body: 'Non-compliance with the accessibility regulations'
+      },
+      {
+        Type: 'OL',
+        Body: [
+          'Some content inserted with CSS may not read by some screen readers, and not available to people who turn off style sheets. This fails WCAG 2.1 A F87 criterion.'
+        ]
+      },
+      {
+        Type: 'H3',
+        Body: 'How we tested this website'
+      },
+      {
+        Type: 'P',
+        Body: 'We tested user journeys for both authenticated and non-authenticated users, including:'
+      },
+      {
+        Type: 'UL',
+        Body: [
+          'creating an account',
+          'logging in to an account',
+          'registering an application',
+          'deleting an application',
+          'subscribing to an API',
+          'unsubscribing to an API',
+          'regenerating client keys',
+          'copying client keys and secrets',
+          'adding redirect URLs',
+          'removing redirect URLs',
+          'deleting an account',
+          'updating a profile'
+        ]
+      }
+    ]
+  },
   'logged-out': {
     title: 'You are now signed out',
     url: '/logged-out',
@@ -598,7 +743,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: "Leave your feedback <a target='_blank' href='https://forms.office.com/Pages/ResponsePage.aspx?id=yXfS-grGoU2187O4s0qC-YA4Qd_fewBHv2fn-gXg0b9UQU8yT1JaWU1GVFo1M0RXNlZDREJUWjZXRS4u' class='govuk-link'>here</a>."
+        Body: "Leave your feedback <a target='_blank' href='https://forms.office.com/Pages/ResponsePage.aspx?id=yXfS-grGoU2187O4s0qC-YA4Qd_fewBHv2fn-gXg0b9UQU8yT1JaWU1GVFo1M0RXNlZDREJUWjZXRS4u' class='govuk-link'>here (opens in a new tab)</a>."
       }
     ]
   },
