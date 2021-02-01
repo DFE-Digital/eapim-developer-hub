@@ -25,7 +25,7 @@ module.exports = async (req, res, next) => {
       if (expired) {
         try {
           const newtoken = await getToken()
-          res.cookie('access_token', newtoken.access_token, { secure: false })
+          res.cookie('access_token', newtoken.access_token, { secure: true })
           next()
         } catch (err) {
           next(err)
@@ -39,7 +39,7 @@ module.exports = async (req, res, next) => {
   } else {
     try {
       const newtoken = await getToken()
-      res.cookie('access_token', newtoken.access_token, { secure: false })
+      res.cookie('access_token', newtoken.access_token, { secure: true })
       res.locals.access_token = newtoken.access_token
       next()
     } catch (err) {
