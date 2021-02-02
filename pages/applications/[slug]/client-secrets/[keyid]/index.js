@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-unfetch'
-import { getOAuthToken, checkAuth } from '../../../../../lib/authService'
+import { getOAuthToken } from '../../../../../lib/authService'
 import React, { useState } from 'react'
 import moment from 'moment'
 import ApplicationManagementPage from 'components/pages/ApplicationManagementPage'
@@ -106,8 +106,6 @@ const ApplicationClientSecretsConfirm = ({ id, secret, application, newClientKey
 }
 
 ApplicationClientSecretsConfirm.getInitialProps = async ({ req, res, query }) => {
-  checkAuth(req, res)
-
   const token = getOAuthToken(res)
 
   if (req && req.method === 'POST') {

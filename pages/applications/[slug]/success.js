@@ -2,7 +2,6 @@ import React from 'react'
 import ContentBuilder from 'components/ContentBuilder'
 import ApplicationManagementPage from 'components/pages/ApplicationManagementPage'
 import ErrorPage from 'components/pages/ErrorPage'
-import { checkAuth } from '../../../lib/authService'
 import { getApplication } from '../../../lib/applicationService'
 import errorHandler from '../../../lib/errorHandler'
 
@@ -23,8 +22,6 @@ const ApplicationCreateSuccess = ({ application, serverError }) => {
 }
 
 ApplicationCreateSuccess.getInitialProps = async ({ req, res, query }) => {
-  checkAuth(req, res)
-
   try {
     const application = await getApplication(query.slug, res)
     if (!application) return errorHandler(res)

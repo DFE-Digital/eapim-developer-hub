@@ -1,7 +1,6 @@
 import React from 'react'
 import ErrorPage from 'components/pages/ErrorPage'
 import ApplicationManagementPage from 'components/pages/ApplicationManagementPage'
-import { checkAuth } from '../../../../../lib/authService'
 import { getApplication } from '../../../../../lib/applicationService'
 import { getSubscriptions, deleteSubscription } from '../../../../../lib/subscriptionService'
 import errorHandler from '../../../../../lib/errorHandler'
@@ -50,8 +49,6 @@ const Unsubscribe = ({ application, subscription, serverError }) => {
 }
 
 Unsubscribe.getInitialProps = async ({ req, res, query }) => {
-  checkAuth(req, res)
-
   if (req && req.method === 'POST') {
     try {
       const { subscriptionId, environment, applicationId } = req.body

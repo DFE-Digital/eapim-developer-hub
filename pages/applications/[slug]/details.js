@@ -5,13 +5,12 @@ import { getContent } from '../../../content/applicationManagement'
 import ErrorPage from 'components/pages/ErrorPage'
 import ApplicationManagementPage from 'components/pages/ApplicationManagementPage'
 import { useAuth } from '../../../providers/AuthProvider'
-import { checkAuth } from '../../../lib/authService'
 import { getApplication } from '../../../lib/applicationService'
 import errorHandler from '../../../lib/errorHandler'
 
 const content = getContent('details')
 
-const ApplicationDetails = ({ application, router, serverError }) => {
+const ApplicationDetails = ({ application, serverError }) => {
   if (serverError) return <ErrorPage {...serverError} />
 
   const { user } = useAuth()
@@ -79,8 +78,6 @@ const ApplicationDetails = ({ application, router, serverError }) => {
 }
 
 ApplicationDetails.getInitialProps = async ({ req, res, query }) => {
-  checkAuth(req, res)
-
   try {
     const application = await getApplication(query.slug, res)
     if (!application) return errorHandler(res)

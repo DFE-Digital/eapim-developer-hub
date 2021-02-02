@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-unfetch'
-import { getOAuthToken, checkAuth } from '../lib/authService'
+import { getOAuthToken } from '../lib/authService'
 import React from 'react'
 import Link from 'next/link'
 import ErrorPage from 'components/pages/ErrorPage'
@@ -51,8 +51,6 @@ const DeleteAcountConfirm = ({ serverError }) => {
 }
 
 DeleteAcountConfirm.getInitialProps = async ({ req, res }) => {
-  checkAuth(req, res)
-
   const token = getOAuthToken(res)
 
   if (req && req.method === 'POST') {
