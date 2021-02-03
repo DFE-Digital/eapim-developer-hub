@@ -679,7 +679,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: 'This website is partially compliant with the <a class="govuk-link" href="https://www.w3.org/TR/WCAG21/">Web Content Accessibility Guidelines version 2.1</a> AA standard.'
+        Body: 'This website is partially compliant with the <a class="govuk-link" href="https://www.w3.org/TR/WCAG21/">Web Content Accessibility Guidelines version 2.1</a> AA standard, due to the non-compliances listed below.'
       },
       {
         Type: 'H3',
@@ -696,7 +696,7 @@ const data = {
       {
         Type: 'OL',
         Body: [
-          'Some content inserted with CSS may not read by some screen readers, and not available to people who turn off style sheets. This fails WCAG 2.1 A F87 criterion.'
+          'Some content inserted with CSS may not read by some screen readers, and will not be available to people who turn off style sheets. This fails WCAG 2.1 A F87 criterion.'
         ]
       },
       {
@@ -723,6 +723,14 @@ const data = {
           'deleting an account',
           'updating a profile'
         ]
+      },
+      {
+        Type: 'H3',
+        Body: 'Preparation of this accessibility statement'
+      },
+      {
+        Type: 'INSET',
+        Body: 'This statement was prepared on 3 February 2021. It was last reviewed on 3 February 2021. This website was last tested on 2 February 2021. The test was carried out by the DfE Developer Hub.'
       }
     ]
   },
