@@ -3,6 +3,7 @@ const ready = function (callback) {
   else document.addEventListener('DOMContentLoaded', callback)
 }
 
+const BEARER_TOKEN_TEXT = 'bearerToken'
 const VERIFY_ACCOUNT_TEXT = 'Verify your account using the email we sent. Or get us to resend the verification email'
 
 const wrapForgotPassword = function (toWrap) {
@@ -84,6 +85,17 @@ const summaryErrorMessageCallback = function (mutations) {
           showFieldError('#password', 'password')
         }
       }
+
+      if (p.innerText.indexOf(BEARER_TOKEN_TEXT) > -1) {
+        if (document.querySelector('.error-summary-email').innerHTML === '' && document.querySelector('.error-summary-password').innerHTML === '') {
+          p.innerHTML = ''
+          p.innerText = 'Verify your email address.'
+          showFormGroupError('#signInName')
+          showFieldError('#signInName', 'email')
+          showFormGroupError('#password')
+          showFieldError('#password', 'password')
+        }
+      }
     }
   })
 }
@@ -92,6 +104,9 @@ const emailErrorMessageCallback = function (mutations) {
   mutations.forEach(function (mutation) {
     const entry = mutation.target
     const mutated = entry.querySelector('.govuk-body') ? entry.querySelector('.govuk-body') : (entry.tagName === 'P' && entry)
+
+    const emailEl = document.querySelector('.error-summary-email')
+    const passwordEl = document.querySelector('.error-summary-password')
 
     if (mutated) {
       if (!mutated.classList.contains('govuk-error-message') && mutated.innerText !== '') {
@@ -102,8 +117,10 @@ const emailErrorMessageCallback = function (mutations) {
         const a = createErrorLink('#signInName', mutated.cloneNode(true))
 
         showFormGroupError('#signInName')
-        document.querySelector('.error-summary-email').innerHTML = ''
-        document.querySelector('.error-summary-email').append(a)
+        if (emailEl) {
+          emailEl.innerHTML = ''
+          emailEl.append(a)
+        }
         showPageLevel()
       }
     }
@@ -111,10 +128,12 @@ const emailErrorMessageCallback = function (mutations) {
     if (entry.style.display === 'none') {
       entry.closest('.govuk-form-group').classList.remove('govuk-form-group--error')
       mutated.innerText = ''
-      document.querySelector('.error-summary-email').innerHTML = ''
+      if (emailEl) {
+        emailEl.innerHTML = ''
+      }
     }
 
-    if (document.querySelector('.error-summary-email').innerHTML === '' && document.querySelector('.error-summary-password').innerHTML === '') {
+    if ((emailEl && emailEl.innerHTML === '') && (passwordEl && passwordEl.innerHTML === '')) {
       hidePageLevel()
     }
   })
