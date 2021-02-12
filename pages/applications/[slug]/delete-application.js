@@ -6,6 +6,8 @@ import { getContent } from '../../../content/applicationManagement'
 import { getApplication } from '../../../lib/applicationService'
 import errorHandler from '../../../lib/errorHandler'
 
+import { checkAuth } from 'checkAuth'
+
 const content = getContent('delete-application')
 
 const DeleteApplication = ({ application, serverError }) => {
@@ -29,6 +31,8 @@ const DeleteApplication = ({ application, serverError }) => {
 }
 
 DeleteApplication.getInitialProps = async ({ req, res, query }) => {
+  checkAuth(req, res)
+
   try {
     const application = await getApplication(query.slug, res)
     if (!application) return errorHandler(res)

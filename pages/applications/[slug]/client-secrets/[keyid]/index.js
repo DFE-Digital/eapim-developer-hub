@@ -13,6 +13,8 @@ import clipboard from '../../../../../src/utils/clipboard'
 import { useAuth } from '../../../../../providers/AuthProvider'
 import { getContent } from '../../../../../content/applicationManagement'
 
+import { checkAuth } from 'checkAuth'
+
 const content = getContent('client-secrets-confirm')
 
 const ApplicationClientSecretsConfirm = ({ id, secret, application, newClientKey, newClientKeyDisplayName, startDateTime, endDateTime, serverError }) => {
@@ -106,6 +108,8 @@ const ApplicationClientSecretsConfirm = ({ id, secret, application, newClientKey
 }
 
 ApplicationClientSecretsConfirm.getInitialProps = async ({ req, res, query }) => {
+  checkAuth(req, res)
+
   const token = getOAuthToken(res)
 
   if (req && req.method === 'POST') {

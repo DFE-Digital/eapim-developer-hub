@@ -8,6 +8,8 @@ import ContentBuilder from 'components/ContentBuilder'
 import { getApplication } from '../../../../lib/applicationService'
 import errorHandler from '../../../../lib/errorHandler'
 
+import { checkAuth } from 'checkAuth'
+
 const content = getContent('client-secrets')
 
 const ApplicationClientSecrets = ({ id, application, serverError }) => {
@@ -91,6 +93,8 @@ const ApplicationClientSecrets = ({ id, application, serverError }) => {
 }
 
 ApplicationClientSecrets.getInitialProps = async ({ req, res, query }) => {
+  checkAuth(req, res)
+
   try {
     const application = await getApplication(query.slug, res)
     if (!application) return errorHandler(res)

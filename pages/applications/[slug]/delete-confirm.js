@@ -8,6 +8,8 @@ import { useAuth } from '../../../providers/AuthProvider'
 import { getApplication, deleteApplication } from '../../../lib/applicationService'
 import errorHandler from '../../../lib/errorHandler'
 
+import { checkAuth } from 'checkAuth'
+
 const content = getContent('delete-application').pageConfirm
 
 const ApplicationDeleteConfirm = ({ application, serverError }) => {
@@ -66,6 +68,8 @@ const ApplicationDeleteConfirm = ({ application, serverError }) => {
 }
 
 ApplicationDeleteConfirm.getInitialProps = async ({ req, res, query }) => {
+  checkAuth(req, res)
+
   try {
     const application = await getApplication(query.slug, res)
     if (!application) return errorHandler(res)

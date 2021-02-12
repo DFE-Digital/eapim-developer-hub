@@ -7,6 +7,8 @@ import errorHandler from '../../../../../lib/errorHandler'
 
 import { getContent } from '../../../../../content/applicationManagement'
 
+import { checkAuth } from 'checkAuth'
+
 const content = getContent('api-subscriptions-unsubscribe')
 
 const Unsubscribe = ({ application, subscription, serverError }) => {
@@ -49,6 +51,8 @@ const Unsubscribe = ({ application, subscription, serverError }) => {
 }
 
 Unsubscribe.getInitialProps = async ({ req, res, query }) => {
+  checkAuth(req, res)
+
   if (req && req.method === 'POST') {
     try {
       const { subscriptionId, environment, applicationId } = req.body

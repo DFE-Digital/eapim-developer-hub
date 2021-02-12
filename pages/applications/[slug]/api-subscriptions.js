@@ -11,6 +11,8 @@ import { getApis, getApiTags } from '../../../lib/apiServices'
 import { getApplication } from '../../../lib/applicationService'
 import { getSubscriptions } from '../../../lib/subscriptionService'
 
+import { checkAuth } from 'checkAuth'
+
 const content = getContent('api-subscriptions')
 
 const ApplicationApiSubscriptions = ({ apis, application, subscriptions, router, serverError }) => {
@@ -54,6 +56,8 @@ const ApplicationApiSubscriptions = ({ apis, application, subscriptions, router,
 }
 
 ApplicationApiSubscriptions.getInitialProps = async ({ req, res, query }) => {
+  checkAuth(req, res)
+
   try {
     const application = await getApplication(query.slug, res)
     if (!application) return errorHandler(res)

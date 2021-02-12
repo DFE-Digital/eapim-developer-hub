@@ -13,7 +13,7 @@ export const AuthContext = createContext({
 export const AuthProvider = ({ children }) => {
   const [pageLoaded, setPageLoaded] = useState(false)
   const [account, setAccount] = useState(null)
-  const { deleteCookie } = useCookie()
+  const { setCookie, deleteCookie } = useCookie()
 
   useEffect(() => {
     const item = window.localStorage.getItem('account')
@@ -24,14 +24,16 @@ export const AuthProvider = ({ children }) => {
 
   const setUser = (data) => {
     window.localStorage.setItem('account', JSON.stringify(data))
-    setAccount(data)
+    setCookie('msal.idtoken', data)
+    setAccount('msal.idtoken', data)
   }
 
   const logout = async (redirectUri = null) => {
+    await signOut(redirectUri)
+
     window.localStorage.removeItem('account')
     setAccount(null)
     deleteCookie('msal.idtoken')
-    await signOut(redirectUri)
   }
 
   return (

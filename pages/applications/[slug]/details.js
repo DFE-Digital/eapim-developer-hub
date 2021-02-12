@@ -8,6 +8,8 @@ import { useAuth } from '../../../providers/AuthProvider'
 import { getApplication } from '../../../lib/applicationService'
 import errorHandler from '../../../lib/errorHandler'
 
+import { checkAuth } from 'checkAuth'
+
 const content = getContent('details')
 
 const ApplicationDetails = ({ application, serverError }) => {
@@ -78,6 +80,8 @@ const ApplicationDetails = ({ application, serverError }) => {
 }
 
 ApplicationDetails.getInitialProps = async ({ req, res, query }) => {
+  checkAuth(req, res)
+
   try {
     const application = await getApplication(query.slug, res)
     if (!application) return errorHandler(res)
