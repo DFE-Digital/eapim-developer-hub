@@ -51,7 +51,7 @@ const Unsubscribe = ({ application, subscription, serverError }) => {
 }
 
 Unsubscribe.getInitialProps = async ({ req, res, query }) => {
-  checkAuth(req, res)
+  await checkAuth(req, res, query.slug)
 
   if (req && req.method === 'POST') {
     try {

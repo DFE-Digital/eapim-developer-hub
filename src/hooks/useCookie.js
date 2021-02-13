@@ -1,6 +1,10 @@
 const getCookie = (key) => {
   const cookies = (document.cookie.split(';'))
-  return cookies.find(item => item.indexOf(key) > -1) ? key : null
+  const item = cookies.find(item => item.indexOf(key) > -1)
+
+  if (!item) return null
+
+  return item.split('=')[1]
 }
 
 const hasCookie = (key) => {

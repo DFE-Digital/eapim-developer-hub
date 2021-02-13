@@ -25,9 +25,9 @@ const ApplicationCreateSuccess = ({ application, serverError }) => {
 }
 
 ApplicationCreateSuccess.getInitialProps = async ({ req, res, query }) => {
-  checkAuth(req, res)
-
   try {
+    await checkAuth(req, res, query.slug)
+
     const application = await getApplication(query.slug, res)
     if (!application) return errorHandler(res)
     return {

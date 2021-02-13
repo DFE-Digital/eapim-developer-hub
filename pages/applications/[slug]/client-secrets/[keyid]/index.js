@@ -108,7 +108,7 @@ const ApplicationClientSecretsConfirm = ({ id, secret, application, newClientKey
 }
 
 ApplicationClientSecretsConfirm.getInitialProps = async ({ req, res, query }) => {
-  checkAuth(req, res)
+  await checkAuth(req, res, query.slug)
 
   const token = getOAuthToken(res)
 

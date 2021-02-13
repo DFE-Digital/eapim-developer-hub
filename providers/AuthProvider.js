@@ -13,7 +13,7 @@ export const AuthContext = createContext({
 export const AuthProvider = ({ children }) => {
   const [pageLoaded, setPageLoaded] = useState(false)
   const [account, setAccount] = useState(null)
-  const { setCookie, deleteCookie } = useCookie()
+  const { deleteCookie } = useCookie()
 
   useEffect(() => {
     const item = window.localStorage.getItem('account')
@@ -24,7 +24,6 @@ export const AuthProvider = ({ children }) => {
 
   const setUser = (data) => {
     window.localStorage.setItem('account', JSON.stringify(data))
-    setCookie('msal.idtoken', data)
     setAccount('msal.idtoken', data)
   }
 
