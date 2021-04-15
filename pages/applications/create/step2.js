@@ -28,6 +28,10 @@ const ApplicationCreateStep2 = () => {
       formErrors.appDescription = content.errors.empty
     }
 
+    if (!/^[a-zA-Z0-9 ,-_.@;[]()]*.{2,50}$/.test(fields.appDescription)) {
+      formErrors.appDescription = content.errors.invalid
+    }
+
     return formErrors
   }
 

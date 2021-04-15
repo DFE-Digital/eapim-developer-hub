@@ -15,6 +15,7 @@ const ApplicationCreateSummary = () => {
   const router = useRouter()
 
   const [registering, setRegistering] = useState(false)
+  const [errors, setErrors] = useState({})
 
   const isValid = () => {
     const { name, description, redirectUrl } = application
@@ -23,6 +24,7 @@ const ApplicationCreateSummary = () => {
 
   const createApplication = async () => {
     setRegistering(true)
+    setErrors({})
 
     const data = {
       userName: user.name(),
@@ -41,11 +43,12 @@ const ApplicationCreateSummary = () => {
       window.location.href = `/applications/${registration.applicationId}/success`
     } catch (err) {
       setRegistering(false)
+      setErrors(err)
     }
   }
 
   return (
-    <ApplicationPage title={content.title} breadcrumbs={[{ text: 'to application redirect url ', href: '/applications/create/step3', back: true }]} hideSidebar>
+    <ApplicationPage title={content.title} breadcrumbs={[{ text: 'to application redirect url ', href: '/applications/create/step3', back: true }]} errors={errors} hideSidebar>
       <h1 className='govuk-heading-xl'>{content.title}</h1>
 
       <dl className='govuk-summary-list'>

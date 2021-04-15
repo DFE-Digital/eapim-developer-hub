@@ -129,11 +129,12 @@ const data = {
       cancel: 'Cancel'
     },
     inputs: {
-      label: 'Application name',
-      hint: 'Your application name must be between 2 and 50 characters. It can contain alphanumeric characters and spaces. Special characters are not allowed'
+      label: 'Application description',
+      hint: 'Your application description can contain alphanumeric characters and spaces. Special characters allowed include: , - _ . @ [ ] ( ) ;'
     },
     errors: {
-      empty: 'Enter your application description'
+      empty: 'Enter your application description',
+      invalid: 'Description contains invalid characters. Special characters allowed include: , - _ . @ [ ] ( ) ;'
     },
     content: []
   },
