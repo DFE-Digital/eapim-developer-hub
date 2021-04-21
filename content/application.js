@@ -130,11 +130,11 @@ const data = {
     },
     inputs: {
       label: 'Application description',
-      hint: 'Your application description can contain alphanumeric characters and spaces. Special characters allowed include: , - _ . @ [ ] ( ) ;'
+      hint: 'Your application description can contain alphanumeric characters and spaces. Special characters allowed include: , - _ . @ ;'
     },
     errors: {
       empty: 'Enter your application description',
-      invalid: 'Description contains invalid characters. Special characters allowed include: , - _ . @ [ ] ( ) ;'
+      invalid: 'Description contains invalid characters. Special characters allowed include: , - _ . @ ;'
     },
     content: []
   },
@@ -151,8 +151,8 @@ const data = {
       hint: 'This will be the URL that you want to redirect users back to. It must begin with https://'
     },
     errors: {
-      empty: "'Enter your application redirect URL'",
-      invalid: "'URL must contain https://. If you are using localhost, prefix it with http://'"
+      empty: 'Enter your application redirect URL',
+      invalid: 'URL must contain https://. If you are using localhost, prefix it with http://'
     },
     content: []
   },
