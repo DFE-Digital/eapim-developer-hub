@@ -3,6 +3,21 @@ import jwtDecode from 'jwt-decode'
 
 import { getApplications } from '../lib/applicationService'
 
+export const decodeToken = (req, res) => {
+  const items = cookies({ req, res })
+  const idtoken = items['msal.idtoken']
+
+  let session = null
+
+  try {
+    session = jwtDecode(idtoken)
+  } catch {
+    session = null
+  }
+
+  return session
+}
+
 export const checkAuth = async (req, res, appId) => {
   const items = cookies({ req, res })
 

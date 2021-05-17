@@ -81,7 +81,7 @@ const ApplicationDetails = ({ application, serverError }) => {
 
 ApplicationDetails.getInitialProps = async ({ req, res, query }) => {
   try {
-    await await checkAuth(req, res, query.slug)
+    await checkAuth(req, res, query.slug)
 
     const application = await getApplication(query.slug, res)
     if (!application) return errorHandler(res)
