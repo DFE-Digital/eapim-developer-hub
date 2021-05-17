@@ -14,7 +14,7 @@ import { decodeToken } from 'checkAuth'
 const content = getContent('applications')
 const APPLICATIONS_LIMIT = 10
 
-const Applications = ({ applications }) => {
+const Applications = ({ applications = [] }) => {
   const router = useRouter()
   const { user } = useAuth()
   const { clear } = useApplication()
@@ -83,7 +83,7 @@ Applications.getInitialProps = async ({ req, res }) => {
     if (!applications) return errorHandler(res)
 
     return {
-      applications
+      applications 
     }
 
   } catch (error) {
