@@ -78,6 +78,7 @@ const Applications = ({ applications = [] }) => {
 Applications.getInitialProps = async ({ req, res }) => {
   try {
     const token = decodeToken(req, res)
+    if (!token) return { applications: [] }
 
     const applications = await getApplications({ accountIdentifier: token.sub }, res)
     if (!applications) return errorHandler(res)
