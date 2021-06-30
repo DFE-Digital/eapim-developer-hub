@@ -1,0 +1,25 @@
+.govuk-subscriptions {
+    &__table {
+        font-size: 14px;
+
+        td {
+            vertical-align: middle;
+        }
+        
+        div {
+            padding: 0;
+            margin: 0;
+            &:last-child {
+                button {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+
+    &__button {
+        font-size: 14px;
+        width: 100%;  
+        margin-bottom: 15px;
+    }
+}

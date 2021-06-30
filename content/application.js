@@ -188,5 +188,26 @@ const data = {
       server: 'Something went wrong with registering your application'
     },
     content: []
+  },
+  subscriptions: {
+    title: 'Pending Subscriptions',
+    approveTitle: 'Confirm approval',
+    url: '/applications/pending-subscriptions',
+    table: {
+      name: 'Name',
+      description: 'Description',
+      owner: 'Owner',
+      id: 'ID',
+      date: 'Date'
+    },
+    buttons: {
+      approve: 'Approve',
+      reject: 'Reject'
+    },
+    messages: {
+      maximum: 'There is a limit of 10 applications. It is best practice to register a different application for production and non-production subscriptions.',
+      authWarning: 'You need an account to view subscriptions.',
+      empty: "You don't have any pending subscriptions"
+    }
   }
 }
