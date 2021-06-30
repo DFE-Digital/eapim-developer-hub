@@ -22,6 +22,10 @@ const data = {
         url: '/apis'
       },
       {
+        title: 'Pending Subscriptions',
+        url: '/pending-subscriptions'
+      },
+      {
         title: 'Applications',
         url: '/applications'
       },

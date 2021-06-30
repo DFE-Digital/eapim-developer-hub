@@ -1,21 +1,18 @@
 import React from 'react'
-import { useRouter } from 'next/router'
-import { sidebar } from '../../../content/application'
+import { getContent, sidebar } from '../../../content/application'
 import Page from 'components/Page'
 
-const parentTitle = 'applications'
+const content = getContent('subscriptions')
 
-const PendingSubscriptionsPage = ({ children, title, hideSidebar, backLink, breadcrumbs, ...props }) => {
-  const router = useRouter()
-  const sidebarContent = (!hideSidebar) ? sidebar() : null
+const parentTitle = 'Pending Subscriptions'
 
-  const back = backLink && 'to application listing'
-  breadcrumbs = breadcrumbs || [{ title: parentTitle, href: `/${parentTitle}`, back }]
+const PendingSubscriptionsPage = ({ children, title, layout }) => {
+  title = title || content.title
 
-  if (parentTitle !== title.toLowerCase()) breadcrumbs.push({ title, href: router.asPath })
+  const breadcrumbs = [{ title: parentTitle, href: `/${parentTitle.toLowerCase()}` }]
 
   return (
-    <Page title={title} parentTitle={parentTitle} sidebarContent={sidebarContent} breadcrumbs={breadcrumbs} {...props}>
+    <Page title={title} sidebarContent={sidebar()} breadcrumbs={breadcrumbs} layout={layout}>
       {children}
     </Page>
   )

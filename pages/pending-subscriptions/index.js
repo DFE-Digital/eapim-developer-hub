@@ -1,11 +1,11 @@
 import React from 'react'
-import { getContent } from '../../../content/application'
+import { getContent } from '../../content/application'
 import AuthWarning from 'components/AuthWarning'
 import PendingSubscriptionsPage from 'components/pages/PendingSubscriptionsPage'
-import { useAuth } from '../../../providers/AuthProvider'
+import { useAuth } from '../../providers/AuthProvider'
 
-import errorHandler from '../../../lib/errorHandler'
-import { getPendingSubscriptions } from '../../../lib/pendingSubscriptionsService'
+import errorHandler from '../../lib/errorHandler'
+import { getPendingSubscriptions } from '../../lib/pendingSubscriptionsService'
 
 import { decodeToken } from 'checkAuth'
 
@@ -49,10 +49,10 @@ const Subscriptions = ({ subscriptions = [] }) => {
                       {subscription.properties.displayName}
                     </td>
                     <td className={`govuk-table__cell`}>
-                      {/* {subscription.properties.description} needs to be added to API response */}
+                      {/* {subscription.properties.description} needs to be added to API response or descoped */}
                     </td>
                     <td className={`govuk-table__cell`}>
-                      {/* {subscription.properties.Owner}  needs to be added to API response */}
+                      {/* {subscription.properties.Owner}  needs to be added to API response or descoped */}
                     </td>
                     <td className={`govuk-table__cell`}>
                       {subscription.name}
