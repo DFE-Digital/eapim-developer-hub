@@ -1,6 +1,6 @@
 import React from 'react'
-import ReactHtmlParser from 'react-html-parser'
-import Highlight from 'react-highlight.js'
+import ReactHtmlParser from 'html-react-parser'
+import Highlight from 'react-highlight'
 import Details from './Details'
 
 const builder = (item) => {
@@ -8,7 +8,14 @@ const builder = (item) => {
     case 'H3': return <h3 className='govuk-heading-m'>{ReactHtmlParser(item.body)}</h3>
     case 'H4': return <h4 className='govuk-heading-s'>{ReactHtmlParser(item.body)}</h4>
     case 'HR': return <hr className='govuk-section-break govuk-section-break--visible govuk-!-margin-top-6 govuk-!-margin-bottom-6' />
-    case 'P': return <p className='govuk-body'>{ReactHtmlParser(item.body)}</p>
+    case 'P':
+      let itembody = ''
+      if (typeof (item.body) === 'object') {
+        itembody = item.body[0]
+      } else {
+        itembody = item.body
+      }
+      return <p className='govuk-body'>{ReactHtmlParser(itembody)} </p>
     case 'CODE': return (
       <Highlight language='javascript'>
         <div>{item.body}</div>

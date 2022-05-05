@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
-import ReactHtmlParser from 'react-html-parser'
-import Highlight from 'react-highlight.js'
+import ReactHtmlParser from 'html-react-parser'
+import Highlight from 'react-highlight'
 import Details from './Details'
 
 const ContentBuilder = ({ data, sectionNav }) => {
