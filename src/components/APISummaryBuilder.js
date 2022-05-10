@@ -11,7 +11,9 @@ const builder = (item) => {
     case 'P':
       let itembody = ''
       if (typeof (item.body) === 'object') {
-        itembody = item.body[0]
+        for (var i = 0; i < item.body.length; i++) {
+          itembody += item.body[i] + ' '
+        }
       } else {
         itembody = item.body
       }
