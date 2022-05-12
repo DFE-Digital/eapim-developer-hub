@@ -3,9 +3,7 @@ const { ASSET_HOST } = process.env
 // for those who using CDN
 const assetPrefix = ASSET_HOST || ''
 
-const withSass = require('@zeit/next-sass')
-
-module.exports = withSass({
+module.exports = {
   assetPrefix,
   target: 'serverless',
   webpack: (config, { dev }) => {
@@ -13,4 +11,4 @@ module.exports = withSass({
 
     return config
   }
-})
+}
