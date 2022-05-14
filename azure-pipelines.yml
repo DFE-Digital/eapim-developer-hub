@@ -11,7 +11,7 @@ pool:
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '16.15.0'
+    versionSpec: '16.13.0'
     checkLatest: true
 
 - task: Npm@1
