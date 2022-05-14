@@ -18,7 +18,7 @@ steps:
   displayName: 'npm install'
   inputs:
     command: custom
-    customCommand: 'install --timing --verbose'
+    customCommand: 'install --legacy-peer-deps --timing --verbose'
     customRegistry: useNpmrc
     verbose: true
 
