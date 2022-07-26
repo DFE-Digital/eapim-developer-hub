@@ -6,6 +6,7 @@ import ErrorPage from 'components/pages/ErrorPage'
 import Page from 'components/Page'
 import ContentBuilder from 'components/ContentBuilder'
 import { useAuth } from '../providers/AuthProvider'
+import { checkBasicAuth } from 'checkAuth'
 
 import errorHandler from '../lib/errorHandler'
 import { getContent } from '../content/profile'
@@ -51,11 +52,14 @@ const DeleteAcountConfirm = ({ serverError }) => {
 }
 
 DeleteAcountConfirm.getInitialProps = async ({ req, res }) => {
-  const token = getOAuthToken(res)
-
   if (req && req.method === 'POST') {
     try {
-      const { userName, userEmail, userID } = req.body
+      const token = getOAuthToken(res)
+      const idtoken = await checkBasicAuth(req, res)
+      const userID = idtoken.sub
+      const userEmail = idtoken.email
+      const { userName } = req.body
+
       const url = `${process.env.PLATFORM_API_URL}/Account`
 
       const response = await fetch(url, {
