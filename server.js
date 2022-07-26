@@ -1,5 +1,6 @@
 const path = require('path')
 const express = require('express')
+var session = require('express-session')
 const compression = require('compression')
 const next = require('next')
 const helmet = require('helmet')
@@ -16,6 +17,20 @@ app
   .prepare()
   .then(async () => {
     const server = express()
+
+    const sess = {
+      secret: process.env.SESSION_SECRET,
+      resave: false,
+      saveUninitialized: true,
+      cookie: {}
+    }
+
+    // ensure session cookie has secure flag outside of dev
+    if (!dev) {
+      sess.cookie.secure = true
+    }
+
+    server.use(session(sess))
 
     server.use(helmet())
     server.use(compression())

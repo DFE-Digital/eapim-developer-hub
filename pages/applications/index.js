@@ -84,9 +84,8 @@ Applications.getInitialProps = async ({ req, res }) => {
     if (!applications) return errorHandler(res)
 
     return {
-      applications 
+      applications
     }
-
   } catch (error) {
     return errorHandler(res, error, 500)
   }
