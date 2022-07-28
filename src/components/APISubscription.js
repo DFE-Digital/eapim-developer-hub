@@ -27,6 +27,7 @@ const APISubscription = ({ applicationId, tag, subscription, onSubscriptionChang
     setSubscribing(true)
 
     try {
+      // todo: do server side...
       const newSubscriptions = await postSubscription(applicationId, apiName, environment)
       onSubscriptionChange(newSubscriptions)
       setSubscribing(false)
@@ -41,6 +42,7 @@ const APISubscription = ({ applicationId, tag, subscription, onSubscriptionChang
     setFetching(true)
 
     try {
+      // todo: do server side...
       const keys = await getSubscriptionKeys(subId, environment)
       setSubscriptionKeys(keys)
       setShowKeys(true)

@@ -30,6 +30,7 @@ const ApplicationDeleteConfirm = ({ application, serverError }) => {
       applicationId: application.applicationId
     }
 
+    // todo: do server side...
     const deleteApp = await deleteApplication(body)
 
     if (deleteApp && !deleting) {

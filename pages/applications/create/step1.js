@@ -22,6 +22,7 @@ const ApplicationCreateStep1 = () => {
 
   useEffect(() => {
     const fetchApplications = async () => {
+      // todo: do server side...
       const apps = await getApplications(user.getToken())
       setApplications(apps)
     }

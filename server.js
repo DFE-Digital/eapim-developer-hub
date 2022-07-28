@@ -1,6 +1,7 @@
+require('dotenv').config()
 const path = require('path')
 const express = require('express')
-var session = require('express-session')
+// var session = require('express-session')
 const compression = require('compression')
 const next = require('next')
 const helmet = require('helmet')
@@ -18,19 +19,21 @@ app
   .then(async () => {
     const server = express()
 
-    const sess = {
-      secret: process.env.SESSION_SECRET,
-      resave: false,
-      saveUninitialized: true,
-      cookie: {}
-    }
+    // const sess = {
+    //   secret: process.env.SESSION_SECRET,
+    //   resave: false,
+    //   saveUninitialized: true,
+    //   cookie: {
+    //     httpOnly: false
+    //   }
+    // }
 
-    // ensure session cookie has secure flag outside of dev
-    if (!dev) {
-      sess.cookie.secure = true
-    }
+    // // ensure session cookie has secure flag outside of dev
+    // if (!dev) {
+    //   sess.cookie.secure = true
+    // }
 
-    server.use(session(sess))
+    // server.use(session(sess))
 
     server.use(helmet())
     server.use(compression())

@@ -17,15 +17,15 @@ const getToken = async () => {
 }
 
 module.exports = async (req, res, next) => {
-  if (req.session.access_token) {
+  if (req.cookies.access_token) {
     try {
-      const token = jwtdecode(req.session.access_token)
+      const token = jwtdecode(req.cookies.access_token)
       const expired = Date.now() >= (token.exp * 1000)
 
       if (expired) {
         try {
           const newtoken = await getToken()
-          req.session.access_token = newtoken.access_token
+          res.cookie('access_token', newtoken.access_token, { secure: true })
           next()
         } catch (err) {
           next(err)
@@ -39,7 +39,8 @@ module.exports = async (req, res, next) => {
   } else {
     try {
       const newtoken = await getToken()
-      req.session.access_token = newtoken.access_token
+      res.cookie('access_token', newtoken.access_token, { secure: true })
+      res.locals.access_token = newtoken.access_token
       next()
     } catch (err) {
       next(err)

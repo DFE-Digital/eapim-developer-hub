@@ -102,6 +102,7 @@ const ApplicationRedirectUrls = ({ application, serverError }) => {
     }
 
     try {
+      // todo: do server side
       const result = await updateApplication(body)
 
       if (result) {
@@ -133,6 +134,7 @@ const ApplicationRedirectUrls = ({ application, serverError }) => {
     }
 
     try {
+      // todo: do server side...
       const result = await updateApplication(body)
 
       if (result) {

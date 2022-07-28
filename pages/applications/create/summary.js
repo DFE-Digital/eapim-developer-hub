@@ -36,6 +36,7 @@ const ApplicationCreateSummary = () => {
     }
 
     try {
+      // todo: do server side...
       const registration = await registerApplication(data)
       window.localStorage.setItem('credentials', JSON.stringify({ primarySecret: registration.PrimarySecret, secondarySecret: registration.SecondarySecret }))
       clear()
