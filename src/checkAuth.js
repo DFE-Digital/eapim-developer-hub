@@ -42,7 +42,7 @@ export const checkAuth = async (req, res, appId) => {
     give_name: session.give_name,
     family_name: session.family_name,
     accountIdentifier: session.sub
-  }, res)
+  }, req, res)
 
   const isUsersApplication = applications.find(app => app.applicationId === appId)
 

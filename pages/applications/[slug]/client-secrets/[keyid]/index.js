@@ -110,7 +110,7 @@ const ApplicationClientSecretsConfirm = ({ id, secret, application, newClientKey
 ApplicationClientSecretsConfirm.getInitialProps = async ({ req, res, query }) => {
   await checkAuth(req, res, query.slug)
 
-  const token = getOAuthToken(res)
+  const token = getOAuthToken(req, res)
 
   if (req && req.method === 'POST') {
     const { userName, userEmail, userID, applicationId, KeyId, KeyDisplayName } = req.body
@@ -132,7 +132,7 @@ ApplicationClientSecretsConfirm.getInitialProps = async ({ req, res, query }) =>
       const data = await response.json()
 
       if (response.ok) {
-        const application = await getApplication(query.slug, res)
+        const application = await getApplication(query.slug, req, res)
         const newClientKey = data[`${KeyDisplayName}Secret`]
 
         const keyObject = data.passwordCredentials.find(item => item.displayName === KeyDisplayName)
@@ -153,7 +153,7 @@ ApplicationClientSecretsConfirm.getInitialProps = async ({ req, res, query }) =>
   }
 
   try {
-    const application = await getApplication(query.slug, res)
+    const application = await getApplication(query.slug, req, res)
     if (!application) return errorHandler(res)
 
     const secret = application.passwordCredentials.find(item => item.keyId === query.keyid)

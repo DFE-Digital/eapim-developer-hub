@@ -31,7 +31,7 @@ LoggedOut.getInitialProps = async ({ req, res }) => {
         subject: 'Developer Hub Feedback Survey',
         'content-type': 'text/html',
         'email-content': template(req.body)
-      }, res)
+      }, req, res)
 
       res.writeHead(301, { Location: '/' })
       res.end()

@@ -54,7 +54,7 @@ const DeleteAcountConfirm = ({ serverError }) => {
 DeleteAcountConfirm.getInitialProps = async ({ req, res }) => {
   if (req && req.method === 'POST') {
     try {
-      const token = getOAuthToken(res)
+      const token = getOAuthToken(req, res)
       const idtoken = await checkBasicAuth(req, res)
       const userID = idtoken.sub
       const userEmail = idtoken.email
