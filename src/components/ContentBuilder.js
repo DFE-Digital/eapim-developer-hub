@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
-import ReactHtmlParser from 'react-html-parser'
-import Highlight from 'react-highlight.js'
+import ReactHtmlParser from 'html-react-parser'
+import Highlight from 'react-highlight'
 import Details from './Details'
 
 const ContentBuilder = ({ data, sectionNav }) => {
@@ -25,14 +25,22 @@ const ContentBuilder = ({ data, sectionNav }) => {
         </Fragment>
       )}
       {data.map((item, i) => {
-        if (item.Type === 'DIV') return <div className='flex' key={i}>{ReactHtmlParser(item.Body)}</div>
-        if (item.Type === 'H2') {
-          const anchor = item.Body.replace(/\s+/g, '-').toLowerCase()
-          return <h2 className='govuk-heading-l' key={i} id={anchor}>{ ReactHtmlParser(item.Body) }</h2>
+        // For item bodys that are sent as arrays rather than strings, join the array
+        let itembody = ''
+        if (Array.isArray(item.Body)) {
+          itembody = item.Body.join(' ')
+        } else {
+          itembody = item.Body
         }
-        if (item.Type === 'H3') return <h3 className='govuk-heading-m' key={i}>{ ReactHtmlParser(item.Body) }</h3>
-        if (item.Type === 'H4') return <h4 className='govuk-heading-s' key={i}>{ ReactHtmlParser(item.Body) }</h4>
-        if (item.Type === 'P') return <p className='govuk-body' key={i}>{ ReactHtmlParser(item.Body) }</p>
+
+        if (item.Type === 'DIV') return <div className='flex' key={i}>{ReactHtmlParser(itembody)}</div>
+        if (item.Type === 'H2') {
+          const anchor = itembody.replace(/\s+/g, '-').toLowerCase()
+          return <h2 className='govuk-heading-l' key={i} id={anchor}>{ ReactHtmlParser(itembody) }</h2>
+        }
+        if (item.Type === 'H3') return <h3 className='govuk-heading-m' key={i}>{ ReactHtmlParser(itembody) }</h3>
+        if (item.Type === 'H4') return <h4 className='govuk-heading-s' key={i}>{ ReactHtmlParser(itembody) }</h4>
+        if (item.Type === 'P') return <p className='govuk-body' key={i}>{ ReactHtmlParser(itembody) }</p>
         if (item.Type === 'UL' || item.Type === 'BL' || item.Type === 'OL') {
           return (
             <ul
@@ -81,7 +89,7 @@ const ContentBuilder = ({ data, sectionNav }) => {
               <span className='govuk-warning-text__icon' aria-hidden='true'>!</span>
               <strong className='govuk-warning-text__text'>
                 <span className='govuk-warning-text__assistive'>Warning</span>
-                { ReactHtmlParser(item.Body) }
+                { ReactHtmlParser(itembody) }
               </strong>
             </div>
           )
@@ -89,7 +97,7 @@ const ContentBuilder = ({ data, sectionNav }) => {
         if (item.Type === 'INSET') {
           return (
             <div className='govuk-inset-text' key={i}>
-              { ReactHtmlParser(item.Body) }
+              { ReactHtmlParser(itembody) }
             </div>
           )
         }
@@ -97,8 +105,8 @@ const ContentBuilder = ({ data, sectionNav }) => {
 
         if (item.Type === 'CODE') {
           return (
-            <Highlight language='csharp' key={i}>
-              <div>{item.Body}</div>
+            <Highlight className='csharp' key={i}>
+              <div>{itembody}</div>
             </Highlight>
           )
         }
