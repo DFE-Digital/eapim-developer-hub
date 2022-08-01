@@ -54,11 +54,13 @@ const DeleteAcountConfirm = ({ serverError }) => {
 DeleteAcountConfirm.getInitialProps = async ({ req, res }) => {
   if (req && req.method === 'POST') {
     try {
+      var body = req._req ? req._req.body : req.body
+
       const token = getOAuthToken(req, res)
       const idtoken = await checkBasicAuth(req, res)
       const userID = idtoken.sub
       const userEmail = idtoken.email
-      const { userName } = req._req.body
+      const { userName } = body
 
       const url = `${process.env.PLATFORM_API_URL}/Account`
 

@@ -177,12 +177,14 @@ const Support = ({ apis, serverError }) => {
 Support.getInitialProps = async ({ req, res }) => {
   if (req && req.method === 'POST') {
     try {
+      var body = req._req ? req._req.body : req.body
+
       await send({
         'email-to': process.env.SERVICE_NOW_EMAIL,
-        'email-from': req._req.body.email,
+        'email-from': body.email,
         subject: 'Developer Hub Support Request',
         'content-type': 'text/html',
-        'email-content': template(req._req.body)
+        'email-content': template(body)
       }, req, res)
 
       res.writeHead(301, { Location: '/support-submitted' })

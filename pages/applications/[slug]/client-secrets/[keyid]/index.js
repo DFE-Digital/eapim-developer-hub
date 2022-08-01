@@ -113,7 +113,9 @@ ApplicationClientSecretsConfirm.getInitialProps = async ({ req, res, query }) =>
   const token = getOAuthToken(req, res)
 
   if (req && req.method === 'POST') {
-    const { userName, userEmail, userID, applicationId, KeyId, KeyDisplayName } = req._req.body
+    var body = req._req ? req._req.body : req.body
+
+    const { userName, userEmail, userID, applicationId, KeyId, KeyDisplayName } = body
 
     try {
       const url = `${process.env.PLATFORM_API_URL}/GenerateApplicationSecret`
