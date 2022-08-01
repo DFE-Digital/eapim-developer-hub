@@ -35,7 +35,7 @@ export const checkAuth = async (req, res, appId) => {
   if (!session) {
     const response = res._res ? res._res : res
 
-    response.redirect('/auth/login')
+    response.writeHead(301, { Location: '/auth/login' })
     response.end()
   }
 

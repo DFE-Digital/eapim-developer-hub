@@ -78,8 +78,7 @@ DeleteAcountConfirm.getInitialProps = async ({ req, res }) => {
       }
 
       const response = res._res ? res._res : res
-      response.setHeader('x-deleted-account', 'true')
-      response.redirect('/delete-account?account=deleted')
+      response.writeHead(301, { Location: '/delete-account?account=deleted' })
       response.end()
     } catch (error) {
       return errorHandler(res, error, 500)
