@@ -60,8 +60,9 @@ Unsubscribe.getInitialProps = async ({ req, res, query }) => {
       const { subscriptionId, environment, applicationId } = body
       await deleteSubscription(subscriptionId, environment, req, res)
 
-      res.writeHead(301, { Location: `/applications/${applicationId}/unsubscribe/confirmed` })
-      return res.end()
+      const response = res._res ? res._res : res
+      response.writeHead(301, { Location: `/applications/${applicationId}/unsubscribe/confirmed` })
+      return response.end()
     } catch (error) {
       return errorHandler(res, error, 500)
     }

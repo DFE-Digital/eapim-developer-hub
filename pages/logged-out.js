@@ -35,8 +35,9 @@ LoggedOut.getInitialProps = async ({ req, res }) => {
         'email-content': template(body)
       }, req, res)
 
-      res.writeHead(301, { Location: '/' })
-      res.end()
+      const response = res._res ? res._res : res
+      response.writeHead(301, { Location: '/' })
+      response.end()
     } catch (error) {
       return errorHandler(res, error, 500)
     }

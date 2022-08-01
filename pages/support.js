@@ -177,7 +177,7 @@ const Support = ({ apis, serverError }) => {
 Support.getInitialProps = async ({ req, res }) => {
   if (req && req.method === 'POST') {
     try {
-      var body = req._req ? req._req.body : req.body
+      const body = req._req ? req._req.body : req.body
 
       await send({
         'email-to': process.env.SERVICE_NOW_EMAIL,
@@ -187,8 +187,10 @@ Support.getInitialProps = async ({ req, res }) => {
         'email-content': template(body)
       }, req, res)
 
-      res.writeHead(301, { Location: '/support-submitted' })
-      res.end()
+      const response = res._res ? res._res : res
+
+      response.writeHead(301, { Location: '/support-submitted' })
+      response.end()
     } catch (error) {
       return errorHandler(res, error, 500)
     }

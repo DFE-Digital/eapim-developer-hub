@@ -64,7 +64,7 @@ DeleteAcountConfirm.getInitialProps = async ({ req, res }) => {
 
       const url = `${process.env.PLATFORM_API_URL}/Account`
 
-      const response = await fetch(url, {
+      const deleteResponse = await fetch(url, {
         method: 'DELETE',
         headers: {
           'Ocp-Apim-Subscription-Key': process.env.OCP_APIM_SUBSCRIPTION_KEY,
@@ -73,13 +73,14 @@ DeleteAcountConfirm.getInitialProps = async ({ req, res }) => {
         body: JSON.stringify({ userName, userEmail, userID })
       })
 
-      if (response.status !== 204) {
-        throw new Error(response.status)
+      if (deleteResponse.status !== 204) {
+        throw new Error(deleteResponse.status)
       }
 
-      res.setHeader('x-deleted-account', 'true')
-      res.redirect('/delete-account?account=deleted')
-      res.end()
+      const response = res._res ? res._res : res
+      response.setHeader('x-deleted-account', 'true')
+      response.redirect('/delete-account?account=deleted')
+      response.end()
     } catch (error) {
       return errorHandler(res, error, 500)
     }

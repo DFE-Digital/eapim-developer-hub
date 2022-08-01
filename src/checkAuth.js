@@ -33,8 +33,10 @@ export const checkAuth = async (req, res, appId) => {
   }
 
   if (!session) {
-    res.redirect('/auth/login')
-    res.end()
+    const response = res._res ? res._res : res
+
+    response.redirect('/auth/login')
+    response.end()
   }
 
   const applications = await getApplications({
@@ -91,8 +93,10 @@ function verify (req, res) {
 
 export const checkBasicAuth = async (req, res, callback) => {
   var result = await verify(req, res).catch(() => {
-    res.redirect('/auth/login')
-    res.end()
+    const response = res._res ? res._res : res
+
+    response.redirect('/auth/login')
+    response.end()
   })
   return result
 }
