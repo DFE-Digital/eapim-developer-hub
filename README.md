@@ -16,9 +16,9 @@ It's recommended to use NODE_ENV=production due to major differences between thi
 
 ## runnning
 
-npm i
-npm run build
-npm run start
+- npm i
+- npm run build
+- npm run start
 
 ## Linting
 
