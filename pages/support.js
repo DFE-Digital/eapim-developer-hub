@@ -179,10 +179,10 @@ Support.getInitialProps = async ({ req, res }) => {
     try {
       await send({
         'email-to': process.env.SERVICE_NOW_EMAIL,
-        'email-from': req.body.email,
+        'email-from': req._req.body.email,
         subject: 'Developer Hub Support Request',
         'content-type': 'text/html',
-        'email-content': template(req.body)
+        'email-content': template(req._req.body)
       }, req, res)
 
       res.writeHead(301, { Location: '/support-submitted' })

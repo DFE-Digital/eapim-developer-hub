@@ -30,7 +30,7 @@ LoggedOut.getInitialProps = async ({ req, res }) => {
         'email-to': process.env.SERVICE_NOW_EMAIL,
         subject: 'Developer Hub Feedback Survey',
         'content-type': 'text/html',
-        'email-content': template(req.body)
+        'email-content': template(req._req.body)
       }, req, res)
 
       res.writeHead(301, { Location: '/' })
