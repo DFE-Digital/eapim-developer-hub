@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import ReactHtmlParser from 'react-html-parser'
+import ReactHtmlParser from 'html-react-parser'
 
 import APISummaryBuilder from './APISummaryBuilder'
 

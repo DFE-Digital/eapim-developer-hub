@@ -139,8 +139,8 @@ const Home = ({ loggedin }) => {
   )
 }
 
-Home.getInitialProps = async ({ req }) => {
-  if (req && req.query.loggedin) return { loggedin: true }
+Home.getInitialProps = async ({ req, query }) => {
+  if (req && query.loggedin) return { loggedin: true }
 
   return { status: 200 }
 }

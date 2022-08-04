@@ -18,8 +18,8 @@ const DeletedAccount = ({ accountDeleted }) => {
   return null
 }
 
-DeletedAccount.getInitialProps = async ({ req }) => {
-  if (req && req.query.account && req.query.account === 'deleted') return { accountDeleted: true }
+DeletedAccount.getInitialProps = async ({ req, query }) => {
+  if (req && query.account && query.account === 'deleted') return { accountDeleted: true }
 
   return { status: 200 }
 }

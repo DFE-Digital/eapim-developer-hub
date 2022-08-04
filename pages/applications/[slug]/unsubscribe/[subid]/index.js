@@ -55,11 +55,14 @@ Unsubscribe.getInitialProps = async ({ req, res, query }) => {
 
   if (req && req.method === 'POST') {
     try {
-      const { subscriptionId, environment, applicationId } = req.body
-      await deleteSubscription(subscriptionId, environment, res)
+      var body = req._req ? req._req.body : req.body
 
-      res.writeHead(301, { Location: `/applications/${applicationId}/unsubscribe/confirmed` })
-      return res.end()
+      const { subscriptionId, environment, applicationId } = body
+      await deleteSubscription(subscriptionId, environment, req, res)
+
+      const response = res._res ? res._res : res
+      response.writeHead(301, { Location: `/applications/${applicationId}/unsubscribe/confirmed` })
+      return response.end()
     } catch (error) {
       return errorHandler(res, error, 500)
     }
@@ -69,10 +72,10 @@ Unsubscribe.getInitialProps = async ({ req, res, query }) => {
     const subid = query.subid.substr(0, query.subid.lastIndexOf('-'))
     const environment = query.subid.split('-').pop()
 
-    const application = await getApplication(query.slug, res)
+    const application = await getApplication(query.slug, req, res)
     if (!application) return errorHandler(res)
 
-    const subscriptions = await getSubscriptions(application.applicationId, res)
+    const subscriptions = await getSubscriptions(application.applicationId, req, res)
     application.subscriptions = subscriptions
 
     const subscription = subscriptions.find(sub => sub.id === subid && sub.environment === environment)

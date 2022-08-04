@@ -1,10 +1,11 @@
+require('dotenv').config()
 const path = require('path')
 const express = require('express')
+// var session = require('express-session')
 const compression = require('compression')
 const next = require('next')
 const helmet = require('helmet')
 const cookieParser = require('cookie-parser')
-const bodyParser = require('body-parser')
 const port = process.env.PORT || 3000
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
@@ -17,10 +18,25 @@ app
   .then(async () => {
     const server = express()
 
+    // const sess = {
+    //   secret: process.env.SESSION_SECRET,
+    //   resave: false,
+    //   saveUninitialized: true,
+    //   cookie: {
+    //     httpOnly: false
+    //   }
+    // }
+
+    // // ensure session cookie has secure flag outside of dev
+    // if (!dev) {
+    //   sess.cookie.secure = true
+    // }
+
+    // server.use(session(sess))
     server.use(helmet())
     server.use(compression())
     server.use(cookieParser())
-    server.use(bodyParser.urlencoded({ extended: true }))
+    server.use(express.urlencoded({ extended: true }))
 
     const staticPath = path.join(__dirname, '../static')
     server.use('/static', express.static(staticPath, {

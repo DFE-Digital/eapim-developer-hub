@@ -16,15 +16,15 @@ const ApiDetails = ({ api, summary, serverError }) => {
   )
 }
 
-ApiDetails.getInitialProps = async ({ res, query }) => {
+ApiDetails.getInitialProps = async ({ res, req, query }) => {
   try {
-    const apis = await getApis(res)
+    const apis = await getApis(req, res)
     if (!apis) return errorHandler(res)
 
     const api = apis.find(api => api.name === query.slug)
     if (!api) return errorHandler(res)
 
-    api.tags = await getApiTags(api.name, res)
+    api.tags = await getApiTags(api.name, req, res)
 
     const summary = await getSummary(api.tags.summary)
     if (!summary) return errorHandler(res)

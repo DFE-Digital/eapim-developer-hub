@@ -1,19 +1,29 @@
 import React from 'react'
-import ReactHtmlParser from 'react-html-parser'
-import Highlight from 'react-highlight.js'
+import ReactHtmlParser from 'html-react-parser'
+import Highlight from 'react-highlight'
 import Details from './Details'
 
 const builder = (item) => {
+  // For item bodys that are sent as arrays rather than strings, join the array
+  let itembody = ''
+  if (Array.isArray(item.body)) {
+    itembody = item.body.join(' ')
+  } else {
+    itembody = item.body
+  }
+
   switch (item.type) {
-    case 'H3': return <h3 className='govuk-heading-m'>{ReactHtmlParser(item.body)}</h3>
-    case 'H4': return <h4 className='govuk-heading-s'>{ReactHtmlParser(item.body)}</h4>
+    case 'H3': return <h3 className='govuk-heading-m'>{ReactHtmlParser(itembody)}</h3>
+    case 'H4': return <h4 className='govuk-heading-s'>{ReactHtmlParser(itembody)}</h4>
     case 'HR': return <hr className='govuk-section-break govuk-section-break--visible govuk-!-margin-top-6 govuk-!-margin-bottom-6' />
-    case 'P': return <p className='govuk-body'>{ReactHtmlParser(item.body)}</p>
-    case 'CODE': return (
-      <Highlight language='javascript'>
-        <div>{item.body}</div>
-      </Highlight>
-    )
+    case 'P':
+      return <p className='govuk-body'>{ReactHtmlParser(itembody)} </p>
+    case 'CODE':
+      return (
+        <Highlight className='json'>
+          <div>{itembody}</div>
+        </Highlight>
+      )
     case 'UL':
     case 'OL': {
       const hasInner = !!item.body[0].body

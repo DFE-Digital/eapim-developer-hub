@@ -6,6 +6,7 @@ import ErrorPage from 'components/pages/ErrorPage'
 import Page from 'components/Page'
 import ContentBuilder from 'components/ContentBuilder'
 import { useAuth } from '../providers/AuthProvider'
+import { checkBasicAuth } from 'checkAuth'
 
 import errorHandler from '../lib/errorHandler'
 import { getContent } from '../content/profile'
@@ -51,14 +52,19 @@ const DeleteAcountConfirm = ({ serverError }) => {
 }
 
 DeleteAcountConfirm.getInitialProps = async ({ req, res }) => {
-  const token = getOAuthToken(res)
-
   if (req && req.method === 'POST') {
     try {
-      const { userName, userEmail, userID } = req.body
+      var body = req._req ? req._req.body : req.body
+
+      const token = getOAuthToken(req, res)
+      const idtoken = await checkBasicAuth(req, res)
+      const userID = idtoken.sub
+      const userEmail = idtoken.email
+      const { userName } = body
+
       const url = `${process.env.PLATFORM_API_URL}/Account`
 
-      const response = await fetch(url, {
+      const deleteResponse = await fetch(url, {
         method: 'DELETE',
         headers: {
           'Ocp-Apim-Subscription-Key': process.env.OCP_APIM_SUBSCRIPTION_KEY,
@@ -67,13 +73,13 @@ DeleteAcountConfirm.getInitialProps = async ({ req, res }) => {
         body: JSON.stringify({ userName, userEmail, userID })
       })
 
-      if (response.status !== 204) {
-        throw new Error(response.status)
+      if (deleteResponse.status !== 204) {
+        throw new Error(deleteResponse.status)
       }
 
-      res.setHeader('x-deleted-account', 'true')
-      res.redirect('/delete-account?account=deleted')
-      res.end()
+      const response = res._res ? res._res : res
+      response.writeHead(301, { Location: '/delete-account?account=deleted' })
+      response.end()
     } catch (error) {
       return errorHandler(res, error, 500)
     }

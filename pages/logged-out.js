@@ -26,15 +26,18 @@ const LoggedOut = () => {
 LoggedOut.getInitialProps = async ({ req, res }) => {
   if (req && req.method === 'POST') {
     try {
+      var body = req._req ? req._req.body : req.body
+
       await send({
         'email-to': process.env.SERVICE_NOW_EMAIL,
         subject: 'Developer Hub Feedback Survey',
         'content-type': 'text/html',
-        'email-content': template(req.body)
-      }, res)
+        'email-content': template(body)
+      }, req, res)
 
-      res.writeHead(301, { Location: '/' })
-      res.end()
+      const response = res._res ? res._res : res
+      response.writeHead(301, { Location: '/' })
+      response.end()
     } catch (error) {
       return errorHandler(res, error, 500)
     }
