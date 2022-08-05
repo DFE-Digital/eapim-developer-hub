@@ -34,9 +34,9 @@ const Apis = ({ apis, serverError }) => {
   )
 }
 
-Apis.getInitialProps = async ({ res }) => {
+Apis.getInitialProps = async ({ res, req }) => {
   try {
-    const apis = await getApis(res)
+    const apis = await getApis(req, res)
     if (!apis) return errorHandler(res)
 
     return { apis }

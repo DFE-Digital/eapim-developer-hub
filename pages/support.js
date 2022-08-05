@@ -177,23 +177,27 @@ const Support = ({ apis, serverError }) => {
 Support.getInitialProps = async ({ req, res }) => {
   if (req && req.method === 'POST') {
     try {
+      const body = req._req ? req._req.body : req.body
+
       await send({
         'email-to': process.env.SERVICE_NOW_EMAIL,
-        'email-from': req.body.email,
+        'email-from': body.email,
         subject: 'Developer Hub Support Request',
         'content-type': 'text/html',
-        'email-content': template(req.body)
-      }, res)
+        'email-content': template(body)
+      }, req, res)
 
-      res.writeHead(301, { Location: '/support-submitted' })
-      res.end()
+      const response = res._res ? res._res : res
+
+      response.writeHead(301, { Location: '/support-submitted' })
+      response.end()
     } catch (error) {
       return errorHandler(res, error, 500)
     }
   }
 
   try {
-    const apis = await getApis(res)
+    const apis = await getApis(req, res)
     const data = apis.map(api => {
       return { label: api.properties.displayName, value: api.properties.displayName }
     })

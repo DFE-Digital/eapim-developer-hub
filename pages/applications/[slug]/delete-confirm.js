@@ -30,6 +30,7 @@ const ApplicationDeleteConfirm = ({ application, serverError }) => {
       applicationId: application.applicationId
     }
 
+    // todo: do server side...
     const deleteApp = await deleteApplication(body)
 
     if (deleteApp && !deleting) {
@@ -71,7 +72,7 @@ ApplicationDeleteConfirm.getInitialProps = async ({ req, res, query }) => {
   try {
     await checkAuth(req, res, query.slug)
 
-    const application = await getApplication(query.slug, res)
+    const application = await getApplication(query.slug, req, res)
     if (!application) return errorHandler(res)
 
     return {
