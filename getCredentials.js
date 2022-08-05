@@ -1,5 +1,6 @@
 const fetch = require('isomorphic-unfetch')
 const jwtdecode = require('jwt-decode')
+require('dotenv').config()
 
 const data = 'grant_type=client_credentials' +
   `&client_id=${encodeURIComponent(process.env.OAUTH_CLIENT_CREDENTIALS_ID)}` +
