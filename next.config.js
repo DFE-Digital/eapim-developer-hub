@@ -5,6 +5,7 @@ const assetPrefix = ASSET_HOST || ''
 
 module.exports = {
   assetPrefix,
+  poweredByHeader: false,
   target: 'serverless', // this needs removing but breaks the build - is this because of static files?
   webpack: (config, { dev }) => {
     config.output.publicPath = `${assetPrefix}${config.output.publicPath}`
