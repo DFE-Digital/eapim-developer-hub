@@ -40,7 +40,7 @@ app
 
     server.use(function (req, res, next) {
       res.setHeader(
-        'Content-Security-Policy',
+        'Content-Security-Policy-Report-Only',
         "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self'; style-src 'self' 'unsafe-hashes' http://highlightjs.org/static/demo/styles/github.css 'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=' 'sha256-aqNNdDLnnrDOnTNdkJpYlAxKVJtLt9CtFLklmInuUAE=' 'sha256-kvc78SQn7iP+g9s8uphw7CyzQyiDsk0JrXkT1U9+sCo='; frame-src 'self'; connect-src 'self' https://dev-api-customerengagement.platform.education.gov.uk/platform/ https://dc.services.visualstudio.com/v2/track https://dfeb2cdev.b2clogin.com/dfeb2cdev.onmicrosoft.com/;"
       )
       res.setHeader('X-XSS-Protection', '0')
