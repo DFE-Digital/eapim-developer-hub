@@ -44,7 +44,7 @@ app
     server.use(function (req, res, next) {
       res.setHeader(
         'Content-Security-Policy',
-        `default-src 'self'; connect-src 'self' ${API_URL}/ ${B2C_URL}/ https://dc.services.visualstudio.com/v2/track; style-src 'self' 'unsafe-hashes' http://highlightjs.org/static/demo/styles/github.css 'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=' 'sha256-aqNNdDLnnrDOnTNdkJpYlAxKVJtLt9CtFLklmInuUAE=' 'sha256-kvc78SQn7iP+g9s8uphw7CyzQyiDsk0JrXkT1U9+sCo=';`
+        `default-src 'self'; connect-src 'self' ${API_URL}/ ${B2C_URL}/ https://dc.services.visualstudio.com/v2/track; style-src 'self' 'unsafe-hashes' http://highlightjs.org/static/demo/styles/github.css 'sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=' 'sha256-5BwInUc1NDm54dXZnYOTjvDw+kJGXxHPQei88F1ygIQ=' 'sha256-aqNNdDLnnrDOnTNdkJpYlAxKVJtLt9CtFLklmInuUAE=' 'sha256-DYVT7t5s2ICMBLN6Jw1VQT7HOWV4aCTSonlEix6I/R8=' 'sha256-kvc78SQn7iP+g9s8uphw7CyzQyiDsk0JrXkT1U9+sCo=';`
       )
       res.setHeader('X-XSS-Protection', '0')
       next()
