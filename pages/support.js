@@ -184,7 +184,7 @@ Support.getInitialProps = async ({ req, res }) => {
 
       await send({
         'email-from': body.email,
-        'email-to': process.env.SERVICE_NOW_EMAIL,
+        'email-to': process.env.SUPPORT_EMAIL,
         subject: 'Support request from DfE Developer Hub',
         'content-type': 'text/html',
         'email-content': body.description,
