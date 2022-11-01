@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Select = ({ id, name, label, value, items, onChange, error }) => {
+const Select = ({ id, name, label, hint, value, items, onChange, error }) => {
   return (
     <div className={`govuk-form-group ${error ? 'govuk-form-group--error' : ''}`}>
       {error && (
@@ -11,6 +11,7 @@ const Select = ({ id, name, label, value, items, onChange, error }) => {
 
       <div className='govuk-form-group'>
         <label className='govuk-label' htmlFor={id}>{label}</label>
+        {hint && <span className='govuk-hint'>{hint}</span>}
         <select className='govuk-select' id={id} name={name} value={value} onChange={onChange}>
           {items.map(item => <option key={item.value} value={item.value}>{item.label}</option>)}
         </select>
