@@ -53,7 +53,7 @@ const data = {
     errors: {
       name: 'Enter your full name',
       email: 'Enter a valid email address',
-      apiissue: 'Select if your problem is with a specific API',
+      apiIssue: 'Select if your problem is with a specific API',
       api: 'Select the API you are having a problem with',
       description: 'Describe the problem you are having'
     },
@@ -65,7 +65,7 @@ const data = {
         label: 'Email address',
         hint: 'We will only use your email to respond to you about this problem.'
       },
-      apiissue: {
+      apiIssue: {
         label: 'Is your problem about a specific API?',
         apiSelect: 'Please select the API you are having a problem with.',
         apiSelectHint: 'If you are having problems with multiple APIs, please select the most relevant from this list.'

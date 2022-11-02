@@ -27,7 +27,7 @@ const Support = ({ apis, serverError }) => {
   const descriptionRef = useRef()
 
   const [api, setApi] = useState('')
-  const [apiissue, setApiissue] = useState('')
+  const [apiIssue, setApiIssue] = useState('')
   const [description, setDescription] = useState('')
 
   const [errors, setErrors] = useState({})
@@ -45,8 +45,8 @@ const Support = ({ apis, serverError }) => {
   }, [errors])
 
   const handleInputChange = (e) => {
-    if (e.target.name === 'apiissue') {
-      setApiissue(e.target.value)
+    if (e.target.name === 'apiIssue') {
+      setApiIssue(e.target.value)
     }
 
     if (e.target.name === 'description') {
@@ -69,11 +69,11 @@ const Support = ({ apis, serverError }) => {
       formErrors.email = content.errors.email
     }
 
-    if (validation.isEmpty(fields.apiissue)) {
-      formErrors.apiissue = content.errors.apiissue
+    if (validation.isEmpty(fields.apiIssue)) {
+      formErrors.apiIssue = content.errors.apiIssue
     }
 
-    if (fields.api !== undefined && fields.apiissue === true && validation.isEmpty(fields.api)) {
+    if (fields.api !== undefined && fields.apiIssue === 'true' && validation.isEmpty(fields.api)) {
       formErrors.api = content.errors.api
     }
 
@@ -90,7 +90,7 @@ const Support = ({ apis, serverError }) => {
     const formErrors = validateForm({
       fullname: fullnameRef.current.value,
       email: emailRef.current.value,
-      apiissue,
+      apiIssue,
       api,
       description: descriptionRef.current.value
     })
@@ -129,26 +129,26 @@ const Support = ({ apis, serverError }) => {
           error={errors.email}
         />
         <Radio
-          id='apiissue'
-          name='apiissue'
-          legend={content.form.apiissue.label}
+          id='apiIssue'
+          name='apiIssue'
+          legend={content.form.apiIssue.label}
           onChange={handleInputChange}
-          value={apiissue}
-          error={errors.apiissue}
+          value={apiIssue}
+          error={errors.apiIssue}
           items={[
             { label: 'Yes', value: 'true' },
             { label: 'No', value: 'false' }
           ]}
         />
-        {apiissue && apiissue === 'true' &&
+        {apiIssue && apiIssue === 'true' &&
           <Select
             id='api'
             name='api'
-            label={content.form.apiissue.apiSelect}
-            hint={content.form.apiissue.apiSelectHint}
+            label={content.form.apiIssue.apiSelect}
+            hint={content.form.apiIssue.apiSelectHint}
             error={errors.api}
             items={[{ label: 'Select an API', value: '' }, ...apis]}
-            required={apiissue}
+            required={apiIssue}
             value={api}
             onChange={handleInputChange}
           />
@@ -190,7 +190,7 @@ Support.getInitialProps = async ({ req, res }) => {
         'email-content': body.description,
         fullname: body.fullname,
         api: body.api,
-        apiIssue: body.apiissue
+        apiIssue: body.apiIssue
       }, req, res)
 
       const response = res._res ? res._res : res
