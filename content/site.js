@@ -53,8 +53,8 @@ const data = {
     errors: {
       name: 'Enter your full name',
       email: 'Enter a valid email address',
-      reason: 'Choose an option for your enquiry',
-      api: 'Specify the API you are having an issue with',
+      apiIssue: 'Select if your problem is with a specific API',
+      api: 'Select the API you are having a problem with',
       description: 'Describe the problem you are having'
     },
     form: {
@@ -63,18 +63,15 @@ const data = {
       },
       email: {
         label: 'Email address',
-        hint: 'We only use your email to respond to you.'
+        hint: 'We will only use your email to respond to you about this problem.'
       },
-      reason: {
-        label: 'What specifically do you need help with?',
-        generalEnquiry: 'General enquiry',
-        issueWebsite: 'Issue with website',
-        issueApi: 'Issue with API - Please specify what API you are having an issue with',
-        other: 'Other',
-        issueWebsiteSelect: 'Which API are you having issues with'
+      apiIssue: {
+        label: 'Is your problem about a specific API?',
+        apiSelect: 'Please select the API you are having a problem with.',
+        apiSelectHint: 'If you are having problems with multiple APIs, please select the most relevant from this list.'
       },
       description: {
-        label: 'What do you need help with?',
+        label: 'Please tell us more about your problem and how we can help.',
         hint: 'Please provide as much information as possible. Do not provide any personal information.'
       }
     },
@@ -86,16 +83,20 @@ const data = {
     ]
   },
   'support-submitted': {
-    title: 'Thank you',
+    title: 'Support',
     url: '/support-submitted',
     content: [
       {
         Type: 'P',
-        Body: 'We will get back to you within 2 working days.'
+        Body: 'Thank you for submitting your request for support. Your request has been received.'
       },
       {
         Type: 'P',
-        Body: "Continue to the <a href='/' class='govuk-link'>home page</a>."
+        Body: 'We will review your request and respond to you within two working days at the most.'
+      },
+      {
+        Type: 'P',
+        Body: "Return to the <a href='/' class='govuk-link'>home page</a>."
       }
     ]
   },
