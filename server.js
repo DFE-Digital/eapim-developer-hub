@@ -10,8 +10,6 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handler = app.getRequestHandler()
 
-const getCredentials = require('./getCredentials')
-
 app
   .prepare()
   .then(async () => {
@@ -46,7 +44,7 @@ app
       immutable: true
     }))
 
-    server.all('*', getCredentials, (req, res) => {
+    server.all('*', (req, res) => {
       return handler(req, res)
     })
 
