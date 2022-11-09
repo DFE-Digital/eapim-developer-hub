@@ -127,7 +127,7 @@ ApplicationCredentials.getInitialProps = async ({ req, res, query }) => {
   try {
     await checkAuth(req, res, query.slug)
 
-    const application = await getApplication(query.slug, req, res)
+    const application = await getApplication(query.slug)
     if (!application) return errorHandler(res)
     return {
       application

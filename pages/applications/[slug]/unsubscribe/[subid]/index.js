@@ -72,7 +72,7 @@ Unsubscribe.getInitialProps = async ({ req, res, query }) => {
     const subid = query.subid.substr(0, query.subid.lastIndexOf('-'))
     const environment = query.subid.split('-').pop()
 
-    const application = await getApplication(query.slug, req, res)
+    const application = await getApplication(query.slug)
     if (!application) return errorHandler(res)
 
     const subscriptions = await getSubscriptions(application.applicationId, req, res)

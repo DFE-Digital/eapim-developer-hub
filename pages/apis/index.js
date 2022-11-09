@@ -34,14 +34,18 @@ const Apis = ({ apis, serverError }) => {
   )
 }
 
-Apis.getInitialProps = async ({ res, req }) => {
+export async function getServerSideProps (context) {
   try {
-    const apis = await getApis(req, res)
-    if (!apis) return errorHandler(res)
+    const apis = await getApis()
+    if (!apis) return errorHandler(context.res)
 
-    return { apis }
+    return {
+      props: {
+        apis
+      }
+    }
   } catch (error) {
-    return errorHandler(res, error, 500)
+    return errorHandler(context.res, error, 500)
   }
 }
 

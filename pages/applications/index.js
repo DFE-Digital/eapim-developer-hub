@@ -75,19 +75,21 @@ const Applications = ({ applications = [] }) => {
   )
 }
 
-Applications.getInitialProps = async ({ req, res }) => {
+export async function getServerSideProps (context) {
   try {
-    const token = decodeToken(req, res)
-    if (!token) return { applications: [] }
+    const token = decodeToken(context.req, context.res)
+    if (!token) return { props: { applications: [] } }
 
-    const applications = await getApplications({ accountIdentifier: token.sub }, req, res)
-    if (!applications) return errorHandler(res)
+    const applications = await getApplications({ accountIdentifier: token.sub })
+    if (!applications) return errorHandler(context.res)
 
     return {
-      applications
+      props: {
+        applications
+      }
     }
   } catch (error) {
-    return errorHandler(res, error, 500)
+    return errorHandler(context.res, error, 500)
   }
 }
 

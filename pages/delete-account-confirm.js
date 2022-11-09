@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-unfetch'
-import { getOAuthToken } from '../lib/authService'
+import ClientCredentials from '../lib/clientCredentials'
 import React from 'react'
 import Link from 'next/link'
 import ErrorPage from 'components/pages/ErrorPage'
@@ -56,7 +56,7 @@ DeleteAcountConfirm.getInitialProps = async ({ req, res }) => {
     try {
       var body = req._req ? req._req.body : req.body
 
-      const token = getOAuthToken(req, res)
+      const token = await ClientCredentials.getToken()
       const idtoken = await checkBasicAuth(req, res)
       const userID = idtoken.sub
       const userEmail = idtoken.email

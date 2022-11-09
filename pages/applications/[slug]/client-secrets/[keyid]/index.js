@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-unfetch'
-import { getOAuthToken } from '../../../../../lib/authService'
+import ClientCredentials from '../../../../../lib/clientCredentials'
+
 import React, { useState } from 'react'
 import moment from 'moment'
 import ApplicationManagementPage from 'components/pages/ApplicationManagementPage'
@@ -110,7 +111,7 @@ const ApplicationClientSecretsConfirm = ({ id, secret, application, newClientKey
 ApplicationClientSecretsConfirm.getInitialProps = async ({ req, res, query }) => {
   await checkAuth(req, res, query.slug)
 
-  const token = getOAuthToken(req, res)
+  const token = await ClientCredentials.getToken()
 
   if (req && req.method === 'POST') {
     var body = req._req ? req._req.body : req.body
@@ -134,7 +135,7 @@ ApplicationClientSecretsConfirm.getInitialProps = async ({ req, res, query }) =>
       const data = await response.json()
 
       if (response.ok) {
-        const application = await getApplication(query.slug, req, res)
+        const application = await getApplication(query.slug)
         const newClientKey = data[`${KeyDisplayName}Secret`]
 
         const keyObject = data.passwordCredentials.find(item => item.displayName === KeyDisplayName)
@@ -155,7 +156,7 @@ ApplicationClientSecretsConfirm.getInitialProps = async ({ req, res, query }) =>
   }
 
   try {
-    const application = await getApplication(query.slug, req, res)
+    const application = await getApplication(query.slug)
     if (!application) return errorHandler(res)
 
     const secret = application.passwordCredentials.find(item => item.keyId === query.keyid)
