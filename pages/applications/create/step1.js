@@ -8,7 +8,7 @@ import { getContent } from '../../../content/application'
 import Input from 'components/form/input'
 import * as validation from 'utils/validation'
 import { decodeToken } from 'checkAuth'
-import errorHandler from '../../lib/errorHandler'
+import errorHandler from '../../../lib/errorHandler'
 
 const content = getContent('create-step-1')
 

@@ -22,6 +22,7 @@ app
     server.use(compression())
     server.use(cookieParser())
     server.use(express.urlencoded({ extended: true }))
+    server.use(express.json())
 
     server.use(function (req, res, next) {
       res.setHeader(
