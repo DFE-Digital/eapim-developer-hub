@@ -44,7 +44,7 @@ export const checkAuth = async (req, res, appId) => {
     give_name: session.give_name,
     family_name: session.family_name,
     accountIdentifier: session.sub
-  }, req, res)
+  })
 
   const isUsersApplication = applications.find(app => app.applicationId === appId)
 
@@ -55,7 +55,7 @@ export const checkAuth = async (req, res, appId) => {
   return true
 }
 
-function verify (req, res) {
+export function verify (req, res) {
   const items = cookies({ req, res })
 
   const idtoken = items['msal.idtoken']
