@@ -38,7 +38,7 @@ const ApplicationCreateSummary = () => {
     }
 
     try {
-      const createAppUrl = '/api/applications/create'
+      const createAppUrl = '/api/applications'
       const response = await fetch(createAppUrl, {
         method: 'POST',
         headers: {

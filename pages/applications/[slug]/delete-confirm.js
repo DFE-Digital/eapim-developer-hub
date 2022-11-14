@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
+import fetch from 'isomorphic-unfetch'
 import { useRouter } from 'next/router'
 import { getContent } from '../../../content/applicationManagement'
 import ContentBuilder from 'components/ContentBuilder'
 import ErrorPage from 'components/pages/ErrorPage'
 import ApplicationManagementPage from 'components/pages/ApplicationManagementPage'
 import { useAuth } from '../../../providers/AuthProvider'
-import { getApplication, deleteApplication } from '../../../lib/applicationService'
+import { getApplication } from '../../../lib/applicationService'
 import errorHandler from '../../../lib/errorHandler'
+import errorHandlerClient from '../../../lib/errorHandlerClient'
 
 import { checkAuth } from 'checkAuth'
 
@@ -30,8 +32,18 @@ const ApplicationDeleteConfirm = ({ application, serverError }) => {
       applicationId: application.applicationId
     }
 
-    // todo: do server side...
-    const deleteApp = await deleteApplication(body)
+    const deleteAppUrl = `/api/applications/${application.applicationId}`
+    const response = await fetch(deleteAppUrl, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    })
+
+    errorHandlerClient(response)
+
+    const deleteApp = await response.json()
 
     if (deleteApp && !deleting) {
       setDeleting(false)
