@@ -104,7 +104,6 @@ const ApplicationRedirectUrls = ({ application, serverError }) => {
     }
 
     try {
-      // todo: do server side
       const updateAppUrl = `/api/applications/${application.applicationId}`
       const response = await fetch(updateAppUrl, {
         method: 'PUT',
@@ -147,7 +146,6 @@ const ApplicationRedirectUrls = ({ application, serverError }) => {
     }
 
     try {
-      // todo: do server side...
       const updateAppUrl = `/api/applications/${application.applicationId}`
       const response = await fetch(updateAppUrl, {
         method: 'PUT',
