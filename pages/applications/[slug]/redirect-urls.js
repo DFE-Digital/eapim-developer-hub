@@ -1,12 +1,14 @@
 import React, { useState, useRef } from 'react'
+import fetch from 'isomorphic-unfetch'
 import ReactHtmlParser from 'html-react-parser'
 import { getContent } from '../../../content/applicationManagement'
 import ContentBuilder from 'components/ContentBuilder'
 import ErrorPage from 'components/pages/ErrorPage'
 import ApplicationManagementPage from 'components/pages/ApplicationManagementPage'
 
-import { getApplication, updateApplication } from '../../../lib/applicationService'
+import { getApplication } from '../../../lib/applicationService'
 import errorHandler from '../../../lib/errorHandler'
+import errorHandlerClient from '../../../lib/errorHandlerClient'
 
 import Loader from 'components/Loader'
 import RedirectURL from 'components/RedirectURL'
@@ -103,7 +105,18 @@ const ApplicationRedirectUrls = ({ application, serverError }) => {
 
     try {
       // todo: do server side
-      const result = await updateApplication(body)
+      const updateAppUrl = `/api/applications/${application.applicationId}`
+      const response = await fetch(updateAppUrl, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      })
+
+      errorHandlerClient(response)
+
+      const result = await response.json()
 
       if (result) {
         ref.current.value = ''
@@ -135,7 +148,18 @@ const ApplicationRedirectUrls = ({ application, serverError }) => {
 
     try {
       // todo: do server side...
-      const result = await updateApplication(body)
+      const updateAppUrl = `/api/applications/${application.applicationId}`
+      const response = await fetch(updateAppUrl, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      })
+
+      errorHandlerClient(response)
+
+      const result = await response.json()
 
       if (result) {
         console.log('Successfully Removed!')
