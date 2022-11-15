@@ -7,13 +7,12 @@ export default async function handler (req, res) {
   // check user has a valid openid id token, error if not
   try {
     result = await verify(req, res)
-  } catch {
-    res.status(403).json({ message: 'Forbidden' })
-    return
-  }
 
-  // this should be handled by catch above, repeated for safety
-  if (!result) {
+    if (!result) {
+      // should not reach this, added a safety check if verify fails to throw
+      throw new Error('Forbidden')
+    }
+  } catch {
     res.status(403).json({ message: 'Forbidden' })
     return
   }
