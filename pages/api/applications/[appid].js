@@ -6,7 +6,7 @@ export default async function handler (req, res) {
 
   // example of how to get id from url instead of http body
   // const { query } = req
-  // const { id } = query
+  // const { appid } = query
 
   // check user has a valid openid id token, error if not
   try {
