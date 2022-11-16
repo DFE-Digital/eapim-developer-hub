@@ -29,7 +29,7 @@ LoggedOut.getInitialProps = async ({ req, res }) => {
       var body = req._req ? req._req.body : req.body
 
       await send({
-        'email-to': process.env.SERVICE_NOW_EMAIL,
+        'email-to': process.env.SUPPORT_EMAIL,
         subject: 'Developer Hub Feedback Survey',
         'content-type': 'text/html',
         'email-content': template(body)
