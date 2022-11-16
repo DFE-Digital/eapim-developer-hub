@@ -56,7 +56,7 @@ DeleteAcountConfirm.getInitialProps = async ({ req, res }) => {
     try {
       var body = req._req ? req._req.body : req.body
 
-      const token = await ClientCredentials.getToken()
+      const token = await ClientCredentials.getOauthToken()
       const idtoken = await checkBasicAuth(req, res)
       const userID = idtoken.sub
       const userEmail = idtoken.email

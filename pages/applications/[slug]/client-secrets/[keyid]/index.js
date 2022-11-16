@@ -111,7 +111,7 @@ const ApplicationClientSecretsConfirm = ({ id, secret, application, newClientKey
 ApplicationClientSecretsConfirm.getInitialProps = async ({ req, res, query }) => {
   await checkAuth(req, res, query.slug)
 
-  const token = await ClientCredentials.getToken()
+  const token = await ClientCredentials.getOauthToken()
 
   if (req && req.method === 'POST') {
     var body = req._req ? req._req.body : req.body
