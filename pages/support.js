@@ -9,7 +9,7 @@ import Input from 'components/form/input'
 import Select from 'components/form/select'
 import Textarea from 'components/form/textarea'
 import { send } from '../lib/emailService'
-import { template } from '../emails/support'
+// import { template } from '../emails/support'
 import * as validation from 'utils/validation'
 import errorHandler from '../lib/errorHandler'
 import { getApis } from '../lib/apiServices'
@@ -27,7 +27,7 @@ const Support = ({ apis, serverError }) => {
   const descriptionRef = useRef()
 
   const [api, setApi] = useState('')
-  const [reason, setReason] = useState('')
+  const [apiIssue, setApiIssue] = useState('')
   const [description, setDescription] = useState('')
 
   const [errors, setErrors] = useState({})
@@ -45,8 +45,8 @@ const Support = ({ apis, serverError }) => {
   }, [errors])
 
   const handleInputChange = (e) => {
-    if (e.target.name === 'reason') {
-      setReason(e.target.value)
+    if (e.target.name === 'apiIssue') {
+      setApiIssue(e.target.value)
     }
 
     if (e.target.name === 'description') {
@@ -69,11 +69,11 @@ const Support = ({ apis, serverError }) => {
       formErrors.email = content.errors.email
     }
 
-    if (validation.isEmpty(fields.reason)) {
-      formErrors.reason = content.errors.reason
+    if (validation.isEmpty(fields.apiIssue)) {
+      formErrors.apiIssue = content.errors.apiIssue
     }
 
-    if (fields.api !== undefined && fields.reason === 'issue-with-api' && validation.isEmpty(fields.api)) {
+    if (fields.api !== undefined && fields.apiIssue === 'true' && validation.isEmpty(fields.api)) {
       formErrors.api = content.errors.api
     }
 
@@ -90,7 +90,7 @@ const Support = ({ apis, serverError }) => {
     const formErrors = validateForm({
       fullname: fullnameRef.current.value,
       email: emailRef.current.value,
-      reason,
+      apiIssue,
       api,
       description: descriptionRef.current.value
     })
@@ -129,27 +129,26 @@ const Support = ({ apis, serverError }) => {
           error={errors.email}
         />
         <Radio
-          id='reason'
-          name='reason'
-          legend={content.form.reason.label}
+          id='apiIssue'
+          name='apiIssue'
+          legend={content.form.apiIssue.label}
           onChange={handleInputChange}
-          value={reason}
-          error={errors.reason}
+          value={apiIssue}
+          error={errors.apiIssue}
           items={[
-            { label: content.form.reason.generalEnquiry, value: 'general-enquiry' },
-            { label: content.form.reason.issueWebsite, value: 'issue-with-website' },
-            { label: content.form.reason.issueApi, value: 'issue-with-api' },
-            { label: content.form.reason.other, value: 'other' }
+            { label: 'Yes', value: 'true' },
+            { label: 'No', value: 'false' }
           ]}
         />
-        {reason && reason === 'issue-with-api' &&
+        {apiIssue && apiIssue === 'true' &&
           <Select
             id='api'
             name='api'
-            label={content.form.reason.issueWebsiteSelect}
+            label={content.form.apiIssue.apiSelect}
+            hint={content.form.apiIssue.apiSelectHint}
             error={errors.api}
             items={[{ label: 'Select an API', value: '' }, ...apis]}
-            required={reason === 'issue-with-api'}
+            required={apiIssue}
             value={api}
             onChange={handleInputChange}
           />
@@ -179,12 +178,19 @@ Support.getInitialProps = async ({ req, res }) => {
     try {
       const body = req._req ? req._req.body : req.body
 
+      if (body.api === undefined) {
+        body.api = 'N/A'
+      }
+
       await send({
-        'email-to': process.env.SERVICE_NOW_EMAIL,
         'email-from': body.email,
-        subject: 'Developer Hub Support Request',
+        'email-to': process.env.SUPPORT_EMAIL,
+        subject: 'Support request from DfE Developer Hub',
         'content-type': 'text/html',
-        'email-content': template(body)
+        'email-content': body.description,
+        fullname: body.fullname,
+        api: body.api,
+        apiIssue: body.apiIssue
       }, req, res)
 
       const response = res._res ? res._res : res
