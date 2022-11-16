@@ -9,9 +9,7 @@ import Input from 'components/form/input'
 import Select from 'components/form/select'
 import Textarea from 'components/form/textarea'
 import { send } from '../lib/emailService'
-// import { template } from '../emails/support'
 import * as validation from 'utils/validation'
-import errorHandler from '../lib/errorHandler'
 import { getApis } from '../lib/apiServices'
 
 const content = getContent('support')
@@ -173,43 +171,42 @@ const Support = ({ apis, serverError }) => {
   )
 }
 
-Support.getInitialProps = async ({ req, res }) => {
-  if (req && req.method === 'POST') {
-    try {
-      const body = req._req ? req._req.body : req.body
+export async function getServerSideProps (context) {
+  if (context.req && context.req.method === 'POST') {
+    const body = context.req.body
 
-      if (body.api === undefined) {
-        body.api = 'N/A'
+    if (body.api === undefined) {
+      body.api = 'N/A'
+    }
+
+    await send({
+      'email-from': body.email,
+      'email-to': process.env.SUPPORT_EMAIL,
+      subject: 'Support request from DfE Developer Hub',
+      'content-type': 'text/html',
+      'email-content': body.description,
+      fullname: body.fullname,
+      api: body.api,
+      apiIssue: body.apiIssue
+    })
+
+    return {
+      redirect: {
+        destination: '/support-submitted',
+        permanent: false
       }
-
-      await send({
-        'email-from': body.email,
-        'email-to': process.env.SUPPORT_EMAIL,
-        subject: 'Support request from DfE Developer Hub',
-        'content-type': 'text/html',
-        'email-content': body.description,
-        fullname: body.fullname,
-        api: body.api,
-        apiIssue: body.apiIssue
-      }, req, res)
-
-      const response = res._res ? res._res : res
-
-      response.writeHead(301, { Location: '/support-submitted' })
-      response.end()
-    } catch (error) {
-      return errorHandler(res, error, 500)
     }
   }
 
-  try {
-    const apis = await getApis(req, res)
-    const data = apis.map(api => {
-      return { label: api.properties.displayName, value: api.properties.displayName }
-    })
-    return { apis: data }
-  } catch (error) {
-    return errorHandler(res, error, 500)
+  const apis = await getApis()
+  const data = apis.map(api => {
+    return { label: api.properties.displayName, value: api.properties.displayName }
+  })
+
+  return {
+    props: {
+      apis: data
+    }
   }
 }
 
