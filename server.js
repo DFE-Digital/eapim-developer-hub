@@ -28,7 +28,7 @@ app
       if (dev) {
         res.setHeader(
           'Content-Security-Policy',
-          `default-src 'self'; connect-src 'self' ${API_URL}/ ${B2C_URL}/; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline' http://highlightjs.org/static/demo/styles/github.css;`
+          `default-src 'self'; connect-src 'self' ${API_URL}/ ${B2C_URL} http://localhost:3000/; script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline' http://highlightjs.org/static/demo/styles/github.css;`
         )
       } else {
         res.setHeader(
