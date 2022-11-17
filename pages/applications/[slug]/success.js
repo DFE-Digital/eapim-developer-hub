@@ -7,7 +7,7 @@ import errorHandler from '../../../lib/errorHandler'
 
 import { getContent } from '../../../content/applicationManagement'
 
-import { checkAuth } from 'checkAuth'
+import { checkBasicAuth, checkUserOwnsApp } from 'checkAuth'
 
 const content = getContent('create-success')
 
@@ -26,7 +26,8 @@ const ApplicationCreateSuccess = ({ application, serverError }) => {
 
 ApplicationCreateSuccess.getInitialProps = async ({ req, res, query }) => {
   try {
-    await checkAuth(req, res, query.slug)
+    const session = await checkBasicAuth(req, res)
+    await checkUserOwnsApp(session, query.slug)
 
     const application = await getApplication(query.slug)
     if (!application) return errorHandler(res)

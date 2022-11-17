@@ -17,7 +17,7 @@ import { useAuth } from '../../../providers/AuthProvider'
 
 import * as validation from '../../../src/utils/validation'
 
-import { checkAuth } from 'checkAuth'
+import { checkBasicAuth, checkUserOwnsApp } from 'checkAuth'
 
 const content = getContent('redirect-urls')
 const URLS_LIMIT = 15
@@ -241,7 +241,8 @@ const ApplicationRedirectUrls = ({ application, serverError }) => {
 
 ApplicationRedirectUrls.getInitialProps = async ({ req, res, query }) => {
   try {
-    await checkAuth(req, res, query.slug)
+    const session = await checkBasicAuth(req, res)
+    await checkUserOwnsApp(session, query.slug)
 
     const application = await getApplication(query.slug)
     if (!application) return errorHandler(res)

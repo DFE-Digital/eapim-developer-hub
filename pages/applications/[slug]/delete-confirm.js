@@ -10,7 +10,7 @@ import { getApplication } from '../../../lib/applicationService'
 import errorHandler from '../../../lib/errorHandler'
 import errorHandlerClient from '../../../lib/errorHandlerClient'
 
-import { checkAuth } from 'checkAuth'
+import { checkBasicAuth, checkUserOwnsApp } from 'checkAuth'
 
 const content = getContent('delete-application').pageConfirm
 
@@ -82,7 +82,8 @@ const ApplicationDeleteConfirm = ({ application, serverError }) => {
 
 ApplicationDeleteConfirm.getInitialProps = async ({ req, res, query }) => {
   try {
-    await checkAuth(req, res, query.slug)
+    const session = await checkBasicAuth(req, res)
+    await checkUserOwnsApp(session, query.slug)
 
     const application = await getApplication(query.slug)
     if (!application) return errorHandler(res)

@@ -6,7 +6,7 @@ import clipboard from '../../../src/utils/clipboard'
 import { getApplication } from '../../../lib/applicationService'
 import errorHandler from '../../../lib/errorHandler'
 
-import { checkAuth } from 'checkAuth'
+import { checkBasicAuth, checkUserOwnsApp } from 'checkAuth'
 
 import { getContent } from '../../../content/applicationManagement'
 const content = getContent('credentials')
@@ -125,7 +125,8 @@ const ApplicationCredentials = ({ application, serverError }) => {
 
 ApplicationCredentials.getInitialProps = async ({ req, res, query }) => {
   try {
-    await checkAuth(req, res, query.slug)
+    const session = await checkBasicAuth(req, res)
+    await checkUserOwnsApp(session, query.slug)
 
     const application = await getApplication(query.slug)
     if (!application) return errorHandler(res)

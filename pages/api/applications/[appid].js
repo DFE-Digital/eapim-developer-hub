@@ -1,16 +1,13 @@
 import { deleteApplication, updateApplication } from '../../../lib/applicationService'
-import { verify } from 'checkAuth'
+import { verify, checkUserOwnsApp } from 'checkAuth'
 
 export default async function handler (req, res) {
   var result = null
 
-  // example of how to get id from url instead of http body
-  // const { query } = req
-  // const { appid } = query
-
   // check user has a valid openid id token, error if not
   try {
     result = await verify(req, res)
+    await checkUserOwnsApp(result, req.body.applicationId)
 
     if (!result) {
       // should not reach this, added a safety check if verify fails to throw

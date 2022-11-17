@@ -7,7 +7,7 @@ import errorHandler from '../../../../../lib/errorHandler'
 
 import { getContent } from '../../../../../content/applicationManagement'
 
-import { checkAuth } from 'checkAuth'
+import { checkBasicAuth, checkUserOwnsApp } from 'checkAuth'
 
 const content = getContent('api-subscriptions-unsubscribe')
 
@@ -51,7 +51,8 @@ const Unsubscribe = ({ application, subscription, serverError }) => {
 }
 
 Unsubscribe.getInitialProps = async ({ req, res, query }) => {
-  await checkAuth(req, res, query.slug)
+  const session = await checkBasicAuth(req, res)
+  await checkUserOwnsApp(session, query.slug)
 
   if (req && req.method === 'POST') {
     try {
@@ -75,7 +76,7 @@ Unsubscribe.getInitialProps = async ({ req, res, query }) => {
     const application = await getApplication(query.slug)
     if (!application) return errorHandler(res)
 
-    const subscriptions = await getSubscriptions(application.applicationId, req, res)
+    const subscriptions = await getSubscriptions(application.applicationId)
     application.subscriptions = subscriptions
 
     const subscription = subscriptions.find(sub => sub.id === subid && sub.environment === environment)

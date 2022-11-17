@@ -14,7 +14,7 @@ import clipboard from '../../../../../src/utils/clipboard'
 import { useAuth } from '../../../../../providers/AuthProvider'
 import { getContent } from '../../../../../content/applicationManagement'
 
-import { checkAuth } from 'checkAuth'
+import { checkBasicAuth, checkUserOwnsApp } from 'checkAuth'
 
 const content = getContent('client-secrets-confirm')
 
@@ -109,17 +109,21 @@ const ApplicationClientSecretsConfirm = ({ id, secret, application, newClientKey
 }
 
 ApplicationClientSecretsConfirm.getInitialProps = async ({ req, res, query }) => {
-  await checkAuth(req, res, query.slug)
-
-  const token = await ClientCredentials.getOauthToken()
+  const session = await checkBasicAuth(req, res)
+  await checkUserOwnsApp(session, query.slug)
 
   if (req && req.method === 'POST') {
     var body = req._req ? req._req.body : req.body
 
-    const { userName, userEmail, userID, applicationId, KeyId, KeyDisplayName } = body
+    const { userName, applicationId, KeyId, KeyDisplayName } = body
+    await checkUserOwnsApp(session, applicationId)
+    const userID = session.sub
+    const userEmail = session.userEmail
 
     try {
       const url = `${process.env.PLATFORM_API_URL}/GenerateApplicationSecret`
+
+      const token = await ClientCredentials.getOauthToken()
 
       const response = await fetch(url, {
         method: 'POST',

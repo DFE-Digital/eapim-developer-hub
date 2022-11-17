@@ -1,5 +1,5 @@
 import { postSubscription } from '../../../../lib/subscriptionService'
-import { verify } from 'checkAuth'
+import { verify, checkUserOwnsApp } from 'checkAuth'
 
 export default async function handler (req, res) {
   const { query } = req
@@ -10,6 +10,7 @@ export default async function handler (req, res) {
   // check user has a valid openid id token, error if not
   try {
     result = await verify(req, res)
+    await checkUserOwnsApp(result, appid)
 
     if (!result) {
       // should not reach this, added a safety check if verify fails to throw
