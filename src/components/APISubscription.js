@@ -40,7 +40,6 @@ const APISubscription = ({ applicationId, tag, subscription, onSubscriptionChang
       errorHandlerClient(response)
 
       const newSubscriptions = await response.json()
-
       onSubscriptionChange(newSubscriptions)
       setSubscribing(false)
     } catch (error) {
@@ -52,11 +51,10 @@ const APISubscription = ({ applicationId, tag, subscription, onSubscriptionChang
   const onFetchKeys = async (e, subId) => {
     e.preventDefault()
     setFetching(true)
-
     try {
       const getSubKeysUrl = `/api/applications/${applicationId}/subscriptions/${subId}/keys?environment=${environment}`
       const response = await fetch(getSubKeysUrl, {
-        method: 'PUT',
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json'
         }
@@ -65,7 +63,6 @@ const APISubscription = ({ applicationId, tag, subscription, onSubscriptionChang
       errorHandlerClient(response)
 
       const keys = await response.json()
-
       setSubscriptionKeys(keys)
       setShowKeys(true)
       setFetching(false)
@@ -168,14 +165,5 @@ const APISubscription = ({ applicationId, tag, subscription, onSubscriptionChang
     </>
   )
 }
-
-// export async function getServerSideProps (context) {
-//   console.log('api subscriptions serverside')
-
-//   return {
-//     props: {
-//     }
-//   }
-// }
 
 export default APISubscription
