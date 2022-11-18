@@ -26,7 +26,7 @@ const ApplicationCreateStep1 = (props) => {
       setApplications(props.apps)
     }
 
-    if (user.getOauthToken()) fetchApplications()
+    if (user.getToken()) fetchApplications()
   }, [user])
 
   const cancel = () => {

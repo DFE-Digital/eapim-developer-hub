@@ -110,16 +110,12 @@ export async function getServerSideProps (context) {
   const session = await checkBasicAuth(context.req, context.res)
   await checkUserOwnsApp(session, context.query.slug)
 
-  const application = await getApplication(context.query.slug)
-  if (!application) throw new Error('Forbidden')
-
   if (context.req && context.req.method === 'POST') {
     var body = context.req._req ? context.req._req.body : context.req.body
-
     const { userName, applicationId, KeyId, KeyDisplayName } = body
     await checkUserOwnsApp(session, applicationId)
     const userID = session.sub
-    const userEmail = session.userEmail
+    const userEmail = session.email
 
     const url = `${process.env.PLATFORM_API_URL}/GenerateApplicationSecret`
 
@@ -158,8 +154,17 @@ export async function getServerSideProps (context) {
     }
   }
 
+  const application = await getApplication(context.query.slug)
+  if (!application) throw new Error('Forbidden')
+
+  const secret = application.passwordCredentials.find(item => item.keyId === context.query.keyid)
+  if (!secret) throw new Error('Forbidden')
+
   return {
     props: {
+      secret,
+      application,
+      id: context.query.slug
     }
   }
 }
