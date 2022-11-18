@@ -3,7 +3,6 @@ import ErrorPage from 'components/pages/ErrorPage'
 import APIPage from 'components/pages/APIPage'
 
 import { getApis } from '../../lib/apiServices'
-import errorHandler from '../../lib/errorHandler'
 
 const Apis = ({ apis, serverError }) => {
   if (serverError) return <ErrorPage {...serverError} />
@@ -35,17 +34,13 @@ const Apis = ({ apis, serverError }) => {
 }
 
 export async function getServerSideProps (context) {
-  try {
-    const apis = await getApis()
-    if (!apis) return errorHandler(context.res)
+  const apis = await getApis()
+  if (!apis) throw new Error('Failed to fetch APIs')
 
-    return {
-      props: {
-        apis
-      }
+  return {
+    props: {
+      apis
     }
-  } catch (error) {
-    return errorHandler(context.res, error, 500)
   }
 }
 

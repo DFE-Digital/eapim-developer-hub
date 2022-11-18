@@ -8,7 +8,6 @@ import { getContent } from '../../../content/application'
 import Input from 'components/form/input'
 import * as validation from 'utils/validation'
 import { decodeToken } from 'checkAuth'
-import errorHandler from '../../../lib/errorHandler'
 
 const content = getContent('create-step-1')
 
@@ -104,12 +103,11 @@ const ApplicationCreateStep1 = (props) => {
 }
 
 export async function getServerSideProps (context) {
-  // var idtoken = context.req.cookies['msal.idtoken']
   const token = decodeToken(context.req, context.res)
   if (!token) return { props: { apps: [] } }
 
   const apps = await getApplications({ accountIdentifier: token.sub })
-  if (!apps) return errorHandler(context.res)
+  if (!apps) throw new Error('Forbidden')
 
   return {
     props: {

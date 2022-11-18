@@ -6,7 +6,6 @@ import ApplicationPage from 'components/pages/ApplicationPage'
 import { useAuth } from '../../providers/AuthProvider'
 import { useApplication } from '../../providers/ApplicationProvider'
 
-import errorHandler from '../../lib/errorHandler'
 import { getApplications } from '../../lib/applicationService'
 
 import { decodeToken } from 'checkAuth'
@@ -76,20 +75,16 @@ const Applications = ({ applications = [] }) => {
 }
 
 export async function getServerSideProps (context) {
-  try {
-    const token = decodeToken(context.req, context.res)
-    if (!token) return { props: { applications: [] } }
+  const token = decodeToken(context.req, context.res)
+  if (!token) return { props: { applications: [] } }
 
-    const applications = await getApplications({ accountIdentifier: token.sub })
-    if (!applications) return errorHandler(context.res)
+  const applications = await getApplications({ accountIdentifier: token.sub })
+  if (!applications) throw Error('Forbidden')
 
-    return {
-      props: {
-        applications
-      }
+  return {
+    props: {
+      applications
     }
-  } catch (error) {
-    return errorHandler(context.res, error, 500)
   }
 }
 
