@@ -4,7 +4,6 @@ import ApplicationManagementPage from 'components/pages/ApplicationManagementPag
 import { getContent } from '../../../content/applicationManagement'
 
 import { getApplication } from '../../../lib/applicationService'
-import errorHandler from '../../../lib/errorHandler'
 
 import { checkBasicAuth, checkUserOwnsApp } from 'checkAuth'
 
@@ -30,20 +29,18 @@ const DeleteApplication = ({ application, serverError }) => {
   )
 }
 
-DeleteApplication.getInitialProps = async ({ req, res, query }) => {
-  try {
-    const session = await checkBasicAuth(req, res)
-    await checkUserOwnsApp(session, query.slug)
+export async function getServerSideProps (context) {
+  const session = await checkBasicAuth(context.req, context.res)
+  await checkUserOwnsApp(session, context.query.slug)
 
-    const application = await getApplication(query.slug)
-    if (!application) return errorHandler(res)
+  const application = await getApplication(context.query.slug)
+  if (!application) throw new Error('Forbidden')
 
-    return {
-      id: query.slug,
+  return {
+    props: {
+      id: context.query.slug,
       application
     }
-  } catch (error) {
-    return errorHandler(res, error, 500)
   }
 }
 

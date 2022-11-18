@@ -6,7 +6,6 @@ import ErrorPage from 'components/pages/ErrorPage'
 import ContentBuilder from 'components/ContentBuilder'
 
 import { getApplication } from '../../../../lib/applicationService'
-import errorHandler from '../../../../lib/errorHandler'
 
 import { checkBasicAuth, checkUserOwnsApp } from 'checkAuth'
 
@@ -92,20 +91,18 @@ const ApplicationClientSecrets = ({ id, application, serverError }) => {
   )
 }
 
-ApplicationClientSecrets.getInitialProps = async ({ req, res, query }) => {
-  try {
-    const session = await checkBasicAuth(req, res)
-    await checkUserOwnsApp(session, query.slug)
+export async function getServerSideProps (context) {
+  const session = await checkBasicAuth(context.req, context.res)
+  await checkUserOwnsApp(session, context.query.slug)
 
-    const application = await getApplication(query.slug)
-    if (!application) return errorHandler(res)
+  const application = await getApplication(context.query.slug)
+  if (!application) throw new Error('Forbidden')
 
-    return {
-      id: query.slug,
+  return {
+    props: {
+      id: context.query.slug,
       application
     }
-  } catch (error) {
-    return errorHandler(res, error, 500)
   }
 }
 
