@@ -13,4 +13,11 @@ const SupportSubmitted = () => {
   )
 }
 
+export async function getServerSideProps (context) {
+  return {
+    props: {
+    }
+  }
+}
+
 export default SupportSubmitted
