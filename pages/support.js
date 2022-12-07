@@ -191,7 +191,7 @@ Support.getInitialProps = async ({ req, res }) => {
         fullname: body.fullname,
         api: body.api,
         apiIssue: body.apiIssue
-      }, req, res)
+      }, 'support', req, res)
 
       const response = res._res ? res._res : res
 
