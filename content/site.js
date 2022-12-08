@@ -78,7 +78,7 @@ const data = {
     content: [
       {
         Type: 'P',
-        Body: "Complete this short form and our Support Team will get back to you within 2 working days. You can also check our <a href='/documentation/reference-guide' class='govuk-link'>reference guide</a> for answers."
+        Body: "Complete this form and our Support Team will get back to you within three working days. You can also check our <a href='/documentation/reference-guide' class='govuk-link'>reference guide</a> for answers."
       }
     ]
   },
