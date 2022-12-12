@@ -1,13 +1,29 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Page from 'components/Page'
 import ContentBuilder from 'components/ContentBuilder'
 import { send } from '../lib/emailService'
 import { template } from '../emails/survey'
+import * as Msal from '@azure/msal-browser'
+import { config } from '../lib/authService'
+import { useInsights } from 'hooks'
 
 import { getContent } from '../content/site'
 const content = getContent('logged-out')
+const [trackException] = useInsights()
 
 const LoggedOut = () => {
+  useEffect(() => {
+    const myMSALObj = new Msal.PublicClientApplication(config.login)
+
+    myMSALObj.handleRedirectPromise()
+      .then(res => {
+        // complete logout interation
+      })
+      .catch(error => {
+        trackException(error)
+      })
+  })
+
   return (
     <Page title={content.title} layout='three-quarters'>
       <h1 className='govuk-heading-l'>{content.title}</h1>

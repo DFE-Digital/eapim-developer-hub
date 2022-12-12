@@ -28,11 +28,10 @@ export const AuthProvider = ({ children }) => {
   }
 
   const logout = async (redirectUri = null) => {
-    await signOut(redirectUri)
-
     window.localStorage.removeItem('account')
     setAccount(null)
     deleteCookie('msal.idtoken')
+    await signOut()
   }
 
   return (
