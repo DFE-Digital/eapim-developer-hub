@@ -10,9 +10,11 @@ DFE Developer Hub for external suppliers &amp; third party developers
 
 ## Env variables
 
-Get dev env vars and populate .env file, these can be pulled from the release pipeline (do not commit this)
+Get dev env vars and populate .env.local file, these can be pulled from the release pipeline (do not commit this)
 
 It's recommended to use NODE_ENV=production due to major differences between this and development mode
+
+Next js does not override env variables found in .env with env.local
 
 ## runnning
 
