@@ -149,8 +149,7 @@ const Support = ({ apis, serverError }) => {
             required={apiIssue}
             value={api}
             onChange={handleInputChange}
-          />
-        }
+          />}
         <Textarea
           inline
           ref={descriptionRef}

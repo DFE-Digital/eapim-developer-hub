@@ -35,7 +35,7 @@ const APISummary = ({ api, summary }) => {
             <tr className='govuk-table__row'>
               <th scope='row' className='govuk-table__header govuk-!-width-one-half'>Open API file</th>
               <td className='govuk-table__cell govuk-!-width-one-half'>
-                <a className='govuk-link' href={api.tags.swaggerFile} download={api.tags.swaggerFile} target='_blank'>View Open API file</a>
+                <a className='govuk-link' href={api.tags.swaggerFile} download={api.tags.swaggerFile} target='_blank' rel='noreferrer'>View Open API file</a>
               </td>
             </tr>
           )}
@@ -63,9 +63,9 @@ const APISummary = ({ api, summary }) => {
             let component = ReactHtmlParser(item.body)
 
             if (item.type === 'download') {
-              component = <a className='govuk-link' href={item.link} download={item.link} target='_blank'>{ReactHtmlParser(item.body)}</a>
+              component = <a className='govuk-link' href={item.link} download={item.link} target='_blank' rel='noreferrer'>{ReactHtmlParser(item.body)}</a>
             } else if (item.type !== 'download' && item.link) {
-              component = <a className='govuk-link' href={item.link} target='_blank'>{ReactHtmlParser(item.body)}</a>
+              component = <a className='govuk-link' href={item.link} target='_blank' rel='noreferrer'>{ReactHtmlParser(item.body)}</a>
             }
 
             return (

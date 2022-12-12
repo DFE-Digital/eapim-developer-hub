@@ -106,7 +106,8 @@ const ApplicationCreateSummary = () => {
       <button
         type='button'
         className='govuk-button govuk-button--secondary'
-        onClick={() => { router.push('/applications'); clear() }}>
+        onClick={() => { router.push('/applications'); clear() }}
+      >
         {content.buttons.cancel}
       </button>
     </ApplicationPage>

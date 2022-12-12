@@ -60,7 +60,7 @@ const ApplicationClientSecretsConfirm = ({ id, secret, application, newClientKey
                 <td className='govuk-table__cell middle'>{moment(endDateTime).format('DD MMM YYYY')}</td>
                 <td className='govuk-table__cell middle govuk-table__cell--numeric'>
                   <button type='button' className='govuk-button govuk-!-margin-0' onClick={(e) => copyToClipboard(e, '#newKey')}>
-                    {copied ? `Copied` : `Copy`}
+                    {copied ? 'Copied' : 'Copy'}
                   </button>
                 </td>
               </tr>
@@ -68,8 +68,7 @@ const ApplicationClientSecretsConfirm = ({ id, secret, application, newClientKey
           </table>
 
           <a href={`/applications/${id}/client-secrets`} className='govuk-button govuk-button--default' role='button'>{content.buttons.back}</a>
-        </div>
-      }
+        </div>}
 
       {!newClientKey && user.getToken() &&
         <div className='govuk-grid-column-two-thirds'>
@@ -100,8 +99,7 @@ const ApplicationClientSecretsConfirm = ({ id, secret, application, newClientKey
             <button type='submit' className='govuk-button govuk-button--default govuk-!-margin-top-6 govuk-!-margin-right-1'>{content.buttons.continue}</button>
             <a href={`/applications/${id}/client-secrets`} className='govuk-button govuk-button--secondary govuk-!-margin-top-6'>{content.buttons.cancel}</a>
           </form>
-        </div>
-      }
+        </div>}
     </ApplicationManagementPage>
   )
 }
@@ -111,7 +109,7 @@ export async function getServerSideProps (context) {
   await checkUserOwnsApp(session, context.query.slug)
 
   if (context.req && context.req.method === 'POST') {
-    var body = context.req._req ? context.req._req.body : context.req.body
+    const body = context.req._req ? context.req._req.body : context.req.body
     const { userName, applicationId, KeyId, KeyDisplayName } = body
     await checkUserOwnsApp(session, applicationId)
     const userID = session.sub

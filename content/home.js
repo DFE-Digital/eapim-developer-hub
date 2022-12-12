@@ -17,7 +17,7 @@ const data = {
         body: [
           {
             Type: 'P',
-            Body: `You can browse <a href='/apis' class='govuk-link'>public APIs</a> from different sectors including schools, finance and corporate entities.`
+            Body: 'You can browse <a href="apis" class="govuk-link">public APIs</a> from different sectors including schools, finance and corporate entities.'
           }
         ],
         svg: '/assets/images/hp-apis.svg',
@@ -30,11 +30,11 @@ const data = {
         body: [
           {
             Type: 'P',
-            Body: `Connect your application to an API sandbox environment to begin building your software. When you're ready to go live, ask for production access.`
+            Body: 'Connect your application to an API sandbox environment to begin building your software. When you\'re ready to go live, ask for production access.'
           },
           {
             Type: 'P',
-            Body: `To get started, read <a href='/documentation' class='govuk-link'>using the Developer Hub</a>.`
+            Body: 'To get started, read <a href="/documentation" class="govuk-link">using the Developer Hub</a>.'
           }
         ],
         svg: '/assets/images/hp-int.svg',

@@ -72,7 +72,7 @@ const ApplicationDeleteConfirm = ({ application, serverError }) => {
       >
         {!deleting ? content.buttons.delete : content.buttons.deleting}
       </button>
-      <a href={`/applications/${application.applicationId}/details`} className={'govuk-button govuk-button--secondary govuk-!-margin-top-6'}>
+      <a href={`/applications/${application.applicationId}/details`} className='govuk-button govuk-button--secondary govuk-!-margin-top-6'>
         {content.buttons.cancel}
       </a>
     </ApplicationManagementPage>

@@ -58,7 +58,7 @@ const SignInSuccess = () => {
       if (tokenResponse !== null) {
         accountObj = tokenResponse.account
         const idToken = tokenResponse.idToken
-        const acr = tokenResponse.idTokenClaims['acr']
+        const acr = tokenResponse.idTokenClaims.acr
 
         if (isForgotPassword(acr)) {
           return goTo('/password-changed')

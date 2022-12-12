@@ -50,6 +50,7 @@
     "snazzy": "^9.0.0",
     "standard": "^17.0.0"
   },
+  "pre-commit": "lint-staged",
   "lint-staged": {
     "*.js": [
       "yarn lint:fix"

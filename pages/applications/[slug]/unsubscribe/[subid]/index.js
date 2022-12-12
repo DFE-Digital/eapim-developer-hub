@@ -54,7 +54,7 @@ export async function getServerSideProps (context) {
   await checkUserOwnsApp(session, context.query.slug)
 
   if (context.req && context.req.method === 'POST') {
-    var body = context.req._req ? context.req._req.body : context.req.body
+    const body = context.req._req ? context.req._req.body : context.req.body
     const { subscriptionId, environment, applicationId } = body
 
     await deleteSubscription(subscriptionId, environment)

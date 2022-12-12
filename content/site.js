@@ -33,14 +33,14 @@ const data = {
   },
   phasebanner: {
     phase: 'Alpha',
-    body: `This is a new service - your <a class='govuk-link' href='https://forms.office.com/Pages/ResponsePage.aspx?id=yXfS-grGoU2187O4s0qC-YA4Qd_fewBHv2fn-gXg0b9UQU8yT1JaWU1GVFo1M0RXNlZDREJUWjZXRS4u' rel='noreferrer noopener' target='_blank'>feedback <span class='govuk-visually-hidden'>(opens in a new tab)</span></a> will help us to improve it.`
+    body: 'This is a new service - your <a class=\'govuk-link\' href=\'https://forms.office.com/Pages/ResponsePage.aspx?id=yXfS-grGoU2187O4s0qC-YA4Qd_fewBHv2fn-gXg0b9UQU8yT1JaWU1GVFo1M0RXNlZDREJUWjZXRS4u\' rel=\'noreferrer noopener\' target=\'_blank\'>feedback <span class=\'govuk-visually-hidden\'>(opens in a new tab)</span></a> will help us to improve it.'
   },
   authWarning: {
     title: 'Warning',
     content: [
       {
         Type: 'DIV',
-        Body: `<a href='/auth/register' class='govuk-button'>Create an account</a><p class='govuk-body'>or <a href='/auth/login' class='govuk-link govuk-!-margin-left-1'><strong>sign in</strong></a> to the DfE Developer Hub.</p>`
+        Body: '<a href=\'/auth/register\' class=\'govuk-button\'>Create an account</a><p class=\'govuk-body\'>or <a href=\'/auth/login\' class=\'govuk-link govuk-!-margin-left-1\'><strong>sign in</strong></a> to the DfE Developer Hub.</p>'
       }
     ]
   },
@@ -761,7 +761,7 @@ const data = {
     content: [
       {
         Type: 'P',
-        Body: `<a href='/auth/login' class='govuk-link'>Sign in</a> to the Developer Hub with your new password.`
+        Body: '<a href=\'/auth/login\' class=\'govuk-link\'>Sign in</a> to the Developer Hub with your new password.'
       }
     ]
   },
@@ -778,7 +778,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: `<a href='/' class='govuk-link'>Go back to the homepage</a>`
+        Body: '<a href=\'/\' class=\'govuk-link\'>Go back to the homepage</a>'
       }
     ]
   },
@@ -791,7 +791,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: `<a href='/support' class='govuk-link'>Contact us</a> if you are having issues with the Developer Hub.`
+        Body: '<a href=\'/support\' class=\'govuk-link\'>Contact us</a> if you are having issues with the Developer Hub.'
       }
     ]
   }

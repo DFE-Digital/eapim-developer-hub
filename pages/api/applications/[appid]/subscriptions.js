@@ -5,7 +5,7 @@ export default async function handler (req, res) {
   const { query } = req
   const { appid, environment } = query
 
-  var result = null
+  let result = null
 
   // check user has a valid openid id token, error if not
   try {

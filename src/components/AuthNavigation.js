@@ -25,7 +25,7 @@ const AuthNavigation = () => {
               <a href='/profile' className='govuk-link'>{user.name()}</a>
             </li>
             <li>
-              <a href='/auth/logout'className='govuk-link'>Sign out</a>
+              <a href='/auth/logout' className='govuk-link'>Sign out</a>
             </li>
           </>
         )}

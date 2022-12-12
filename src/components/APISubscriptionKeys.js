@@ -14,8 +14,7 @@ const APISubscriptionKeys = ({ subscription, subscriptionKeys, showKeys, fetchin
             {!subscription.keys &&
               <a className='govuk-link' href='#' onClick={(e) => onViewKeys(e, subscription.id)}>
                 {!subscriptionHasKeys && fetching ? 'Loading...' : (showKeys ? 'Hide keys' : 'View keys')}
-              </a>
-            }
+              </a>}
           </th>
         </tr>
         {subscriptionHasKeys && showKeys && (

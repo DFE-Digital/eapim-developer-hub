@@ -2,7 +2,7 @@ import React from 'react'
 
 const Input = React.forwardRef(({ error, inline, id, name, type, value, label, hint, placeholder, ariaDescribedBy, ariaInvalid, ariaRequired = false, readOnly = false, onFocus, onChange }, ref) => {
   return (
-    <div className={`govuk-form-group ${error ? `govuk-form-group--error` : ''} ${inline === true ? `govuk-!-margin-bottom-0` : ''}`}>
+    <div className={`govuk-form-group ${error ? 'govuk-form-group--error' : ''} ${inline === true ? 'govuk-!-margin-bottom-0' : ''}`}>
       {label && <label className='govuk-label' htmlFor={id}>{label}</label>}
 
       {hint && <span className='govuk-hint'>{hint}</span>}
@@ -14,7 +14,7 @@ const Input = React.forwardRef(({ error, inline, id, name, type, value, label, h
       )}
 
       <input
-        className={`govuk-input ${error ? `govuk-input--error` : ''} ${readOnly ? `input-readonly` : ''}`}
+        className={`govuk-input ${error ? 'govuk-input--error' : ''} ${readOnly ? 'input-readonly' : ''}`}
         ref={ref}
         id={id}
         type={type}
