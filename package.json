@@ -4,8 +4,6 @@
   "main": "server.js",
   "scripts": {
     "lint-staged": "lint-staged",
-    "test:ci": "jest --maxWorkers=2 --ci",
-    "test": "jest --watch",
     "dev": "nodemon -w server server.js",
     "build": "next build",
     "start": "node server.js",
@@ -19,78 +17,47 @@
     "@microsoft/applicationinsights-web": "^2.5.8",
     "compression": "^1.7.1",
     "cookie-parser": "^1.4.5",
+    "dotenv": "^16.0.3",
     "express": "^4.18.1",
-    "express-session": "^1.17.3",
     "govuk-frontend": "^3.6.0",
     "helmet": "^3.20.0",
     "html-react-parser": "^3.0.1",
     "idtoken-verifier": "^2.2.2",
     "isomorphic-unfetch": "^3.0.0",
-    "js-cookie": "^2.2.1",
     "jwt-decode": "^3.1.2",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.31",
     "next": "^12.3.4",
     "next-cookies": "^2.0.3",
-    "postcss": "^8.4.14",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.0.0",
     "react-highlight": "^0.14.0",
-    "react-is": "^17.0.2",
-    "react-side-effect": "^2.1.2",
     "react-svg": "^15.1.3",
-    "react-testing-library": "^8.0.1",
     "sass": "^1.54.0",
     "styled-components": "^5.1.1",
     "styled-normalize": "^8.0.6",
     "validator": "^13.7.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.1.0",
-    "@babel/plugin-transform-template-literals": "^7.12.1",
-    "@testing-library/jest-dom": "^5.1.1",
-    "@testing-library/react": "^9.4.1",
-    "babel-core": "7.0.0-bridge.0",
-    "babel-eslint": "^10.0.1",
-    "babel-jest": "^25.1.0",
-    "babel-plugin-inline-dotenv": "^1.1.2",
-    "babel-plugin-module-resolver": "^4.0.0",
     "eslint": "^7.10.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-react": "^7.30.1",
-    "jest": "^27.5.1",
     "lint-staged": "^12.5.0",
     "nodemon": "^2.0.19",
     "pre-commit": "^1.2.2",
-    "react-test-renderer": "^17.0.2",
     "rimraf": "^3.0.0",
     "snazzy": "^9.0.0",
-    "standard": "^13.1.0"
+    "standard": "^17.0.0"
   },
-  "pre-commit": "lint-staged",
   "lint-staged": {
     "*.js": [
       "yarn lint:fix"
     ]
   },
-  "standard": {
-    "parser": "babel-eslint",
-    "env": [
-      "jest"
-    ]
-  },
+  "standard": {},
   "engines": {
     "node": ">=16.13.0"
-  },
-  "jest": {
-    "modulePaths": [
-      "./src",
-      "./src/test"
-    ],
-    "setupFilesAfterEnv": [
-      "@testing-library/jest-dom/extend-expect"
-    ]
   },
   "browserslist": {
     "production": [
