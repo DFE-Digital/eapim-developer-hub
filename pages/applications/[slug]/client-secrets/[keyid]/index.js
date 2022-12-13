@@ -2,7 +2,7 @@ import fetch from 'isomorphic-unfetch'
 import ClientCredentials from '../../../../../lib/clientCredentials'
 
 import React, { useState } from 'react'
-import moment from 'moment'
+import { format } from 'date-fns'
 import ApplicationManagementPage from 'components/pages/ApplicationManagementPage'
 import ErrorPage from 'components/pages/ErrorPage'
 import ContentBuilder from 'components/ContentBuilder'
@@ -56,8 +56,8 @@ const ApplicationClientSecretsConfirm = ({ id, secret, application, newClientKey
             <tbody className='govuk-table__body'>
               <tr className='govuk-table__row'>
                 <td id='newKey' className='govuk-table__cell middle'>{newClientKey}</td>
-                <td className='govuk-table__cell middle'>{moment(startDateTime).format('DD MMM YYYY')}</td>
-                <td className='govuk-table__cell middle'>{moment(endDateTime).format('DD MMM YYYY')}</td>
+                <td className='govuk-table__cell middle'>{format(startDateTime, 'dd MMM YYYY')}</td>
+                <td className='govuk-table__cell middle'>{format(endDateTime, 'dd MMM YYYY')}</td>
                 <td className='govuk-table__cell middle govuk-table__cell--numeric'>
                   <button type='button' className='govuk-button govuk-!-margin-0' onClick={(e) => copyToClipboard(e, '#newKey')}>
                     {copied ? 'Copied' : 'Copy'}

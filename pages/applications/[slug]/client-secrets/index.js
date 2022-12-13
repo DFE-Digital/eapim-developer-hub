@@ -1,4 +1,4 @@
-import moment from 'moment'
+import { format } from 'date-fns'
 import React from 'react'
 import { getContent } from '../../../../content/applicationManagement'
 import ApplicationManagementPage from 'components/pages/ApplicationManagementPage'
@@ -50,8 +50,8 @@ const ApplicationClientSecrets = ({ id, application, serverError }) => {
             <td className='govuk-table__cell middle'>
               {primary.hint}••••••••••••••••••••••••••••••••
             </td>
-            <td className='govuk-table__cell middle'>{moment(primary.startDateTime).format('DD MMM YYYY')}</td>
-            <td className='govuk-table__cell middle'>{moment(primary.endDateTime).format('DD MMM YYYY')}</td>
+            <td className='govuk-table__cell middle'>{format(primary.startDateTime, 'dd MMM YYYY')}</td>
+            <td className='govuk-table__cell middle'>{format(primary.endDateTime, 'dd MMM YYYY')}</td>
             <td className='govuk-table__cell middle govuk-table__cell--numeric'>
               <a href={`/applications/${id}/client-secrets/${primary.keyId}`} className='govuk-button govuk-!-margin-bottom-0'>
                 {content.buttons.regenerate}
@@ -75,8 +75,8 @@ const ApplicationClientSecrets = ({ id, application, serverError }) => {
             <td className='govuk-table__cell middle'>
               {secondary.hint}••••••••••••••••••••••••••••••••
             </td>
-            <td className='govuk-table__cell middle'>{moment(secondary.startDateTime).format('DD MMM YYYY')}</td>
-            <td className='govuk-table__cell middle'>{moment(secondary.endDateTime).format('DD MMM YYYY')}</td>
+            <td className='govuk-table__cell middle'>{format(secondary.startDateTime, 'dd MMM YYYY')}</td>
+            <td className='govuk-table__cell middle'>{format(secondary.endDateTime, 'dd MMM YYYY')}</td>
             <td className='govuk-table__cell middle govuk-table__cell--numeric'>
               <a href={`/applications/${id}/client-secrets/${secondary.keyId}`} className='govuk-button govuk-!-margin-bottom-0'>
                 {content.buttons.regenerate}
