@@ -62,7 +62,7 @@ const Header = () => {
               {content.navigation.map((nav) => {
                 return (
                   <li className={`govuk-header__navigation-item ${router.pathname.includes(nav.url) ? 'govuk-header__navigation-item--active' : ''}`} key={nav.title}>
-                    <Link href={nav.url} passHref>
+                    <Link legacyBehavior href={nav.url} passHref>
                       <a href={nav.url} className='govuk-header__link'>{nav.title}</a>
                     </Link>
                   </li>

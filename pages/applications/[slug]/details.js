@@ -34,7 +34,7 @@ const ApplicationDetails = ({ application, serverError }) => {
             Created on:
           </dt>
           <dd className='govuk-summary-list__value'>
-            {timezone.tz(application.createdOn, 'MM/DD/YYYY HH:mma', 'Europe/London').add(1, 'hour').format('DD MMMM YYYY, HH:mma')}
+          {timezone.tz(application.createdOn, 'MM/DD/YYYY HH:mma', 'Europe/London').add(1, 'hour').format('DD MMMM YYYY, HH:mma')}
           </dd>
         </div>
         <div className='govuk-summary-list__row'>
@@ -71,7 +71,7 @@ const ApplicationDetails = ({ application, serverError }) => {
         </div>
       </dl>
 
-      <Link href='/applications/[slug]/api-subscriptions' as={`/applications/${application.applicationId}/api-subscriptions`} passHref>
+      <Link legacyBehavior href='/applications/[slug]/api-subscriptions' as={`/applications/${application.applicationId}/api-subscriptions`} passHref>
         <a role='button' className='govuk-button govuk-button--default govuk-!-margin-top-6'>{content.buttons.subscribe}</a>
       </Link>
     </ApplicationManagementPage>

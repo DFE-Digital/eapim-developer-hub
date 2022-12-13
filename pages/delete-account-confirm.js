@@ -42,7 +42,7 @@ const DeleteAcountConfirm = ({ serverError }) => {
         <input type='hidden' name='userEmail' value={user.email()} />
         <input type='hidden' name='userID' value={user.id()} />
         <button type='submit' className='govuk-button govuk-button--warning govuk-!-margin-top-6 govuk-!-margin-right-1'>Delete account</button>
-        <Link href='/profile'>
+        <Link legacyBehavior href='/profile'>
           <a className='govuk-button govuk-button--secondary govuk-!-margin-top-6'>{content.buttons.cancel}</a>
         </Link>
       </form>
