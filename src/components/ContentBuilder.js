@@ -1,7 +1,10 @@
 import React, { Fragment } from 'react'
 import ReactHtmlParser from 'html-react-parser'
-import Highlight from 'react-highlight'
+import hljs from 'highlight.js/lib/core'
+import csharp from 'highlight.js/lib/languages/csharp'
 import Details from './Details'
+
+hljs.registerLanguage('csharp', csharp)
 
 const ContentBuilder = ({ data, sectionNav }) => {
   return (
@@ -105,9 +108,7 @@ const ContentBuilder = ({ data, sectionNav }) => {
 
         if (item.Type === 'CODE') {
           return (
-            <Highlight className='csharp' key={i}>
-              <div>{itembody}</div>
-            </Highlight>
+            <pre key={i}><code className='csharp hljs'>{ReactHtmlParser(hljs.highlight(itembody, { language: 'csharp' }).value)}</code></pre>
           )
         }
 
