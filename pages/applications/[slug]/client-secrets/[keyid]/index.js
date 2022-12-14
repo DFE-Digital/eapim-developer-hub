@@ -1,19 +1,18 @@
 import fetch from 'isomorphic-unfetch'
-import { getOAuthToken } from '../../../../../lib/authService'
+import ClientCredentials from '../../../../../lib/clientCredentials'
+
 import React, { useState } from 'react'
 import moment from 'moment'
 import ApplicationManagementPage from 'components/pages/ApplicationManagementPage'
 import ErrorPage from 'components/pages/ErrorPage'
 import ContentBuilder from 'components/ContentBuilder'
 
-import errorHandler from '../../../../../lib/errorHandler'
-
 import { getApplication } from '../../../../../lib/applicationService'
 import clipboard from '../../../../../src/utils/clipboard'
 import { useAuth } from '../../../../../providers/AuthProvider'
 import { getContent } from '../../../../../content/applicationManagement'
 
-import { checkAuth } from 'checkAuth'
+import { checkBasicAuth, checkUserOwnsApp } from 'checkAuth'
 
 const content = getContent('client-secrets-confirm')
 
@@ -107,40 +106,43 @@ const ApplicationClientSecretsConfirm = ({ id, secret, application, newClientKey
   )
 }
 
-ApplicationClientSecretsConfirm.getInitialProps = async ({ req, res, query }) => {
-  await checkAuth(req, res, query.slug)
+export async function getServerSideProps (context) {
+  const session = await checkBasicAuth(context.req, context.res)
+  await checkUserOwnsApp(session, context.query.slug)
 
-  const token = getOAuthToken(req, res)
+  if (context.req && context.req.method === 'POST') {
+    var body = context.req._req ? context.req._req.body : context.req.body
+    const { userName, applicationId, KeyId, KeyDisplayName } = body
+    await checkUserOwnsApp(session, applicationId)
+    const userID = session.sub
+    const userEmail = session.email
 
-  if (req && req.method === 'POST') {
-    var body = req._req ? req._req.body : req.body
+    const url = `${process.env.PLATFORM_API_URL}/GenerateApplicationSecret`
 
-    const { userName, userEmail, userID, applicationId, KeyId, KeyDisplayName } = body
+    const token = await ClientCredentials.getOauthToken()
 
-    try {
-      const url = `${process.env.PLATFORM_API_URL}/GenerateApplicationSecret`
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Ocp-Apim-Subscription-Key': process.env.OCP_APIM_SUBSCRIPTION_KEY,
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({ userName, userEmail, userID, applicationId, KeyId, KeyDisplayName })
+    })
 
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Ocp-Apim-Subscription-Key': process.env.OCP_APIM_SUBSCRIPTION_KEY,
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({ userName, userEmail, userID, applicationId, KeyId, KeyDisplayName })
-      })
+    if (!response.ok) throw new Error('Error generating a new key')
 
-      if (!response.ok) throw new Error('Error generating a new key')
+    const data = await response.json()
 
-      const data = await response.json()
+    if (response.ok) {
+      const application = await getApplication(context.query.slug)
+      const newClientKey = data[`${KeyDisplayName}Secret`]
 
-      if (response.ok) {
-        const application = await getApplication(query.slug, req, res)
-        const newClientKey = data[`${KeyDisplayName}Secret`]
+      const keyObject = data.passwordCredentials.find(item => item.displayName === KeyDisplayName)
+      const { startDateTime, endDateTime } = keyObject
 
-        const keyObject = data.passwordCredentials.find(item => item.displayName === KeyDisplayName)
-        const { startDateTime, endDateTime } = keyObject
-
-        return {
+      return {
+        props: {
           application,
           newClientKey,
           startDateTime,
@@ -149,25 +151,21 @@ ApplicationClientSecretsConfirm.getInitialProps = async ({ req, res, query }) =>
           id: data.applicationId
         }
       }
-    } catch (error) {
-      return errorHandler(res, error, 500)
     }
   }
 
-  try {
-    const application = await getApplication(query.slug, req, res)
-    if (!application) return errorHandler(res)
+  const application = await getApplication(context.query.slug)
+  if (!application) throw new Error('Forbidden')
 
-    const secret = application.passwordCredentials.find(item => item.keyId === query.keyid)
-    if (!secret) return errorHandler(res)
+  const secret = application.passwordCredentials.find(item => item.keyId === context.query.keyid)
+  if (!secret) throw new Error('Forbidden')
 
-    return {
+  return {
+    props: {
       secret,
       application,
-      id: query.slug
+      id: context.query.slug
     }
-  } catch (error) {
-    return errorHandler(res, error, 500)
   }
 }
 

@@ -2,10 +2,9 @@ import React from 'react'
 import ApplicationManagementPage from 'components/pages/ApplicationManagementPage'
 import ErrorPage from 'components/pages/ErrorPage'
 import { getApplication } from '../../../../lib/applicationService'
-import errorHandler from '../../../../lib/errorHandler'
 import { getContent } from '../../../../content/applicationManagement'
 
-import { checkAuth } from 'checkAuth'
+import { checkBasicAuth, checkUserOwnsApp } from 'checkAuth'
 
 const content = getContent('api-subscriptions-unsubscribe-confirmed')
 
@@ -22,15 +21,17 @@ const UnsubscribeConfirmed = ({ application, serverError }) => {
   )
 }
 
-UnsubscribeConfirmed.getInitialProps = async ({ req, res, query }) => {
-  try {
-    await checkAuth(req, res, query.slug)
+export async function getServerSideProps (context) {
+  const session = await checkBasicAuth(context.req, context.res)
+  await checkUserOwnsApp(session, context.query.slug)
 
-    const application = await getApplication(query.slug, req, res)
-    if (!application) return errorHandler(res)
-    return { application }
-  } catch (error) {
-    return errorHandler(res, error, 500)
+  const application = await getApplication(context.query.slug)
+  if (!application) throw new Error('Forbidden')
+
+  return {
+    props: {
+      application
+    }
   }
 }
 

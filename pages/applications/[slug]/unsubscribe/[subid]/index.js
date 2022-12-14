@@ -3,11 +3,10 @@ import ErrorPage from 'components/pages/ErrorPage'
 import ApplicationManagementPage from 'components/pages/ApplicationManagementPage'
 import { getApplication } from '../../../../../lib/applicationService'
 import { getSubscriptions, deleteSubscription } from '../../../../../lib/subscriptionService'
-import errorHandler from '../../../../../lib/errorHandler'
 
 import { getContent } from '../../../../../content/applicationManagement'
 
-import { checkAuth } from 'checkAuth'
+import { checkBasicAuth, checkUserOwnsApp } from 'checkAuth'
 
 const content = getContent('api-subscriptions-unsubscribe')
 
@@ -50,44 +49,42 @@ const Unsubscribe = ({ application, subscription, serverError }) => {
   )
 }
 
-Unsubscribe.getInitialProps = async ({ req, res, query }) => {
-  await checkAuth(req, res, query.slug)
+export async function getServerSideProps (context) {
+  const session = await checkBasicAuth(context.req, context.res)
+  await checkUserOwnsApp(session, context.query.slug)
 
-  if (req && req.method === 'POST') {
-    try {
-      var body = req._req ? req._req.body : req.body
+  if (context.req && context.req.method === 'POST') {
+    var body = context.req._req ? context.req._req.body : context.req.body
+    const { subscriptionId, environment, applicationId } = body
 
-      const { subscriptionId, environment, applicationId } = body
-      await deleteSubscription(subscriptionId, environment, req, res)
+    await deleteSubscription(subscriptionId, environment)
 
-      const response = res._res ? res._res : res
-      response.writeHead(301, { Location: `/applications/${applicationId}/unsubscribe/confirmed` })
-      return response.end()
-    } catch (error) {
-      return errorHandler(res, error, 500)
+    return {
+      redirect: {
+        destination: `/applications/${applicationId}/unsubscribe/confirmed`,
+        permanent: false
+      }
     }
   }
 
-  try {
-    const subid = query.subid.substr(0, query.subid.lastIndexOf('-'))
-    const environment = query.subid.split('-').pop()
+  const subid = context.query.subid.substr(0, context.query.subid.lastIndexOf('-'))
+  const environment = context.query.subid.split('-').pop()
 
-    const application = await getApplication(query.slug, req, res)
-    if (!application) return errorHandler(res)
+  const application = await getApplication(context.query.slug)
+  if (!application) throw Error('Forbidden')
 
-    const subscriptions = await getSubscriptions(application.applicationId, req, res)
-    application.subscriptions = subscriptions
+  const subscriptions = await getSubscriptions(application.applicationId)
+  application.subscriptions = subscriptions
 
-    const subscription = subscriptions.find(sub => sub.id === subid && sub.environment === environment)
-    if (!subscription) return errorHandler(res)
+  const subscription = subscriptions.find(sub => sub.id === subid && sub.environment === environment)
+  if (!subscription) throw Error('Forbidden')
 
-    return {
-      id: query.slug,
+  return {
+    props: {
+      id: context.query.slug,
       application,
       subscription
     }
-  } catch (error) {
-    return errorHandler(res, error, 500)
   }
 }
 

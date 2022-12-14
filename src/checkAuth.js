@@ -3,6 +3,7 @@ import jwtDecode from 'jwt-decode'
 import IdTokenVerifier from 'idtoken-verifier'
 
 import { getApplications } from '../lib/applicationService'
+import { getSubscriptions } from '../lib/subscriptionService'
 
 export const decodeToken = (req, res) => {
   const items = cookies({ req, res })
@@ -19,32 +20,13 @@ export const decodeToken = (req, res) => {
   return session
 }
 
-export const checkAuth = async (req, res, appId) => {
-  const items = cookies({ req, res })
-
-  const idtoken = items['msal.idtoken']
-
-  let session = null
-
-  try {
-    session = jwtDecode(idtoken)
-  } catch {
-    session = null
-  }
-
-  if (!session) {
-    const response = res._res ? res._res : res
-
-    response.writeHead(301, { Location: '/auth/login' })
-    response.end()
-  }
-
+export const checkUserOwnsApp = async (session, appId) => {
   const applications = await getApplications({
     email: session.email,
     give_name: session.give_name,
     family_name: session.family_name,
     accountIdentifier: session.sub
-  }, req, res)
+  })
 
   const isUsersApplication = applications.find(app => app.applicationId === appId)
 
@@ -55,7 +37,30 @@ export const checkAuth = async (req, res, appId) => {
   return true
 }
 
-function verify (req, res) {
+export const checkUserOwnsSub = async (session, appId, subId, environment) => {
+  const applications = await getApplications({
+    email: session.email,
+    give_name: session.give_name,
+    family_name: session.family_name,
+    accountIdentifier: session.sub
+  })
+
+  const userApp = applications.find(app => app.applicationId === appId)
+
+  if (!userApp) {
+    throw new Error('Unauthorized')
+  }
+
+  const subscriptions = await getSubscriptions(appId)
+  const userSub = subscriptions.find(sub => sub.id === subId && sub.environment === environment)
+  if (!userSub) {
+    throw new Error('Unauthorized')
+  }
+
+  return true
+}
+
+export function verify (req, res) {
   const items = cookies({ req, res })
 
   const idtoken = items['msal.idtoken']

@@ -5,13 +5,11 @@ import ContentBuilder from 'components/ContentBuilder'
 import APISubscriptions from 'components/APISubscriptions'
 import ApplicationManagementPage from 'components/pages/ApplicationManagementPage'
 
-import errorHandler from '../../../lib/errorHandler'
-
 import { getApis, getApiTags } from '../../../lib/apiServices'
 import { getApplication } from '../../../lib/applicationService'
 import { getSubscriptions } from '../../../lib/subscriptionService'
 
-import { checkAuth } from 'checkAuth'
+import { checkBasicAuth, checkUserOwnsApp } from 'checkAuth'
 
 const content = getContent('api-subscriptions')
 
@@ -55,30 +53,29 @@ const ApplicationApiSubscriptions = ({ apis, application, subscriptions, router,
   )
 }
 
-ApplicationApiSubscriptions.getInitialProps = async ({ req, res, query }) => {
-  try {
-    await checkAuth(req, res, query.slug)
+export async function getServerSideProps (context) {
+  const session = await checkBasicAuth(context.req, context.res)
+  await checkUserOwnsApp(session, context.query.slug)
 
-    const application = await getApplication(query.slug, req, res)
-    if (!application) return errorHandler(res)
+  const application = await getApplication(context.query.slug)
+  if (!application) throw new Error('Forbidden')
 
-    const apis = await getApis(req, res)
-    if (!apis) return errorHandler(res)
+  const apis = await getApis()
+  if (!apis) throw new Error('Failed to list APIs')
 
-    const subscriptions = await getSubscriptions(application.applicationId, req, res)
+  const subscriptions = await getSubscriptions(application.applicationId)
 
-    await Promise.all(apis.map(async (api) => {
-      api.tags = await getApiTags(api.name, req, res)
-      return api
-    }))
+  await Promise.all(apis.map(async (api) => {
+    api.tags = await getApiTags(api.name)
+    return api
+  }))
 
-    return {
+  return {
+    props: {
       apis,
       application,
       subscriptions
     }
-  } catch (error) {
-    return errorHandler(res, error, 500)
   }
 }
 
