@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { Helmet } from 'react-helmet'
-import * as Msal from 'msal'
+import * as Msal from '@azure/msal-browser'
 import { Loading } from 'components/Loading'
-import { b2cPolicies, config } from '../lib/authService'
+import { b2cPolicies, config, signOut } from '../lib/authService'
 import { useAuth } from '../providers/AuthProvider'
 import { useCookie, useInsights } from 'hooks'
 
@@ -10,8 +10,13 @@ const goTo = (url) => {
   window.location.href = url
 }
 
-const errorHandling = (error) => {
-  console.log(`MSAL Error Message: ${error.errorMessage}`)
+const [trackException] = useInsights()
+
+const errorHandling = async (error) => {
+  console.log(`MSAL Error Message: ${error}`)
+  trackException(error)
+
+  if (!error.errorMessage) return goTo('/')
 
   // user has no account
   if (error.errorMessage.indexOf('AADB2C99002') > -1) return goTo('/')
@@ -27,6 +32,7 @@ const errorHandling = (error) => {
   // Learn more about AAD error codes at https://docs.microsoft.com/en-us/azure/active-directory/develop/reference-aadsts-error-codes
   if (error.errorMessage.indexOf('Invalid state') > -1) return goTo('/')
 
+  await signOut()
   return goTo('/')
 }
 
@@ -43,41 +49,42 @@ const SignInSuccess = () => {
   const { setUser } = useAuth()
 
   useEffect(() => {
-    const myMSALObj = new Msal.UserAgentApplication(config.login)
-    const { setCookie, deleteCookie } = useCookie()
-    const [trackException] = useInsights()
+    const myMSALObj = new Msal.PublicClientApplication(config.login)
+    const { setCookie } = useCookie()
 
-    myMSALObj.handleRedirectCallback((error, response) => {
-      console.log('MSAL Response:', response)
+    myMSALObj.handleRedirectPromise().then((tokenResponse) => {
+      console.log('MSAL Response:', tokenResponse)
+      let accountObj = null
+      if (tokenResponse !== null) {
+        accountObj = tokenResponse.account
+        const idToken = tokenResponse.idToken
+        const acr = tokenResponse.idTokenClaims['acr']
 
-      if (error) {
-        trackException(error)
-        return errorHandling(error)
-      }
-
-      const acr = response.idToken.claims['acr']
-      const isIdToken = response.tokenType === 'id_token'
-
-      if (isIdToken && isForgotPassword(acr)) {
-        return goTo('/password-changed')
-      }
-
-      if (isIdToken && isAuth(acr)) {
-        console.log(`id_token acquired at: ${new Date().toString()}`)
-
-        if (!myMSALObj.getAccount()) {
-          deleteCookie('msal.idtoken', null)
-          return myMSALObj.loginRedirect()
+        if (isForgotPassword(acr)) {
+          return goTo('/password-changed')
         }
 
-        const account = myMSALObj.getAccount()
-        setUser(account)
-        setCookie('msal.idtoken', response.idToken.rawIdToken)
-        goTo('/?loggedin=true')
+        if (isAuth(acr)) {
+          console.log(`idToken acquired at: ${new Date().toString()}`)
+          setUser(accountObj)
+          setCookie('msal.idtoken', idToken)
+          goTo('/?loggedin=true')
+        } else {
+          throw Error('Invalid auth')
+        }
       } else {
-        console.log(`Token type is: ${response.tokenType}`)
-        return goTo('/')
+        const currentAccounts = myMSALObj.getAllAccounts()
+        if (!currentAccounts || currentAccounts.length === 0) {
+          throw Error('No user')
+        } else if (currentAccounts.length > 1) {
+          throw Error('multiple users')
+        } else {
+          accountObj = currentAccounts[0]
+          goTo('/?loggedin=true')
+        }
       }
+    }).catch((error) => {
+      return errorHandling(error)
     })
   }, [])
 

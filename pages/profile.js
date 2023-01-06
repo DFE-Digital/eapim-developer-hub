@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
-import * as Msal from 'msal'
-import { b2cPolicies, config } from '../lib/authService'
+import * as Msal from '@azure/msal-browser'
+import { b2cPolicies, config, signOut } from '../lib/authService'
 import Page from 'components/Page'
 import ContentBuilder from 'components/ContentBuilder'
 import { useAuth } from '../providers/AuthProvider'
@@ -13,43 +13,45 @@ const goTo = (url) => {
   window.location.href = url
 }
 
+const [trackException] = useInsights()
+
 const isEditProfile = (acr) => acr === b2cPolicies.editProfile
 
-const errorHandling = (error) => {
-  console.log(`MSAL Error Message: ${error.errorMessage}`)
-
+const errorHandling = async (error) => {
+  console.log(`MSAL Error Message: ${error}`)
+  trackException(error)
   // user cancelled action
+  if (!error.errorMessage) return goTo('/')
+
   if (error.errorMessage.indexOf('AADB2C90091') > -1) goTo('/profile')
+
+  await signOut()
+  return goTo('/')
 }
 
 const Profile = () => {
   const { user, setUser } = useAuth()
-  const [trackException] = useInsights()
 
-  useEffect(() => {
-    const myMSALObj = new Msal.UserAgentApplication(config.editProfile)
+  useEffect(async () => {
+    const myMSALObj = new Msal.PublicClientApplication(config.editProfile)
 
-    myMSALObj.handleRedirectCallback((error, response) => {
-      if (error) {
-        trackException(error)
-        return errorHandling(error)
+    myMSALObj.handleRedirectPromise().then((tokenResponse) => {
+      if (tokenResponse !== null) {
+        console.log(tokenResponse)
+        const acr = tokenResponse.idTokenClaims['acr']
+        const accountObj = tokenResponse.account
+
+        if (isEditProfile(acr)) {
+          console.log('edited profile refreshing')
+          setUser(accountObj)
+          goTo('/profile')
+        } else {
+          console.log(`Token type is: ${tokenResponse.tokenType}`)
+          goTo('/profile')
+        }
       }
-
-      const acr = response.idToken.claims['acr']
-      const isIdToken = response.tokenType === 'id_token'
-
-      if (isIdToken && isEditProfile(acr)) {
-        console.log(`id_token acquired at: ${new Date().toString()}`)
-
-        if (!myMSALObj.getAccount()) return myMSALObj.loginRedirect()
-
-        const account = myMSALObj.getAccount()
-        setUser(account)
-        goTo('/profile')
-      } else {
-        console.log(`Token type is: ${response.tokenType}`)
-        goTo('/profile')
-      }
+    }).catch(async (error) => {
+      errorHandling(error)
     })
   }, [])
 
