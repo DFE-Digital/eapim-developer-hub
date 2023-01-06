@@ -33,7 +33,7 @@ const data = {
   },
   phasebanner: {
     phase: 'Alpha',
-    body: 'This is a new service - your <a class=\'govuk-link\' href=\'https://forms.office.com/Pages/ResponsePage.aspx?id=yXfS-grGoU2187O4s0qC-YA4Qd_fewBHv2fn-gXg0b9UQU8yT1JaWU1GVFo1M0RXNlZDREJUWjZXRS4u\' rel=\'noreferrer noopener\' target=\'_blank\'>feedback <span class=\'govuk-visually-hidden\'>(opens in a new tab)</span></a> will help us to improve it.'
+    body: 'This is a new service - your <a class=\'govuk-link\' href=\'/feedback\' rel=\'noreferrer noopener\'>feedback <span class=\'govuk-visually-hidden\'></span></a> will help us to improve it.'
   },
   authWarning: {
     title: 'Warning',
@@ -78,7 +78,7 @@ const data = {
     content: [
       {
         Type: 'P',
-        Body: "Complete this short form and our Support Team will get back to you within 2 working days. You can also check our <a href='/documentation/reference-guide' class='govuk-link'>reference guide</a> for answers."
+        Body: "Complete this form and our Support Team will get back to you within three working days. You will receive an email that confirms the information that you provided within your request. You can also check our <a href='/documentation/reference-guide' class='govuk-link'>reference guide</a> for answers."
       }
     ]
   },
@@ -88,11 +88,97 @@ const data = {
     content: [
       {
         Type: 'P',
-        Body: 'Thank you for submitting your request for support. Your request has been received.'
+        Body: 'Thank you for submitting your request for support. You should receive an email confirming the information you provided within your request.'
       },
       {
         Type: 'P',
-        Body: 'We will review your request and respond to you within two working days at the most.'
+        Body: 'We will review your request and respond to you within three working days.'
+      },
+      {
+        Type: 'P',
+        Body: 'If you do not receive an email confirming the informtion you provided, then please contact us at <a href="mailto:EAPIM.SUPPORT@education.gov.uk">EAPIM.SUPPORT@education.gov.uk</a>.'
+      },
+      {
+        Type: 'P',
+        Body: "Return to the <a href='/' class='govuk-link'>home page</a>."
+      }
+    ]
+  },
+  feedback: {
+    title: 'Feedback',
+    url: '/feedback',
+    buttons: {
+      submit: 'Send feedback'
+    },
+    errors: {
+      name: 'Enter your full name',
+      email: 'Enter a valid email address',
+      relationship: 'Select your relationship to the DfE',
+      relationshipOther: 'Specify your relationship to the DfE',
+      role: 'Select your role',
+      roleOther: 'Specify your role',
+      experience: 'Select how satified you are with this platform',
+      experienceAbout: 'Describle the reason for your rating',
+      otherFeedback: 'Provide any other feedback',
+      futureResearch: 'Select whether you consent to being contacted about future research',
+      futureResearchEmail: 'Provide contact email for future research'
+    },
+    form: {
+      relationship: {
+        label: '1. Which of the following best describes your relationship with the Department for Education (DfE)?'
+      },
+      role: {
+        label: '2. Which of the following best describes your role?'
+      },
+      experience: {
+        label: '3. On a scale of 1-10, where 1 = ‘Not satisfied at all’ and 10 = ‘Completely satisfied’, how satisfied are you with your experience using this platform?'
+      },
+      experienceAbout: {
+        label: '4. Tell us a bit about the reasons why you gave this rating out of 10.',
+        hint: 'Please be as detailed as possible, telling us anything you think would help improve the experience for you.'
+      },
+      otherFeedback: {
+        label: '5. Is there any other feedback you would like the team to know?',
+        hint: 'This could be positive or constructive feedback - anything to help improve the service.'
+      },
+      futureResearch: {
+        label: '6. Would you be interested in taking part in future user research sessions to help us improve this service and consent to us contacting you about this?',
+        hint: 'Please note, by selecting ‘yes’ here, you are not committing to taking part. We will always contact you separately about future research sessions, and you do not have to take part if you do not want to.'
+      },
+      futureResearchEmail: {
+        label: '7. Please provide us your email address so we can contact you about future user research sessions.',
+        hint: 'This email will only be used to contact you about research sessions. Your previous answers will no longer be anonymous if submitted.'
+      },
+      name: {
+        label: 'Full name'
+      },
+      email: {
+        label: 'Email address',
+        hint: 'We will only use your email to respond to you about this problem.'
+      }
+    },
+    content: [
+      {
+        Type: 'P',
+        Body: 'We are always looking to improve this service, and welcome your feedback. Please complete this short form, which will take no more than a couple of minutes to complete. Your responses are completely anonymous unless you choose to give your email.​'
+      },
+      {
+        Type: 'P',
+        Body: "Please note, we are unable to respond to individual feedback responses. If you require support with an API or the platform itself, please use the separate <a href='/support' class='govuk-link'>Support form</a>.​​"
+      }
+    ]
+  },
+  'feedback-submitted': {
+    title: 'Feedback',
+    url: '/feedback-submitted',
+    content: [
+      {
+        Type: 'P',
+        Body: 'Thank you for submitting your feedback. We are grateful you have taken the time to provide this, and look forward to reading your opinions.'
+      },
+      {
+        Type: 'P',
+        Body: "Please note, we are unable to respond to individual feedback responses received. If you require support with an API or the platform itself, please use the separate <a href='/support' class='govuk-link'>Support form</a> (opens in a new window).'"
       },
       {
         Type: 'P',
@@ -752,7 +838,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: "Leave your feedback <a target='_blank' href='https://forms.office.com/Pages/ResponsePage.aspx?id=yXfS-grGoU2187O4s0qC-YA4Qd_fewBHv2fn-gXg0b9UQU8yT1JaWU1GVFo1M0RXNlZDREJUWjZXRS4u' class='govuk-link'>here (opens in a new tab)</a>."
+        Body: "Leave your feedback <a class='govuk-link' href='/feedback' target='_blank' rel='noreferrer noopener' class='govuk-link'>here (opens in a new tab)</a>."
       }
     ]
   },

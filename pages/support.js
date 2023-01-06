@@ -187,7 +187,7 @@ export async function getServerSideProps (context) {
       fullname: body.fullname,
       api: body.api,
       apiIssue: body.apiIssue
-    })
+    }, 'support')
 
     return {
       redirect: {
