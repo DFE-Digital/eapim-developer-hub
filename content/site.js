@@ -78,7 +78,7 @@ const data = {
     content: [
       {
         Type: 'P',
-        Body: "Complete this form and our Support Team will get back to you within three working days. You can also check our <a href='/documentation/reference-guide' class='govuk-link'>reference guide</a> for answers."
+        Body: "Complete this form and our Support Team will get back to you within three working days. You will receive an email that confirms the information that you provided within your request. You can also check our <a href='/documentation/reference-guide' class='govuk-link'>reference guide</a> for answers."
       }
     ]
   },
@@ -88,11 +88,15 @@ const data = {
     content: [
       {
         Type: 'P',
-        Body: 'Thank you for submitting your request for support. Your request has been received.'
+        Body: 'Thank you for submitting your request for support. You should receive an email confirming the information you provided within your request.'
       },
       {
         Type: 'P',
-        Body: 'We will review your request and respond to you within two working days at the most.'
+        Body: 'We will review your request and respond to you within three working days.'
+      },
+      {
+        Type: 'P',
+        Body: 'If you do not receive an email confirming the informtion you provided, then please contact us at <a href="mailto:EAPIM.SUPPORT@education.gov.uk">EAPIM.SUPPORT@education.gov.uk</a>.'
       },
       {
         Type: 'P',

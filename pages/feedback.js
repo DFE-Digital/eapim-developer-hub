@@ -86,8 +86,6 @@ const Feedback = ({ serverError }) => {
   const validateForm = (fields) => {
     const formErrors = {}
 
-    console.log('in feedback validate')
-
     if (validation.isEmpty(fields.relationship)) {
       formErrors.relationship = content.errors.relationship
     }
