@@ -74,8 +74,8 @@ const data = {
         Type: 'UL',
         Body: [
           "use or refer to 'DfE'",
-          'be the same or similar to an existing name on the Developer Hub',
-          'be the same or similar to a trademarked name registered by another business outside the Developer Hub',
+          'be the same or similar to an existing name on the Find and Use an API service',
+          'be the same or similar to a trademarked name registered by another business outside the Find and Use an API service',
           'contain offensive words or phrases',
           'mislead users into believing it has special status or power - for example, associating your application with government, local authorities or institutions, like Royal Tax App'
         ]

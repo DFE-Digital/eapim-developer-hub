@@ -35,7 +35,7 @@ const ErrorSummary = ({ errors, pageTitle }) => {
         </div>
       </div>
       <Helmet>
-        <title>Error - {pageTitle} | DfE Developer Hub</title>
+        <title>Error - {pageTitle} | Find and Use an API</title>
       </Helmet>
     </>
   )

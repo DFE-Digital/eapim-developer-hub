@@ -9,7 +9,7 @@ export const sidebar = () => {
 
 const data = {
   documentation: {
-    title: 'Using the Developer Hub',
+    title: 'Using the Find and Use an API service',
     url: '/documentation',
     metaTitle: '',
     metaDescription: '',
@@ -21,7 +21,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: 'You will need to create an account with the DfE Developer Hub to gain access to APIs and their subscription keys.'
+        Body: 'You will need to create an account with the Find and Use an API service to gain access to APIs and their subscription keys.'
       },
       {
         Type: 'P',
@@ -263,7 +263,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: 'Your credentials are your client ID and your client ‘secret’ - a kind of password. Developer Hub supplies 2 active client secrets (primary and secondary) at any one time.'
+        Body: 'Your credentials are your client ID and your client ‘secret’ - a kind of password. Find and Use an API supplies 2 active client secrets (primary and secondary) at any one time.'
       },
       {
         Type: 'P',
@@ -282,7 +282,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: 'Your client ID is a unique identifier that we create when you register your application on the Developer Hub.'
+        Body: 'Your client ID is a unique identifier that we create when you register your application on the Find and Use an API service.'
       },
       {
         Type: 'H3',
@@ -315,7 +315,7 @@ const data = {
       {
         Type: 'OL',
         Body: [
-          'Sign in to the Developer Hub.',
+          'Sign in to Find and Use an API.',
           'Check that your secondary secret for the application has a reasonable amount of time before it expires (for example, at least 6 months).',
           'Update your application to use the secondary secret.',
           'Check that your application is working with the secondary secret.',
@@ -379,7 +379,7 @@ const data = {
       {
         Type: 'OL',
         Body: [
-          'Create an account in the DfE Developer Hub.',
+          'Create an account in the Find and Use an API service.',
           'Register your application that will integrate with the DfE APIs.',
           'Copy your client ID and secret details.',
           'Subscribe to the DfE Information API and choose the sandbox environment.',
@@ -638,7 +638,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: "The DfE Developer Hub, the underlying API Platform and some of the APIs are coded in the open, as per the <a href='https://www.gov.uk/service-manual/service-standard/make-all-new-source-code-open' class='govuk-link' target='_blank'>GOV.UK Digital Service Standard (opens in a new tab)</a>."
+        Body: "Find and Use an API, the underlying API Platform and some of the APIs are coded in the open, as per the <a href='https://www.gov.uk/service-manual/service-standard/make-all-new-source-code-open' class='govuk-link' target='_blank'>GOV.UK Digital Service Standard (opens in a new tab)</a>."
       },
       {
         Type: 'P',
@@ -725,7 +725,7 @@ const data = {
     content: [
       {
         Type: 'P',
-        Body: 'Follow best practice to make sure your application does not fail when the Developer Hub makes changes to the production environment.'
+        Body: 'Follow best practice to make sure your application does not fail when the Find and Use an API makes changes to the production environment.'
       },
       {
         Type: 'H2',
@@ -749,7 +749,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: 'The Developer Hub’s HTTPS certificates can change - this includes the leaf, intermediary and root certificates.'
+        Body: 'Find and Use an API’s HTTPS certificates can change - this includes the leaf, intermediary and root certificates.'
       },
       {
         Type: 'P',
@@ -784,7 +784,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: "The DfE Developer Hub does not support <a href='https://fetch.spec.whatwg.org/#http-cors-protocol' class='govuk-link' target='_blank'>CORS (opens in a new tab)</a>. It is not possible to call our APIs from client-side code within a web browser, for example using Ajax."
+        Body: "The Find and Use an API service does not support <a href='https://fetch.spec.whatwg.org/#http-cors-protocol' class='govuk-link' target='_blank'>CORS (opens in a new tab)</a>. It is not possible to call our APIs from client-side code within a web browser, for example using Ajax."
       },
       {
         Type: 'H2',
@@ -825,11 +825,11 @@ const data = {
       },
       {
         Type: 'P',
-        Body: 'These terms of use explain what you can expect from us and what we expect from you when you create and operate software services on the DfE Developer Hub. This is not a legal relationship between DfE and any software developer.'
+        Body: 'These terms of use explain what you can expect from us and what we expect from you when you create and operate software services on the Find and Use an API service. This is not a legal relationship between DfE and any software developer.'
       },
       {
         Type: 'P',
-        Body: 'We reserve the right to remove your access to the Developer Hub and its application programming interfaces (APIs) temporarily or permanently.'
+        Body: 'We reserve the right to remove your access to the Find and Use an API service and its application programming interfaces (APIs) temporarily or permanently.'
       },
       {
         Type: 'P',

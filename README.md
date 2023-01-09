@@ -1,6 +1,6 @@
-# eapim-developer-hub
+# find-and-use-an-api
 
-DFE Developer Hub for external suppliers &amp; third party developers
+Find and Use an API for external suppliers &amp; third party developers
 
 ## Required to run
 

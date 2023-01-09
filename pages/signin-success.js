@@ -85,7 +85,7 @@ const SignInSuccess = () => {
     <>
       <Loading />
       <Helmet>
-        <title>Redirecting... | DfE Developer Hub</title>
+        <title>Redirecting... | Find and Use an API</title>
       </Helmet>
     </>
   )
