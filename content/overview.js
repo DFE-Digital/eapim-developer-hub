@@ -725,7 +725,7 @@ const data = {
     content: [
       {
         Type: 'P',
-        Body: 'Follow best practice to make sure your application does not fail when the Find and Use an API makes changes to the production environment.'
+        Body: 'Follow best practice to make sure your application does not fail when changes are made to the production environment.'
       },
       {
         Type: 'H2',
