@@ -88,7 +88,7 @@
   padding-bottom: 30px;
 }
 
-/* BEGIN - DfE style changes when moving from GovUk styles //
+/* BEGIN - DfE style changes when moving from GovUk styles */
 body, p, h1, h2, h3, h4, h5, h6, a, span, div, table, th, td, blockquote, li, tr {
     font-family: 
         BlinkMacSystemFont,
@@ -142,4 +142,4 @@ body, p, h1, h2, h3, h4, h5, h6, a, span, div, table, th, td, blockquote, li, tr
         display: inline-block;
         float: right;
     }
-// END - DfE style changes */
+/* END - DfE style changes */
