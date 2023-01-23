@@ -5,7 +5,7 @@ import Link from 'next/link'
 import ContentBuilder from 'components/ContentBuilder'
 import Header from 'components/Header'
 import CookieBanner from 'components/CookieBanner'
-import PhaseBanner from 'components/PhaseBanner'
+// import PhaseBanner from 'components/PhaseBanner'
 import AuthNavigation from 'components/AuthNavigation'
 import Footer from 'components/Footer'
 import { useAuth } from '../providers/AuthProvider'
@@ -45,9 +45,14 @@ const Home = ({ loggedin }) => {
     <>
       {pageLoaded && !bannerCookie && <CookieBanner />}
       <Header />
-      <PhaseBanner />
       <div className='govuk-width-container'>
         <div className='service-banner'>
+          <div className='govuk-phase-banner'>
+            <p className='govuk-phase-banner__content'>
+              <strong className='govuk-tag govuk-phase-banner__content__tag'>Alpha</strong>
+              <span className='govuk-phase-banner__text'>This is a new service - your <a class='govuk-link' href='/feedback' rel='noreferrer noopener'>feedback</a> will help us to improve it.</span>
+            </p>
+          </div>
           {loggedin && <span className='govuk-visually-hidden' role='alert' aria-live='assertive'>you are now signed in</span>}
           <AuthNavigation />
         </div>
