@@ -88,7 +88,39 @@
   padding-bottom: 30px;
 }
 
-/* BEGIN - DfE style changes when moving from GovUk styles */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 body, p, h1, h2, h3, h4, h5, h6, a, span, div, table, th, td, blockquote, li, tr {
   font-family: 
       BlinkMacSystemFont,
@@ -145,8 +177,8 @@ body, p, h1, h2, h3, h4, h5, h6, a, span, div, table, th, td, blockquote, li, tr
   }
 
   .govuk-phase-banner {
-      padding-top: 0;
-      padding-bottom: 0;
+      padding-top: 10px;
+      padding-bottom: 10px;
       border-bottom: 0 solid #b1b4b6;
   }
 
@@ -220,4 +252,9 @@ body, p, h1, h2, h3, h4, h5, h6, a, span, div, table, th, td, blockquote, li, tr
               margin-top:35px!important;
           }
       }
-/* END - DfE style changes */
+
+      .govuk-list {
+          font-size: 19px;
+          font-size: 0.1875rem;
+          line-height: 0.315789;
+      }
