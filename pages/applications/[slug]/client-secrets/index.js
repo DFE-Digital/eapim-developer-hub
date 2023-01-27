@@ -1,4 +1,4 @@
-import { format } from 'date-fns'
+import { format, parseISO } from 'date-fns'
 import React from 'react'
 import { getContent } from '../../../../content/applicationManagement'
 import ApplicationManagementPage from 'components/pages/ApplicationManagementPage'
@@ -50,8 +50,8 @@ const ApplicationClientSecrets = ({ id, application, serverError }) => {
             <td className='govuk-table__cell middle'>
               {primary.hint}••••••••••••••••••••••••••••••••
             </td>
-            <td className='govuk-table__cell middle'>{format(primary.startDateTime, 'dd MMM YYYY')}</td>
-            <td className='govuk-table__cell middle'>{format(primary.endDateTime, 'dd MMM YYYY')}</td>
+            <td className='govuk-table__cell middle'>{format(parseISO(primary.startDateTime), 'dd MMM yyyy')}</td>
+            <td className='govuk-table__cell middle'>{format(parseISO(primary.endDateTime), 'dd MMM yyyy')}</td>
             <td className='govuk-table__cell middle govuk-table__cell--numeric'>
               <a href={`/applications/${id}/client-secrets/${primary.keyId}`} className='govuk-button govuk-!-margin-bottom-0'>
                 {content.buttons.regenerate}
@@ -75,8 +75,8 @@ const ApplicationClientSecrets = ({ id, application, serverError }) => {
             <td className='govuk-table__cell middle'>
               {secondary.hint}••••••••••••••••••••••••••••••••
             </td>
-            <td className='govuk-table__cell middle'>{format(secondary.startDateTime, 'dd MMM YYYY')}</td>
-            <td className='govuk-table__cell middle'>{format(secondary.endDateTime, 'dd MMM YYYY')}</td>
+            <td className='govuk-table__cell middle'>{format(parseISO(secondary.startDateTime), 'dd MMM yyyy')}</td>
+            <td className='govuk-table__cell middle'>{format(parseISO(secondary.endDateTime), 'dd MMM yyyy')}</td>
             <td className='govuk-table__cell middle govuk-table__cell--numeric'>
               <a href={`/applications/${id}/client-secrets/${secondary.keyId}`} className='govuk-button govuk-!-margin-bottom-0'>
                 {content.buttons.regenerate}
