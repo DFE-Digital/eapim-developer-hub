@@ -1,7 +1,10 @@
 import React from 'react'
 import ReactHtmlParser from 'html-react-parser'
-import Highlight from 'react-highlight'
+import hljs from 'highlight.js/lib/core'
+import json from 'highlight.js/lib/languages/json'
 import Details from './Details'
+
+hljs.registerLanguage('json', json)
 
 const builder = (item) => {
   // For item bodys that are sent as arrays rather than strings, join the array
@@ -20,9 +23,7 @@ const builder = (item) => {
       return <p className='govuk-body'>{ReactHtmlParser(itembody)} </p>
     case 'CODE':
       return (
-        <Highlight className='json'>
-          <div>{itembody}</div>
-        </Highlight>
+        <pre><code className='json hljs'>{ReactHtmlParser(hljs.highlight(itembody, { language: 'json' }).value)}</code></pre>
       )
     case 'UL':
     case 'OL': {

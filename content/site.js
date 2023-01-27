@@ -33,14 +33,14 @@ const data = {
   },
   phasebanner: {
     phase: 'Alpha',
-    body: `This is a new service - your <a class='govuk-link' href='/feedback' rel='noreferrer noopener'>feedback <span class='govuk-visually-hidden'></span></a> will help us to improve it.`
+    body: 'This is a new service - your <a class=\'govuk-link\' href=\'/feedback\' rel=\'noreferrer noopener\'>feedback <span class=\'govuk-visually-hidden\'></span></a> will help us to improve it.'
   },
   authWarning: {
     title: 'Warning',
     content: [
       {
         Type: 'DIV',
-        Body: `<a href='/auth/register' class='govuk-button'>Create an account</a><p class='govuk-body'>or <a href='/auth/login' class='govuk-link govuk-!-margin-left-1'><strong>sign in</strong></a> to the DfE Developer Hub.</p>`
+        Body: '<a href=\'/auth/register\' class=\'govuk-button\'>Create an account</a><p class=\'govuk-body\'>or <a href=\'/auth/login\' class=\'govuk-link govuk-!-margin-left-1\'><strong>sign in</strong></a> to the DfE Developer Hub.</p>'
       }
     ]
   },
@@ -162,7 +162,8 @@ const data = {
         Type: 'P',
         Body: 'We are always looking to improve this service, and welcome your feedback. Please complete this short form, which will take no more than a couple of minutes to complete. Your responses are completely anonymous unless you choose to give your email.​'
       },
-      { Type: 'P',
+      {
+        Type: 'P',
         Body: "Please note, we are unable to respond to individual feedback responses. If you require support with an API or the platform itself, please use the separate <a href='/support' class='govuk-link'>Support form</a>.​​"
       }
     ]
@@ -846,7 +847,7 @@ const data = {
     content: [
       {
         Type: 'P',
-        Body: `<a href='/auth/login' class='govuk-link'>Sign in</a> to the Developer Hub with your new password.`
+        Body: '<a href=\'/auth/login\' class=\'govuk-link\'>Sign in</a> to the Developer Hub with your new password.'
       }
     ]
   },
@@ -863,7 +864,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: `<a href='/' class='govuk-link'>Go back to the homepage</a>`
+        Body: '<a href=\'/\' class=\'govuk-link\'>Go back to the homepage</a>'
       }
     ]
   },
@@ -876,7 +877,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: `<a href='/support' class='govuk-link'>Contact us</a> if you are having issues with the Developer Hub.`
+        Body: '<a href=\'/support\' class=\'govuk-link\'>Contact us</a> if you are having issues with the Developer Hub.'
       }
     ]
   }

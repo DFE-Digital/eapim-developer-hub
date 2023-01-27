@@ -47,8 +47,8 @@ export default class extends Document {
     return (
       <Html lang='en-GB' {...this.helmetHtmlAttrComponents}>
         <Head>
-          { this.helmetJsx }
-          { this.helmetHeadComponents }
+          {this.helmetJsx}
+          {this.helmetHeadComponents}
         </Head>
         <body {...this.helmetBodyAttrComponents}>
           <Main />

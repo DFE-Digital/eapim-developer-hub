@@ -7,7 +7,7 @@ if (!window.Element.prototype.matches) {
 
 if (!window.Element.prototype.closest) {
   window.Element.prototype.closest = function (s) {
-    var el = this
+    let el = this
 
     do {
       if (window.Element.prototype.matches.call(el, s)) return el
@@ -34,11 +34,11 @@ if (window.HTMLCollection && !window.HTMLCollection.prototype.forEach) {
       enumerable: true,
       writable: true,
       value: function append () {
-        var argArr = window.Array.prototype.slice.call(arguments)
-        var docFrag = document.createDocumentFragment()
+        const argArr = window.Array.prototype.slice.call(arguments)
+        const docFrag = document.createDocumentFragment()
 
         argArr.forEach(function (argItem) {
-          var isNode = argItem instanceof window.Node
+          const isNode = argItem instanceof window.Node
           docFrag.appendChild(isNode ? argItem : document.createTextNode(window.String(argItem)))
         })
 

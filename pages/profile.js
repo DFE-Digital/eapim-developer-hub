@@ -38,7 +38,7 @@ const Profile = () => {
     myMSALObj.handleRedirectPromise().then((tokenResponse) => {
       if (tokenResponse !== null) {
         console.log(tokenResponse)
-        const acr = tokenResponse.idTokenClaims['acr']
+        const acr = tokenResponse.idTokenClaims.acr
         const accountObj = tokenResponse.account
 
         if (isEditProfile(acr)) {

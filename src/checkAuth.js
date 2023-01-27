@@ -83,7 +83,7 @@ export function verify (req, res) {
     jwksURI: process.env.MSAL_ID_VERIFICATION_URL
   })
 
-  var result = new Promise((resolve, reject) => {
+  const result = new Promise((resolve, reject) => {
     verifier.verify(idtoken, session.nonce, (error, payload) => {
       if (error) {
         reject(error)
@@ -97,7 +97,7 @@ export function verify (req, res) {
 }
 
 export const checkBasicAuth = async (req, res, callback) => {
-  var result = await verify(req, res).catch(() => {
+  const result = await verify(req, res).catch(() => {
     const response = res._res ? res._res : res
 
     response.redirect('/auth/login')

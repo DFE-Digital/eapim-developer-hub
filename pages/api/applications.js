@@ -2,7 +2,7 @@ import { registerApplication } from '../../lib/applicationService'
 import { verify } from 'checkAuth'
 
 export default async function handler (req, res) {
-  var result = null
+  let result = null
 
   // check user has a valid openid id token, error if not
   try {

@@ -63,7 +63,7 @@ app
     })
   })
   .catch(ex => {
-    console.log(`> Error`)
+    console.log('> Error')
     console.error(ex.stack)
     process.exit(1)
   })

@@ -54,7 +54,7 @@ const Applications = ({ applications = [] }) => {
               {applications.length && applications.map((app, i) => {
                 return (
                   <tr className='govuk-table__row' key={i}>
-                    <th scope='row' className={`govuk-table__header`}>
+                    <th scope='row' className='govuk-table__header'>
                       <a className='govuk-link' href={`/applications/${app.applicationId}/details`}>{app.applicationName}</a>
                     </th>
                   </tr>

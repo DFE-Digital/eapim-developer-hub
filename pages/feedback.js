@@ -8,7 +8,6 @@ import Input from 'components/form/input'
 import Textarea from 'components/form/textarea'
 import { send } from '../lib/emailService'
 import * as validation from 'utils/validation'
-import errorHandler from '../lib/errorHandlerClient'
 
 const content = getContent('feedback')
 
@@ -170,20 +169,19 @@ const Feedback = ({ serverError }) => {
           ]}
         />
         {relationship && relationship === 'Other' &&
-        <Textarea
-          inline
-          ref={relationshipOtherRef}
-          id='relationshipOther'
-          name='relationshipOther'
+          <Textarea
+            inline
+            ref={relationshipOtherRef}
+            id='relationshipOther'
+            name='relationshipOther'
           // label={content.form.relationship.label}
           // hint={content.form.relationship.hint}
-          maxLength='3000'
-          value={relationshipOther}
-          error={errors.relationshipOther}
-          required={relationship}
-          onChange={handleInputChange}
-        />
-        }
+            maxLength='3000'
+            value={relationshipOther}
+            error={errors.relationshipOther}
+            required={relationship}
+            onChange={handleInputChange}
+          />}
         <Radio
           id='role'
           name='role'
@@ -202,20 +200,19 @@ const Feedback = ({ serverError }) => {
           ]}
         />
         {role && role === 'Other' &&
-        <Textarea
-          inline
-          ref={roleOtherRef}
-          id='roleOther'
-          name='roleOther'
+          <Textarea
+            inline
+            ref={roleOtherRef}
+            id='roleOther'
+            name='roleOther'
           // label={content.form.role.label}
           // hint={content.form.role.hint}
-          maxLength='3000'
-          value={roleOther}
-          error={errors.roleOther}
-          required={role}
-          onChange={handleInputChange}
-        />
-        }
+            maxLength='3000'
+            value={roleOther}
+            error={errors.roleOther}
+            required={role}
+            onChange={handleInputChange}
+          />}
         <Radio
           id='experience'
           name='experience'
@@ -274,19 +271,18 @@ const Feedback = ({ serverError }) => {
           ]}
         />
         {futureResearch && futureResearch === 'Yes' &&
-        <Input
-          ref={futureResearchEmailRef}
-          id='futureResearchEmail'
-          name='futureResearchEmail'
-          type='email'
-          label={content.form.futureResearchEmail.label}
-          hint={content.form.futureResearchEmail.hint}
-          value={futureResearchEmail}
-          error={errors.futureResearchEmail}
-          required={futureResearch}
-          onChange={handleInputChange}
-        />
-        }
+          <Input
+            ref={futureResearchEmailRef}
+            id='futureResearchEmail'
+            name='futureResearchEmail'
+            type='email'
+            label={content.form.futureResearchEmail.label}
+            hint={content.form.futureResearchEmail.hint}
+            value={futureResearchEmail}
+            error={errors.futureResearchEmail}
+            required={futureResearch}
+            onChange={handleInputChange}
+          />}
         <button type='submit' className='govuk-button govuk-!-margin-right-1'>
           {content.buttons.submit}
         </button>
@@ -295,47 +291,49 @@ const Feedback = ({ serverError }) => {
   )
 }
 
-Feedback.getInitialProps = async ({ req, res }) => {
-  if (req && req.method === 'POST') {
-    try {
-      const body = req._req ? req._req.body : req.body
+export async function getServerSideProps (context) {
+  if (context.req && context.req.method === 'POST') {
+    const body = context.req.body
 
-      if (body.relationshipOther === undefined) {
-        body.relationshipOther = 'N/A'
+    if (body.relationshipOther === undefined) {
+      body.relationshipOther = 'N/A'
+    }
+
+    if (body.roleOther === undefined) {
+      body.roleOther = 'N/A'
+    }
+
+    if (body.futureResearchEmail === undefined) {
+      body.futureResearchEmail = 'N/A'
+    }
+
+    await send({
+      'email-to': process.env.SUPPORT_EMAIL,
+      subject: 'Feedback from DfE Developer Hub',
+      'content-type': 'text/html',
+      relationship: body.relationship,
+      relationshipOther: body.relationshipOther,
+      role: body.role,
+      roleOther: body.roleOther,
+      experience: body.experience,
+      experienceAbout: body.experienceAbout,
+      otherFeedback: body.otherFeedback,
+      futureResearch: body.futureResearch,
+      futureResearchEmail: body.futureResearchEmail
+    }, 'feedback')
+
+    return {
+      redirect: {
+        destination: '/feedback-submitted',
+        permanent: false
       }
-
-      if (body.roleOther === undefined) {
-        body.roleOther = 'N/A'
-      }
-
-      if (body.futureResearchEmail === undefined) {
-        body.futureResearchEmail = 'N/A'
-      }
-
-      await send({
-        'email-to': process.env.SUPPORT_EMAIL,
-        subject: 'Feedback from DfE Developer Hub',
-        'content-type': 'text/html',
-        relationship: body.relationship,
-        relationshipOther: body.relationshipOther,
-        role: body.role,
-        roleOther: body.roleOther,
-        experience: body.experience,
-        experienceAbout: body.experienceAbout,
-        otherFeedback: body.otherFeedback,
-        futureResearch: body.futureResearch,
-        futureResearchEmail: body.futureResearchEmail
-      }, 'feedback')
-
-      const response = res._res ? res._res : res
-
-      response.writeHead(301, { Location: '/feedback-submitted' })
-      response.end()
-    } catch (error) {
-      return errorHandler(res, error, 500)
     }
   }
-  return { status: 200 }
+
+  return {
+    props: {
+    }
+  }
 }
 
 export default Feedback

@@ -22,7 +22,7 @@ const Sidebar = ({ title, items }) => {
 
           return (
             <li key={item.title}>
-              <Link as={item.url} href={item.href} passHref>
+              <Link legacyBehavior as={item.url} href={item.href} passHref>
                 <a href={item.url} className={'govuk-link ' + (isActive ? 'active' : '') + (item.className ? item.className : '')}>{item.title}</a>
               </Link>
             </li>

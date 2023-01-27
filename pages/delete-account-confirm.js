@@ -42,8 +42,8 @@ const DeleteAcountConfirm = ({ serverError }) => {
         <input type='hidden' name='userEmail' value={user.email()} />
         <input type='hidden' name='userID' value={user.id()} />
         <button type='submit' className='govuk-button govuk-button--warning govuk-!-margin-top-6 govuk-!-margin-right-1'>Delete account</button>
-        <Link href='/profile'>
-          <a className={'govuk-button govuk-button--secondary govuk-!-margin-top-6'}>{content.buttons.cancel}</a>
+        <Link legacyBehavior href='/profile'>
+          <a className='govuk-button govuk-button--secondary govuk-!-margin-top-6'>{content.buttons.cancel}</a>
         </Link>
       </form>
     </Page>
@@ -58,7 +58,7 @@ export async function getServerSideProps (context) {
     const userID = idtoken.sub
     const userEmail = idtoken.email
 
-    var body = context.req._req ? context.req._req.body : context.req.body
+    const body = context.req._req ? context.req._req.body : context.req.body
     const { userName } = body
 
     const token = await ClientCredentials.getOauthToken()

@@ -8,16 +8,19 @@ const initialState = {
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'INIT':
+    case 'INIT': {
       const init = window.localStorage.getItem('application')
       return (init) ? { ...JSON.parse(init) } : initialState
-    case 'UPDATE':
+    }
+    case 'UPDATE': {
       const data = { ...state, ...action.payload }
       window.localStorage.setItem('application', JSON.stringify(data))
       return data
-    case 'CLEAR':
+    }
+    case 'CLEAR': {
       window.localStorage.removeItem('application')
       return initialState
+    }
     default:
   }
 }

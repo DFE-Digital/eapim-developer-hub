@@ -1,20 +1,23 @@
 import React, { Fragment } from 'react'
 import ReactHtmlParser from 'html-react-parser'
-import Highlight from 'react-highlight'
+import hljs from 'highlight.js/lib/core'
+import csharp from 'highlight.js/lib/languages/csharp'
 import Details from './Details'
+
+hljs.registerLanguage('csharp', csharp)
 
 const ContentBuilder = ({ data, sectionNav }) => {
   return (
-    <Fragment>
+    <>
       {sectionNav && (
-        <Fragment>
-          <ul className={'govuk-list'}>
+        <>
+          <ul className='govuk-list'>
             {data.map((item, q) => {
               if (item.Type === 'H2') {
                 const link = `#${item.Body.replace(/\s+/g, '-').toLowerCase()}`
                 return (
                   <li key={q}>
-                    <a className='govuk-link' href={link}>{ ReactHtmlParser(item.Body) }</a>
+                    <a className='govuk-link' href={link}>{ReactHtmlParser(item.Body)}</a>
                   </li>
                 )
               }
@@ -22,7 +25,7 @@ const ContentBuilder = ({ data, sectionNav }) => {
             })}
           </ul>
           <hr className='govuk-section-break govuk-section-break--visible govuk-!-margin-bottom-9' />
-        </Fragment>
+        </>
       )}
       {data.map((item, i) => {
         // For item bodys that are sent as arrays rather than strings, join the array
@@ -36,11 +39,11 @@ const ContentBuilder = ({ data, sectionNav }) => {
         if (item.Type === 'DIV') return <div className='flex' key={i}>{ReactHtmlParser(itembody)}</div>
         if (item.Type === 'H2') {
           const anchor = itembody.replace(/\s+/g, '-').toLowerCase()
-          return <h2 className='govuk-heading-l' key={i} id={anchor}>{ ReactHtmlParser(itembody) }</h2>
+          return <h2 className='govuk-heading-l' key={i} id={anchor}>{ReactHtmlParser(itembody)}</h2>
         }
-        if (item.Type === 'H3') return <h3 className='govuk-heading-m' key={i}>{ ReactHtmlParser(itembody) }</h3>
-        if (item.Type === 'H4') return <h4 className='govuk-heading-s' key={i}>{ ReactHtmlParser(itembody) }</h4>
-        if (item.Type === 'P') return <p className='govuk-body' key={i}>{ ReactHtmlParser(itembody) }</p>
+        if (item.Type === 'H3') return <h3 className='govuk-heading-m' key={i}>{ReactHtmlParser(itembody)}</h3>
+        if (item.Type === 'H4') return <h4 className='govuk-heading-s' key={i}>{ReactHtmlParser(itembody)}</h4>
+        if (item.Type === 'P') return <p className='govuk-body' key={i}>{ReactHtmlParser(itembody)}</p>
         if (item.Type === 'UL' || item.Type === 'BL' || item.Type === 'OL') {
           return (
             <ul
@@ -49,7 +52,7 @@ const ContentBuilder = ({ data, sectionNav }) => {
             >
               {item.Body.map((li, x) => {
                 return (
-                  <li key={x}>{ ReactHtmlParser(li) }</li>
+                  <li key={x}>{ReactHtmlParser(li)}</li>
                 )
               })}
             </ul>
@@ -58,12 +61,12 @@ const ContentBuilder = ({ data, sectionNav }) => {
         if (item.Type === 'TABLE') {
           return (
             <table className='govuk-table govuk-!-margin-top-7' key={i}>
-              <caption className='govuk-table__caption'>{ ReactHtmlParser(item.Body.Caption) }</caption>
+              <caption className='govuk-table__caption'>{ReactHtmlParser(item.Body.Caption)}</caption>
               <thead className='govuk-table__head'>
                 <tr className='govuk-table__row'>
                   {item.Body.Headers.map((header, x) => {
                     return (
-                      <th scope='col' className='govuk-table__header' key={x}>{ ReactHtmlParser(header) }</th>
+                      <th scope='col' className='govuk-table__header' key={x}>{ReactHtmlParser(header)}</th>
                     )
                   })}
                 </tr>
@@ -73,8 +76,8 @@ const ContentBuilder = ({ data, sectionNav }) => {
                   return (
                     <tr className='govuk-table__row' key={y}>
                       {row.Data.map((data, z) => {
-                        if (z === 0) return <th scope='row' className='govuk-table__header' key={z}>{ ReactHtmlParser(data) }</th>
-                        return <td className='govuk-table__cell' key={z}>{ ReactHtmlParser(data) }</td>
+                        if (z === 0) return <th scope='row' className='govuk-table__header' key={z}>{ReactHtmlParser(data)}</th>
+                        return <td className='govuk-table__cell' key={z}>{ReactHtmlParser(data)}</td>
                       })}
                     </tr>
                   )
@@ -89,7 +92,7 @@ const ContentBuilder = ({ data, sectionNav }) => {
               <span className='govuk-warning-text__icon' aria-hidden='true'>!</span>
               <strong className='govuk-warning-text__text'>
                 <span className='govuk-warning-text__assistive'>Warning</span>
-                { ReactHtmlParser(itembody) }
+                {ReactHtmlParser(itembody)}
               </strong>
             </div>
           )
@@ -97,7 +100,7 @@ const ContentBuilder = ({ data, sectionNav }) => {
         if (item.Type === 'INSET') {
           return (
             <div className='govuk-inset-text' key={i}>
-              { ReactHtmlParser(itembody) }
+              {ReactHtmlParser(itembody)}
             </div>
           )
         }
@@ -105,15 +108,13 @@ const ContentBuilder = ({ data, sectionNav }) => {
 
         if (item.Type === 'CODE') {
           return (
-            <Highlight className='csharp' key={i}>
-              <div>{itembody}</div>
-            </Highlight>
+            <pre key={i}><code className='csharp hljs'>{ReactHtmlParser(hljs.highlight(itembody, { language: 'csharp' }).value)}</code></pre>
           )
         }
 
         return null
       })}
-    </Fragment>
+    </>
   )
 }
 

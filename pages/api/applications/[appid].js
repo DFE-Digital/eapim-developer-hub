@@ -2,7 +2,7 @@ import { deleteApplication, updateApplication } from '../../../lib/applicationSe
 import { verify, checkUserOwnsApp } from 'checkAuth'
 
 export default async function handler (req, res) {
-  var result = null
+  let result = null
 
   // check user has a valid openid id token, error if not
   try {

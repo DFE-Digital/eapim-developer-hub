@@ -16,9 +16,8 @@ const Details = ({ title, content, tag }) => {
         </div>
         {tag &&
           <div className='details-tag'>
-            <strong className={`govuk-tag govuk-tag-round govuk-tag--blue`}>{tag}</strong>
-          </div>
-        }
+            <strong className='govuk-tag govuk-tag-round govuk-tag--blue'>{tag}</strong>
+          </div>}
       </summary>
       <div className='govuk-details__text' style={{ display: open ? 'block' : 'none' }}>{content}</div>
     </details>

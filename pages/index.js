@@ -118,7 +118,7 @@ const Home = ({ loggedin }) => {
                     {column.links.map((link, index) => {
                       return (
                         <li className='govuk-body-s' key={link.url + index}>
-                          <Link href={link.url} passHref>
+                          <Link legacyBehavior href={link.url} passHref>
                             <a className='govuk-link'>{link.title}</a>
                           </Link>
                         </li>

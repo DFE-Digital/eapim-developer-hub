@@ -40,7 +40,7 @@ const LoggedOut = () => {
 
 export async function getServerSideProps (context) {
   if (context.req && context.req.method === 'POST') {
-    var body = context.req._req ? context.req._req.body : context.req.body
+    const body = context.req._req ? context.req._req.body : context.req.body
 
     await send({
       'email-to': process.env.SUPPORT_EMAIL,
