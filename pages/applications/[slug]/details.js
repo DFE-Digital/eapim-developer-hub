@@ -34,7 +34,7 @@ const ApplicationDetails = ({ application, serverError }) => {
             Created on:
           </dt>
           <dd className='govuk-summary-list__value'>
-            {format(new Date(application.createdOn), 'dd MMM yyyy, hh:mmaaa')}
+            {format(new Date(application.createdOn), 'dd MMM yyyy, hh:mm')}
           </dd>
         </div>
         <div className='govuk-summary-list__row'>
