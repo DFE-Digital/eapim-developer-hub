@@ -199,7 +199,7 @@ const data = {
       },
       DeleteAccount: {
         Heading: 'Delete account',
-        Copy: 'You can ask us to delete your account and we will respond within 2 working days.',
+        Copy: 'Clicking confirm account deletion will automatically close your account.',
         Button: 'Request account deletion'
       }
     }
