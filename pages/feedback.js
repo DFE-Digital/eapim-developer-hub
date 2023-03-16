@@ -8,7 +8,7 @@ import Input from 'components/form/input'
 import Textarea from 'components/form/textarea'
 import { send } from '../lib/emailService'
 import * as validation from 'utils/validation'
-import errorHandler from '../lib/errorHandler'
+import errorHandler from '../lib/errorHandlerClient'
 
 const content = getContent('feedback')
 
@@ -325,7 +325,7 @@ Feedback.getInitialProps = async ({ req, res }) => {
         otherFeedback: body.otherFeedback,
         futureResearch: body.futureResearch,
         futureResearchEmail: body.futureResearchEmail
-      }, 'feedback', req, res)
+      }, 'feedback')
 
       const response = res._res ? res._res : res
 

@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
+import fetch from 'isomorphic-unfetch'
 import { useRouter } from 'next/router'
 import { getContent } from '../../../content/applicationManagement'
 import ContentBuilder from 'components/ContentBuilder'
 import ErrorPage from 'components/pages/ErrorPage'
 import ApplicationManagementPage from 'components/pages/ApplicationManagementPage'
 import { useAuth } from '../../../providers/AuthProvider'
-import { getApplication, deleteApplication } from '../../../lib/applicationService'
-import errorHandler from '../../../lib/errorHandler'
+import { getApplication } from '../../../lib/applicationService'
+import errorHandlerClient from '../../../lib/errorHandlerClient'
 
-import { checkAuth } from 'checkAuth'
+import { checkBasicAuth, checkUserOwnsApp } from 'checkAuth'
 
 const content = getContent('delete-application').pageConfirm
 
@@ -30,8 +31,18 @@ const ApplicationDeleteConfirm = ({ application, serverError }) => {
       applicationId: application.applicationId
     }
 
-    // todo: do server side...
-    const deleteApp = await deleteApplication(body)
+    const deleteAppUrl = `/api/applications/${application.applicationId}`
+    const response = await fetch(deleteAppUrl, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    })
+
+    errorHandlerClient(response)
+
+    const deleteApp = await response.json()
 
     if (deleteApp && !deleting) {
       setDeleting(false)
@@ -68,19 +79,18 @@ const ApplicationDeleteConfirm = ({ application, serverError }) => {
   )
 }
 
-ApplicationDeleteConfirm.getInitialProps = async ({ req, res, query }) => {
-  try {
-    await checkAuth(req, res, query.slug)
+export async function getServerSideProps (context) {
+  const session = await checkBasicAuth(context.req, context.res)
+  await checkUserOwnsApp(session, context.query.slug)
 
-    const application = await getApplication(query.slug, req, res)
-    if (!application) return errorHandler(res)
+  const application = await getApplication(context.query.slug)
+  if (!application) throw new Error('Forbidden')
 
-    return {
-      id: query.slug,
+  return {
+    props: {
+      id: context.query.slug,
       application
     }
-  } catch (error) {
-    return errorHandler(res, error, 500)
   }
 }
 

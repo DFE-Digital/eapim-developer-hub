@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
+import fetch from 'isomorphic-unfetch'
 import APISubscriptionKeys from './APISubscriptionKeys'
 
-import { getSubscriptionKeys, postSubscription } from '../../lib/subscriptionService'
+import errorHandlerClient from '../../lib/errorHandlerClient'
 
 const statusType = {
   default: { tag: 'green', button: 'subscribe' },
@@ -27,8 +28,18 @@ const APISubscription = ({ applicationId, tag, subscription, onSubscriptionChang
     setSubscribing(true)
 
     try {
-      // todo: do server side...
-      const newSubscriptions = await postSubscription(applicationId, apiName, environment)
+      const newSubscriptionsUrl = `/api/applications/${applicationId}/subscriptions?environment=${environment}`
+      const response = await fetch(newSubscriptionsUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ apiName })
+      })
+
+      errorHandlerClient(response)
+
+      const newSubscriptions = await response.json()
       onSubscriptionChange(newSubscriptions)
       setSubscribing(false)
     } catch (error) {
@@ -40,10 +51,18 @@ const APISubscription = ({ applicationId, tag, subscription, onSubscriptionChang
   const onFetchKeys = async (e, subId) => {
     e.preventDefault()
     setFetching(true)
-
     try {
-      // todo: do server side...
-      const keys = await getSubscriptionKeys(subId, environment)
+      const getSubKeysUrl = `/api/applications/${applicationId}/subscriptions/${subId}/keys?environment=${environment}`
+      const response = await fetch(getSubKeysUrl, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      errorHandlerClient(response)
+
+      const keys = await response.json()
       setSubscriptionKeys(keys)
       setShowKeys(true)
       setFetching(false)

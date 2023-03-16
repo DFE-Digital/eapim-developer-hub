@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import fetch from 'isomorphic-unfetch'
 import { useRouter } from 'next/router'
 import ApplicationPage from 'components/pages/ApplicationPage'
 import { useAuth } from '../../../providers/AuthProvider'
 import { useApplication } from '../../../providers/ApplicationProvider'
-import { registerApplication } from '../../../lib/applicationService'
+import errorHandlerClient from '../../../lib/errorHandlerClient'
+
 import { isEmpty } from '../../../src/utils/validation'
 
 import { getContent } from '../../../content/application'
@@ -36,12 +38,28 @@ const ApplicationCreateSummary = () => {
     }
 
     try {
-      // todo: do server side...
-      const registration = await registerApplication(data)
-      window.localStorage.setItem('credentials', JSON.stringify({ primarySecret: registration.PrimarySecret, secondarySecret: registration.SecondarySecret }))
-      clear()
-      setRegistering(false)
-      window.location.href = `/applications/${registration.applicationId}/success`
+      const createAppUrl = '/api/applications'
+      const response = await fetch(createAppUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+
+      errorHandlerClient(response)
+
+      const registration = await response.json()
+
+      if (registration.applicationId) {
+        window.localStorage.setItem('credentials', JSON.stringify({ primarySecret: registration.PrimarySecret, secondarySecret: registration.SecondarySecret }))
+        clear()
+        setRegistering(false)
+        window.location.href = `/applications/${registration.applicationId}/success`
+      } else {
+        setRegistering(false)
+        setErrors('Failed to register application')
+      }
     } catch (err) {
       setRegistering(false)
       setErrors(err)

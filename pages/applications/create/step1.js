@@ -7,10 +7,11 @@ import { useAuth } from '../../../providers/AuthProvider'
 import { getContent } from '../../../content/application'
 import Input from 'components/form/input'
 import * as validation from 'utils/validation'
+import { decodeToken } from 'checkAuth'
 
 const content = getContent('create-step-1')
 
-const ApplicationCreateStep1 = () => {
+const ApplicationCreateStep1 = (props) => {
   const { user } = useAuth()
   const context = useApplication()
   const router = useRouter()
@@ -22,9 +23,7 @@ const ApplicationCreateStep1 = () => {
 
   useEffect(() => {
     const fetchApplications = async () => {
-      // todo: do server side...
-      const apps = await getApplications(user.getToken())
-      setApplications(apps)
+      setApplications(props.apps)
     }
 
     if (user.getToken()) fetchApplications()
@@ -101,6 +100,20 @@ const ApplicationCreateStep1 = () => {
       </form>
     </ApplicationPage>
   )
+}
+
+export async function getServerSideProps (context) {
+  const token = decodeToken(context.req, context.res)
+  if (!token) return { props: { apps: [] } }
+
+  const apps = await getApplications({ accountIdentifier: token.sub })
+  if (!apps) throw new Error('Forbidden')
+
+  return {
+    props: {
+      apps
+    }
+  }
 }
 
 export default ApplicationCreateStep1

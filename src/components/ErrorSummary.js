@@ -2,8 +2,12 @@ import React, { useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 
 const createErrorSummary = (errors) => {
-  const keys = Object.keys(errors)
-  return keys.map(key => ({ id: key, message: errors[key] }))
+  if (typeof errors === 'string') {
+    return [{ id: '#', message: errors }]
+  } else {
+    const keys = Object.keys(errors)
+    return keys.map(key => ({ id: key, message: errors[key] }))
+  }
 }
 
 const hasLength = (errors) => Object.keys(errors).length !== 0

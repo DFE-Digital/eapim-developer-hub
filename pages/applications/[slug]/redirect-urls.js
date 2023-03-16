@@ -1,12 +1,13 @@
 import React, { useState, useRef } from 'react'
+import fetch from 'isomorphic-unfetch'
 import ReactHtmlParser from 'html-react-parser'
 import { getContent } from '../../../content/applicationManagement'
 import ContentBuilder from 'components/ContentBuilder'
 import ErrorPage from 'components/pages/ErrorPage'
 import ApplicationManagementPage from 'components/pages/ApplicationManagementPage'
 
-import { getApplication, updateApplication } from '../../../lib/applicationService'
-import errorHandler from '../../../lib/errorHandler'
+import { getApplication } from '../../../lib/applicationService'
+import errorHandlerClient from '../../../lib/errorHandlerClient'
 
 import Loader from 'components/Loader'
 import RedirectURL from 'components/RedirectURL'
@@ -15,7 +16,7 @@ import { useAuth } from '../../../providers/AuthProvider'
 
 import * as validation from '../../../src/utils/validation'
 
-import { checkAuth } from 'checkAuth'
+import { checkBasicAuth, checkUserOwnsApp } from 'checkAuth'
 
 const content = getContent('redirect-urls')
 const URLS_LIMIT = 15
@@ -102,8 +103,18 @@ const ApplicationRedirectUrls = ({ application, serverError }) => {
     }
 
     try {
-      // todo: do server side
-      const result = await updateApplication(body)
+      const updateAppUrl = `/api/applications/${application.applicationId}`
+      const response = await fetch(updateAppUrl, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      })
+
+      errorHandlerClient(response)
+
+      const result = await response.json()
 
       if (result) {
         ref.current.value = ''
@@ -134,8 +145,18 @@ const ApplicationRedirectUrls = ({ application, serverError }) => {
     }
 
     try {
-      // todo: do server side...
-      const result = await updateApplication(body)
+      const updateAppUrl = `/api/applications/${application.applicationId}`
+      const response = await fetch(updateAppUrl, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      })
+
+      errorHandlerClient(response)
+
+      const result = await response.json()
 
       if (result) {
         console.log('Successfully Removed!')
@@ -217,19 +238,18 @@ const ApplicationRedirectUrls = ({ application, serverError }) => {
   )
 }
 
-ApplicationRedirectUrls.getInitialProps = async ({ req, res, query }) => {
-  try {
-    await checkAuth(req, res, query.slug)
+export async function getServerSideProps (context) {
+  const session = await checkBasicAuth(context.req, context.res)
+  await checkUserOwnsApp(session, context.query.slug)
 
-    const application = await getApplication(query.slug, req, res)
-    if (!application) return errorHandler(res)
+  const application = await getApplication(context.query.slug)
+  if (!application) throw new Error('Forbidden')
 
-    return {
-      id: query.slug,
+  return {
+    props: {
+      id: context.query.slug,
       application
     }
-  } catch (error) {
-    return errorHandler(res, error, 500)
   }
 }
 

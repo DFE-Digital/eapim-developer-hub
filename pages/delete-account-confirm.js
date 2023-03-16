@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-unfetch'
-import { getOAuthToken } from '../lib/authService'
+import ClientCredentials from '../lib/clientCredentials'
 import React from 'react'
 import Link from 'next/link'
 import ErrorPage from 'components/pages/ErrorPage'
@@ -8,7 +8,6 @@ import ContentBuilder from 'components/ContentBuilder'
 import { useAuth } from '../providers/AuthProvider'
 import { checkBasicAuth } from 'checkAuth'
 
-import errorHandler from '../lib/errorHandler'
 import { getContent } from '../content/profile'
 
 const content = getContent('delete-account-confirm')
@@ -51,41 +50,45 @@ const DeleteAcountConfirm = ({ serverError }) => {
   )
 }
 
-DeleteAcountConfirm.getInitialProps = async ({ req, res }) => {
-  if (req && req.method === 'POST') {
-    try {
-      var body = req._req ? req._req.body : req.body
+export async function getServerSideProps (context) {
+  if (context.req && context.req.method === 'POST') {
+    const idtoken = await checkBasicAuth(context.req, context.res)
 
-      const token = getOAuthToken(req, res)
-      const idtoken = await checkBasicAuth(req, res)
-      const userID = idtoken.sub
-      const userEmail = idtoken.email
-      const { userName } = body
+    // use user id from token not trusted from client
+    const userID = idtoken.sub
+    const userEmail = idtoken.email
 
-      const url = `${process.env.PLATFORM_API_URL}/Account`
+    var body = context.req._req ? context.req._req.body : context.req.body
+    const { userName } = body
 
-      const deleteResponse = await fetch(url, {
-        method: 'DELETE',
-        headers: {
-          'Ocp-Apim-Subscription-Key': process.env.OCP_APIM_SUBSCRIPTION_KEY,
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({ userName, userEmail, userID })
-      })
+    const token = await ClientCredentials.getOauthToken()
+    const url = `${process.env.PLATFORM_API_URL}/Account`
 
-      if (deleteResponse.status !== 204) {
-        throw new Error(deleteResponse.status)
+    const deleteResponse = await fetch(url, {
+      method: 'DELETE',
+      headers: {
+        'Ocp-Apim-Subscription-Key': process.env.OCP_APIM_SUBSCRIPTION_KEY,
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({ userName, userEmail, userID })
+    })
+
+    if (deleteResponse.status !== 204) {
+      throw new Error(deleteResponse.status)
+    }
+
+    return {
+      redirect: {
+        destination: '/delete-account?account=deleted',
+        permanent: false
       }
-
-      const response = res._res ? res._res : res
-      response.writeHead(301, { Location: '/delete-account?account=deleted' })
-      response.end()
-    } catch (error) {
-      return errorHandler(res, error, 500)
     }
   }
 
-  return { status: 200 }
+  return {
+    props: {
+    }
+  }
 }
 
 export default DeleteAcountConfirm

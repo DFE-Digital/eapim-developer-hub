@@ -1,14 +1,29 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Page from 'components/Page'
 import ContentBuilder from 'components/ContentBuilder'
 import { send } from '../lib/emailService'
 import { template } from '../emails/survey'
-import errorHandler from '../lib/errorHandler'
+import * as Msal from '@azure/msal-browser'
+import { config } from '../lib/authService'
+import { useInsights } from 'hooks'
 
 import { getContent } from '../content/site'
 const content = getContent('logged-out')
+const [trackException] = useInsights()
 
 const LoggedOut = () => {
+  useEffect(() => {
+    const myMSALObj = new Msal.PublicClientApplication(config.login)
+
+    myMSALObj.handleRedirectPromise()
+      .then(res => {
+        // complete logout interation
+      })
+      .catch(error => {
+        trackException(error)
+      })
+  })
+
   return (
     <Page title={content.title} layout='three-quarters'>
       <h1 className='govuk-heading-l'>{content.title}</h1>
@@ -23,28 +38,28 @@ const LoggedOut = () => {
   )
 }
 
-LoggedOut.getInitialProps = async ({ req, res }) => {
-  if (req && req.method === 'POST') {
-    try {
-      var body = req._req ? req._req.body : req.body
+export async function getServerSideProps (context) {
+  if (context.req && context.req.method === 'POST') {
+    var body = context.req._req ? context.req._req.body : context.req.body
 
-      await send({
-        'email-to': process.env.SUPPORT_EMAIL,
-        subject: 'Developer Hub Feedback Survey',
-        'content-type': 'text/html',
-        'email-content': template(body)
-      }, req, res)
+    await send({
+      'email-to': process.env.SUPPORT_EMAIL,
+      subject: 'Developer Hub Feedback Survey',
+      'content-type': 'text/html',
+      'email-content': template(body)
+    })
 
-      const response = res._res ? res._res : res
-      response.writeHead(301, { Location: '/' })
-      response.end()
-    } catch (error) {
-      return errorHandler(res, error, 500)
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
     }
   }
 
   return {
-    status: 200
+    props: {
+    }
   }
 }
 
