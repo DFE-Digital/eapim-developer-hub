@@ -495,7 +495,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: 'The Department for Education (DfE) Find and Use an API website and material relating to government information, products and services (or to third party information, products and services) is provided ‘as is’.'
+        Body: 'The Department for Education&lsquo;s (DfE) Find and Use an API website and material relating to government information, products and services (or to third party information, products and services) is provided ‘as is’.'
       },
       {
         Type: 'P',

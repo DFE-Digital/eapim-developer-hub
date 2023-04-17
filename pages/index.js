@@ -65,7 +65,7 @@ const Home = ({ loggedin }) => {
             {!user.getToken() && (
               <div className='registerLinks govuk-!-margin-top-9'>
                 <a href='/auth/register' className='btn white'>{content.buttons.register}</a>
-                <p className='govuk-body'>or <a href='/auth/login' className='govuk-link govuk-!-margin-left-1'><strong>{content.buttons.signin}</strong></a> to the {content.title}.</p>
+                <p className='govuk-body'>or <a href='/auth/login' className='govuk-link govuk-!-margin-left-1'><strong>{content.buttons.signin}</strong></a> to the {content.title} service.</p>
               </div>
             )}
           </div>
