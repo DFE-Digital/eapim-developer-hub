@@ -206,7 +206,7 @@ const data = {
     content: [
       {
         Type: 'P',
-        Body: "The Find and Use an API service puts small files (known as 'cookies') onto your computer to collect information about how you browse the site. Find out more about the cookies we use, what they're for and when they expire."
+        Body: "The Department for Education’s (DfEs) Find and Use an API service puts small files (known as 'cookies') onto your computer to collect information about how you browse the site. Find out more about the cookies we use, what they're for and when they expire."
       },
       {
         Type: 'H2',
@@ -247,8 +247,8 @@ const data = {
       {
         Type: 'UL',
         Body: [
-          'ai_session - keeps track of how many users are accessing the application over time. Expires after 24 hours',
-          'ai_user - collects statistical usage and telemetry information. Expires after 1 year'
+          'ai_session: Keeps track of how many users are accessing the application over time. Expires after 30 minutes.',
+          'ai_user: Collects statistical usage and telemetry information. Expires after 1 year.'
         ]
       },
       {
@@ -261,7 +261,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: 'Essential cookies are usually only set if you request a service, for example setting your privacy preferences, logging in or filling in forms.'
+        Body: 'Essential cookies are usually only set if you request a service. For example; setting your privacy preferences, logging in to the system or filling in forms.'
       },
       {
         Type: 'P',
@@ -269,22 +269,31 @@ const data = {
       },
       {
         Type: 'P',
-        Body: 'We use one essential cookie, set by websites run on the Windows Azure cloud platform:'
+        Body: 'We use 2 essential cookies, set by websites running on the Windows Azure cloud platform. These are:'
       },
       {
         Type: 'UL',
         Body: [
-          'ARRAffinity - used for load balancing to make sure your page requests are routed to the same server in any browsing session - expires when you close your browser'
+          'ARRAffinity: Set by Azure App Service to choose the right instance established by the user. This cookie is used to detect and defend when a client attempts to replay a cookie - expires after session.',
+          'ARRAffinitySameSite: Used for load balancing to make sure your page requests are routed to the same server in any browsing session. Expires when you close your browser - expires after session.'
         ]
       },
       {
         Type: 'P',
-        Body: "You might see a message at the top of the website on your first visit. We store a cookie on your computer so it knows you've seen it and not to show it again."
+        Body: 'We use one cookie, set by Microsoft to enable users to log in, authenticate and access secured Web APIs. This is:'
+      },
+      {
+        Type: 'P',
+        Body: 'Access_token: Stores the authentication cookie used by Microsoft Authentication Library to acquire security tokens from Microsoft Identity Platform – expires after session.'
+      },
+      {
+        Type: 'P',
+        Body: "You might see a message at the top of the website on your first visit. We store a cookie on your computer, so it knows you've seen it and not to show it again. This is:"
       },
       {
         Type: 'UL',
         Body: [
-          'seen_cookie_message - hides the cookie banner on your first visit to the website - expires in 1 month'
+          'Set-banner-message: Hides the cookie banner on your first visit to the website - expires after 1 month.'
         ]
       },
       {
