@@ -5,7 +5,7 @@ import Link from 'next/link'
 import ContentBuilder from 'components/ContentBuilder'
 import Header from 'components/Header'
 import CookieBanner from 'components/CookieBanner'
-import PhaseBanner from 'components/PhaseBanner'
+// import PhaseBanner from 'components/PhaseBanner'
 import AuthNavigation from 'components/AuthNavigation'
 import Footer from 'components/Footer'
 import { useAuth } from '../providers/AuthProvider'
@@ -45,9 +45,14 @@ const Home = ({ loggedin }) => {
     <>
       {pageLoaded && !bannerCookie && <CookieBanner />}
       <Header />
-      <PhaseBanner />
       <div className='govuk-width-container'>
         <div className='service-banner'>
+          <div className='govuk-phase-banner'>
+            <p className='govuk-phase-banner__content'>
+              <strong className='govuk-tag govuk-phase-banner__content__tag'>Alpha</strong>
+              <span className='govuk-phase-banner__text'>This is a new service - your <a class='govuk-link' href='/feedback' rel='noreferrer noopener'>feedback</a> will help us to improve it.</span>
+            </p>
+          </div>
           {loggedin && <span className='govuk-visually-hidden' role='alert' aria-live='assertive'>you are now signed in</span>}
           <AuthNavigation />
         </div>
@@ -60,7 +65,7 @@ const Home = ({ loggedin }) => {
             {!user.getToken() && (
               <div className='registerLinks govuk-!-margin-top-9'>
                 <a href='/auth/register' className='btn white'>{content.buttons.register}</a>
-                <p className='govuk-body'>or <a href='/auth/login' className='govuk-link govuk-!-margin-left-1'><strong>{content.buttons.signin}</strong></a> to the {content.title}.</p>
+                <p className='govuk-body'>or <a href='/auth/login' className='govuk-link govuk-!-margin-left-1'><strong>{content.buttons.signin}</strong></a> to the {content.title} service.</p>
               </div>
             )}
           </div>

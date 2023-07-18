@@ -314,7 +314,7 @@ Feedback.getInitialProps = async ({ req, res }) => {
 
       await send({
         'email-to': process.env.SUPPORT_EMAIL,
-        subject: 'Feedback from DfE Developer Hub',
+        subject: 'Feedback from the Find and Use an API service',
         'content-type': 'text/html',
         relationship: body.relationship,
         relationshipOther: body.relationshipOther,

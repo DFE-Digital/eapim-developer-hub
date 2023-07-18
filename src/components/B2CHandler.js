@@ -13,7 +13,7 @@ const B2CHandler = ({ func, text }) => {
     <>
       <span className='govuk-visually-hidden'>{text}</span>
       <Helmet>
-        <title>{text} | DfE Developer Hub</title>
+        <title>{text} | Find and Use an API</title>
       </Helmet>
     </>
   )

@@ -78,7 +78,7 @@ const Page = ({ children, title, parentTitle, sidebarContent, breadcrumbs, layou
       </div>
       <Footer />
       <Helmet>
-        <title>{title} | DfE Developer Hub</title>
+        <title>{title} | Find and Use an API</title>
       </Helmet>
     </>
   )

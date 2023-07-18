@@ -5,7 +5,7 @@ export const getContent = (key) => {
 const data = {
   app: {
     govuk: 'GOV UK',
-    portalName: 'DfE Developer Hub'
+    portalName: 'Find and Use an API'
   },
   heading: {
     menu: 'Menu',
@@ -33,14 +33,14 @@ const data = {
   },
   phasebanner: {
     phase: 'Alpha',
-    body: `This is a new service - your <a class='govuk-link' href='/feedback' rel='noreferrer noopener'>feedback <span class='govuk-visually-hidden'></span></a> will help us to improve it.`
+    body: `This is a new service - your <a class='govuk-link' href='/feedback' rel='noreferrer noopener'>feedback</a> will help us to improve it.`
   },
   authWarning: {
     title: 'Warning',
     content: [
       {
         Type: 'DIV',
-        Body: `<a href='/auth/register' class='govuk-button'>Create an account</a><p class='govuk-body'>or <a href='/auth/login' class='govuk-link govuk-!-margin-left-1'><strong>sign in</strong></a> to the DfE Developer Hub.</p>`
+        Body: `<a href='/auth/register' class='govuk-button'>Create an account</a><p class='govuk-body'>or <a href='/auth/login' class='govuk-link govuk-!-margin-left-1'><strong>sign in</strong></a> to the Find and Use an API service.</p>`
       }
     ]
   },
@@ -210,7 +210,7 @@ const data = {
     content: [
       {
         Type: 'P',
-        Body: "The DfE Developer Hub puts small files (known as 'cookies') onto your computer to collect information about how you browse the site. Find out more about the cookies we use, what they're for and when they expire."
+        Body: "The Department for Education’s (DfEs) Find and Use an API service puts small files (known as 'cookies') onto your computer to collect information about how you browse the site. Find out more about the cookies we use, what they're for and when they expire."
       },
       {
         Type: 'H2',
@@ -218,7 +218,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: 'We use Microsoft Azure Application Insights analytics to help us understand how the Developer Hub is being used and how it is performing. Any details that could personally identify you are removed from this information.'
+        Body: 'We use Microsoft Azure Application Insights analytics to help us understand how the Find and Use an API service is being used and how it is performing. Any details that could personally identify you are removed from this information.'
       },
       {
         Type: 'P',
@@ -240,7 +240,7 @@ const data = {
         Type: 'UL',
         Body: [
           'how you got to the site',
-          'the pages you visit on the Developer Hub and how long you spend on them',
+          'the pages you visit on the Find and Use an API service and how long you spend on them',
           'what you click on while you’re visiting the site'
         ]
       },
@@ -251,8 +251,8 @@ const data = {
       {
         Type: 'UL',
         Body: [
-          'ai_session - keeps track of how many users are accessing the application over time. Expires after 24 hours',
-          'ai_user - collects statistical usage and telemetry information. Expires after 1 year'
+          'ai_session: Keeps track of how many users are accessing the application over time. Expires after 30 minutes.',
+          'ai_user: Collects statistical usage and telemetry information. Expires after 1 year.'
         ]
       },
       {
@@ -265,7 +265,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: 'Essential cookies are usually only set if you request a service, for example setting your privacy preferences, logging in or filling in forms.'
+        Body: 'Essential cookies are usually only set if you request a service. For example; setting your privacy preferences, logging in to the system or filling in forms.'
       },
       {
         Type: 'P',
@@ -273,22 +273,31 @@ const data = {
       },
       {
         Type: 'P',
-        Body: 'We use one essential cookie, set by websites run on the Windows Azure cloud platform:'
+        Body: 'We use 2 essential cookies, set by websites running on the Windows Azure cloud platform. These are:'
       },
       {
         Type: 'UL',
         Body: [
-          'ARRAffinity - used for load balancing to make sure your page requests are routed to the same server in any browsing session - expires when you close your browser'
+          'ARRAffinity: Set by Azure App Service to choose the right instance established by the user. This cookie is used to detect and defend when a client attempts to replay a cookie - expires after session.',
+          'ARRAffinitySameSite: Used for load balancing to make sure your page requests are routed to the same server in any browsing session. Expires when you close your browser - expires after session.'
         ]
       },
       {
         Type: 'P',
-        Body: "You might see a message at the top of the website on your first visit. We store a cookie on your computer so it knows you've seen it and not to show it again."
+        Body: 'We use one cookie, set by Microsoft to enable users to log in, authenticate and access secured Web APIs. This is:'
+      },
+      {
+        Type: 'P',
+        Body: 'Access_token: Stores the authentication cookie used by Microsoft Authentication Library to acquire security tokens from Microsoft Identity Platform – expires after session.'
+      },
+      {
+        Type: 'P',
+        Body: "You might see a message at the top of the website on your first visit. We store a cookie on your computer, so it knows you've seen it and not to show it again. This is:"
       },
       {
         Type: 'UL',
         Body: [
-          'seen_cookie_message - hides the cookie banner on your first visit to the website - expires in 1 month'
+          'Set-banner-message: Hides the cookie banner on your first visit to the website - expires after 1 month.'
         ]
       },
       {
@@ -297,7 +306,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: 'The cookies message banner will ask you to accept cookies or review your settings when you visit the Developer Hub.'
+        Body: 'The cookies message banner will ask you to accept cookies or review your settings when you visit the Find and Use an API service.'
       },
       {
         Type: 'P',
@@ -318,15 +327,15 @@ const data = {
     content: [
       {
         Type: 'P',
-        Body: "This privacy policy relates to the information we store about you as a Developer Hub user. It does not relate to the privacy of the end users of any application you develop; under our <a href='/documentation/terms-of-use' class='govuk-link'>terms of use</a> you are responsible for the information stored by your application."
+        Body: "This privacy policy relates to the information we store about you as a Find and Use an API user. It does not relate to the privacy of the end users of any application you develop; under our <a href='/documentation/terms-of-use' class='govuk-link'>terms of use</a> you are responsible for the information stored by your application."
       },
       {
         Type: 'P',
-        Body: "We hold information about you as a software developer on the EU General Data Protection Regulation (GDPR) lawful basis of 'public task' so that we can run the Developer Hub as a service to you."
+        Body: "We hold information about you as a software developer on the EU General Data Protection Regulation (GDPR) lawful basis of 'public task' so that we can run Find and Use an API as a service to you."
       },
       {
         Type: 'P',
-        Body: 'We do not knowingly hold personal information on children under the age of 16. The Developer Hub is not for use by children under this age.'
+        Body: 'We do not knowingly hold personal information on children under the age of 16. Find and Use an API is not for use by children under this age.'
       },
       {
         Type: 'P',
@@ -338,7 +347,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: 'When you use the Developer Hub, we collect:'
+        Body: 'When you use the Find and Use an API service, we collect:'
       },
       {
         Type: 'UL',
@@ -362,7 +371,7 @@ const data = {
       {
         Type: 'UL',
         Body: [
-          'to create your account on the Developer Hub',
+          'to create your account on the Find and Use an API service',
           'to make sure your account works properly',
           'to send you service updates and notices',
           'in a customer relationship management tool to help us manage our obligations to you'
@@ -457,7 +466,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: 'We use third party software to help us improve your experience on the Developer Hub, including Azure App Insights, Optimizely and SurveyMonkey.'
+        Body: 'We use third party software to help us improve your experience on the Find and Use an API service, including Azure App Insights, Optimizely and SurveyMonkey.'
       },
       {
         Type: 'P',
@@ -499,7 +508,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: 'The Department for Education (DfE) Developer Hub website and material relating to government information, products and services (or to third party information, products and services) is provided ‘as is’.'
+        Body: 'The Department for Education&lsquo;s (DfE) Find and Use an API website and material relating to government information, products and services (or to third party information, products and services) is provided ‘as is’.'
       },
       {
         Type: 'P',
@@ -608,7 +617,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: 'You can link directly to pages hosted on Developer Hub without permission, but:'
+        Body: 'You can link directly to pages hosted on Find and Use an API without permission, but:'
       },
       {
         Type: 'UL',
@@ -668,7 +677,7 @@ const data = {
     ]
   },
   'accessibility-statement': {
-    title: 'Accessibility statement for DfE Developer Hub',
+    title: 'Accessibility statement for Find and Use an API',
     url: '/accessibility-statement',
     content: [
       {
@@ -677,7 +686,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: 'This page only contains information about the DfE Developer Hub service, available at https://dfe-developerhub.education.gov.uk/.'
+        Body: 'This page only contains information about the Find and Use an API service, available at <a class="govuk-link" href="/">Find and Use an API</a>.'
       },
       {
         Type: 'H3',
@@ -685,7 +694,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: 'This website is run by the DfE Developer Hub. We want as many people as possible to be able to use this website. For example, that means you should be able to:'
+        Body: 'This website is run by the Find and Use an API service. We want as many people as possible to be able to use this website. For example, that means you should be able to:'
       },
       {
         Type: 'UL',
@@ -733,7 +742,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: 'We’ll consider your request and get back to you within two working days.'
+        Body: 'We’ll consider your request and get back to you within three working days.'
       },
       {
         Type: 'H3',
@@ -816,7 +825,7 @@ const data = {
       },
       {
         Type: 'INSET',
-        Body: 'This statement was prepared on 3 February 2021. It was last reviewed on 3 February 2021. This website was last tested on 2 February 2021. The test was carried out by the DfE Developer Hub.'
+        Body: 'This statement was prepared on 3 February 2021. It was last reviewed on 3 February 2021. This website was last tested on 2 February 2021. The test was carried out by the Find and Use an API service.'
       }
     ]
   },
@@ -833,7 +842,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: 'Before you leave, please give feedback to help us improve the Developer Hub.'
+        Body: 'Before you leave, please give feedback to help us improve the Find and Use an API service.'
       },
       {
         Type: 'P',
@@ -846,7 +855,7 @@ const data = {
     content: [
       {
         Type: 'P',
-        Body: `<a href='/auth/login' class='govuk-link'>Sign in</a> to the Developer Hub with your new password.`
+        Body: `<a href='/auth/login' class='govuk-link'>Sign in</a> to the Find and Use an API service with your new password.`
       }
     ]
   },
@@ -876,7 +885,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: `<a href='/support' class='govuk-link'>Contact us</a> if you are having issues with the Developer Hub.`
+        Body: `<a href='/support' class='govuk-link'>Contact us</a> if you are having issues with the Find and Use an API service.`
       }
     ]
   }

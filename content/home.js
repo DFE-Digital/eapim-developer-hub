@@ -4,9 +4,9 @@ export const getContent = (key) => {
 
 const data = {
   home: {
-    title: 'DfE Developer Hub',
+    title: 'Find and Use an API',
     url: '/',
-    intro: 'Connect to the Department for Education digital services through our APIs.',
+    intro: 'Connect to the Department for Education (DfE) digital services through our APIs.',
     buttons: {
       register: 'Create an account',
       signin: 'sign in'
@@ -34,7 +34,7 @@ const data = {
           },
           {
             Type: 'P',
-            Body: `To get started, read <a href='/documentation' class='govuk-link'>using the Developer Hub</a>.`
+            Body: `To get started, read <a href='/documentation' class='govuk-link'>using the Find and Use an API service</a>.`
           }
         ],
         svg: '/assets/images/hp-int.svg',
@@ -48,7 +48,7 @@ const data = {
         heading: 'Getting started',
         links: [
           {
-            title: 'Using the Developer Hub',
+            title: 'Using the Find and Use an API service',
             url: '/documentation'
           },
           {

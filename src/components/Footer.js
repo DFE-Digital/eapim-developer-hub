@@ -9,6 +9,9 @@ const Footer = () => {
             <h4 className='govuk-visually-hidden'>Footer links</h4>
             <ul className='govuk-footer__inline-list'>
               <li className='govuk-footer__inline-list-item'>
+                <a className='govuk-footer__link' href='/accessibility-statement'>Accessibility statement</a>
+              </li>
+              <li className='govuk-footer__inline-list-item'>
                 <a className='govuk-footer__link' href='/cookies'>Cookies</a>
               </li>
               <li className='govuk-footer__inline-list-item'>
@@ -16,9 +19,6 @@ const Footer = () => {
               </li>
               <li className='govuk-footer__inline-list-item'>
                 <a className='govuk-footer__link' href='/terms-and-conditions'>Terms and conditions</a>
-              </li>
-              <li className='govuk-footer__inline-list-item'>
-                <a className='govuk-footer__link' href='/accessibility-statement'>Accessibility statement</a>
               </li>
             </ul>
             <svg aria-hidden='true' focusable='false' className='govuk-footer__licence-logo' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 483.2 195.7' height='17' width='41'>
