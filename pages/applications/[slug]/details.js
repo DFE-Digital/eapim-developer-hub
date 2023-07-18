@@ -35,7 +35,7 @@ const ApplicationDetails = ({ application, serverError }) => {
             Created on:
           </dt>
           <dd className='govuk-summary-list__value'>
-            {timezone.tz(application.createdOn, 'MM/DD/YYYY HH:mma', 'Europe/London').add(1, 'hour').format('DD MMMM YYYY, HH:mma')}
+            {timezone.tz(application.createdOn, 'MM/DD/YYYY HH:mma', 'Europe/London').format('DD MMMM YYYY, HH:mm')}
           </dd>
         </div>
         <div className='govuk-summary-list__row'>

@@ -130,11 +130,11 @@ const data = {
     },
     inputs: {
       label: 'Application description',
-      hint: 'Your application description can contain alphanumeric characters and spaces. Special characters allowed include: , - _ . @ ;'
+      hint: 'Your application description can contain up to 1000 characters and can contain alphanumeric characters and spaces. Special characters allowed include: , - _ . @ ;'
     },
     errors: {
       empty: 'Enter your application description',
-      invalid: 'Description contains invalid characters. Special characters allowed include: , - _ . @ ;'
+      invalid: 'Description contains invalid characters or is too long. The maximum length is 1000 characters. Special characters allowed include: , - _ . @ ;'
     },
     content: []
   },

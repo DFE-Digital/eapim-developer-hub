@@ -22,7 +22,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: 'You can ask us to delete your account and we will respond within three working days.'
+        Body: 'Clicking confirm account deletion will automatically close your account.'
       }
     ]
   },
