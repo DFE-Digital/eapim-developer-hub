@@ -96,7 +96,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: 'If you do not receive an email confirming the informtion you provided, then please contact us at <a href="mailto:EAPIM.SUPPORT@education.gov.uk">EAPIM.SUPPORT@education.gov.uk</a>.'
+        Body: 'If you do not receive an email confirming the informtion you provided, then please contact us at <a href="mailto:dfe-api.support@education.gov.uk">dfe-api.support@education.gov.uk</a>.'
       },
       {
         Type: 'P',
