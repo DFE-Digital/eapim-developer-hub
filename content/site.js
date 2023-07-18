@@ -92,7 +92,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: 'We will review your request and respond to you within two working days at the most.'
+        Body: 'We will review your request and respond to you within three working days.'
       },
       {
         Type: 'P',
@@ -195,7 +195,7 @@ const data = {
       },
       DeleteAccount: {
         Heading: 'Delete account',
-        Copy: 'You can ask us to delete your account and we will respond within 2 working days.',
+        Copy: 'You can ask us to delete your account and we will respond within three working days.',
         Button: 'Request account deletion'
       }
     }
@@ -738,7 +738,7 @@ const data = {
       },
       {
         Type: 'P',
-        Body: 'We’ll consider your request and get back to you within two working days.'
+        Body: 'We’ll consider your request and get back to you within three working days.'
       },
       {
         Type: 'H3',
