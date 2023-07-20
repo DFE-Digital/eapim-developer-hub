@@ -210,7 +210,7 @@ const data = {
     content: [
       {
         Type: 'P',
-        Body: "The Department for Education’s (DfEs) Find and Use an API service puts small files (known as 'cookies') onto your computer to collect information about how you browse the site. Find out more about the cookies we use, what they're for and when they expire."
+        Body: "The Department for Education’s (DfE) Find and Use an API service puts small files (known as 'cookies') onto your computer to collect information about how you browse the site. Find out more about the cookies we use, what they're for and when they expire."
       },
       {
         Type: 'H2',
