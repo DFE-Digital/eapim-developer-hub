@@ -80,8 +80,8 @@
             <g id="Row-1" transform="translate(0.000000, 22.000000)">
                 <path d="M0,145.699115 L881,145.699115" id="Line" stroke="#B1B4B6" stroke-linecap="square"></path>
                 <path d="M0,1.30088496 L881,1.30088496" id="Line" stroke="#B1B4B6" stroke-linecap="square"></path>
-                <text id="Attendance-API" font-family="Arial-BoldMT, Arial" font-size="28" font-weight="bold" fill="#2A61AD">
-                    <tspan aria-hidden="true" x="0" y="48.1769912">Attendance API</tspan>
+                <text id="Example-API" font-family="Arial-BoldMT, Arial" font-size="28" font-weight="bold" fill="#2A61AD">
+                    <tspan aria-hidden="true" x="0" y="48.1769912">Example API</tspan>
                 </text>
                 <g id="4---granular-components/-" transform="translate(834.852381, 39.026549)" fill="#0B0C0C">
                     <polygon id="-" points="3.06353153 4.16823611 3.06353153 1.3017342 17.8411501 1.3017342 17.8411501 4.16823611"></polygon>
