@@ -35,6 +35,10 @@ const data = {
     phase: 'Alpha',
     body: `This is a new service - your <a class='govuk-link' href='/feedback' rel='noreferrer noopener'>feedback</a> will help us to improve it.`
   },
+  newsitemsg: {
+    body: `The only API available on this website is the FMS Submission API. <br />To use other Department for Education APIs, go to the new <a href='https://beta-find-and-use-an-api.education.gov.uk'>Find and Use an API website</a>.`
+  },
+
   authWarning: {
     title: 'Warning',
     content: [
