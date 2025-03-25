@@ -49,8 +49,7 @@ const Home = ({ loggedin }) => {
         <div className='service-banner'>
           <div className='govuk-phase-banner'>
             <p className='govuk-phase-banner__content'>
-              <strong className='govuk-tag govuk-phase-banner__content__tag'>Alpha</strong>
-              <span className='govuk-phase-banner__text'>This is a new service - your <a class='govuk-link' href='/feedback' rel='noreferrer noopener'>feedback</a> will help us to improve it.</span>
+              <span className='govuk-phase-banner__text'>The only API available on this website is the FMS Submission API. <br />To use other Department for Education APIs, go to the new <a class='govuk-link' href='https://beta-find-and-use-an-api.education.gov.uk'>Find and Use an API website</a>.</span>
             </p>
           </div>
           {loggedin && <span className='govuk-visually-hidden' role='alert' aria-live='assertive'>you are now signed in</span>}
